@@ -117,7 +117,7 @@ class Presets(loader.Module):
     async def _menu(self):
         await self.inline.bot.send_photo(
             self._client.tg_id,
-            'https://files.catbox.moe/38pbzg.jpg
+            'https://files.catbox.moe/38pbzg.jpg'
             caption=self.strings('welcome'),
             reply_markup=self.inline.generate_markup(self._markup),
         )
@@ -209,7 +209,7 @@ class Presets(loader.Module):
         """| Packs of modules to load"""
         await self.inline.form(
             message=message,
-            photo='https://x0.at/wGb3.mp4
+            photo='https://files.catbox.moe/38pbzg.jpg'
             text=self.strings('welcome').replace('/presets', self.get_prefix() + 'presets'),
             reply_markup=self._markup,
         )
