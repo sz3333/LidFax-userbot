@@ -93,7 +93,7 @@ elif echo "$OSTYPE" | grep -qE '^darwin.*'; then
 	PKGMGR="brew install"
 	PYVER="3"
 else
-	printf "\r\033[1;31mUnrecognised OS.\e[0m Please follow 'Manual installation' at \033[0;94mhttps://github.com/hikariatama/Hikka/#-installation\e[0m"
+	printf "\r\033[1;31mUnrecognised OS.\e[0m Please follow 'Manual installation' at \033[0;94mhttps://github.com/sz3333/LidFax-userbot/#-installation\e[0m"
 	exit 1
 fi
 
@@ -127,9 +127,9 @@ printf "\n\r\033[0;34mCloning repo...\e[0m"
 ##############################################################################
 
 # shellcheck disable=SC2086
-${SUDO_CMD}rm -rf Hikka
+${SUDO_CMD}rm -rf LidFax-userbot
 # shellcheck disable=SC2086
-runout ${SUDO_CMD}git clone https://github.com/hikariatama/Hikka/ || {
+runout ${SUDO_CMD}git clone https://github.com/sz3333/LidFax-userbot/ || {
 	errorout "Clone failed."
 	exit 3
 }
