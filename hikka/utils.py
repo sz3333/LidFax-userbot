@@ -927,9 +927,6 @@ def get_named_platform() -> str:
     if main.IS_SERV00:
         return "💎 Serv00"
 
-    if main.IS_TOTHOST:
-        return "💘 ToTHost"
-
     if main.IS_AEZA:
         return "🛡 Aeza"
 
@@ -970,8 +967,6 @@ def get_platform_emoji() -> str:
         )
     )
 
-    if main.IS_TOTHOST:
-        return BASE.format(5372887118156683469)
 
     if main.IS_HIKKAHOST:
         return BASE.format(5395745114494624362)
@@ -993,9 +988,6 @@ def get_platform_emoji() -> str:
 
     if main.IS_LAVHOST:
         return BASE.format(5352753797531721191)
-
-    if main.IS_GOORM:
-        return BASE.format(5298947740032573902)
 
     if main.IS_CODESPACES:
         return BASE.format(5350807743554937610)
@@ -1349,7 +1341,7 @@ def get_commit_url() -> str:
     """
     try:
         hash_ = get_git_hash()
-        return f'<a href="https://github.com/LidF1x-tech/LidF1x-test/commit/{hash_}">#{hash_[:7]}</a>'
+        return f'<a href="https://github.com/sz3333/LidFax-userbot/commit/{hash_}">#{hash_[:7]}</a>'
     except Exception:
         return "Unknown"
 
