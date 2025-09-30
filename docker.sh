@@ -3,7 +3,7 @@
 PORT=8437 # Port to run the server on
 echo "EXTERNAL_PORT=$PORT" >.env
 
-eval "git clone https://github.com/sz3333/LidFax-userbot"
+eval "git clone -b stable https://github.com/sz3333/LidFax-userbot"
 cd LidFax-userbot
 
 touch hikka-install.log
