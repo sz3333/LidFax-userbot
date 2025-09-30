@@ -1,10 +1,10 @@
 #!/bin/bash
 
-PORT=3429 # Port to run the server on
+PORT=8437 # Port to run the server on
 echo "EXTERNAL_PORT=$PORT" >.env
 
-eval "git clone https://github.com/LidF1x-tech/Hikka"
-cd Hikka
+eval "git clone https://github.com/sz3333/LidFax-userbot"
+cd LidFax-userbot
 
 touch hikka-install.log
 
