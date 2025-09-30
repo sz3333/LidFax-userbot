@@ -77,12 +77,12 @@ class LidFaxSettingsMod(loader.Module):
             if (
                 dialog.name
                 in {
-                    "lidf1x-logs",
-                    "lidf1x-onload",
-                    "lidf1x-assets",
-                    "lidf1x-backups",
-                    "lidf1x-acc-switcher",
-                    "silent-tags",
+                    "lidfax-logs",
+                    "lidfax-onload",
+                    "lidfax-assets",
+                    "lidfax-backups",
+                    "lidfax-acc-switcher",
+                    "silent-tags lidfax",
                 }
                 and dialog.is_channel
                 and (
@@ -102,7 +102,7 @@ class LidFaxSettingsMod(loader.Module):
 
         folders = await self._client(GetDialogFiltersRequest())
 
-        if any(folder.title == "heroku" for folder in folders):
+        if any(folder.title == "lidfax" for folder in folders):
             folder_id = max(
                 folders,
                 key=lambda x: x.id,
