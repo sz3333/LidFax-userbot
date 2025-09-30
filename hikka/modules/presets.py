@@ -97,7 +97,7 @@ PRESETS = {
 
 @loader.tds
 class Presets(loader.Module):
-    """Suggests new Heroku users a packs of modules to load"""
+    """Suggests new LidFax users a packs of modules to load"""
 
     strings = {"name": "Presets"}
 
@@ -123,7 +123,7 @@ class Presets(loader.Module):
     async def _menu(self):
         await self.inline.bot.send_photo(
             self._client.tg_id,
-            'https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/presets_cmd.png',
+            'https://files.catbox.moe/38pbzg.jpg',
             caption=self.strings('welcome'),
             reply_markup=self.inline.generate_markup(self._markup),
         )
@@ -215,7 +215,7 @@ class Presets(loader.Module):
         """| Packs of modules to load"""
         await self.inline.form(
             message=message,
-            photo='https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/presets_cmd.png',
+            photo='https://files.catbox.moe/38pbzg.jpg',
             text=self.strings('welcome').replace('/presets', self.get_prefix() + 'presets'),
             reply_markup=self._markup,
         )
