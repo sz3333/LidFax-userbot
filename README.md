@@ -8,7 +8,7 @@
 
 ### Disclaimer
 
-> Even though Heroku has extended security measures for scam-modules protection, flood-based account restrictions protection and others, it still may cause damage to server / account if you install module from untrusted developer. Please, consider downloading modules exceptionally from official repository or from trusted developers. If you are not sure about whether module is safe or not, please, DO NOT INSTALL IT. Same goes for unknown commands (.terminal, .e, .eval, .ec, .ecpp, etc.). You have been warned.
+> Even though LidFax has extended security measures for scam-modules protection, flood-based account restrictions protection and others, it still may cause damage to server / account if you install module from untrusted developer. Please, consider downloading modules exceptionally from official repository or from trusted developers. If you are not sure about whether module is safe or not, please, DO NOT INSTALL IT. Same goes for unknown commands (.terminal, .e, .eval, .ec, .ecpp, etc.). You have been warned.
 
 <hr>
 <h2><img src="https://github.com/hikariatama/assets/raw/master/1326-command-window-line-flat.webp" height="54" align="middle"> Installation</h2>
@@ -19,8 +19,8 @@
 
 
 <b>Manual installation (no script):</b><br>
-<code>apt update && apt install git python3 -y && git clone https://github.com/coddrago/Heroku && cd Heroku && pip install -r requirements.txt && python3 -m hikka</code><br.>
-<i>If you are on VPS\VDS, type <code>--proxy-pass</code> in the end of command to open SSH tunnel to your Hikka web interface, or use <code>--no-web</code> to complete setup in console</i><br>
+<code>apt update && apt install git python3 -y && git clone -b stable https://github.com/sz3333/LidFax-userbot && cd LidFax-userbot && pip install -r requirements.txt && python3 -m hikka</code><br.>
+<i>If you are on VPS\VDS, type <code>--proxy-pass</code> in the end of command to open SSH tunnel to your LidFax web interface, or use <code>--no-web</code> to complete setup in console</i><br>
 <br>
 <b>Some further details:</b>
 
@@ -120,7 +120,7 @@ Check out <a href="https://web.archive.org/dev.hikka.pw">dev.hikka.pw</a> for de
 <img src="https://user-images.githubusercontent.com/36935426/202842278-37fbc518-1679-45d7-92f5-9e519275630d.png">
 
 <hr>
-<i>⚠️ This project is provided as-is. Developer doesn't take ANY responsibility over any problems, caused by userbot. By installing Heroku you take all risks on you. This is but not limited to account bans, deleted (by Telegram algorithms) messages, SCAM-modules, leaked sessions (due to SCAM-modules). It is <b>highly</b> recommended to enable the API Flood protection (.api_fw_protection) and not to install many modules at once. By using Heroku you give your consent to any actions made by your account in background in purposes of automatization. Please, consider reading https://core.telegram.org/api/terms for more information.</i>
+<i>⚠️ This project is provided as-is. Developer doesn't take ANY responsibility over any problems, caused by userbot. By installing LidFax you take all risks on you. This is but not limited to account bans, deleted (by Telegram algorithms) messages, SCAM-modules, leaked sessions (due to SCAM-modules). It is <b>highly</b> recommended to enable the API Flood protection (.api_fw_protection) and not to install many modules at once. By using LidFax you give your consent to any actions made by your account in background in purposes of automatization. Please, consider reading https://core.telegram.org/api/terms for more information.</i>
 
 <b>Special thanks to:</b>
 
