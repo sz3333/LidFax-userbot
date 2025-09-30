@@ -393,7 +393,7 @@ help:
   _cmd_doc_helphide: "<модуль или модули> - Спрятать модуль(-и) из помощи\n*Разделяй модули пробелами"
   _cmd_doc_support: "Показать ссылку на чат помощи Heroku"
 
-heroku_info:
+lidfax_info:
   owner: "Владелец"
   version: "Версия"
   build: "Сборка"
