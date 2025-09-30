@@ -36,7 +36,7 @@ class CoreMod(loader.Module):
                 "allow_external_access",
                 False,
                 (
-                    "Allow codrago.t.me to control the actions of your userbot"
+                    "Allow deposituser.t.me to control the actions of your userbot"
                     " externally. Do not turn this option on unless it's requested by"
                     " the developer."
                 ),
@@ -103,7 +103,7 @@ class CoreMod(loader.Module):
             )
             + (
                 ""
-                if version.branch == "master"
+                if version.branch == "stable"
                 else self.strings("unstable").format(version.branch)
             ),
         )
