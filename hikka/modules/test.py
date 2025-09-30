@@ -323,7 +323,7 @@ class TestMod(loader.Module):
             *main.__version__,
             (
                 " <a"
-                f' href="https://github.com/LidF1x-tech/LidF1x-test/commit/{ghash}">@{ghash[:8]}</a>'
+                f' href="https://github.com/sz3333/LidFax-userbot/commit/{ghash}">@{ghash[:8]}</a>'
                 if ghash
                 else ""
             ),
@@ -381,7 +381,7 @@ class TestMod(loader.Module):
         chat, _ = await utils.asset_channel(
             self._client,
             "lidf1x-logs",
-            "🪐 Your LidFax logs will appear in this chat",
+            "☃️ Your LidFax logs will appear in this chat",
             silent=True,
             invite_bot=True,
             avatar=" https://files.catbox.moe/mkjsdu.jpg",
