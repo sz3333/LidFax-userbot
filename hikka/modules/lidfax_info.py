@@ -40,7 +40,7 @@ class LidFaxInfoMod(loader.Module):
             ),
 
             loader.ConfigValue(
-                "show_heroku",
+                "show_lidfax",
                 True,
                 validator=loader.validators.Boolean(),
             ),
