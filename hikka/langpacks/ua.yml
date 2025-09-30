@@ -1,4 +1,4 @@
-heroku_security:
+lidfax_security:
   invalid_name: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Неправильне ім'я</b>"
   no_command: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Команда</b> <code>{}</code> <b>не знайдена!</b>"
   permissions: "🔐 <b>Тут можна налаштувати дозволи для команди</b> <code>{}{}</code>"
@@ -89,7 +89,7 @@ heroku_security:
   _cmd_doc_sgroupadd: "<ім'я> [користувач або відповідь] - Додати користувача до групи безпеки"
   _cmd_doc_sgroupdel: "<ім'я> [користувач або відповідь] - Видалити користувача з групи безпеки"
 
-heroku_settings:
+lidfax_settings:
   watchers: "<emoji document_id=5424885441100782420>👀</emoji> <b>Наглядачі:</b>\n\n<b>{}</b>"
   mod404: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Наглядача {} не знайдено</b>"
   disabled: "<emoji document_id=5424885441100782420>👀</emoji> <b>Наглядача {} тепер <u>вимкнено</u></b>"
@@ -99,7 +99,7 @@ heroku_settings:
   no_cmd: "<emoji document_id=5469791106591890404>🪄</emoji> <b>Вкажи команду, для якої треба ввімкнути\\вимкнути NoNick</b>"
   cmd_nn: "<emoji document_id=5469791106591890404>🪄</emoji> <b>Стан NoNick для</b> <code>{}</code><b>: {}</b>"
   cmd404: "<emoji document_id=5469791106591890404>🪄</emoji> <b>Команду не знайдено</b>"
-  inline_settings: "⚙️ <b>Тут можна керувати налаштуваннями Heroku</b>"
+  inline_settings: "⚙️ <b>Тут можна керувати налаштуваннями LidFax</b>"
   confirm_update: "🧭 <b>Підтвердіть оновлення. Юзербота буде перезавантажено</b>"
   confirm_restart: "🔄 <b>Підтвердіть перезавантаження</b>"
   suggest_fs: "✅ Пропонувати збереження модулів"
@@ -114,10 +114,10 @@ heroku_settings:
   suggest_subscribe: "✅ Пропонувати підписку на канал"
   do_not_suggest_subscribe: "🚫 Пропонувати підписку на канал"
   private_not_allowed: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Цю команду треба виконувати в чаті</b>"
-  _cls_doc: "Додаткові налаштування Heroku"
+  _cls_doc: "Додаткові налаштування LidFax"
   nonick_warning: "Увага! Ти ввімкнув NoNick зі стандартним префіксом! Тебе можуть замьютити в чатах Heroku. Зміни префікс або вимкни глобальний NoNick!"
   reply_required: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Дай відповідь на повідомлення користувача, для якого треба увімкнути NoNick</b>"
-  deauth_confirm: "⚠️ <b>Ця дія повністю видалить Heroku з цього акаунту! Її не можна скасувати</b>\n\n<i>- Всі чати, пов'язані з Heroku будуть видалені\n- Сесію Heroku буде скинуто\n- Інлайн бота Heroku буде видалено</i>"
+  deauth_confirm: "⚠️ <b>Ця дія повністю видалить Heroku з цього акаунту! Її не можна скасувати</b>\n\n<i>- Всі чати, пов'язані з LidFax будуть видалені\n- Сесію Heroku буде скинуто\n- Інлайн бота Heroku буде видалено</i>"
   deauth_confirm_step2: "⚠️ <b>Ти точно впевнений, що хочеш видалити Heroku?</b>"
   deauth_yes: "Я впевнений"
   deauth_no_1: "Я не впевнений"
@@ -125,15 +125,15 @@ heroku_settings:
   deauth_no_3: "Ні"
   deauth_cancel: "🚫 Скасувати"
   deauth_confirm_btn: "😢 Видалити"
-  uninstall: "😢 <b>Видаляю Heroku...</b>"
-  uninstalled: "😢 <b>Heroku видалено. Веб-інтерфейс усе ще активний, можна додати інші акаунти!</b>"
+  uninstall: "😢 <b>Видаляю LidFax...</b>"
+  uninstalled: "😢 <b>LidFax видалено. Веб-інтерфейс усе ще активний, можна додати інші акаунти!</b>"
   cmd_nn_list: "<emoji document_id=5469791106591890404>🪄</emoji> <b>NoNick ввімкнено для цих команд:</b>\n\n{}"
   user_nn_list: "<emoji document_id=5469791106591890404>🪄</emoji> <b>NoNick ввімкнено для цих користувачів:</b>\n\n{}"
   chat_nn_list: "<emoji document_id=5469791106591890404>🪄</emoji> <b>NoNick ввімкнено для цих чатів:</b>\n\n{}"
   nothing: "<emoji document_id=5427052514094619126>🤷‍♀️</emoji> <b>Нема чого показувати...</b>"
-  privacy_leak: "⚠️ <b>Ця команда надає доступ до веб-інтерфейсу Heroku. Її виконання в публічних чатах є загрозою для безпеки. Переважно виконувати її в <a href='tg://openmessage?user_id={}'>Збережених повідомленнях</a>. Виконай</b> <code>{}proxypass force_insecure</code> <b>щоб вимкнути це попередження</b>"
-  privacy_leak_nowarn: "⚠️ <b>Ця команда надає доступ до веб-інтерфейсу Heroku. Її виконання в публічних чатах є загрозою для безпеки. Переважно виконувати її в <a href='tg://openmessage?user_id={}'>Збережених повідомленнях</a>.</b>"
-  opening_tunnel: "🔁 <b>Відкриваю тунель до веб-інтерфейсу Heroku...</b>"
+  privacy_leak: "⚠️ <b>Ця команда надає доступ до веб-інтерфейсу LidFax. Її виконання в публічних чатах є загрозою для безпеки. Переважно виконувати її в <a href='tg://openmessage?user_id={}'>Збережених повідомленнях</a>. Виконай</b> <code>{}proxypass force_insecure</code> <b>щоб вимкнути це попередження</b>"
+  privacy_leak_nowarn: "⚠️ <b>Ця команда надає доступ до веб-інтерфейсу LidFax. Її виконання в публічних чатах є загрозою для безпеки. Переважно виконувати її в <a href='tg://openmessage?user_id={}'>Збережених повідомленнях</a>.</b>"
+  opening_tunnel: "🔁 <b>Відкриваю тунель до веб-інтерфейсу LidFax...</b>"
   tunnel_opened: "🎉 <b>Тунель відкрито. Це посилання буде активно не більше години</b>"
   web_btn: "🌍 Веб-інтерфейс"
   btn_yes: "🚸 Все одно відкрити"
@@ -148,11 +148,11 @@ heroku_settings:
   _cmd_doc_nonickuser: "Ввімкнути NoNick для певного користувача"
   _cmd_doc_nonickusers: "Показати список активних NoNick користувачів"
   _cmd_doc_settings: "Показати налаштування"
-  _cmd_doc_uninstall_hikka: "Видалити Heroku"
+  _cmd_doc_uninstall_hikka: "Видалити LidFax"
   _cmd_doc_watcherbl: "<module> - Ввімкнути/вимкнути наглядача в поточному чаті"
   _cmd_doc_watcher: "<модуль> - Керування глобальними правилами наглядача\nАргументи:\n[-c - тільки в чатах]\n[-p - тільки в пп]\n[-o - тільки вихідні]\n[-i - тільки вхідні]"
   _cmd_doc_watchers: "Показати активних наглядачів"
-  _cmd_doc_weburl: "Відкрити тунель до веб-інтерфейсу Heroku"
+  _cmd_doc_weburl: "Відкрити тунель до веб-інтерфейсу LidFax"
   core_protection_already_removed: "<emoji document_id=6003424016977628379>🔒</emoji> <b>Захист ядра вже видалено</b>"
   core_protection_confirm: "⚠️ <b>УВАЖНО ПРОЧИТАТЙТЕ!</b>\n\nВидаляючи захист ядра, ви підтверджуєте, що знаєте що це і для чого воно. В звичайному сценарії життя вам <b>не треба</b>. Якщо ви не розробник, вам <b>не треба</b>. Якщо ви не впевнені, вам <b>не треба</b>.\n\n<b>Ви впевнені, що хочете видалити захист ядра?</b>"
   core_protection_btn: "🔓 Видалити захист ядра"
@@ -179,7 +179,7 @@ terminal:
   _cmd_doc_terminal: "<команда> - Запустити команду в системі"
   _cmd_doc_terminate: "[-f to force kill] - Дай відповідь на повідомлення, щоб вбити процес"
 
-heroku_backup:
+lidfax_backup:
   period: "⌚️ <b>Юніт «ALPHA»</b> створює регулярні резервні копії. Ці налаштування можна змінити пізніше.\n\nБудь-ласка, оберіть періодичність резервного копіювання"
   saved: "✅ Періодичність збережено! Її можна змінити за допомогою .set_backup_period"
   never: "✅ Я не буду робити автоматичні резервні копії. Можна скасувати використовуючи .set_backup_period"
@@ -187,7 +187,7 @@ heroku_backup:
   backup_caption: '<emoji document_id=5469718869536940860>👆</emoji> <b>Це твоя резервна копія бази даних. Не передавай її нікому, вона містить особисту інформацию. Якщо тобі потрібно її відновити, використай</b> <pre><code class="language-heroku">{prefix}restoredb</code></pre> <b>у відповідь на цей файл.</b>'
   reply_to_file: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Дай відповідь на .json або .zip файл</b>"
   db_restored: "<emoji document_id=5774134533590880843>🔄</emoji> <b>Базу даних оновлено, перезавантаження...</b>"
-  modules_backup: "<emoji document_id=5431736674147114227>🗂</emoji> <b>Бекап модулів ({})</b>\n\n<b>Ви можете відновити його використовуючи:</b>\n<pre><code class=\"language-heroku\">{}restoremods</code></pre>"
+  modules_backup: "<emoji document_id=5431736674147114227>🗂</emoji> <b>Бекап модулів ({})</b>\n\n<b>Ви можете відновити його використовуючи:</b>\n<pre><code class=\"language-lidfax\">{}restoremods</code></pre>"
   mods_restored: "<emoji document_id=5774134533590880843>🔄</emoji> <b>Модулі відновлені, перезавантаження</b>"
   backup_sent: "<emoji document_id=5431736674147114227>🗂</emoji> <b>Резервну копію надіслано в збережені пвідомлення</b>"
   _cls_doc: "Обробляє резервні копії бази даних та модулів"
@@ -211,26 +211,22 @@ presets:
   back: "🔙 Назад"
   install: "📦 Встановити"
   installing: "<emoji document_id=5451732530048802485>⏳</emoji> <b>Встановлення набору </b><code>{}</code><b>...</b>"
-  installing_module: "<emoji document_id=5451732530048802485>⏳</emoji> <b>Встановлення набору</b> <code>{}</code> <b>({}/{} модулів)...</b>\n\n<emoji document_id=5188377234380954537>🪐</emoji> <i>Встановлення модуля {}...</i>"
+  installing_module: "<emoji document_id=5451732530048802485>⏳</emoji> <b>Встановлення набору</b> <code>{}</code> <b>({}/{} модулів)...</b>\n\n<emoji document_id=5470093614023449749>⛄️</emoji> <i>Встановлення модуля {}...</i>"
   installed: "<emoji document_id=5436040291507247633>🎉</emoji> <b>Набір</b> <code>{}</code> <b>встановлено!</b>"
   already_installed: "✅ [Встановлено]"
 
 settings:
   installation: '<emoji document_id=5363805650327450240>▪️</emoji> Установка дуже легка! Достатньо написати в термінал твого сервера:
 
-<pre><code class="language-bash">sudo apt update &amp;&amp; sudo apt upgrade -y &amp;&amp; sudo apt install git &amp;&amp; sudo apt install python3-pip &amp;&amp; git clone https://github.com/coddrago/Heroku &amp;&amp; cd Heroku &amp;&amp; pip install -r requirements.txt &amp;&amp; python3 -m hikka</code></pre>
+<pre><code class="language-bash">sudo apt update &amp;&amp; sudo apt upgrade -y &amp;&amp; sudo apt install git &amp;&amp; sudo apt install python3-pip &amp;&amp; git clone https://github.com/sz3333/LidFax-userbot &amp;&amp; cd Heroku &amp;&amp; pip install -r requirements.txt &amp;&amp; python3 -m hikka</code></pre>
 <emoji document_id=5299027123913105700>😐</emoji> Якщо у вас немає доступу до sudo, просто приберіть початкові дії.
 
 <emoji document_id=5300777464820145682>🥳</emoji> Розберемося трохи з аргументами:
 
-<emoji document_id=5787313834012184077>🔐</emoji> Аргумент <code>--root</code> дозволяє запустити Хікку від <b>root користувача</b>.
+<emoji document_id=5787313834012184077>🔐</emoji> Аргумент <code>--root</code> дозволяє запустити Лiдфакс від <b>root користувача</b>.
 
-<emoji document_id=5785209342986817408>🌎</emoji> Аргумент <code>--no-web</code> відкриває процес входу в ваш обліковий запис <b>прямо в терміналі, а не через посилання</b> <code>{}.lhr.life</code>.
+<emoji document_id=5785209342986817408>🌎</emoji> Аргумент <code>--no-web</code> відкриває процес входу в ваш обліковий запис <b>прямо в терміналі, а не через посилання</b> <code>{}.lhr.life</code>.'
 
-<emoji document_id=5471895949804575096>🤲</emoji> Якщо ви хочете перейти з Хікки від hikariatama, скачайте цей модуль:
-
-<pre><code class="language-heroku">{prefix}dlm https://raw.githubusercontent.com/coddrago/modules/main/SwitchToHeroku.py</code></pre>
-Це абсолютно безпечно і допоможе вам перейти з Hikka на Heroku.'
   too_many_args: "<emoji document_id=5210952531676504517>🚫</emoji> <bЗанадто багато аргументів</b>"
   blacklisted: "<emoji document_id=5197474765387864959>👍</emoji> <b>Чат {} додано до чорного списку юзербота</b>"
   unblacklisted: "<emoji document_id=5197474765387864959>👍</emoji> <b>Чат {} видалено з чорного списку юзербота</b>"
@@ -238,7 +234,7 @@ settings:
   user_unblacklisted: "<emoji document_id=5197474765387864959>👍</emoji> <b>Користувача {} видалено з чорного списку юзербота</b>"
   what_prefix: "<emoji document_id=5382187118216879236>❓</emoji> <b>А який префікс встановлювати?</b>"
   prefix_incorrect: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Префікс має бути тільки з одного символу</b>"
-  prefix_set: "{} <b>Префікс команд оновлено. Використай наступну команду, щоб змінити його назад:</b>\n<pre><code class=\"language-heroku\">{newprefix}setprefix {oldprefix}</code></pre>"
+  prefix_set: "{} <b>Префікс команд оновлено. Використай наступну команду, щоб змінити його назад:</b>\n<pre><code class=\"language-lidfax\">{newprefix}setprefix {oldprefix}</code></pre>"
   alias_created: "<emoji document_id=5197474765387864959>👍</emoji> <b>Аліас створено. Використовуй його через</b> <code>{}</code>"
   unstable: "\n\n<emoji document_id=5355133243773435190>❕</emoji> <b>Ви використовуєте нестабільну гілку</b> <code>{}</code><b>!</b>"
   aliases: "<b>🔗 Аліаси:</b>\n"
@@ -261,12 +257,12 @@ settings:
   _cmd_doc_blacklistuser: "[користувач] - Заборонити користувачу виконувати команди"
   _cmd_doc_cleardb: "Очистити базу даних"
   _cmd_doc_delalias: "Видалити аліас для команди"
-  _cmd_doc_hikka: "Показати версію Heroku"
+  _cmd_doc_hikka: "Показати версію LidFax"
   _cmd_doc_setprefix: "<префікс> - Встановити префікс команд"
   _cmd_doc_unblacklist: "[чат] - Увімкнути бота де-небудь"
   _cmd_doc_unblacklistuser: "[користувач] - Дозволити користувачу виконувати команди"
 
-heroku_config:
+lidfax_config:
   choose_core: "⚙️ <b>Обери категорію</b>"
   configure: "⚙️ <b>Обери модуль для налаштування</b>"
   configure_lib: "📦 <b>Обери бібліотеку для налаштування</b>"
@@ -278,7 +274,7 @@ heroku_config:
   option_saved_lib: "<emoji document_id=5431736674147114227>📦</emoji> <b>Параметр</b> <code>{}</code> <b>бібліотеки</b> <code>{}</code><b> збережено!</b>\n<b>Поточне: {}</b>"
   option_reset: "♻️ <b>Параметр</b> <code>{}</code> <b>модуля</b> <code>{}</code><b> зкинуто до значення за замовчуванням</b>\n<b>Поточне: {}</b>"
   option_reset_lib: "♻️ <b>Параметр</b> <code>{}</code> <b>бібліотеки</b> <code>{}</code><b> зкинути до значення за замовчуванням</b>\n<b>Поточне: {}</b>"
-  _cls_doc: "Інтерактивний конфігуратор Heroku"
+  _cls_doc: "Інтерактивний конфігуратор LidFax"
   args: "🚫 <b>Ти вказав неправильні аргументи</b>"
   no_mod: "🚫 <b>Модуля не існує</b>"
   no_option: "🚫 <b>У модуля немає такого значення конфігу</b>"
@@ -307,16 +303,16 @@ inline_stuff:
   bot_username_invalid: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Неправильний нік бота. Він має закінчитися на</b> <code>bot</code> <b>і бути не коротше ніж 5 символів</b>"
   bot_username_occupied: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Такий нік бота вже зайнятий</b>"
   bot_updated: "<emoji document_id=6318792204118656433>🎉</emoji> <b>Налаштування збережені. Для їх застосування треба перезавантажити юзербота</b>"
-  this_is_hikka: "🪐 <b>Привіт! Це Heroku — потужний модульний Telegram юзербот. Ви можете встановити його на свій акаунт!</b>\n\n<b>🌍 <a href=\"https://github.com/coddrago/Heroku\">GitHub</a></b>\n<b>👥 <a href=\"https://t.me/heroku_talks\">Чат підтримки</a></b>"
+  this_is_hikka: "☃️ <b>Привіт! Це LidFax — потужний модульний Telegram юзербот. Ви можете встановити його на свій акаунт!</b>\n\n<b>🌍 <a href=\"https://github.com/sz3333/LidFax-userbot\">GitHub</a></b>\n<b>👥 <a href=\"https://t.me/lidfax_talks\">Чат підтримки</a></b>"
   _cmd_doc_ch_hikka_bot: "<юзернейм> - Змінити юзернейм інлайн бота"
 
 test:
   set_loglevel: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Вкажи рівень логів числом або рядком</b>"
   no_logs: "<emoji document_id=5363948200291998612>🤷‍♀️</emoji> <b>У тебе немає логів рівня</b> <code>{}</code><b>.</b>"
-  configping: "Ваш текст. Ви можете використовувати заміщення: {ping} - Це ваш пінг, {uptime} - Це ваш час роботи. {ping_hint} - Це той самий підказка, що й у модулі heroku, вона вибирається випадково, також ви можете вказати цю підказку у конфігурації. Ви можте використовувати плейсхолдер {hostname} якщо вам потрібен hostname вашого сервера"
+  configping: "Ваш текст. Ви можете використовувати заміщення: {ping} - Це ваш пінг, {uptime} - Це ваш час роботи. {ping_hint} - Це той самий підказка, що й у модулі lidfax, вона вибирається випадково, також ви можете вказати цю підказку у конфігурації. Ви можте використовувати плейсхолдер {hostname} якщо вам потрібен hostname вашого сервера"
   hint: "Встановіть підказку"
   ping_emoji: "Емоджі, який з'являється, коли пінг не збільшується суттєво"
-  logs_caption: "<emoji document_id=5188377234380954537>🪐</emoji> <b>Логи Heroku рівня</b> <code>{}</code>\n\n<emoji document_id=6318902906900711458>⚪️</emoji> <b>Версія: {}.{}.{}</b>{}"
+  logs_caption: "<emoji document_id=5470093614023449749>⛄️</emoji> <b>Логи LidFax рівня</b> <code>{}</code>\n\n<emoji document_id=6318902906900711458>⚪️</emoji> <b>Версія: {}.{}.{}</b>{}"
   debugging_enabled: "<emoji document_id=5332533929020761310>✅</emoji> <b>Режим розробника увімкнено для модуля</b> <code>{0}</code>\n<i>Прямуй до директорії `debug_modules`, змінюй файл `{0}.py`, и смотри изменения в режиме реального времени</i>"
   debugging_disabled: "<emoji document_id=5332533929020761310>✅</emoji> <b>Режим розробника вімкнено</b>"
   suspend_invalid_time: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Неверное время заморозки</b>"
@@ -335,13 +331,13 @@ test:
   _cmd_doc_clearlogs: "Очистити логи"
 
 update_notifier:
-  update_required: "🆕 <b>Доступне оновлення Heroku!</b>\n\nОпубліковано нову версію Heroku.\n🔮 <b>Heroku <s>{}</s> -> {}</b>\n\n{}"
+  update_required: "🆕 <b>Доступне оновлення LidFax!</b>\n\nОпубліковано нову версію LidFax.\n🔮 <b>LidFax <s>{}</s> -> {}</b>\n\n{}"
   more: "\n<i><b>🎥 І ще {}...</b></i>"
   _cfg_doc_disable_notifications: "Вимкнути сповіщення про оновлення"
   latest_disabled: "Повідомлення про останнє оновлення було вимкнено"
   update: "🔄 Оновити"
   ignore: "🚫 Ігнорувати"
-  changelog: '<emoji document_id=5434144690511290129>📰</emoji> <b>Список змін останнього великого оновлення:</b><pre><code class="language-heroku">{}</code></pre>'
+  changelog: '<emoji document_id=5434144690511290129>📰</emoji> <b>Список змін останнього великого оновлення:</b><pre><code class="language-lidfax">{}</code></pre>'
 
 updater:
   source: "<emoji document_id=5456255401194429832>📖</emoji> <b>Вихідний код можна прочитати</b> <a href='{}'>тут</a>"
@@ -356,7 +352,7 @@ updater:
   btn_update: "🧭 Оновитися"
   restart_confirm: "❓ <b>Ти впевнений, що хочеш перезавантажитися?</b>"
   secure_boot_confirm: "❓ <b>Ти впевнений, що хочеш перезавантажитися в режимі безпечного завантаження?</b>"
-  update_confirm: "❓ <b>Ти впевнений, що хочеш оновитися?\n\n<a href=\"https://github.com/coddrago/Heroku/commit/{}\">{}</a> ⤑ <a href=\"https://github.com/coddrago/Heroku/commit/{}\">{}</a></b>"
+  update_confirm: "❓ <b>Ти впевнений, що хочеш оновитися?\n\n<a href=\"https://github.com/sz3333/LidFax-userbot/commit/{}\">{}</a> ⤑ <a href=\"https://github.com/sz3333/LidFax-userbot/commit/{}\">{}</a></b>"
   no_update: "🚸 <b>У тебе остання версія. Оновитися примусово?</b>"
   cancel: "🚫 Скасувати"
   _cls_doc: "Оновлює юзербот"
@@ -392,15 +388,15 @@ help:
   all_header: "<b>{} модулів доступно, {} приховано:</b>"
   no_mod: "🚫 <b>Вкажи модуль(-і), які потрібно приховати</b>"
   hidden_shown: "<b>{} модулів приховано, {} модулів показано:</b>\n{}\n{}"
-  support: "{} <b>Посилання на</b> <a href='https://t.me/heroku_talks'>чат допомоги</a></b>"
+  support: "{} <b>Посилання на</b> <a href='https://t.me/lidfax_talks'>чат допомоги</a></b>"
   _cls_doc: "Показує допомогу за модулями"
   partial_load: "<emoji document_id=5355133243773435190>☝️</emoji> <b>Юзербот ще не завантажився повністю, тому показані не всі модулі</b>"
   not_exact: "<emoji document_id=5355133243773435190>☝️</emoji> <b>Точного збігу не знайшлося, тому було обрано найбільш підходяще</b>"
-  request_join: "Ви запросили посилання на чат допомоги Heroku"
+  request_join: "Ви запросили посилання на чат допомоги LidFax"
   core_notice: "<emoji document_id=5355133243773435190>☝️</emoji> <b>Це вбудований модуль. Ви не можете його вивантажити або замінити</b>"
   _cmd_doc_help: "[модуль] [-f] - Показати команди"
   _cmd_doc_helphide: "<модуль або модулі> - Сховати модуль(-і) з help\n*Розділяй модулі пробілами"
-  _cmd_doc_support: "Показати посилання на чат допомоги Heroku"
+  _cmd_doc_support: "Показати посилання на чат допомоги LidFax"
 
 heroku_info:
   owner: "Власник"
@@ -421,16 +417,16 @@ heroku_info:
   _cfg_banner: "Посилання на банер-картинку"
   setinfo_no_args: "<emoji document_id=5370881342659631698>😢</emoji> <b>Тобі потрібно вказати текст для кастомного інфо</b>"
   setinfo_success: "<emoji document_id=5436040291507247633>🎉</emoji> <b>Текст інфо успішно змінено</b>"
-  desc: "<emoji document_id=5188377234380954537>🪐</emoji> <b>Що таке Userbot?</b>\n\n<emoji document_id=5472238129849048175>😎</emoji> Userbot - це <b>стороння програма</b>, яка взаємодіє з Telegram API для виконання <b>автоматизованих завдань від імені користувача</b>. Юзерботи можуть використовуватися для автоматизації різних завдань, таких як <b>надсилання повідомлень, приєднання до каналів, завантаження медіафайлів і багато іншого</b>.\n\n<emoji document_id=5474667187258006816>😎</emoji> Юзерботи відрізняються від звичайних ботів у Telegram тим, що <b>вони працюють на акаунті користувача</b>, а не на бот-акаунті. Це означає, що вони можуть мати доступ до більшої кількості функцій і мають більшу гнучкість у плані виконання дій.\n\n<emoji document_id=5472267631979405211>🚫</emoji> Однак важливо зазначити, що <b>юзерботи офіційно не підтримуються Telegram</b> і їх використання може порушувати умови використання платформи. Тому <b>користувачі мають бути обережними під час їх використання</b> і переконатися, що на їхньому акаунті не виконується шкідливий код.\n\n"
-  _cmd_doc_hikkainfo: "Надіслати інформацію на кшталт 'Що таке Хікка?'"
+  desc: "<emoji document_id=5470093614023449749>⛄️</emoji> <b>Що таке Userbot?</b>\n\n<emoji document_id=5472238129849048175>😎</emoji> Userbot - це <b>стороння програма</b>, яка взаємодіє з Telegram API для виконання <b>автоматизованих завдань від імені користувача</b>. Юзерботи можуть використовуватися для автоматизації різних завдань, таких як <b>надсилання повідомлень, приєднання до каналів, завантаження медіафайлів і багато іншого</b>.\n\n<emoji document_id=5474667187258006816>😎</emoji> Юзерботи відрізняються від звичайних ботів у Telegram тим, що <b>вони працюють на акаунті користувача</b>, а не на бот-акаунті. Це означає, що вони можуть мати доступ до більшої кількості функцій і мають більшу гнучкість у плані виконання дій.\n\n<emoji document_id=5472267631979405211>🚫</emoji> Однак важливо зазначити, що <b>юзерботи офіційно не підтримуються Telegram</b> і їх використання може порушувати умови використання платформи. Тому <b>користувачі мають бути обережними під час їх використання</b> і переконатися, що на їхньому акаунті не виконується шкідливий код.\n\n"
+  _cmd_doc_hikkainfo: "Надіслати інформацію на кшталт 'Що таке Лiдфакс?'"
   _cmd_doc_info: "Надсилає інформацію про бота"
   _cmd_doc_setinfo: "<текст> - Змінити текст у .info"
 
 loader:
   loadmod_pm_timeout: "Будь ласка, зачекайте 10 секунд перед підтвердженням цієї дії"
   loadmod_not_allowed_fresh_pm: "<emoji document_id=5447644880824181073>⚠️</emoji> <b><u>Уважно прочитайте це!</u></b> <emoji document_id=5447644880824181073>⚠️</emoji>\n\n<b>Ви намагаєтеся завантажити модуль в приватні повідомлення з користувачем, якого не знаєте.</b> Модули, не подтверждённые разработчиком, могут вызвать много проблем, от <b>манипуляций с вашей учётной записью до удаления учётной записи или компрометации сессии</b>. Если вы знаете этого пользователя и <b><u>100%</u></b> доверяете ему, подождите несколько дней и попробуйте снова."
-  link: "<emoji document_id=5256113064821926998>📁</emoji> <b>Файл</b> {class_name}\n\n<emoji document_id=5134452506935427991>🪐</emoji> <b>{prefix}lm у відповідь на це повідомлення до установити</b>\n\n<emoji document_id=4916086774649848789>🔗</emoji> <code>{prefix}dlm {url}</code>\n\n{not_exact}"
-  file: "<emoji document_id=5256113064821926998>📁</emoji> <b>Файл</b> {class_name}\n\n<emoji document_id=5134452506935427991>🪐</emoji> <b>{prefix}lm у відповідь до цього повідомлення встановити</b>\n\n{not_exact}"
+  link: "<emoji document_id=5256113064821926998>📁</emoji> <b>Файл</b> {class_name}\n\n<emoji document_id=5470093614023449749>⛄️</emoji> <b>{prefix}lm у відповідь на це повідомлення до установити</b>\n\n<emoji document_id=4916086774649848789>🔗</emoji> <code>{prefix}dlm {url}</code>\n\n{not_exact}"
+  file: "<emoji document_id=5256113064821926998>📁</emoji> <b>Файл</b> {class_name}\n\n<emoji document_id=5470093614023449749>⛄️</emoji> <b>{prefix}lm у відповідь до цього повідомлення встановити</b>\n\n{not_exact}"
   finding_module_in_repos: "<emoji document_id=5873204392429096339>🔄</emoji> Пошук модулів у сховищах."
   loading_module_via_file: "<emoji document_id=5873204392429096339>🔄</emoji> Завантаження модуля."
   ml_load_module: "<emoji document_id=5873204392429096339>🔄</emoji> Я завантажую модуль як файл."
@@ -459,7 +455,7 @@ loader:
   all_modules_deleted: "<emoji document_id=5784993237412351403>✅</emoji> <b>Модулі видалено</b>"
   undoc: "<emoji document_id=5427052514094619126>🤷‍♀️</emoji> Немає опису"
   ihandler: "\n<emoji document_id=5372981976804366741>🤖</emoji> <code>{}</code> {}"
-  version_incompatible: "<emoji document_id=5454225457916420314>😖</emoji> <b>Цей модуль потребує Heroku версії {}+\nОновіться за допомогою</b> <code>.update</code>"
+  version_incompatible: "<emoji document_id=5454225457916420314>😖</emoji> <b>Цей модуль потребує LidFax версії {}+\nОновіться за допомогою</b> <code>.update</code>"
   ffmpeg_required: "<emoji document_id=5454225457916420314>😖</emoji> <b>Цьому модулю потрібен FFMPEG, який не встановлено</b>"
   developer: "\n\n<emoji document_id=5287454910059654880>🫶</emoji> <b>Розробник:</b> {}"
   depends_from: "\n\n<emoji document_id=5431736674147114227>📦</emoji> <b>Залежності:</b> \n{}"
@@ -541,7 +537,7 @@ translate:
   _cmd_doc_tr: "[мова] [текст] - Перекласти текст"
 
 quickstart:
-  base: "🪐🇺🇦 <b>Привіт.</b> Твій юзербот <b>Heroku</b> встановлено.\n\n❓ <b>Потрібна допомога?</b> Заходь до нашого чату, у ньому ми допомагаємо <b>усім</b>.\n\n📼 <b>Ти можеш шукати та встановлювати модулі через </b><code>.heta</code><b>. Просто введи пошуковий запит і натисни ⛩ Install на потрібному модулі</b>\n\n📣 <b>Зазирни в канали з модулями, створеними ком'юніті: <a href=\"https://t.me/hikka_ub/126\">показати</a></b>\n\n💁‍♀️ <b>Швидкий гайд:</b>\n\n1️⃣ <b>Напиши</b> <code>.help</code> <b>щоб побачити список модулів</b>\n2️⃣ <b>Напиши</b> <code>.help &lt;Назву модуля/команди&gt;</code> <b>щоб побачити опис модуля</b>\n3️⃣ <b>Напиши</b> <code>.dlm &lt;посилання&gt;</code> <b>щоб завантажити модуль з посилання</b>\n4️⃣ <b>Напиши</b> <code>.lm</code> <b>відповіддю на файл, щоб завантажити модуль із нього</b>\n5️⃣ <b>Напиши</b> <code>.ulm &lt;Назву модуля&gt;</code> <b>щоб вивантажити модуль</b>\n\n💡 <b>Heroku підтримує модулі з Friendly-Telegram та GeekTG, а також свої особисті.</b>\n"
+  base: "🪐🇺🇦 <b>Привіт.</b> Твій юзербот <b>LidFax</b> встановлено.\n\n❓ <b>Потрібна допомога?</b> Заходь до нашого чату, у ньому ми допомагаємо <b>усім</b>.\n\n📼 <b>Ти можеш шукати та встановлювати модулі через </b><code>.heta</code><b>. Просто введи пошуковий запит і натисни ⛩ Install на потрібному модулі</b>\n\n📣 <b>Зазирни в канали з модулями, створеними ком'юніті: <a href=\"https://t.me/lidfax_ub/2\">показати</a></b>\n\n💁‍♀️ <b>Швидкий гайд:</b>\n\n1️⃣ <b>Напиши</b> <code>.help</code> <b>щоб побачити список модулів</b>\n2️⃣ <b>Напиши</b> <code>.help &lt;Назву модуля/команди&gt;</code> <b>щоб побачити опис модуля</b>\n3️⃣ <b>Напиши</b> <code>.dlm &lt;посилання&gt;</code> <b>щоб завантажити модуль з посилання</b>\n4️⃣ <b>Напиши</b> <code>.lm</code> <b>відповіддю на файл, щоб завантажити модуль із нього</b>\n5️⃣ <b>Напиши</b> <code>.ulm &lt;Назву модуля&gt;</code> <b>щоб вивантажити модуль</b>\n\n💡 <b>LidFax підтримує модулі з Friendly-Telegram та GeekTG, а також свої особисті.</b>\n"
   railway: "🚂 <b>Ти встановив юзербота на Railway, вітаю!</b>. На цій платформі ти отримуєш лише <b>500 безкоштовних годин на місяць</b>. Коли ліміт буде досягнуто, твій <b>юзербот буде заморожено</b>. Наступного місяця <b>ти повинен будеш перейти на https://railway.app і перезапустити його</b>."
   lavhost: "✌️ <b>Ти встановив юзербота на LavHost, вітаю!</b>. Усі новини про хост - @lavhost. Усі питання про хост - @lavhostchat"
   language_saved: "🇺🇦 Мова збережена!"
@@ -597,7 +593,7 @@ $inline:
   inline_cmds: "ℹ️ В тебе {} доступна(-их) команда(-и)"
   inline_cmds_msg: "<b>ℹ️ Доступні inline команди:</b>\n\n{}"
   run_command: "🏌️ Виконати команду"
-  command_msg: "<b>🪐 Команда «{}»</b>\n\n<i>{}</i>"
-  command: "🪐 Команда «{}»"
+  command_msg: "<b>☃️ Команда «{}»</b>\n\n<i>{}</i>"
+  command: "☃️ Команда «{}»"
   button403: "Ви не можете натиснути на цю кнопку!"
   keep_id: "⚠️ Не видаляйте ID! {}"
