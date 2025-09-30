@@ -398,7 +398,7 @@ help:
   _cmd_doc_helphide: "<модуль або модулі> - Сховати модуль(-і) з help\n*Розділяй модулі пробілами"
   _cmd_doc_support: "Показати посилання на чат допомоги LidFax"
 
-heroku_info:
+lidfax_info:
   owner: "Власник"
   version: "Версія"
   build: "Збірка"
