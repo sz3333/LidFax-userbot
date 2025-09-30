@@ -154,7 +154,7 @@ class LidFaxSettingsMod(loader.Module):
         )
 
     @loader.command()
-    async def uninstall_heroku(self, message: Message):
+    async def uninstall_lidfax(self, message: Message):
         await self.inline.form(
             self.strings("deauth_confirm"),
             message,
