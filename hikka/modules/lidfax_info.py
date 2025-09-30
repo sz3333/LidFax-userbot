@@ -88,7 +88,7 @@ class LidFaxInfoMod(loader.Module):
             platform = platform.replace(emoji, icon)
         return (
             (
-                "<b>🪐 LidFax</b>\n"
+                "<b>☃️ LidFax</b>\n"
                 if self.config["show_heroku"]
                 else ""
             )
