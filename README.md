@@ -134,6 +134,6 @@ Check out <a href="https://web.archive.org/dev.hikka.pw">dev.hikka.pw</a> for de
 <hr>
 <h2>Sponsors: </h2>
 <p align="center">
-    <img src="assets/lidfax-assets.png" width="300" height="60">
+    <img src="assets/lidfax-assets.png" width="900" height="900">
 </p>
 <p align="center">Developed with support of <a href="https://google.pl/?ref=herokugh">google.pl</a></p>
