@@ -122,8 +122,6 @@ lidfax_settings:
   close_menu: "😌 Close menu"
   custom_emojis: "✅ Custom emojis"
   no_custom_emojis: "🚫 Custom emojis"
-  exteragram_emojis_on: "✅ Exteragram emoji links"
-  exteragram_emojis_off: "🚫 Exteragram emoji links"
   suggest_subscribe: "✅ Suggest subscribe to channel"
   do_not_suggest_subscribe: "🚫 Suggest subscribe to channel"
   private_not_allowed: "<emoji document_id=5210952531676504517>🚫</emoji> <b>This command must be executed in chat</b>"

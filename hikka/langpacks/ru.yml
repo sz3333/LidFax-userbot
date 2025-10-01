@@ -111,8 +111,6 @@ lidfax_settings:
   close_menu: "😌 Закрыть меню"
   custom_emojis: "✅ Кастомные эмодзи"
   no_custom_emojis: "🚫 Кастомные эмодзи"
-  exteragram_emojis_on: "✅ Ссылки эмодзи Exteragram"
-  exteragram_emojis_off: "🚫 Ссылки эмодзи Exteragram"
   suggest_subscribe: "✅ Предлагать подписку на канал"
   do_not_suggest_subscribe: "🚫 Предлагать подписку на канал"
   private_not_allowed: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Эту команду нужно выполнять в чате</b>"
