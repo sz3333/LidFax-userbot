@@ -839,11 +839,12 @@ class Hikka:
                 caption=(
                     "☃️ <b>LidFax {} started!</b>\n\n⚙ <b>GitHub commit SHA: <a"
                     ' href="https://github.com/sz3333/LidFax-userbot/commit/{}">{}</a></b>\n🔎'
-                    " <b>Update status: {}</b>\n<b>{}</b>".format(
+                    " <b>Update status: {}</b>\n🔑 <b>Current prefix: <code>{}</code></b>\n<b>{}</b>".format(
                         ".".join(list(map(str, list(__version__)))),
                         build,
                         build[:7],
                         upd,
+                        self.get_prefix(),
                         web_url,
                     )
                 ),
