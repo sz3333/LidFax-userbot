@@ -826,7 +826,7 @@ class Hikka:
                     else ""
                 )
                 logging.debug(
-                    "\n🪐 LidFax %s #%s (%s) started\n%s",
+                    "\n☃️ LidFax %s #%s (%s) started\n%s",
                     ".".join(list(map(str, list(__version__)))),
                     build[:7],
                     upd,
@@ -836,10 +836,10 @@ class Hikka:
 
             await client.hikka_inline.bot.send_photo(
                 logging.getLogger().handlers[0].get_logid_by_client(client.tg_id),
-                "https://x0.at/wGb3.mp4",
+                "https://raw.githubusercontent.com/sz3333/legendary-meme/refs/heads/main/LidFax.mp4",
                 caption=(
-                    "🪐 <b>LidFax {} started!</b>\n\n⚙ <b>GitHub commit SHA: <a"
-                    ' href="https://github.com/coddrago/LidFax/commit/{}">{}</a></b>\n🔎'
+                    "☃️ <b>LidFax {} started!</b>\n\n⚙ <b>GitHub commit SHA: <a"
+                    ' href="https://github.com/sz3333/LidFax-userbot/commit/{}">{}</a></b>\n🔎'
                     " <b>Update status: {}</b>\n<b>{}</b>".format(
                         ".".join(list(map(str, list(__version__)))),
                         build,

@@ -58,7 +58,7 @@
 Check out <a href="https://web.archive.org/dev.hikka.pw">dev.hikka.pw</a> for developers' documentation and <a href="https://web.archive.org/hikka.pw">hikka.pw</a> for users' documentation<br>
 
 <hr>
-<h2 border="none"><img src="https://github.com/hikariatama/assets/raw/master/981-consultation-flat.webp" height="54" align="middle"> <a href="https://t.me/heroku_talks">Support</a></h2>
+<h2 border="none"><img src="https://github.com/hikariatama/assets/raw/master/981-consultation-flat.webp" height="54" align="middle"> <a href="https://t.me/lidfax_talks">Support</a></h2>
 <hr>
 <h2 border="none"><img src="https://github.com/hikariatama/assets/raw/master/541-hand-washing-step-12-flat.webp" height="54" align="middle"> Features</h2>
 <table>
@@ -128,12 +128,12 @@ Check out <a href="https://web.archive.org/dev.hikka.pw">dev.hikka.pw</a> for de
     <li><a href="https://gitlab.com/hackintosh5">Hackintosh5</a> for FTG, which is the base of project</li>
     <li><a href="https://t.me/GunyaKshin">Codwiz</a> for Ukrainian translation pack</li>
     <li><a href="https://t.me/thisLyomi">Lyomi</a> for German translation pack</li>
-    <li><a href="https://t.me/lonami">Lonami</a> for Telethon, which is the base of Heroku-TL</li>
+    <li><a href="https://t.me/crow">Pavel</a> for Telethon, which is the base of LidFax-TL</li>
 </ul>
 
 <hr>
 <h2>Sponsors: </h2>
 <p align="center">
-    <img src="assets/aeza.svg" width="300" height="60">
+    <img src="assets/lidfax-assets.png" width="900" height="900">
 </p>
-<p align="center">Developed with support of <a href="https://aeza.net/?ref=herokugh">aeza.net</a></p>
+<p align="center">Developed with support of <a href="https://google.pl/?ref=herokugh">google.pl</a></p>

@@ -4,6 +4,12 @@
 # You can redistribute it and/or modify it under the terms of the GNU AGPLv3
 # 🔑 https://www.gnu.org/licenses/agpl-3.0.html
 
+# ©️ Codrago, 2024-2025
+# This file is a part of Heroku Userbot
+# 🌐 https://github.com/coddrago/Heroku
+# You can redistribute it and/or modify it under the terms of the GNU AGPLv3
+# 🔑 https://www.gnu.org/licenses/agpl-3.0.html
+
 import asyncio
 import logging
 
@@ -39,10 +45,10 @@ PRESETS = {
         "https://github.com/amm1edev/ame_repo/raw/refs/heads/main/Complements.py",
         "https://github.com/amm1edev/ame_repo/raw/refs/heads/main/Compliments.py",
         "https://github.com/amm1edev/ame_repo/raw/refs/heads/main/mazemod.py",
-        "https://raw.githubusercontent.com/coddrago/modules/main/dice.py",
-        "https://raw.githubusercontent.com/coddrago/modules/main/loli.py",
-        "https://raw.githubusercontent.com/coddrago/modules/main/DoxTool.py",
-        "https://raw.githubusercontent.com/coddrago/modules/main/randomizer.py",
+        "https://mods.codrago.life/randnum.py",
+        "https://mods.codrago.life/loli.py",
+        "https://mods.codrago.life/DoxTool.py",
+        "https://mods.codrago.life/randomizer.py",
     ],
     "chat": [
         "https://github.com/amm1edev/ame_repo/raw/refs/heads/main/activists.py",
@@ -56,8 +62,9 @@ PRESETS = {
         "https://github.com/amm1edev/ame_repo/raw/refs/heads/main/BanMedia.py",
         "https://github.com/amm1edev/ame_repo/raw/refs/heads/main/swmute.py",
         "https://github.com/amm1edev/ame_repo/raw/refs/heads/main/filter.py",
-        "https://raw.githubusercontent.com/coddrago/modules/main/id.py",
-        "https://raw.githubusercontent.com/coddrago/modules/main/clickon.py",
+        "https://mods.codrago.life/id.py",
+        "https://mods.codrago.life/clickon.py",
+        "https://mods.codrago.life/autoclicker.py",
     ],
     "service": [
         "https://github.com/amm1edev/ame_repo/raw/refs/heads/main/account_switcher.py",
@@ -72,10 +79,9 @@ PRESETS = {
         "https://github.com/amm1edev/ame_repo/raw/refs/heads/main/accounttime.py",
         "https://github.com/amm1edev/ame_repo/raw/refs/heads/main/searx.py",
         "https://github.com/amm1edev/ame_repo/raw/refs/heads/main/swmute.py",
-        "https://raw.githubusercontent.com/coddrago/modules/main/modlist.py",
+        "https://mods.codrago.life/modlist.py",
     ],
     "downloaders": [
-        "https://heta.dan.tatar/musicdl.py",
         "https://github.com/amm1edev/ame_repo/raw/refs/heads/main/uploader.py",
         "https://github.com/amm1edev/ame_repo/raw/refs/heads/main/porn.py",
         "https://github.com/amm1edev/ame_repo/raw/refs/heads/main/web2file.py",
@@ -117,7 +123,7 @@ class Presets(loader.Module):
     async def _menu(self):
         await self.inline.bot.send_photo(
             self._client.tg_id,
-            'https://x0.at/wGb3.mp4
+            'https://files.catbox.moe/38pbzg.jpg',
             caption=self.strings('welcome'),
             reply_markup=self.inline.generate_markup(self._markup),
         )
@@ -209,7 +215,7 @@ class Presets(loader.Module):
         """| Packs of modules to load"""
         await self.inline.form(
             message=message,
-            photo='https://x0.at/wGb3.mp4
+            photo='https://files.catbox.moe/38pbzg.jpg',
             text=self.strings('welcome').replace('/presets', self.get_prefix() + 'presets'),
             reply_markup=self._markup,
         )
