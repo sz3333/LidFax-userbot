@@ -968,7 +968,7 @@ class LidFaxConfigMod(loader.Module):
     async def configcmd(self, message: Message):
         args = utils.get_args_raw(message)
         if self.lookup(args) and hasattr(self.lookup(args), "config"):
-            form = await self.inline.form("☃️", message, silent=True)
+            form = await self.inline.form("🪐", message, silent=True)
             mod = self.lookup(args)
             if isinstance(mod, loader.Library):
                 type_ = "library"
