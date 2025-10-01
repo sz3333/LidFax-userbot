@@ -40,7 +40,7 @@ class LidFaxInfoMod(loader.Module):
             ),
 
             loader.ConfigValue(
-                "show_lidfax",
+                "show_heroku",
                 True,
                 validator=loader.validators.Boolean(),
             ),
@@ -207,7 +207,7 @@ class LidFaxInfoMod(loader.Module):
         )
 
     @loader.command()
-    async def lidfaxinfo(self, message: Message):
+    async def herokuinfo(self, message: Message):
         await utils.answer(message, self.strings("desc"))
 
     @loader.command()
