@@ -122,8 +122,8 @@ lidfax_settings:
   close_menu: "😌 Close menu"
   custom_emojis: "✅ Custom emojis"
   no_custom_emojis: "🚫 Custom emojis"
-  exteragram_emojis_on: "✅ Exteragram emoji links"
-  exteragram_emojis_off: "🚫 Exteragram emoji links"
+  exteragram_emojis_off: "✅ Exteragram emoji links"
+  exteragram_emojis_on: "🚫 Exteragram emoji links"
   suggest_subscribe: "✅ Suggest subscribe to channel"
   do_not_suggest_subscribe: "🚫 Suggest subscribe to channel"
   private_not_allowed: "<emoji document_id=5210952531676504517>🚫</emoji> <b>This command must be executed in chat</b>"
@@ -279,7 +279,7 @@ settings:
   _cfg_nonstandart_prefixes: "Allow non-standart prefixes like flags or more than one symbol"
   _cls_doc: "Control core userbot settings"
 
-lidfax_config:
+LidFax_config:
   name: "LidFaxConfig"
   choose_core: "⚙️ <b>Choose a category</b>"
   configure: "⚙️ <b>Choose a module to configure</b>"
