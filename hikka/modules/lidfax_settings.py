@@ -695,7 +695,7 @@ class LidFaxSettingsMod(loader.Module):
             [
                 (
                     {
-                        "text": self.strings("exteragram_emojis_off"),
+                        "text": self.strings("exteragram_emojis_on"),
                         "callback": self.inline__setting,
                         "args": (
                             lambda: main.save_config_key("exteragram_emojis", False),
