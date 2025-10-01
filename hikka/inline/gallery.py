@@ -271,6 +271,7 @@ class Gallery(InlineUnit):
 
         async def answer(msg: str):
             nonlocal message
+            msg = utils.apply_exteragram_emojis(msg)
             if isinstance(message, Message):
                 await (message.edit if message.out else message.respond)(
                     msg,
