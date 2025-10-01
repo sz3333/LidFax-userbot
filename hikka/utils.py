@@ -936,8 +936,8 @@ def get_named_platform() -> str:
     if main.IS_WSL:
         return "🍀 WSL"
 
-    if main.IS_DJHOST:
-        return "🎡 DJHost"
+    if main.IS_HYSTERIA:
+        return "💨 hysteria"
 
     if main.IS_ORACLE:
         return "😶‍🌫️ Oracle"
@@ -1655,7 +1655,7 @@ def get_git_info() -> typing.Tuple[str, str]:
     hash_ = get_git_hash()
     return (
         hash_,
-        f"https://github.com/coddrago/LidFax/commit/{hash_}" if hash_ else "",
+        f"https://github.com/sz3333/LidFax-userbot/commit/{hash_}" if hash_ else "",
     )
 
 
