@@ -154,7 +154,7 @@ class LidFaxSettingsMod(loader.Module):
         )
 
     @loader.command()
-    async def uninstall_lidfax(self, message: Message):
+    async def uninstall_heroku(self, message: Message):
         await self.inline.form(
             self.strings("deauth_confirm"),
             message,
@@ -688,25 +688,6 @@ class LidFaxSettingsMod(loader.Module):
                         "callback": self.inline__setting,
                         "args": (
                             lambda: main.save_config_key("disable_custom_emojis", True),
-                        ),
-                    }
-                ),
-            ],
-            [
-                (
-                    {
-                        "text": self.strings("exteragram_emojis_off"),
-                        "callback": self.inline__setting,
-                        "args": (
-                            lambda: main.save_config_key("exteragram_emojis", False),
-                        ),
-                    }
-                    if main.get_config_key("exteragram_emojis")
-                    else {
-                        "text": self.strings("exteragram_emojis_on"),
-                        "callback": self.inline__setting,
-                        "args": (
-                            lambda: main.save_config_key("exteragram_emojis", True),
                         ),
                     }
                 ),
