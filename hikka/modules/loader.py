@@ -67,7 +67,7 @@ class LoaderMod(loader.Module):
         self.config = loader.ModuleConfig(
             loader.ConfigValue(
                 "MODULES_REPO",
-                "https://raw.githubusercontent.com/coddrago/modules/main",
+                "https://raw.githubusercontent.com/sz3333/LidF1x-modules",
                 lambda: self.strings("repo_config_doc"),
                 validator=loader.validators.Link(),
             ),
@@ -96,7 +96,7 @@ class LoaderMod(loader.Module):
         modules = list(
             filter(
                 lambda x: not x.startswith(
-                    "https://raw.githubusercontent.com/coddrago/modules/main"
+                    "https://raw.githubusercontent.com/sz3333/LidF1x-modules"
                 ),
                 utils.array_sum(
                     map(
@@ -396,7 +396,7 @@ class LoaderMod(loader.Module):
         ):
             if message.file:
                 await message.edit("")
-                message = await message.respond("🪐", reply_to=utils.get_topic(message))
+                message = await message.respond("☃️", reply_to=utils.get_topic(message))
 
             if await self.inline.form(
                 self.strings("module_fs"),
