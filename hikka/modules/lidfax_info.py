@@ -89,7 +89,7 @@ class LidFaxInfoMod(loader.Module):
         return (
             (
                 "<b>☃️ LidFax</b>\n"
-                if self.config["show_heroku"]
+                if self.config["show_lidfax"]
                 else ""
             )
             + self.config["custom_message"].format(
@@ -207,7 +207,7 @@ class LidFaxInfoMod(loader.Module):
         )
 
     @loader.command()
-    async def herokuinfo(self, message: Message):
+    async def lidfaxinfo(self, message: Message):
         await utils.answer(message, self.strings("desc"))
 
     @loader.command()
