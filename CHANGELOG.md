@@ -1,5 +1,5 @@
 # Heroku Changelog
-## 🪐 Heroku 1.6.8
+## ☃️ Heroku 1.6.8
 
 - Finally renamed to Heroku and new Emoji
 - many changes and improvements
