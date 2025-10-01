@@ -111,6 +111,8 @@ heroku_settings:
   close_menu: "😌 Menü schließen"
   custom_emojis: "✅ Benutzerdefinierte Emojis"
   no_custom_emojis: "🚫 Benutzerdefinierte Emojis"
+  exteragram_emojis_on: "✅ Exteragram Emoji-Links"
+  exteragram_emojis_off: "🚫 Exteragram Emoji-Links"
   suggest_subscribe: "✅ Abonnement für den Kanal vorschlagen"
   do_not_suggest_subscribe: "🚫 Abonnement für den Kanal nicht vorschlagen"
   private_not_allowed: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Dieser Befehl muss im Chat ausgeführt werden</b>"
