@@ -845,7 +845,7 @@ class Hikka:
                         build,
                         build[:7],
                         upd,
-                        self.get_prefix(),
+                        utils.get_prefix(),
                         web_url,
                     )
                 ),
