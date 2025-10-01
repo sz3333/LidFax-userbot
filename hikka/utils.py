@@ -134,26 +134,6 @@ parser = hikkatl.utils.sanitize_parse_mode("html")
 logger = logging.getLogger(__name__)
 
 
-def apply_exteragram_emojis(text: str) -> str:
-    """
-    If enabled via config, replaces <emoji document_id=ID>EMOJI</emoji>
-    with <a href="tg://emoji?id=ID">EMOJI</a> to force exteragram-style links.
-    """
-    try:
-        from . import main
-
-        if not main.get_config_key("exteragram_emojis"):
-            return text
-    except Exception:
-        return text
-
-    return re.sub(
-        r"<emoji\s+document_id=(\d+)[^>]*>([\s\S]*?)</emoji>",
-        r'<a href="tg://emoji?id=\1">\2</a>',
-        text,
-    )
-
-
 def get_args(message: typing.Union[Message, str]) -> typing.List[str]:
     """
     Get arguments from message
@@ -424,8 +404,6 @@ async def answer_file(
         kwargs.setdefault("reply_to", topic)
 
     try:
-        if isinstance(caption, str):
-            caption = apply_exteragram_emojis(caption)
         response = await message.client.send_file(
             message.peer_id,
             file,
@@ -523,8 +501,6 @@ async def answer(
     )
 
     if isinstance(response, str) and not kwargs.pop("asfile", False):
-        # Apply exteragram emoji transformation before parsing HTML
-        response = apply_exteragram_emojis(response)
         text, entities = parse_mode.parse(response)
 
         if len(text) >= 4096 and not hasattr(message, "hikka_grepped"):

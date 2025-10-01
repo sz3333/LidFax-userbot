@@ -695,25 +695,6 @@ class LidFaxSettingsMod(loader.Module):
             [
                 (
                     {
-                        "text": self.strings("exteragram_emojis_off"),
-                        "callback": self.inline__setting,
-                        "args": (
-                            lambda: main.save_config_key("exteragram_emojis", False),
-                        ),
-                    }
-                    if main.get_config_key("exteragram_emojis", False)
-                    else {
-                        "text": self.strings("exteragram_emojis_on"),
-                        "callback": self.inline__setting,
-                        "args": (
-                            lambda: main.save_config_key("exteragram_emojis", True),
-                        ),
-                    }
-                ),
-            ],
-            [
-                (
-                    {
                         "text": self.strings("disable_debugger"),
                         "callback": self.inline__setting,
                         "args": (lambda: self._db.set(log.__name__, "debugger", False),),
