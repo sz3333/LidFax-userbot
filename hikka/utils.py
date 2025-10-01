@@ -778,7 +778,7 @@ async def asset_channel(
     ):
         return client._channels_cache[title]["peer"], False
 
-    # legacy heroku / hikka chats conversion to heroku
+    # legacy heroku / hikka chats conversion to lidfax
     if title.startswith("hikka-"):
         title = title.replace("hikka-", "lidf1x-")
 
@@ -995,7 +995,7 @@ def get_platform_emoji() -> str:
     if main.IS_HIKKAHOST:
         return BASE.format(5397772811504745534)
 
-    if main.IS_DJHOST:
+    if main.IS_HYSTERIA:
         return BASE.format(5397772811504745534)
 
     if main.IS_USERLAND:
