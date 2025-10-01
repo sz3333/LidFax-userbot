@@ -311,7 +311,7 @@ class UpdaterMod(loader.Module):
                     folder_id,
                     DialogFilter(
                         folder_id,
-                        title="hikka",
+                        title="lidf1x",
                         pinned_peers=(
                             [
                                 await self._client.get_input_entity(
