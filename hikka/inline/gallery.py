@@ -259,7 +259,7 @@ class Gallery(InlineUnit):
                     (
                         utils.get_platform_emoji()
                         if self._client.hikka_me.premium and CUSTOM_EMOJIS
-                        else "☃️"
+                        else "🪐"
                     )
                     + self.translator.getkey("inline.opening_gallery"),
                     **({"reply_to": utils.get_topic(message)} if message.out else {}),
@@ -271,6 +271,7 @@ class Gallery(InlineUnit):
 
         async def answer(msg: str):
             nonlocal message
+            msg = utils.apply_exteragram_emojis(msg)
             if isinstance(message, Message):
                 await (message.edit if message.out else message.respond)(
                     msg,
