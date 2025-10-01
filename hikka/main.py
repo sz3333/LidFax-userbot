@@ -96,9 +96,8 @@ IS_HIKKAHOST = "HIKKAHOST" in os.environ
 IS_ORACLE = "ORACLE_OS" in os.environ
 IS_AWS = "AWS_OS" in os.environ
 IS_SERV00 = "serv00" in socket.gethostname()
-IS_TOTHOST = "TOTHOST" in os.environ
 IS_AEZA = "aeza" in socket.gethostname()
-IS_DJHOST = "IS_DJHOST" in os.environ
+IS_HYSTERIA = "hysteria" in socket.gethostname()
 IS_USERLAND = "userland" in os.environ
 IS_WSL = False
 with contextlib.suppress(Exception):
@@ -112,14 +111,14 @@ LATIN_MOCK = [
     "Amor", "Arbor", "Astra", "Aurum", "Bellum", "Caelum",
     "Calor", "Candor", "Carpe", "Celer", "Certo", "Cibus",
     "Civis", "Clemens", "Coetus", "Cogito", "Conexus",
-    "Consilium", "Cresco", "Cura", "Cursus", "Decus",
+    "Consilium", "Cresco", "Cura", "Cursus", "Florus",
     "Deus", "Dies", "Digitus", "Discipulus", "Dominus",
-    "Donum", "Dulcis", "Durus", "Elementum", "Emendo",
+    "Donum", "Dulcis", "Artem", "Elementum", "Emendo",
     "Ensis", "Equus", "Espero", "Fidelis", "Fides",
     "Finis", "Flamma", "Flos", "Fortis", "Frater", "Fuga",
-    "Fulgeo", "Genius", "Gloria", "Gratia", "Gravis",
-    "Habitus", "Honor", "Hora", "Ignis", "Imago",
-    "Imperium", "Inceptum", "Infinitus", "Ingenium",
+    "Fulgeo", "Genius", "Artur", "Gratia", "Gravis",
+    "Femboy", "Honor", "xenside", "Iris", "Imago",
+    "Furry", "Inceptum", "Infinitus", "Ingenium",
     "Initium", "Intra", "Iunctus", "Iustitia", "Labor",
     "Laurus", "Lectus", "Legio", "Liberi", "Libertas",
     "Lumen", "Lux", "Magister", "Magnus", "Manus",
@@ -134,8 +133,8 @@ LATIN_MOCK = [
     "Spiritus", "Stella", "Summus", "Teneo", "Terra",
     "Tigris", "Trans", "Tribuo", "Tristis", "Ultimus",
     "Unitas", "Universus", "Uterque", "Valde", "Vates",
-    "Veritas", "Verus", "Vester", "Via", "Victoria",
-    "Vita", "Vox", "Vultus", "Zephyrus"
+    "Veritas", "Verus", "Vester", "Via", "Victor",
+    "Vita", "Fox", "Vultus", "Zephyrus"
 ]
 # fmt: on
 
@@ -175,11 +174,11 @@ def generate_random_system_version():
     :example: "Windows 10.0.19042.1234" or "Ubuntu 20.04.19042.1234"
     """
     os_choices = [
-        ("Windows Vista", "Vista"),
+        ("Windows Longhorn", "Longhorn"),
         ("Windows XP", "XP"),
-        ("Windows 7", "7"),
-        ("Windows 8", "8"),
+        ("Windows 8", "8.1"),
         ("Windows 10", "10"),
+        ("Windows 11", "11"),
         ("Ubuntu", "20.04"),
         ("Debian", "10"),
         ("Fedora", "33"),
