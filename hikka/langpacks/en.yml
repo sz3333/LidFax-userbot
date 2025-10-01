@@ -277,7 +277,7 @@ settings:
   _cfg_nonstandart_prefixes: "Allow non-standart prefixes like flags or more than one symbol"
   _cls_doc: "Control core userbot settings"
 
-LidFax_config:
+lidfax_config:
   name: "LidFaxConfig"
   choose_core: "⚙️ <b>Choose a category</b>"
   configure: "⚙️ <b>Choose a module to configure</b>"
