@@ -452,7 +452,7 @@ loader:
   loadmod_pm_timeout: "Please, wait for 10 seconds before confirming this action"
   loadmod_not_allowed_fresh_pm: "<emoji document_id=5447644880824181073>⚠️</emoji> <b><u>Read this carefully!</u></b> <emoji document_id=5447644880824181073>⚠️</emoji>\n\n<b>You are attempting to load a module in personal messages with a user you do not know.</b> Modules, not verified by the developer, might cause a lot of trouble, from <b>messing with your account to account deletion or session comprometation</b>. If you know this user and <b><u>100%</u></b> trust him, wait a few days and try again."
   loadmod_confirm_pm_message: "<emoji document_id=5451732530048802485>⏳</emoji> <i>Waiting for your confirmation...</i>"
-  link: "<emoji document_id=5256113064821926998>📁</emoji> <b>File of</b> {class_name}\n\n<emoji document_id=5470093614023449749>⛄️</emoji> <b>{prefix}lm in reply to this message to install</b>\n\n<emoji document_id=4916086774649848789>🔗</emoji> <code>{prefix}dlm {url}</code>\n\n{not_exact}"
+  link: "<emoji document_id=5256113064821926998>📁</emoji> <b>File of</b> {class_name}\n\n<emoji document_id=5470093614023449749>⛄️</emoji> <b>{prefix}lm in reply to this message to install</b>\n\n<emoji document_id=5449385734148487483>🟣</emoji> <code>{prefix}dlm {url}</code>\n\n{not_exact}"
   file: "<emoji document_id=5256113064821926998>📁</emoji> <b>File of</b> {class_name}\n\n<emoji document_id=5470093614023449749>⛄️</emoji> <b>{prefix}lm in reply to this message to install</b>\n\n{not_exact}"
   finding_module_in_repos: "<emoji document_id=5873204392429096339>🔄</emoji> Looking for modules in repositories."
   loading_module_via_file: "<emoji document_id=5873204392429096339>🔄</emoji> Loading the module."
