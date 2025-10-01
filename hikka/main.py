@@ -68,6 +68,7 @@ from .secure import patcher
 from .tl_cache import CustomTelegramClient
 from .translations import Translator
 from .version import __version__
+from .. import utils
 
 try:
     from .web import core
