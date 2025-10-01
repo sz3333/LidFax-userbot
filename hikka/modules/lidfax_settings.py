@@ -701,7 +701,7 @@ class LidFaxSettingsMod(loader.Module):
                             lambda: main.save_config_key("exteragram_emojis", False),
                         ),
                     }
-                    if main.get_config_key("exteragram_emojis", False)
+                    if main.get_config_key("exteragram_emojis")
                     else {
                         "text": self.strings("exteragram_emojis_on"),
                         "callback": self.inline__setting,
