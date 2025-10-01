@@ -17,7 +17,7 @@ from ..types import Message
 
 @loader.tds
 class UpdateNotifier(loader.Module):
-    """Tracks latest Hikka releases, and notifies you, if update is required"""
+    """Tracks latest LidFax releases, and notifies you, if update is required"""
 
     strings = {"name": "UpdateNotifier"}
 
@@ -97,7 +97,7 @@ class UpdateNotifier(loader.Module):
                 "https://t.me/hikari_assets/71",
                 caption=self.strings("update_required").format(
                     utils.get_git_hash()[:6],
-                    '<a href="https://github.com/coddrago/LidFax/compare/{}...{}">{}</a>'.format(
+                    '<a href="https://github.com/sz3333/LidFax-userbot/compare/{}...{}">{}</a>'.format(
                         utils.get_git_hash()[:12],
                         self.get_latest()[:12],
                         self.get_latest()[:6],
