@@ -382,7 +382,7 @@ class Module:
 
         await self.inline.bot.send_photo(
             self.tg_id,
-            "https://files.catbox.moe/38pbzg.jpg",
+            "https://raw.githubusercontent.com/sz3333/LidFax-userbot/refs/heads/stable/assets/request_to_join.png",
             caption=(
                 self._client.loader.lookup("translations")
                 .strings("requested_join")
