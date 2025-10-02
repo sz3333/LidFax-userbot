@@ -14,7 +14,7 @@ from ..inline.types import BotInlineCall
 logger = logging.getLogger(__name__)
 
 imgs = [
-    "",
+    "https://raw.githubusercontent.com/Midga3/LidFax-userbot/refs/heads/stable/assets/started.jpg",
 ]
 
 
