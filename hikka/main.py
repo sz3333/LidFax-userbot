@@ -835,7 +835,7 @@ class Hikka:
 
             await client.hikka_inline.bot.send_photo(
                 logging.getLogger().handlers[0].get_logid_by_client(client.tg_id),
-                "https://raw.githubusercontent.com/sz3333/legendary-meme/refs/heads/main/LidFax.mp4",
+                "https://raw.githubusercontent.com/sz3333/ftg/master/LidFax.png",
                 caption=(
                     "☃️ <b>LidFax {} started!</b>\n\n⚙ <b>GitHub commit SHA: <a"
                     ' href="https://github.com/sz3333/LidFax-userbot/commit/{}">{}</a></b>\n🔎'
