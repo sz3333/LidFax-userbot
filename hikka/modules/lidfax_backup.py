@@ -33,7 +33,7 @@ class LidFaxBackupMod(loader.Module):
         if not self.get("period"):
             await self.inline.bot.send_photo(
                 self.tg_id,
-                photo="https://raw.githubusercontent.com/sz3333/LidFax-userbot/refs/heads/stable/assets/unit_alpha.png",
+                photo="https://raw.githubusercontent.com/Midga3/LidFax-userbot/refs/heads/stable/assets/unit_alpha.png",
                 caption=self.strings("period"),
                 reply_markup=self.inline.generate_markup(
                     utils.chunks(
