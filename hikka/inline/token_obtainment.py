@@ -197,7 +197,7 @@ class TokenObtainment(InlineUnit):
                     for msg in [
                         "/setinline",
                         button.text,
-                        "user@heroku:~$",
+                        "user@lidfax:~$",
                         "/setinlinefeedback",
                         button.text,
                         "Enabled",
@@ -221,7 +221,7 @@ class TokenObtainment(InlineUnit):
                         from .. import main
 
                         m = await conv.send_file(
-                            main.BASE_PATH / "assets" / "heroku-ava.png"
+                            main.BASE_PATH / "assets" / "lidfax-ava.png"
                         )
                         r = await conv.get_response()
 
