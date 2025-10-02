@@ -78,7 +78,7 @@ class TestMod(loader.Module):
             ),
             loader.ConfigValue(
                 "Text_Of_Ping",
-                "<emoji document_id=5458793988859391541>🟣</emoji> <b>𝙿𝚒𝚗𝚐: </b><code>{ping}</code><b> 𝚖𝚜 </b>\n<emoji document_id=5458920797768805767>🟣</emoji><b> 𝚄𝚙𝚝𝚒𝚖𝚎: </b><code>{uptime}</code>",
+                "<emoji document_id=5458793988859391541>🟣</emoji> <b>Ping: </b><code>{ping}</code><b> 𝚖𝚜 </b>\n<emoji document_id=5458920797768805767>🟣</emoji><b> Uptime: </b><code>{uptime}</code>",
                 lambda: self.strings["configping"],
                 validator=loader.validators.String(),
             ),
