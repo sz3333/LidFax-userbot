@@ -118,15 +118,15 @@ lidfax_security:
 
 lidfax_settings:
   name: "LidFaxSettings"
-  watchers: "<emoji document_id=5424885441100782420>👀</emoji> <b>Watchers:</b>\n\n<b>{}</b>"
+  watchers: "<emoji document_id=5440374141142186346>👀</emoji> <b>Watchers:</b>\n\n<b>{}</b>"
   no_args: "<emoji document_id=5210952531676504517>🚫</emoji> <b>No arguments specified</b>"
   invoke404: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Internal debug method</b> <code>{}</code> <b>not found, ergo can't be invoked</b>"
   module404: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Module</b> <code>{}</code> <b>not found</b>"
   invoke: "<emoji document_id=5215519585150706301>👍</emoji> <b>Invoked internal debug method</b> <code>{}</code>\n\n<emoji document_id=5784891605601225888>🔵</emoji> <b>Result:\n{}</b>"
   invoking: "<emoji document_id=5213452215527677338>⏳</emoji> <b>Invoking internal debug method</b> <code>{}</code> <b>of</b> <code>{}</code><b>...</b>"
   mod404: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Watcher {} not found</b>"
-  disabled: "<emoji document_id=5424885441100782420>👀</emoji> <b>Watcher {} is now <u>disabled</u></b>"
-  enabled: "<emoji document_id=5424885441100782420>👀</emoji> <b>Watcher {} is now <u>enabled</u></b>"
+  disabled: "<emoji document_id=5440374141142186346>👀</emoji> <b>Watcher {} is now <u>disabled</u></b>"
+  enabled: "<emoji document_id=5440374141142186346>👀</emoji> <b>Watcher {} is now <u>enabled</u></b>"
   args: "<emoji document_id=5210952531676504517>🚫</emoji> <b>You need to specify watcher name</b>"
   user_nn: "<emoji document_id=5469791106591890404>🪄</emoji> <b>NoNick for this user is now {}</b>"
   no_cmd: "<emoji document_id=5469791106591890404>🪄</emoji> <b>Please, specify command to toggle NoNick for</b>"

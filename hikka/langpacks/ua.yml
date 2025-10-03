@@ -112,10 +112,10 @@ lidfax_security:
   _cmd_doc_sgroupdel: "<ім'я> [користувач або відповідь] - Видалити користувача з групи безпеки"
 
 lidfax_settings:
-  watchers: "<emoji document_id=5424885441100782420>👀</emoji> <b>Наглядачі:</b>\n\n<b>{}</b>"
+  watchers: "<emoji document_id=5440374141142186346>👀</emoji> <b>Наглядачі:</b>\n\n<b>{}</b>"
   mod404: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Наглядача {} не знайдено</b>"
-  disabled: "<emoji document_id=5424885441100782420>👀</emoji> <b>Наглядача {} тепер <u>вимкнено</u></b>"
-  enabled: "<emoji document_id=5424885441100782420>👀</emoji> <b>Наглядача {} тепер <u>увімкнено</u></b>"
+  disabled: "<emoji document_id=5440374141142186346>👀</emoji> <b>Наглядача {} тепер <u>вимкнено</u></b>"
+  enabled: "<emoji document_id=5440374141142186346>👀</emoji> <b>Наглядача {} тепер <u>увімкнено</u></b>"
   args: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Вкажи ім'я наглядача</b>"
   user_nn: "<emoji document_id=5469791106591890404>🪄</emoji> <b>Стан NoNick для цього користувача: {}</b>"
   no_cmd: "<emoji document_id=5469791106591890404>🪄</emoji> <b>Вкажи команду, для якої треба ввімкнути\\вимкнути NoNick</b>"

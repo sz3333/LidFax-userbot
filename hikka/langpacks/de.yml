@@ -112,10 +112,10 @@ lidfax_security:
   _cmd_doc_sgroupdel: "<Name> [Benutzer oder Antwort] - Benutzer aus der Sicherheitsgruppe entfernen"
 
 heroku_settings:
-  watchers: "<emoji document_id=5424885441100782420>👀</emoji> <b>Wächter:</b>\n\n<b>{}</b>"
+  watchers: "<emoji document_id=5440374141142186346>👀</emoji> <b>Wächter:</b>\n\n<b>{}</b>"
   mod404: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Wächter {} nicht gefunden</b>"
-  disabled: "<emoji document_id=5424885441100782420>👀</emoji> <b>Wächter {} ist jetzt <u>deaktiviert</u></b>"
-  enabled: "<emoji document_id=5424885441100782420>👀</emoji> <b>Wächter {} ist jetzt <u>aktiviert</u></b>"
+  disabled: "<emoji document_id=5440374141142186346>👀</emoji> <b>Wächter {} ist jetzt <u>deaktiviert</u></b>"
+  enabled: "<emoji document_id=5440374141142186346>👀</emoji> <b>Wächter {} ist jetzt <u>aktiviert</u></b>"
   args: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Gib den Namen des Wächters an</b>"
   user_nn: "<emoji document_id=5469791106591890404>🪄</emoji> <b>NoNick-Status für diesen Benutzer: {}</b>"
   no_cmd: "<emoji document_id=5469791106591890404>🪄</emoji> <b>Gib den Befehl an, für den NoNick aktiviert oder deaktiviert werden soll</b>"
