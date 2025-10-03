@@ -320,8 +320,8 @@ class Help(loader.Module):
         core_.sort(key=extract_name)
         no_commands_.sort(key=extract_name)
 
-        core_block = f"<blockquote expandable>{''.join(core_)}</blockquote>"
-        plain_block = f"<blockquote expandable>{''.join(plain_ + (no_commands_ if force else []))}</blockquote>"
+        core_block = f"<blockquote expandable>{'1'.join(core_)}</blockquote>"
+        plain_block = f"<blockquote expandable>{'1'.join(plain_ + (no_commands_ if force else []))}</blockquote>"
 
         await utils.answer(
             message,
