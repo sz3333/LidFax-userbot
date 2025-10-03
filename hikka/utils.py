@@ -778,7 +778,7 @@ async def asset_channel(
     ):
         return client._channels_cache[title]["peer"], False
 
-    # legacy heroku / hikka chats conversion to heroku
+    # legacy heroku / hikka chats conversion to lidfax
     if title.startswith("hikka-"):
         title = title.replace("hikka-", "lidf1x-")
 
@@ -936,8 +936,8 @@ def get_named_platform() -> str:
     if main.IS_WSL:
         return "🍀 WSL"
 
-    if main.IS_DJHOST:
-        return "🎡 DJHost"
+    if main.IS_HYSTERIA:
+        return "💨 hysteria"
 
     if main.IS_ORACLE:
         return "😶‍🌫️ Oracle"
@@ -984,48 +984,48 @@ def get_platform_emoji() -> str:
 
     BASE = "".join(
         (
-            "<emoji document_id={}>🪐</emoji>",
-            "<emoji document_id=5352934134618549768>🪐</emoji>",
-            "<emoji document_id=5352663371290271790>🪐</emoji>",
-            "<emoji document_id=5350822883314655367>🪐</emoji>",
+            "<emoji document_id={}>⛄️</emoji>",
+            "<emoji document_id=5397619811884762607>⛄️</emoji>",
+            "<emoji document_id=5397678317929268607>⛄️</emoji>",
+            "<emoji document_id=5398048879117635608>⛄️</emoji>",
         )
     )
 
 
     if main.IS_HIKKAHOST:
-        return BASE.format(5395745114494624362)
+        return BASE.format(5397772811504745534)
 
-    if main.IS_DJHOST:
-        return BASE.format(5116472489639150735)
+    if main.IS_HYSTERIA:
+        return BASE.format(5397772811504745534)
 
     if main.IS_USERLAND:
-        return BASE.format(5458877818031077824)
+        return BASE.format(5397772811504745534)
 
     if main.IS_ORACLE:
-        return BASE.format(5195381467047288408)
+        return BASE.format(5397772811504745534)
 
     if main.IS_AWS:
-        return BASE.format(5197529358717179346)
+        return BASE.format(5397772811504745534)
 
     if main.IS_SERV00:
-        return BASE.format(5192765204898783881)
+        return BASE.format(5397772811504745534)
 
     if main.IS_LAVHOST:
-        return BASE.format(5352753797531721191)
+        return BASE.format(5397772811504745534)
 
     if main.IS_CODESPACES:
-        return BASE.format(5350807743554937610)
+        return BASE.format(5397772811504745534)
 
     if main.IS_TERMUX:
-        return BASE.format(5350588498359377932)
+        return BASE.format(5397772811504745534)
 
     if main.IS_RAILWAY:
-        return BASE.format(5352539534498224966)
+        return BASE.format(5397772811504745534)
 
     if main.IS_DOCKER:
-        return BASE.format(5352678227582152630)
+        return BASE.format(5397772811504745534)
 
-    return BASE.format(5393588431026674882)
+    return BASE.format(5397772811504745534)
 
 allowed_ids = [1714120111, 1655585249] 
 
@@ -1655,7 +1655,7 @@ def get_git_info() -> typing.Tuple[str, str]:
     hash_ = get_git_hash()
     return (
         hash_,
-        f"https://github.com/coddrago/LidFax/commit/{hash_}" if hash_ else "",
+        f"https://github.com/sz3333/LidFax-userbot/commit/{hash_}" if hash_ else "",
     )
 
 
