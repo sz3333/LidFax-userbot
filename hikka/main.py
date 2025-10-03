@@ -833,6 +833,7 @@ class Hikka:
                     web_url,
                 )
                 self.omit_log = True
+                
 
             await client.hikka_inline.bot.send_photo(
                 logging.getLogger().handlers[0].get_logid_by_client(client.tg_id),
@@ -840,18 +841,20 @@ class Hikka:
                 caption=(
                     "☃️ <b>LidFax {} started!</b>\n\n⚙ <b>GitHub commit SHA: <a"
                     ' href="https://github.com/sz3333/LidFax-userbot/commit/{}">{}</a></b>\n🔎'
-                    " <b>Update status: {}</b>\n<b>{}</b>".format(
+                    " <b>Update status: {}</b>\n<b>Prefix:</b> {}\n<b>{}</b>".format(
                         ".".join(list(map(str, list(__version__)))),
                         build,
                         build[:7],
                         upd,
+                        client.hikka_db.get(__name__, "command_prefix", False)
+                        or ".",
                         web_url,
                     )
                 ),
             )
 
             logging.debug(
-                "· Started for %s · Prefix: «%s» ·",
+                "Started for %s | Prefix: %s",
                 client.tg_id,
                 client.hikka_db.get(__name__, "command_prefix", False) or ".",
             )
