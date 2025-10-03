@@ -227,25 +227,9 @@ class Utils(InlineUnit):
         with contextlib.suppress(Exception):
             await call.answer()
 
-        # Try deleting the message
-        deleted = False
+        # Try deleting the message (inline or bot-sent)
         with contextlib.suppress(Exception):
-            deleted = await call.delete()
-
-        if not deleted:
-            # Fallback: remove keyboard from the message via direct API
-            with contextlib.suppress(Exception):
-                if getattr(call, "inline_message_id", None):
-                    await self.bot.edit_message_reply_markup(
-                        inline_message_id=call.inline_message_id,
-                        reply_markup=None,
-                    )
-                elif getattr(getattr(call, "message", None), "chat", None):
-                    await self.bot.edit_message_reply_markup(
-                        chat_id=call.message.chat.id,
-                        message_id=call.message.message_id,
-                        reply_markup=None,
-                    )
+            await call.delete()
 
         # Finally, unload unit to free memory
         with contextlib.suppress(Exception):
