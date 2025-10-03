@@ -188,7 +188,7 @@ terminal:
   kill_fail: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Kann den Prozess nicht beenden</b>"
   killed: "<b>Beendet</b>"
   no_cmd: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Kein Befehl wird in dieser Nachricht ausgeführt</b>"
-  running: "<emoji document_id=5472111548572900003>⌨️</emoji><b> Systembefehl</b> <code>{}</code>"
+  running: "<emoji document_id=5438500423004599348>⌨️</emoji><b> Systembefehl</b> <code>{}</code>"
   finished: "\n<b>Beendigungscode</b> <code>{}</code>"
   stdout: "\n<b>📼 Stdout:</b>\n<pre><code class=\"language-stdout\">"
   stderr: "</code></pre>\n\n<b><emoji document_id=5210952531676504517>🚫</emoji> Stderr:</b>\n<pre><code class=\"language-stderr\">"

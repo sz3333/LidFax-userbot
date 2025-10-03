@@ -201,7 +201,7 @@ terminal:
   kill_fail: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Could not kill process</b>"
   killed: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Killed</b>"
   no_cmd: "<emoji document_id=5210952531676504517>🚫</emoji> <b>No command is running in that message</b>"
-  running: "<emoji document_id=5472111548572900003>⌨️</emoji><b> System call</b> <code>{}</code>"
+  running: "<emoji document_id=5438500423004599348>⌨️</emoji><b> System call</b> <code>{}</code>"
   finished: "\n<b>Exit code</b> <code>{}</code>"
   stdout: "\n<b>📼 Stdout:</b>\n<pre><code class=\"language-stdout\">"
   stderr: "</code></pre>\n\n<b><emoji document_id=5460967491419270149>🚫</emoji> Stderr:</b>\n<pre><code class=\"language-stderr\">"

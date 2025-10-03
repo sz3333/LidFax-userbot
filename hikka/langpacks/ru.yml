@@ -188,7 +188,7 @@ terminal:
   kill_fail: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Не могу убить процесс</b>"
   killed: "<b>Убит</b>"
   no_cmd: "<emoji document_id=5210952531676504517>🚫</emoji> <b>В этом сообщении не выполняется команда</b>"
-  running: "<emoji document_id=5472111548572900003>⌨️</emoji><b> Системная команда</b> <code>{}</code>"
+  running: "<emoji document_id=5438500423004599348>⌨️</emoji><b> Системная команда</b> <code>{}</code>"
   finished: "\n<b>Код выхода </b> <code>{}</code>"
   stdout: "\n<b>📼 Stdout:</b>\n<pre><code class=\"language-stdout\">"
   stderr: "</code></pre>\n\n<b><emoji document_id=5210952531676504517>🚫</emoji> Stderr:</b>\n<pre><code class=\"language-stderr\">"
