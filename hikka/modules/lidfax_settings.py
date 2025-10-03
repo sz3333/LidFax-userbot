@@ -77,18 +77,18 @@ class LidFaxSettingsMod(loader.Module):
             if (
                 dialog.name
                 in {
-                    "heroku-logs",
-                    "heroku-onload",
-                    "heroku-assets",
-                    "heroku-backups",
-                    "heroku-acc-switcher",
-                    "silent-tags",
+                    "lidfax-logs",
+                    "lidfax-onload",
+                    "lidfax-assets",
+                    "lidfax-backups",
+                    "lidfax-acc-switcher",
+                    "silent-tags lidfax",
                 }
                 and dialog.is_channel
                 and (
                     dialog.entity.participants_count == 1
                     or dialog.entity.participants_count == 2
-                    and dialog.name in {"heroku-logs", "silent-tags"}
+                    and dialog.name in {"lidf1x-logs", "silent-tags"}
                 )
                 or (
                     self._client.loader.inline.init_complete
@@ -102,7 +102,7 @@ class LidFaxSettingsMod(loader.Module):
 
         folders = await self._client(GetDialogFiltersRequest())
 
-        if any(folder.title == "heroku" for folder in folders):
+        if any(folder.title == "lidfax" for folder in folders):
             folder_id = max(
                 folders,
                 key=lambda x: x.id,
@@ -154,7 +154,7 @@ class LidFaxSettingsMod(loader.Module):
         )
 
     @loader.command()
-    async def uninstall_heroku(self, message: Message):
+    async def uninstall_lidfax(self, message: Message):
         await self.inline.form(
             self.strings("deauth_confirm"),
             message,
@@ -688,6 +688,25 @@ class LidFaxSettingsMod(loader.Module):
                         "callback": self.inline__setting,
                         "args": (
                             lambda: main.save_config_key("disable_custom_emojis", True),
+                        ),
+                    }
+                ),
+            ],
+            [
+                (
+                    {
+                        "text": self.strings("exteragram_emojis_off"),
+                        "callback": self.inline__setting,
+                        "args": (
+                            lambda: main.save_config_key("exteragram_emojis", False),
+                        ),
+                    }
+                    if main.get_config_key("exteragram_emojis")
+                    else {
+                        "text": self.strings("exteragram_emojis_on"),
+                        "callback": self.inline__setting,
+                        "args": (
+                            lambda: main.save_config_key("exteragram_emojis", True),
                         ),
                     }
                 ),

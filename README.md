@@ -1,14 +1,14 @@
-<a href="https://www.codacy.com/gh/coddrago/Heroku/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=coddrago/Heroku&amp;utm_campaign=Badge_Grade"><img src="https://app.codacy.com/project/badge/Grade/97e3ea868f9344a5aa6e4d874f83db14"/></a>
-<a href="#"><img src="https://img.shields.io/github/languages/code-size/coddrago/Heroku"/></a>
-<a href="#"><img src="https://img.shields.io/github/issues-raw/coddrago/Heroku"/></a>
-<a href="#"><img src="https://img.shields.io/github/license/coddrago/Heroku"/></a>
-<a href="#"><img src="https://img.shields.io/github/commit-activity/m/coddrago/Heroku"/></a><br>
-<a href="#"><img src="https://img.shields.io/github/forks/coddrago/Heroku?style=flat"/></a>
-<a href="#"><img src="https://img.shields.io/github/stars/coddrago/Heroku"/></a>&nbsp;<a href="https://github.com/psf/black"><img src="https://img.shields.io/badge/code%20style-black-000000.svg" alt="Code style: black"></a><br>
+<a href="https://www.codacy.com/gh/sz3333/LidFax-userbot/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=sz3333/LidFax-userbot&amp;utm_campaign=Badge_Grade"><img src="https://app.codacy.com/project/badge/Grade/97e3ea868f9344a5aa6e4d874f83db14"/></a>
+<a href="#"><img src="https://img.shields.io/github/languages/code-size/sz3333/LidFax-userbot"/></a>
+<a href="#"><img src="https://img.shields.io/github/issues-raw/sz3333/LidFax-userbot"/></a>
+<a href="#"><img src="https://img.shields.io/github/license/sz3333/LidFax-userbot"/></a>
+<a href="#"><img src="https://img.shields.io/github/commit-activity/m/sz3333/LidFax-userbot"/></a><br>
+<a href="#"><img src="https://img.shields.io/github/forks/sz3333/LidFax-userbot?style=flat"/></a>
+<a href="#"><img src="https://img.shields.io/github/stars/sz3333/LidFax-userbot"/></a>&nbsp;<a href="https://github.com/psf/black"><img src="https://img.shields.io/badge/code%20style-black-000000.svg" alt="Code style: black"></a><br>
 
 ### Disclaimer
 
-> Even though Heroku has extended security measures for scam-modules protection, flood-based account restrictions protection and others, it still may cause damage to server / account if you install module from untrusted developer. Please, consider downloading modules exceptionally from official repository or from trusted developers. If you are not sure about whether module is safe or not, please, DO NOT INSTALL IT. Same goes for unknown commands (.terminal, .e, .eval, .ec, .ecpp, etc.). You have been warned.
+> Even though LidFax has extended security measures for scam-modules protection, flood-based account restrictions protection and others, it still may cause damage to server / account if you install module from untrusted developer. Please, consider downloading modules exceptionally from official repository or from trusted developers. If you are not sure about whether module is safe or not, please, DO NOT INSTALL IT. Same goes for unknown commands (.terminal, .e, .eval, .ec, .ecpp, etc.). You have been warned.
 
 <hr>
 <h2><img src="https://github.com/hikariatama/assets/raw/master/1326-command-window-line-flat.webp" height="54" align="middle"> Installation</h2>
@@ -19,8 +19,8 @@
 
 
 <b>Manual installation (no script):</b><br>
-<code>apt update && apt install git python3 -y && git clone https://github.com/coddrago/Heroku && cd Heroku && pip install -r requirements.txt && python3 -m hikka</code><br.>
-<i>If you are on VPS\VDS, type <code>--proxy-pass</code> in the end of command to open SSH tunnel to your Hikka web interface, or use <code>--no-web</code> to complete setup in console</i><br>
+<code>apt update && apt install git python3 -y && git clone -b stable https://github.com/sz3333/LidFax-userbot && cd LidFax-userbot && pip install -r requirements.txt && python3 -m hikka</code><br.>
+<i>If you are on VPS\VDS, type <code>--proxy-pass</code> in the end of command to open SSH tunnel to your LidFax web interface, or use <code>--no-web</code> to complete setup in console</i><br>
 <br>
 <b>Some further details:</b>
 
@@ -58,7 +58,7 @@
 Check out <a href="https://web.archive.org/dev.hikka.pw">dev.hikka.pw</a> for developers' documentation and <a href="https://web.archive.org/hikka.pw">hikka.pw</a> for users' documentation<br>
 
 <hr>
-<h2 border="none"><img src="https://github.com/hikariatama/assets/raw/master/981-consultation-flat.webp" height="54" align="middle"> <a href="https://t.me/heroku_talks">Support</a></h2>
+<h2 border="none"><img src="https://github.com/hikariatama/assets/raw/master/981-consultation-flat.webp" height="54" align="middle"> <a href="https://t.me/lidfax_talks">Support</a></h2>
 <hr>
 <h2 border="none"><img src="https://github.com/hikariatama/assets/raw/master/541-hand-washing-step-12-flat.webp" height="54" align="middle"> Features</h2>
 <table>
@@ -120,6 +120,7 @@ Check out <a href="https://web.archive.org/dev.hikka.pw">dev.hikka.pw</a> for de
 <img src="https://user-images.githubusercontent.com/36935426/202842278-37fbc518-1679-45d7-92f5-9e519275630d.png">
 
 <hr>
+<i>⚠️ This project is provided as-is. Developer doesn't take ANY responsibility over any problems, caused by userbot. By installing LidFax you take all risks on you. This is but not limited to account bans, deleted (by Telegram algorithms) messages, SCAM-modules, leaked sessions (due to SCAM-modules). It is <b>highly</b> recommended to enable the API Flood protection (.api_fw_protection) and not to install many modules at once. By using LidFax you give your consent to any actions made by your account in background in purposes of automatization. Please, consider reading https://core.telegram.org/api/terms for more information.</i>
 <i>⚠️ This project is provided as-is. Developer doesn't take ANY responsibilnkllbbjkzkssskdksksksskzjsjzkzjzk caused by userbot. By installing Heroku you take all risks on you. This is but not limited to account bans, deleted (by Telegram algorithms) messages, SCAM-modules, leaked sessions (due to SCAM-modules). It is <b>highly</b> recommended to enable the API Flood protection (.api_fw_protection) and not to install many modules at once. By using Heroku you give your consent to any actions made by your account in background in purposes of automatization. Please, consider reading https://core.telegram.org/api/terms for more information.</i>
 
 <b>Special thanks to:</b>
@@ -128,12 +129,12 @@ Check out <a href="https://web.archive.org/dev.hikka.pw">dev.hikka.pw</a> for de
     <li><a href="https://gitlab.com/hackintosh5">Hackintosh5</a> for FTG, which is the base of project</li>
     <li><a href="https://t.me/GunyaKshin">Codwiz</a> for Ukrainian translation pack</li>
     <li><a href="https://t.me/thisLyomi">Lyomi</a> for German translation pack</li>
-    <li><a href="https://t.me/lonami">Lonami</a> for Telethon, which is the base of Heroku-TL</li>
+    <li><a href="https://t.me/crow">Pavel</a> for Telethon, which is the base of LidFax-TL</li>
 </ul>
 
 <hr>
 <h2>Sponsors: </h2>
 <p align="center">
-    <img src="assets/aeza.svg" width="300" height="60">
+    <img src="assets/lidfax-assets.png" width="900" height="900">
 </p>
-<p align="center">Developed with support of <a href="https://aeza.net/?ref=herokugh">aeza.net</a></p>
+<p align="center">Developed with support of <a href="https://google.pl/?ref=herokugh">google.pl</a></p>

@@ -78,7 +78,7 @@ class TestMod(loader.Module):
             ),
             loader.ConfigValue(
                 "Text_Of_Ping",
-                "<emoji document_id=5920515922505765329>⚡️</emoji> <b>𝙿𝚒𝚗𝚐: </b><code>{ping}</code><b> 𝚖𝚜 </b>\n<emoji document_id=5900104897885376843>🕓</emoji><b> 𝚄𝚙𝚝𝚒𝚖𝚎: </b><code>{uptime}</code>",
+                "<emoji document_id=5458793988859391541>⚡️</emoji> <b>Ping: </b><code>{ping}</code><b> 𝚖𝚜 </b>\n<emoji document_id=5458920797768805767>⏰</emoji><b> Uptime: </b><code>{uptime}</code>",
                 lambda: self.strings["configping"],
                 validator=loader.validators.String(),
             ),
@@ -90,7 +90,7 @@ class TestMod(loader.Module):
             ),
             loader.ConfigValue(
                 "ping_emoji",
-                "🪐",
+                "☃️",
                 lambda: self.strings["ping_emoji"],
                 validator=loader.validators.String(),
             ),
@@ -315,7 +315,7 @@ class TestMod(loader.Module):
         logs = self.lookup("evaluator").censor(logs)
 
         logs = BytesIO(logs.encode("utf-16"))
-        logs.name = "heroku-logs.txt"
+        logs.name = "lidf1x-logs.txt"
 
         ghash = utils.get_git_hash()
 
@@ -323,7 +323,7 @@ class TestMod(loader.Module):
             *main.__version__,
             (
                 " <a"
-                f' href="https://github.com/coddrago/LidFax/commit/{ghash}">@{ghash[:8]}</a>'
+                f' href="https://github.com/sz3333/LidFax-userbot/commit/{ghash}">@{ghash[:8]}</a>'
                 if ghash
                 else ""
             ),
@@ -380,11 +380,11 @@ class TestMod(loader.Module):
     async def client_ready(self):
         chat, _ = await utils.asset_channel(
             self._client,
-            "heroku-logs",
-            "🪐 Your LidFax logs will appear in this chat",
+            "lidf1x-logs",
+            "☃️ Your LidFax logs will appear in this chat",
             silent=True,
             invite_bot=True,
-            avatar=" https://raw.githubusercontent.com/coddrago/LidFax/refs/heads/master/assets/heroku-logs.png",
+            avatar=" https://files.catbox.moe/mkjsdu.jpg",
         )
 
         self.logchat = int(f"-100{chat.id}")

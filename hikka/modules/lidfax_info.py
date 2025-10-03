@@ -40,7 +40,7 @@ class LidFaxInfoMod(loader.Module):
             ),
 
             loader.ConfigValue(
-                "show_heroku",
+                "show_lidfax",
                 True,
                 validator=loader.validators.Boolean(),
             ),
@@ -78,7 +78,7 @@ class LidFaxInfoMod(loader.Module):
             ("🕶", "<emoji document_id=5407025283456835913>📱</emoji>"),
             ("🐈‍⬛", "<emoji document_id=6334750507294262724>🐈‍⬛</emoji>"),
             ("✌️", "<emoji document_id=5469986291380657759>✌️</emoji>"),
-            ("💎", "<emoji document_id=5471952986970267163>💎</emoji>"),
+            ("💎", "<emoji document_id=5449438768404662011>🟣</emoji>"),
             ("🛡", "<emoji document_id=5282731554135615450>🌩</emoji>"),
             ("💘", "<emoji document_id=5452140079495518256>💘</emoji>"),
             ("🌼", "<emoji document_id=5224219153077914783>❤️</emoji>"),
@@ -88,8 +88,8 @@ class LidFaxInfoMod(loader.Module):
             platform = platform.replace(emoji, icon)
         return (
             (
-                "<b>🪐 LidFax</b>\n"
-                if self.config["show_heroku"]
+                "<b>☃️ LidFax</b>\n"
+                if self.config["show_lidfax"]
                 else ""
             )
             + self.config["custom_message"].format(
@@ -207,7 +207,7 @@ class LidFaxInfoMod(loader.Module):
         )
 
     @loader.command()
-    async def herokuinfo(self, message: Message):
+    async def lidfaxinfo(self, message: Message):
         await utils.answer(message, self.strings("desc"))
 
     @loader.command()

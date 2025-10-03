@@ -27,12 +27,12 @@ class Help(loader.Module):
         self.config = loader.ModuleConfig(
             loader.ConfigValue(
                 "core_emoji",
-                "<emoji document_id=4974681956907221809>▪️</emoji>",
+                "<emoji document_id=5467413391222007923>➖</emoji>",
                 lambda: "Core module bullet",
             ),
             loader.ConfigValue(
                 "plain_emoji",
-                "<emoji document_id=4974508259839836856>▪️</emoji>",
+                "<emoji document_id=5460759129670836513>🟠</emoji>",
                 lambda: "Plain module bullet",
             ),
             loader.ConfigValue(
@@ -42,7 +42,7 @@ class Help(loader.Module):
             ),
             loader.ConfigValue(
                 "desc_icon",
-                "<emoji document_id=5188377234380954537>🪐</emoji>",
+                "<emoji document_id=5454359873212923789>☃️</emoji>",
                 lambda: "Desc emoji",
             ),
         )
@@ -137,7 +137,7 @@ class Help(loader.Module):
         )
 
         reply = "{} <b>{}</b>:".format(
-            "<emoji document_id=5134452506935427991>🪐</emoji>",
+            "<emoji document_id=5454359873212923789>☃️</emoji>",
             _name,
             ""
         )
@@ -170,7 +170,7 @@ class Help(loader.Module):
 
         for name, fun in commands.items():
             reply += (
-                "\n<emoji document_id=5197195523794157505>▫️</emoji>"
+                "\n<emoji document_id=5458910485552330694>▫️</emoji>"
                 " <code>{}{}</code>{} {}".format(
                     utils.escape_html(self.get_prefix()),
                     name,
@@ -320,11 +320,15 @@ class Help(loader.Module):
         core_.sort(key=extract_name)
         no_commands_.sort(key=extract_name)
 
+        core_block = f"<blockquote expandable>{''.join(core_).lstrip()}</blockquote>"
+        plain_block = f"<blockquote expandable>{''.join(plain_ + (no_commands_ if force else [])).lstrip()}</blockquote>"
+
         await utils.answer(
             message,
-            (self.config["desc_icon"] + " {}\n <blockquote>{}</blockquote><blockquote>{}</blockquote>").format(
+            (self.config["desc_icon"] + "{}{}\n\n{}{}").format(
                 reply,
-                "".join(core_ + plain_ + (no_commands_ if force else [])),
+                core_block,
+                plain_block,
                 (
                     ""
                     if self.lookup("Loader").fully_loaded
@@ -343,7 +347,7 @@ class Help(loader.Module):
                 (
                     utils.get_platform_emoji()
                     if self._client.hikka_me.premium and CUSTOM_EMOJIS
-                    else "🪐"
+                    else "☃️"
                 )
             ),
         )

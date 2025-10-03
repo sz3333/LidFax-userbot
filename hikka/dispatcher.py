@@ -277,7 +277,17 @@ class CommandDispatcher:
         if not hasattr(event, "message") or not hasattr(event.message, "message"):
             return False
 
-        prefix = self._db.get(main.__name__, "command_prefix", False) or "."
+        # Get default prefix
+        default_prefix = self._db.get(main.__name__, "command_prefix", False) or "."
+
+        # Use owner custom prefix if present for the sender, otherwise default
+        prefix = default_prefix
+        if hasattr(event, "sender_id") and event.sender_id:
+            owner_prefixes = self._db.get(main.__name__, "owner_prefixes", {})
+            owner_prefix = owner_prefixes.get(str(event.sender_id))
+            if owner_prefix:
+                prefix = owner_prefix
+        
         change = str.maketrans(ru_keys + en_keys, en_keys + ru_keys)
         message = utils.censor(event.message)
 
@@ -294,7 +304,7 @@ class CommandDispatcher:
                 and any(s != str.translate(prefix, change) for s in message.message)
             )
         ):
-            # Allow escaping commands using .'s
+            # Allow escaping commands using prefix repetition
             if not watcher:
                 await message.edit(
                     message.message[len(prefix):],
@@ -306,12 +316,15 @@ class CommandDispatcher:
                 )
             return False
 
+        # Handle keyboard layout translation for custom prefixes
         if (
             event.message.message.startswith(str.translate(prefix, change))
             and str.translate(prefix, change) != prefix
         ):
             message.message = str.translate(message.message, change)
             message.text = str.translate(message.text, change)
+            # Update prefix after translation
+            prefix = str.translate(prefix, change)
         elif not event.message.message.startswith(prefix):
             return False
 

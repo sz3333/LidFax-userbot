@@ -117,7 +117,7 @@ class Database(dict):
                 "heroku-assets",
                 "🌆 Your LidFax assets will be stored here",
                 archive=True,
-                avatar="https://raw.githubusercontent.com/coddrago/LidFax/refs/heads/master/assets/heroku-assets.png"
+                avatar="https://raw.githubusercontent.com/sz3333/LidFax-userbot/refs/heads/master/assets/lidfax-assets.png"
             )
         except ChannelsTooMuchError:
             self._assets = None

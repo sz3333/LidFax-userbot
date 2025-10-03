@@ -223,7 +223,17 @@ class Utils(InlineUnit):
     generate_markup = _generate_markup
 
     async def _close_unit_handler(self, call: InlineCall):
-        await call.delete()
+        # Gracefully close: answer callback, try delete, fallback to removing markup, then unload
+        with contextlib.suppress(Exception):
+            await call.answer()
+
+        # Try deleting the message (inline or bot-sent)
+        with contextlib.suppress(Exception):
+            await call.delete()
+
+        # Finally, unload unit to free memory
+        with contextlib.suppress(Exception):
+            await call.unload()
 
     async def _unload_unit_handler(self, call: InlineCall):
         await call.unload()

@@ -23,8 +23,8 @@ eval 'export CFLAGS="-I/data/data/com.termux/files/usr/include/" && pip install 
 printf "\r\033[K\033[0;32mPillow installed!\e[0m\n"
 echo -e "\033[0;96mDownloading source code...\033[0m"
 
-eval "rm -rf ~/Hikka 2>/dev/null"
-eval "cd && git clone https://github.com/sz3333/LidFax-userbot && cd LidFax-userbot"
+eval "rm -rf ~/LidFax-userbot 2>/dev/null"
+eval "cd && git clone -b stable https://github.com/sz3333/LidFax-userbot && cd LidFax-userbot"
 
 echo -e "\033[0;96mSource code downloaded!...\033[0m\n"
 printf "\r\033[0;34mInstalling requirements...\e[0m"

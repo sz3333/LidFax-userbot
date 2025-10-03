@@ -1,7 +1,7 @@
-# Heroku Changelog
-## 🪐 Heroku 1.6.8
+# LidFax Changelog
+## ☃️ LidFax 1.6.9
 
-- Finally renamed to Heroku and new Emoji
+- Finally renamed to LidFax and new Emoji
 - many changes and improvements
 - many bugs fixed, work sped up
 - replacing UpgradedEval with Executor
@@ -15,11 +15,11 @@
 - new design in some built-in elements
 - fixed links in /presets, now modules are installed without problems
 - added several variables to info and ping ({hostname}, {user})
-- added .presets command
+- added ZovHeta
 - fixed bug with "bot.inline.send.message is never awaited"
-- added DJHost in info
+- removed DJHost in info
 - added config for profile picture in info
-- added config for show "Heroku" in info
+- added config for show "LidFax" in info
 - removed UnitHeta
 
 ## 🌑 Hikka 1.6.7
@@ -63,10 +63,6 @@
 - Update to Hikka-TL 2.0.7
 - Allow double-restart
 - Personal messages scam modules protection
-- https://github.com/coddrago/Hikka/issues/115
-- https://github.com/coddrago/Hikka/issues/114
-- https://github.com/coddrago/Hikka/issues/119
-- https://github.com/coddrago/Hikka/issues/120
 - Other changes
 
 ## 🌑 Hikka 1.6.3

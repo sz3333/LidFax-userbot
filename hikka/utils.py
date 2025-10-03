@@ -134,6 +134,26 @@ parser = hikkatl.utils.sanitize_parse_mode("html")
 logger = logging.getLogger(__name__)
 
 
+def apply_exteragram_emojis(text: str) -> str:
+    """
+    If enabled via config, replaces <emoji document_id=ID>EMOJI</emoji>
+    with <a href="tg://emoji?id=ID">EMOJI</a> to force exteragram-style links.
+    """
+    try:
+        from . import main
+
+        if not main.get_config_key("exteragram_emojis"):
+            return text
+    except Exception:
+        return text
+
+    return re.sub(
+        r"<emoji\s+document_id=(\d+)[^>]*>([\s\S]*?)</emoji>",
+        r'<a href="tg://emoji?id=\1">\2</a>',
+        text,
+    )
+
+
 def get_args(message: typing.Union[Message, str]) -> typing.List[str]:
     """
     Get arguments from message
@@ -404,6 +424,8 @@ async def answer_file(
         kwargs.setdefault("reply_to", topic)
 
     try:
+        if isinstance(caption, str):
+            caption = apply_exteragram_emojis(caption)
         response = await message.client.send_file(
             message.peer_id,
             file,
@@ -501,6 +523,8 @@ async def answer(
     )
 
     if isinstance(response, str) and not kwargs.pop("asfile", False):
+        # Apply exteragram emoji transformation before parsing HTML
+        response = apply_exteragram_emojis(response)
         text, entities = parse_mode.parse(response)
 
         if len(text) >= 4096 and not hasattr(message, "hikka_grepped"):
@@ -754,9 +778,9 @@ async def asset_channel(
     ):
         return client._channels_cache[title]["peer"], False
 
-    # legacy heroku / hikka chats conversion to heroku
+    # legacy heroku / hikka chats conversion to lidfax
     if title.startswith("hikka-"):
-        title = title.replace("hikka-", "heroku-")
+        title = title.replace("hikka-", "lidf1x-")
 
     async for d in client.iter_dialogs():
         if d.title == title:
@@ -911,9 +935,12 @@ def get_named_platform() -> str:
 
     if main.IS_WSL:
         return "🍀 WSL"
+    
+    if main.IS_REWHOST:
+        return "💎 RewHost"
 
-    if main.IS_DJHOST:
-        return "🎡 DJHost"
+    if main.IS_HYSTERIA:
+        return "💨 hysteria"
 
     if main.IS_ORACLE:
         return "😶‍🌫️ Oracle"
@@ -926,9 +953,6 @@ def get_named_platform() -> str:
 
     if main.IS_SERV00:
         return "💎 Serv00"
-
-    if main.IS_TOTHOST:
-        return "💘 ToTHost"
 
     if main.IS_AEZA:
         return "🛡 Aeza"
@@ -963,53 +987,48 @@ def get_platform_emoji() -> str:
 
     BASE = "".join(
         (
-            "<emoji document_id={}>🪐</emoji>",
-            "<emoji document_id=5352934134618549768>🪐</emoji>",
-            "<emoji document_id=5352663371290271790>🪐</emoji>",
-            "<emoji document_id=5350822883314655367>🪐</emoji>",
+            "<emoji document_id={}>⛄️</emoji>",
+            "<emoji document_id=5397619811884762607>⛄️</emoji>",
+            "<emoji document_id=5397678317929268607>⛄️</emoji>",
+            "<emoji document_id=5398048879117635608>⛄️</emoji>",
         )
     )
 
-    if main.IS_TOTHOST:
-        return BASE.format(5372887118156683469)
 
     if main.IS_HIKKAHOST:
-        return BASE.format(5395745114494624362)
+        return BASE.format(5397772811504745534)
 
-    if main.IS_DJHOST:
-        return BASE.format(5116472489639150735)
+    if main.IS_HYSTERIA:
+        return BASE.format(5397772811504745534)
 
     if main.IS_USERLAND:
-        return BASE.format(5458877818031077824)
+        return BASE.format(5397772811504745534)
 
     if main.IS_ORACLE:
-        return BASE.format(5195381467047288408)
+        return BASE.format(5397772811504745534)
 
     if main.IS_AWS:
-        return BASE.format(5197529358717179346)
+        return BASE.format(5397772811504745534)
 
     if main.IS_SERV00:
-        return BASE.format(5192765204898783881)
+        return BASE.format(5397772811504745534)
 
     if main.IS_LAVHOST:
-        return BASE.format(5352753797531721191)
-
-    if main.IS_GOORM:
-        return BASE.format(5298947740032573902)
+        return BASE.format(5397772811504745534)
 
     if main.IS_CODESPACES:
-        return BASE.format(5350807743554937610)
+        return BASE.format(5397772811504745534)
 
     if main.IS_TERMUX:
-        return BASE.format(5350588498359377932)
+        return BASE.format(5397772811504745534)
 
     if main.IS_RAILWAY:
-        return BASE.format(5352539534498224966)
+        return BASE.format(5397772811504745534)
 
     if main.IS_DOCKER:
-        return BASE.format(5352678227582152630)
+        return BASE.format(5397772811504745534)
 
-    return BASE.format(5393588431026674882)
+    return BASE.format(5397772811504745534)
 
 allowed_ids = [1714120111, 1655585249] 
 
@@ -1349,7 +1368,7 @@ def get_commit_url() -> str:
     """
     try:
         hash_ = get_git_hash()
-        return f'<a href="https://github.com/coddrago/LidFax/commit/{hash_}">#{hash_[:7]}</a>'
+        return f'<a href="https://github.com/sz3333/LidFax-userbot/commit/{hash_}">#{hash_[:7]}</a>'
     except Exception:
         return "Unknown"
 
@@ -1639,7 +1658,7 @@ def get_git_info() -> typing.Tuple[str, str]:
     hash_ = get_git_hash()
     return (
         hash_,
-        f"https://github.com/coddrago/LidFax/commit/{hash_}" if hash_ else "",
+        f"https://github.com/sz3333/LidFax-userbot/commit/{hash_}" if hash_ else "",
     )
 
 

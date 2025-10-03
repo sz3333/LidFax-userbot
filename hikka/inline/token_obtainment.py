@@ -46,13 +46,13 @@ class TokenObtainment(InlineUnit):
                     pass
                 else:
                     uid = utils.rand(6)
-                    username = f"@heroku_{uid}_bot"
+                    username = f"@lidfax_{uid}_bot"
             else:
                 uid = utils.rand(6)
-                username = f"@heroku_{uid}_bot"
+                username = f"@lidfax_{uid}_bot"
 
             for msg in [
-                f"🪐 LidFax userbot"[:64],
+                f"☃️ LidFax ̶u̶s̶e̶r̶b̶o̶t"[:64],
                 username,
                 "/setuserpic",
                 username,
@@ -72,7 +72,7 @@ class TokenObtainment(InlineUnit):
                 await fw_protect()
                 from .. import main
 
-                m = await conv.send_file(main.BASE_PATH / "assets" / "heroku-ava.png")
+                m = await conv.send_file(main.BASE_PATH / "assets" / "lidfax-ava.png")
                 r = await conv.get_response()
 
                 logger.debug(">> <Photo>")
@@ -197,7 +197,7 @@ class TokenObtainment(InlineUnit):
                     for msg in [
                         "/setinline",
                         button.text,
-                        "user@heroku:~$",
+                        "user@lidfax:~$",
                         "/setinlinefeedback",
                         button.text,
                         "Enabled",
@@ -221,7 +221,7 @@ class TokenObtainment(InlineUnit):
                         from .. import main
 
                         m = await conv.send_file(
-                            main.BASE_PATH / "assets" / "heroku-ava.png"
+                            main.BASE_PATH / "assets" / "lidfax-ava.png"
                         )
                         r = await conv.get_response()
 

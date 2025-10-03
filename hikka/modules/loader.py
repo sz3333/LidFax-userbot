@@ -67,7 +67,7 @@ class LoaderMod(loader.Module):
         self.config = loader.ModuleConfig(
             loader.ConfigValue(
                 "MODULES_REPO",
-                "https://raw.githubusercontent.com/coddrago/modules/main",
+                "https://raw.githubusercontent.com/sz3333/LidF1x-modules",
                 lambda: self.strings("repo_config_doc"),
                 validator=loader.validators.Link(),
             ),
@@ -96,7 +96,7 @@ class LoaderMod(loader.Module):
         modules = list(
             filter(
                 lambda x: not x.startswith(
-                    "https://raw.githubusercontent.com/coddrago/modules/main"
+                    "https://raw.githubusercontent.com/sz3333/LidF1x-modules"
                 ),
                 utils.array_sum(
                     map(
@@ -396,7 +396,7 @@ class LoaderMod(loader.Module):
         ):
             if message.file:
                 await message.edit("")
-                message = await message.respond("🪐", reply_to=utils.get_topic(message))
+                message = await message.respond("☃️", reply_to=utils.get_topic(message))
 
             if await self.inline.form(
                 self.strings("module_fs"),
@@ -884,7 +884,7 @@ class LoaderMod(loader.Module):
             value = getattr(instance, key)
             if isinstance(value, loader.Library):
                 depends_from.append(
-                    "<emoji document_id=5197195523794157505>▫️</emoji>"
+                    "<emoji document_id=5458910485552330694>▫️</emoji>"
                     " <code>{}</code> <b>{}</b> <code>{}</code>".format(
                         value.__class__.__name__,
                         self.strings("by"),
@@ -981,7 +981,7 @@ class LoaderMod(loader.Module):
             key=lambda x: x[0],
         ):
             modhelp += "\n{} <code>{}{}</code> {}".format(
-                "<emoji document_id=5197195523794157505>▫️</emoji>",
+                "<emoji document_id=5458910485552330694>▫️</emoji>",
                 utils.escape_html(self.get_prefix()),
                 _name,
                 (

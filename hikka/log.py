@@ -67,7 +67,7 @@ linecache.getlines = getlines
 def override_text(exception: Exception) -> typing.Optional[str]:
     """Returns error-specific description if available, else `None`"""
     if isinstance(exception, NetworkError):
-        return "✈️ <b>You have problems with internet connection on your server.</b>"
+        return "✈️ <b>You have problems with internet🍅connection on your server.</b>"
 
     return None
 
@@ -268,7 +268,7 @@ class TelegramLogsHandler(logging.Handler):
         bot: "aiogram.Bot",  # type: ignore  # noqa: F821
         item: HikkaException,
     ):
-        chunks = item.message + "\n\n<b>🪐 Full traceback:</b>\n" + item.full_stack
+        chunks = item.message + "\n\n<b>⛄ Full traceback:</b>\n" + item.full_stack
 
         chunks = list(utils.smart_split(*hikkatl.extensions.html.parse(chunks), 4096))
 
@@ -366,7 +366,7 @@ class TelegramLogsHandler(logging.Handler):
                         reply_markup=self._mods[client_id].inline.generate_markup(
                             [
                                 {
-                                    "text": "🪐 Full traceback",
+                                    "text": "☃️ Full traceback",
                                     "callback": self._show_full_trace,
                                     "args": (
                                         self._mods[client_id].inline.bot,
