@@ -320,12 +320,15 @@ class Help(loader.Module):
         core_.sort(key=extract_name)
         no_commands_.sort(key=extract_name)
 
+        core_block = f"<blockquote>встроенные:\n{''.join(core_)}</blockquote>"
+        plain_block = f"<blockquote>кастомные:\n{''.join(plain_ + (no_commands_ if force else []))}</blockquote>"
+
         await utils.answer(
             message,
-            (self.config["desc_icon"] + " {}<blockquote>{}</blockquote>\n<blockquote>{}</blockquote>{}").format(
+            (self.config["desc_icon"] + "{}{}\n\n{}{}").format(
                 reply,
-                "".join(core_),
-                "".join(plain_ + (no_commands_ if force else [])),
+                core_block,
+                plain_block,
                 (
                     ""
                     if self.lookup("Loader").fully_loaded
