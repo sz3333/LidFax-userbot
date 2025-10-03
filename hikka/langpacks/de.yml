@@ -111,7 +111,7 @@ lidfax_security:
   _cmd_doc_sgroupadd: "<Name> [Benutzer oder Antwort] - Benutzer zur Sicherheitsgruppe hinzufügen"
   _cmd_doc_sgroupdel: "<Name> [Benutzer oder Antwort] - Benutzer aus der Sicherheitsgruppe entfernen"
 
-heroku_settings:
+lidfax_settings:
   watchers: "<emoji document_id=5440374141142186346>👀</emoji> <b>Wächter:</b>\n\n<b>{}</b>"
   mod404: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Wächter {} nicht gefunden</b>"
   disabled: "<emoji document_id=5440374141142186346>👀</emoji> <b>Wächter {} ist jetzt <u>deaktiviert</u></b>"
@@ -121,7 +121,7 @@ heroku_settings:
   no_cmd: "<emoji document_id=5469791106591890404>🪄</emoji> <b>Gib den Befehl an, für den NoNick aktiviert oder deaktiviert werden soll</b>"
   cmd_nn: "<emoji document_id=5469791106591890404>🪄</emoji> <b>NoNick-Status für</b> <code>{}</code><b>: {}</b>"
   cmd404: "<emoji document_id=5469791106591890404>🪄</emoji> <b>Befehl nicht gefunden</b>"
-  inline_settings: "⚙️ <b>Hier kannst du die Heroku-Einstellungen verwalten</b>"
+  inline_settings: "⚙️ <b>Hier kannst du die LidFax-Einstellungen verwalten</b>"
   confirm_update: "🧭 <b>Bestätige das Update. Der Userbot wird neu gestartet</b>"
   confirm_restart: "🔄 <b>Bestätige den Neustart</b>"
   suggest_fs: "✅ Module speichern vorschlagen"
@@ -269,7 +269,7 @@ settings:
   alias_removed: "<emoji document_id=5197474765387864959>👍</emoji> <b>Alias</b> <code>{}</code> <b>wurde entfernt</b>."
   no_alias: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Alias</b> <code>{}</code> <b>existiert nicht</b>"
   db_cleared: "<emoji document_id=5197474765387864959>👍</emoji> <b>Datenbank wurde gelöscht</b>"
-  hikka: "{} <b>{}.{}.{}</b> <i>{}</i>\n\n<b><emoji document_id=5289608677244811430>📁</emoji> <b>Telethon:</b> <i>1.37.0</i>\n\n<emoji document_id=5228879218363872764>⌨</emoji> <b>Developer: DepositUser.t.me</b>\n<emoji document_id=5375368793209972850>🖋</emoji> <b>Designer: Wir suchen einen Designer, bitte kontaktieren Sie uns privat: deposituser.t.me</b>"
+  hikka: "{} <b>{}.{}.{}</b> <i>{}</i>\n\n<b><emoji document_id=5289608677244811430>📁</emoji> <b>Telethon:</b> <i>1.37.0</i>\n\n<emoji document_id=5228879218363872764>⌨</emoji> <b>Developer: DepositUser.t.me & mikhaylodm.t.me</b>\n<emoji document_id=5375368793209972850>🖋</emoji> <b>Designer: Wir suchen einen Designer, bitte kontaktieren Sie uns privat: deposituser.t.me</b>"
   _cls_doc: "Verwaltung der grundlegenden Einstellungen des Userbots"
   confirm_cleardb: "⚠️ <b>Bist du sicher, dass du die Datenbank zurücksetzen möchtest?</b>"
   cleardb_confirm: "🗑 Datenbank löschen"
