@@ -60,7 +60,7 @@ class OwnerPrefixMod(loader.Module):
     async def setownerprefix(self, message: Message):
         """Set custom prefix for owner"""
         if not self.config["allow_owner_custom_prefix"]:
-            await utils.answer(message, self.strings("feature_disabled"))
+            await utils.answer(message, self.strings("feature_disabled_notice"))
             return
 
         if not self.is_owner(message.sender_id):
@@ -98,7 +98,7 @@ class OwnerPrefixMod(loader.Module):
     async def removeownerprefix(self, message: Message):
         """Remove custom prefix for owner"""
         if not self.config["allow_owner_custom_prefix"]:
-            await utils.answer(message, self.strings("feature_disabled"))
+            await utils.answer(message, self.strings("feature_disabled_notice"))
             return
 
         if not self.is_owner(message.sender_id):

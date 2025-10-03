@@ -1,6 +1,6 @@
 owner_prefix:
   name: "OwnerPrefix"
-  feature_disabled: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Eigentümer-Benutzerdefinierte Präfixe-Funktion ist deaktiviert</b>"
+  feature_disabled_notice: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Eigentümer-Benutzerdefinierte Präfixe-Funktion ist deaktiviert</b>"
   not_owner: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Nur Eigentümer können diesen Befehl verwenden</b>"
   what_prefix: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Geben Sie das zu setzende Präfix an</b>"
   prefix_too_long: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Präfix ist zu lang (maximal 10 Zeichen)</b>"

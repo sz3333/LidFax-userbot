@@ -1,6 +1,6 @@
 owner_prefix:
   name: "OwnerPrefix"
-  feature_disabled: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Функція кастомних префіксів для власників вимкнена</b>"
+  feature_disabled_notice: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Функція кастомних префіксів для власників вимкнена</b>"
   not_owner: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Тільки власники можуть використовувати цю команду</b>"
   what_prefix: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Вкажіть префікс для встановлення</b>"
   prefix_too_long: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Префікс занадто довгий (максимум 10 символів)</b>"

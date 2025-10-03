@@ -1,6 +1,6 @@
 owner_prefix:
   name: "OwnerPrefix"
-  feature_disabled: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Owner custom prefixes feature is disabled</b>"
+  feature_disabled_notice: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Owner custom prefixes feature is disabled</b>"
   not_owner: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Only owners can use this command</b>"
   what_prefix: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Specify prefix to set</b>"
   prefix_too_long: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Prefix is too long (maximum 10 characters)</b>"
