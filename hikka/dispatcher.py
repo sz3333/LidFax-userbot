@@ -279,15 +279,14 @@ class CommandDispatcher:
 
         # Get default prefix
         default_prefix = self._db.get(main.__name__, "command_prefix", False) or "."
-        
-        # Check for owner custom prefix
+
+        # Use owner custom prefix if present for the sender, otherwise default
         prefix = default_prefix
         if hasattr(event, "sender_id") and event.sender_id:
             owner_prefixes = self._db.get(main.__name__, "owner_prefixes", {})
-            if str(event.sender_id) in owner_prefixes:
-                owner_prefix = owner_prefixes[str(event.sender_id)]
-                if owner_prefix and event.message.message.startswith(owner_prefix):
-                    prefix = owner_prefix
+            owner_prefix = owner_prefixes.get(str(event.sender_id))
+            if owner_prefix:
+                prefix = owner_prefix
         
         change = str.maketrans(ru_keys + en_keys, en_keys + ru_keys)
         message = utils.censor(event.message)
