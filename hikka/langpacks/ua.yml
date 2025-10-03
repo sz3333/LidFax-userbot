@@ -481,7 +481,7 @@ loader:
   ihandler: "\n<emoji document_id=5372981976804366741>🤖</emoji> <code>{}</code> {}"
   version_incompatible: "<emoji document_id=5454225457916420314>😖</emoji> <b>Цей модуль потребує LidFax версії {}+\nОновіться за допомогою</b> <code>.update</code>"
   ffmpeg_required: "<emoji document_id=5454225457916420314>😖</emoji> <b>Цьому модулю потрібен FFMPEG, який не встановлено</b>"
-  developer: "\n\n<emoji document_id=5287454910059654880>🫶</emoji> <b>Розробник:</b> {}"
+  developer: "\n\n<emoji document_id=5458864095610565666>🫶</emoji> <b>Розробник:</b> {}"
   depends_from: "\n\n<emoji document_id=5431736674147114227>📦</emoji> <b>Залежності:</b> \n{}"
   by: "від"
   module_fs: "💿 <b>Ти хочеш зберегти модуль на жорсткий диск, щоб він не вивантажувався під час перезавантаження?</b>"
