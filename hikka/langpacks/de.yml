@@ -40,10 +40,10 @@ lidfax_security:
   owner_list: "<emoji document_id=5386399931378440814>😎</emoji> <b>Gruppenbenutzer</b> <code>owner</code><b>:</b>\n\n{}"
   no_owner: "<emoji document_id=5386399931378440814>😎</emoji> <b>Keine Benutzer in der Gruppe</b> <code>owner</code>"
   no_user: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Geben Sie an, wem Rechte zugewiesen werden sollen</b>"
-  not_a_user: "<emoji document_id=5447644880824181073>⚠️</emoji> <b>Das angegebene Ziel ist kein Benutzer</b>"
+  not_a_user: "<emoji document_id=5449570787109401454>⚠️</emoji> <b>Das angegebene Ziel ist kein Benutzer</b>"
   cancel: "🚫 Abbrechen"
   confirm: "👑 Bestätigen"
-  self: "<emoji document_id=5447644880824181073>⚠️</emoji> <b>Es ist nicht erlaubt, Ihre eigenen Rechte zu verwalten!</b>"
+  self: "<emoji document_id=5449570787109401454>⚠️</emoji> <b>Es ist nicht erlaubt, Ihre eigenen Rechte zu verwalten!</b>"
   warning: "⚠️ <b>Möchten Sie wirklich <a href=\"tg://user?id={}\">{}</a> zur Gruppe hinzufügen</b> <code>{}</code><b>!\nDiese Aktion kann diesem Benutzer teilweise oder vollständig Zugriff auf den Userbot gewähren!</b>"
   suggest_nonick: "🔰 <i>Möchten Sie NoNick für diesen Benutzer aktivieren?</i>"
   user_nn: '🔰 <b>NoNick für <a href="tg://user?id={}">{}</a> ist aktiviert</b>'
@@ -59,7 +59,7 @@ lidfax_security:
   rule_added: "🔐 <b>Sie haben {} <a href='{}'>{}</a> das Recht gegeben, {}</b> <code>{}</code> <b>{}</b> zu verwenden"
   rules: "<emoji document_id=5472308992514464048>🔐</emoji> <b>Zielgerichtete Sicherheitsregeln:</b>\n\n{}"
   no_rules: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Keine zielgerichteten Sicherheitsregeln</b>"
-  owner_target: "<emoji document_id=5447644880824181073>⚠️</emoji> <b>Dieser Benutzer ist ein Besitzer, seine Rechte können nicht durch zielgerichtete Sicherheit verwaltet werden</b>"
+  owner_target: "<emoji document_id=5449570787109401454>⚠️</emoji> <b>Dieser Benutzer ist ein Besitzer, seine Rechte können nicht durch zielgerichtete Sicherheit verwaltet werden</b>"
   rules_removed: '<emoji document_id=5472308992514464048>🔐</emoji> <b>Zielgerichtete Sicherheitsregeln für <a href="{}">{}</a> wurden entfernt</b>'
   rule_removed: '<emoji document_id=5472308992514464048>🔐</emoji> <b>Die Sicherheitsregel für <a href="{}">{}</a> wurde entfernt (</b><code>{}</code><b>)</b>'
   chat_inline: "⚠️ <b>Sie können keine Inline-Befehlregel für Chats erstellen!</b>"
@@ -449,7 +449,7 @@ lidfax_info:
 
 loader:
   loadmod_pm_timeout: "Bitte warten Sie 10 Sekunden, bevor Sie diese Aktion bestätigen"
-  loadmod_not_allowed_fresh_pm: "<emoji document_id=5447644880824181073>⚠️</emoji> <b><u>Lesen Sie dies sorgfältig!</u></b> <emoji document_id=5447644880824181073>⚠️</emoji>\n\n<b>Sie versuchen, ein Modul in privaten Nachrichten von einem Benutzer zu laden, den Sie nicht kennen.</b> Module, die nicht vom Entwickler bestätigt wurden, können viele Probleme verursachen, von <b>Manipulationen mit Ihrem Konto bis hin zu Kontoentfernung oder Sitzungsbeschädigung</b>. Wenn Sie diesen Benutzer kennen und ihm <b><u>100%</u></b> vertrauen, warten Sie ein paar Tage und versuchen Sie es erneut."
+  loadmod_not_allowed_fresh_pm: "<emoji document_id=5449570787109401454>⚠️</emoji> <b><u>Lesen Sie dies sorgfältig!</u></b> <emoji document_id=5449570787109401454>⚠️</emoji>\n\n<b>Sie versuchen, ein Modul in privaten Nachrichten von einem Benutzer zu laden, den Sie nicht kennen.</b> Module, die nicht vom Entwickler bestätigt wurden, können viele Probleme verursachen, von <b>Manipulationen mit Ihrem Konto bis hin zu Kontoentfernung oder Sitzungsbeschädigung</b>. Wenn Sie diesen Benutzer kennen und ihm <b><u>100%</u></b> vertrauen, warten Sie ein paar Tage und versuchen Sie es erneut."
   link: "<emoji document_id=5256113064821926998>📁</emoji> <b>Datei von</b> {class_name}\n\n<emoji document_id=5470093614023449749>⛄️</emoji> <b>{prefix}lm als Antwort auf diese Nachricht installieren</b>\n\n<emoji document_id=4916086774649848789>🔗</emoji> <code>{prefix}dlm {url}</code>\n\n{not_exact}"
   file: "<emoji document_id=5256113064821926998>📁</emoji> <b>Datei von</b> {class_name}\n\n<emoji document_id=5470093614023449749>⛄️</emoji> <b>{prefix}lm als Antwort auf diese Nachricht zum Installieren</b>\n\n{not_exact}"
   loading_module_via_file: "<emoji document_id=5873204392429096339>🔄</emoji> Das Modul wird geladen."
