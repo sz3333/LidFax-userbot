@@ -98,6 +98,7 @@ IS_AWS = "AWS_OS" in os.environ
 IS_SERV00 = "serv00" in socket.gethostname()
 IS_AEZA = "aeza" in socket.gethostname()
 IS_HYSTERIA = "hysteria" in socket.gethostname()
+IS_REWHOST = "RewHost" in socket.gethostname()
 IS_USERLAND = "userland" in os.environ
 IS_WSL = False
 with contextlib.suppress(Exception):

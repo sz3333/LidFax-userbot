@@ -935,6 +935,9 @@ def get_named_platform() -> str:
 
     if main.IS_WSL:
         return "🍀 WSL"
+    
+    if main.IS_REWHOST:
+        return "💎 RewHost"
 
     if main.IS_HYSTERIA:
         return "💨 hysteria"
