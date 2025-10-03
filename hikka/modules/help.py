@@ -21,17 +21,7 @@ logger = logging.getLogger(__name__)
 class Help(loader.Module):
     """Shows help for modules and commands"""
 
-    strings = {
-        "name": "Help",
-        "no_mod": "🚫 <b>Specify module name to hide</b>",
-        "hidden_shown": "👁 <b>{} modules hidden, {} modules shown:</b>\n{}\n{}",
-        "undoc": "🚫 <b>No documentation</b>",
-        "not_exact": "🔍 <i>Not exact match</i>",
-        "core_notice": "💫 <i>This is a core module</i>",
-        "all_header": "📚 <b>All modules ({})</b>\n🚫 <i>Hidden: {}</i>\n",
-        "partial_load": "🔄 <i>Modules are still loading...</i>",
-        "support": "{} <b>Need help?</b>\n💬 <a href=\"https://t.me/hikka_talks\">Join support chat</a>",
-    }
+    strings = {"name": "Help"}
 
     def __init__(self):
         self.config = loader.ModuleConfig(
@@ -55,18 +45,9 @@ class Help(loader.Module):
                 "<emoji document_id=5454359873212923789>☃️</emoji>",
                 lambda: "Desc emoji",
             ),
-            loader.ConfigValue(
-                "command_emoji",
-                "<emoji document_id=5197195523794157505>▫️</emoji>",
-                lambda: "Emoji for command",
-            ),
         )
 
-    @loader.command(
-        ru_doc="[args] | Спрячет ваши модули", 
-        ua_doc="[args] | Сховає ваші модулі", 
-        de_doc="[args] | Versteckt Ihre Module"
-    )
+    @loader.command(ru_doc="[args] | Спрячет ваши модули", ua_doc="[args] | Сховає ваші модулі", de_doc="[args] | Versteckt Ihre Module")
     async def helphide(self, message: Message):
         """[args] | hide your modules"""
         if not (modules := utils.get_args(message)):
@@ -109,7 +90,6 @@ class Help(loader.Module):
         return aliases or []
 
     async def modhelp(self, message: Message, args: str):
-        """Show help for specific module"""
         exact = True
         if not (module := self.lookup(args)):
             if method := self.allmodules.dispatch(
@@ -157,10 +137,10 @@ class Help(loader.Module):
         )
 
         reply = "{} <b>{}</b>:".format(
-            self.config["desc_icon"],
+            "<emoji document_id=5454359873212923789>☃️</emoji>",
             _name,
+            ""
         )
-        
         if module.__doc__:
             reply += (
                 "\n<i><emoji document_id=5879813604068298387>ℹ️</emoji> "
@@ -190,8 +170,8 @@ class Help(loader.Module):
 
         for name, fun in commands.items():
             reply += (
-                "\n{} <code>{}{}</code>{} {}".format(
-                    self.config["command_emoji"],
+                "\n<emoji document_id=5197195523794157505>▫️</emoji>"
+                " <code>{}{}</code>{} {}".format(
                     utils.escape_html(self.get_prefix()),
                     name,
                     (
@@ -226,11 +206,7 @@ class Help(loader.Module):
             ),
         )
 
-    @loader.command(
-        ru_doc="[args] | Помощь с вашими модулями!", 
-        ua_doc="[args] | допоможіть з вашими модулями!", 
-        de_doc="[args] | Hilfe mit deinen Modulen!"
-    )
+    @loader.command(ru_doc="[args] | Помощь с вашими модулями!", ua_doc="[args] | допоможіть з вашими модулями!", de_doc="[args] | Hilfe mit deinen Modulen!")
     async def help(self, message: Message):
         """[args] | help with your modules!"""
         args = utils.get_args_raw(message)
@@ -357,11 +333,7 @@ class Help(loader.Module):
             ),
         )
 
-    @loader.command(
-        ru_doc="| Ссылка на чат помощи", 
-        ua_doc="| посилання для чату служби підтримки", 
-        de_doc="| Link zum Support-Chat"
-    )
+    @loader.command(ru_doc="| Ссылка на чат помощи", ua_doc="| посилання для чату служби підтримки", de_doc="| Link zum Support-Chat")
     async def support(self, message):
         """| link for support chat"""
        
