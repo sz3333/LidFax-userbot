@@ -191,7 +191,7 @@ terminal:
   running: "<emoji document_id=5472111548572900003>⌨️</emoji><b> Системна команда</b> <code>{}</code>"
   finished: "\n<b>Вихідний код </b> <code>{}</code>"
   stdout: "\n<b>📼 Stdout:</b>\n<pre><code class=\"language-stdout\">"
-  stderr: "</code></pre>\n\n<b><emoji document_id=5210952531676504517>🚫</emoji> Stderr:</b>\n<pre><code class=\"language-stderr\">"
+  stderr: "</code></pre>\n\n<b><emoji document_id=5460967491419270149>🚫</emoji> Stderr:</b>\n<pre><code class=\"language-stderr\">"
   end: "</code></pre>"
   auth_fail: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Аутентифікація невдала, спробуй ще раз</b>"
   auth_needed: '<emoji document_id=5472308992514464048>🔐</emoji><a href="tg://user?id={}"> Необхідна аутентифікація</a>'
