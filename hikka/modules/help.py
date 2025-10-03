@@ -320,8 +320,8 @@ class Help(loader.Module):
         core_.sort(key=extract_name)
         no_commands_.sort(key=extract_name)
 
-        core_block = f"<blockquote>встроенные:\n{''.join(core_)}</blockquote>"
-        plain_block = f"<blockquote>кастомные:\n{''.join(plain_ + (no_commands_ if force else []))}</blockquote>"
+        core_block = f"<blockquote expandable>встроенные:\n{''.join(core_)}</blockquote>"
+        plain_block = f"<blockquote expandable>кастомные:\n{''.join(plain_ + (no_commands_ if force else []))}</blockquote>"
 
         await utils.answer(
             message,
