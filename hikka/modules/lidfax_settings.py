@@ -8,13 +8,13 @@ import logging
 import os
 import random
 
-import hikkatl
-from hikkatl.tl.functions.messages import (
+import lidfaxtl
+from lidfaxtl.tl.functions.messages import (
     GetDialogFiltersRequest,
     UpdateDialogFilterRequest,
 )
-from hikkatl.tl.types import Message
-from hikkatl.utils import get_display_name
+from lidfaxtl.tl.types import Message
+from lidfaxtl.utils import get_display_name
 
 from .. import loader, log, main, utils
 from .._internal import fw_protect, restart
@@ -465,7 +465,7 @@ class LidFaxSettingsMod(loader.Module):
     async def inline__setting(self, call: InlineCall, key: str, state: bool = False):
         if callable(key):
             key()
-            hikkatl.extensions.html.CUSTOM_EMOJIS = not main.get_config_key(
+            lidfaxtl.extensions.html.CUSTOM_EMOJIS = not main.get_config_key(
                 "disable_custom_emojis"
             )
         else:

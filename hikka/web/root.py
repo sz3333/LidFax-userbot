@@ -19,7 +19,7 @@ import aiohttp_jinja2
 import requests
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from aiohttp import web
-from hikkatl.errors import (
+from lidfaxtl.errors import (
     FloodWaitError,
     PasswordHashInvalidError,
     PhoneCodeExpiredError,
@@ -27,12 +27,12 @@ from hikkatl.errors import (
     SessionPasswordNeededError,
     YouBlockedUserError,
 )
-from hikkatl.password import compute_check
-from hikkatl.sessions import MemorySession
-from hikkatl.tl.functions.account import GetPasswordRequest
-from hikkatl.tl.functions.auth import CheckPasswordRequest
-from hikkatl.tl.functions.contacts import UnblockRequest
-from hikkatl.utils import parse_phone
+from lidfaxtl.password import compute_check
+from lidfaxtl.sessions import MemorySession
+from lidfaxtl.tl.functions.account import GetPasswordRequest
+from lidfaxtl.tl.functions.auth import CheckPasswordRequest
+from lidfaxtl.tl.functions.contacts import UnblockRequest
+from lidfaxtl.utils import parse_phone
 
 from .. import database, main, utils
 from .._internal import restart

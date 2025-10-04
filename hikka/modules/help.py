@@ -9,8 +9,8 @@ import difflib
 import inspect
 import logging
 
-from hikkatl.extensions.html import CUSTOM_EMOJIS
-from hikkatl.tl.types import Message
+from lidfaxtl.extensions.html import CUSTOM_EMOJIS
+from lidfaxtl.tl.types import Message
 
 from .. import loader, utils
 

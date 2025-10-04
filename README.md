@@ -129,7 +129,7 @@ Check out <a href="https://web.archive.org/dev.hikka.pw">dev.hikka.pw</a> for de
     <li><a href="https://gitlab.com/hackintosh5">Hackintosh5</a> for FTG, which is the base of project</li>
     <li><a href="https://t.me/GunyaKshin">Codwiz</a> for Ukrainian translation pack</li>
     <li><a href="https://t.me/thisLyomi">Lyomi</a> for German translation pack</li>
-    <li><a href="https://t.me/crow">Pavel</a> for Telethon, which is the base of LidFax-TL</li>
+    <li><a href="https://t.me/crow">Pavel</a> for Telethon, which is the base of lidfaxtl</li>
 </ul>
 
 <hr>

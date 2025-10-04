@@ -8,8 +8,8 @@ import asyncio
 import logging
 import re
 
-from hikkatl.errors.rpcerrorlist import YouBlockedUserError
-from hikkatl.tl.functions.contacts import UnblockRequest
+from lidfaxtl.errors.rpcerrorlist import YouBlockedUserError
+from lidfaxtl.tl.functions.contacts import UnblockRequest
 
 from .. import utils
 from .._internal import fw_protect
