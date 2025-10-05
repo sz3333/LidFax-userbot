@@ -872,7 +872,7 @@ class LoaderMod(loader.Module):
 
         if instance.__doc__:
             modhelp += (
-                "<i>\n<emoji document_id=5879813604068298387>ℹ️</emoji>"
+                "<i>\n<emoji document_id=5465645994999838991>ℹ️</emoji>"
                 f" {utils.escape_html(inspect.getdoc(instance))}</i>\n"
             )
 
