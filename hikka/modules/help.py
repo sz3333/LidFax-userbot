@@ -320,8 +320,8 @@ class Help(loader.Module):
         core_.sort(key=extract_name)
         no_commands_.sort(key=extract_name)
 
-        core_block = f"<blockquote expandable>{''.join(core_).lstrip()}</blockquote>"
-        plain_block = f"<blockquote expandable>{''.join(plain_ + (no_commands_ if force else [])).lstrip()}</blockquote>"
+        core_block = f"<blockquote>{''.join(core_).lstrip()}</blockquote>"
+        plain_block = f"<blockquote>{''.join(plain_ + (no_commands_ if force else [])).lstrip()}</blockquote>"
 
         await utils.answer(
             message,
