@@ -9,8 +9,8 @@ import difflib
 import inspect
 import logging
 
-from legacytl.extensions.html import CUSTOM_EMOJIS
-from legacytl.tl.types import Message
+from hikkatl.extensions.html import CUSTOM_EMOJIS
+from hikkatl.tl.types import Message
 
 from .. import loader, utils
 
@@ -19,41 +19,38 @@ logger = logging.getLogger(__name__)
 
 @loader.tds
 class Help(loader.Module):
+    """Shows help for modules and commands"""
+
     strings = {"name": "Help"}
 
     def __init__(self):
         self.config = loader.ModuleConfig(
             loader.ConfigValue(
                 "core_emoji",
-                "<emoji document_id=6030550768426159669>🛡</emoji>",
+                "<emoji document_id=5467413391222007923>➖</emoji>",
                 lambda: "Core module bullet",
             ),
             loader.ConfigValue(
                 "plain_emoji",
-                "<emoji document_id=5861640841524680405>✅</emoji>",
+                "<emoji document_id=5460759129670836513>🔹</emoji>",
                 lambda: "Plain module bullet",
             ),
             loader.ConfigValue(
                 "empty_emoji",
-                "<emoji document_id=5251741320690551495>👎</emoji>",
+                "<emoji document_id=5100652175172830068>🟠</emoji>",
                 lambda: "Empty modules bullet",
             ),
             loader.ConfigValue(
                 "desc_icon",
-                "<emoji document_id=5253521692008917018>🌙</emoji>",
+                "<emoji document_id=5454359873212923789>☃️</emoji>",
                 lambda: "Desc emoji",
-            ),
-            loader.ConfigValue(
-                "expandable",
-                True,
-                lambda: "If the blockquote will be expandable",
-                validator=loader.validators.Boolean(),
             ),
         )
 
-    @loader.command()
+    @loader.command(ru_doc="[args] | Спрячет ваши модули", ua_doc="[args] | Сховає ваші модулі", de_doc="[args] | Versteckt Ihre Module")
     async def helphide(self, message: Message):
-        if not (modules := utils.get_args_split_by(message, ["\n", ","])):
+        """[args] | hide your modules"""
+        if not (modules := utils.get_args(message)):
             await utils.answer(message, self.strings("no_mod"))
             return
 
@@ -96,7 +93,7 @@ class Help(loader.Module):
         exact = True
         if not (module := self.lookup(args)):
             if method := self.allmodules.dispatch(
-                args.lower().strip(self.get_prefix(message.sender_id))
+                args.lower().strip(self.get_prefix())
             )[1]:
                 module = method.__self__
             else:
@@ -140,11 +137,13 @@ class Help(loader.Module):
         )
 
         reply = "{} <b>{}</b>:".format(
-            "<emoji document_id=5253521692008917018>🌙</emoji>", _name, ""
+            "<emoji document_id=5454359873212923789>☃️</emoji>",
+            _name,
+            ""
         )
         if module.__doc__:
             reply += (
-                "\n<i><emoji document_id=5879813604068298387>ℹ️</emoji> "
+                "\n<i><emoji document_id=5465645994999838991>ℹ️</emoji> "
                 + utils.escape_html(inspect.getdoc(module))
                 + "\n</i>"
             )
@@ -171,17 +170,15 @@ class Help(loader.Module):
 
         for name, fun in commands.items():
             reply += (
-                "\n<emoji document_id=5197195523794157505>▫️</emoji>"
+                "\n<emoji document_id=5458910485552330694>▫️</emoji>"
                 " <code>{}{}</code>{} {}".format(
-                    utils.escape_html(self.get_prefix(message.sender_id)),
+                    utils.escape_html(self.get_prefix()),
                     name,
                     (
                         " ({})".format(
                             ", ".join(
                                 "<code>{}{}</code>".format(
-                                    utils.escape_html(
-                                        self.get_prefix(message.sender_id)
-                                    ),
+                                    utils.escape_html(self.get_prefix()),
                                     alias,
                                 )
                                 for alias in self.find_aliases(name)
@@ -209,23 +206,33 @@ class Help(loader.Module):
             ),
         )
 
-    @loader.command()
+    @loader.command(ru_doc="[args] | Помощь с вашими модулями!", ua_doc="[args] | допоможіть з вашими модулями!", de_doc="[args] | Hilfe mit deinen Modulen!")
     async def help(self, message: Message):
+        """[args] | help with your modules!"""
         args = utils.get_args_raw(message)
         force = False
-        only_hidden = False
         if "-f" in args:
             args = args.replace(" -f", "").replace("-f", "")
             force = True
-        if "-h" in args:
-            args = args.replace(" -h", "").replace("-h", "")
-            only_hidden = True
 
         if args:
             await self.modhelp(message, args)
             return
 
         hidden = self.get("hide", [])
+
+        reply = self.strings("all_header").format(
+            len(self.allmodules.modules),
+            (
+                0
+                if force
+                else sum(
+                    module.__class__.__name__ in hidden
+                    for module in self.allmodules.modules
+                )
+            ),
+        )
+        shown_warn = False
 
         plain_ = []
         core_ = []
@@ -234,14 +241,6 @@ class Help(loader.Module):
         for mod in self.allmodules.modules:
             if not hasattr(mod, "commands"):
                 logger.debug("Module %s is not inited yet", mod.__class__.__name__)
-                continue
-
-            if len(mod.commands) == 0 and len(mod.inline_handlers) == 0:
-                no_commands_ += [
-                    "{} <code>{}</code>\n".format(
-                        self.config["empty_emoji"], mod.strings["name"]
-                    )
-                ]
                 continue
 
             if mod.__class__.__name__ in self.get("hide", []) and not force:
@@ -254,8 +253,18 @@ class Help(loader.Module):
             except KeyError:
                 name = getattr(mod, "name", "ERROR")
 
+            if (
+                not getattr(mod, "commands", None)
+                and not getattr(mod, "inline_handlers", None)
+                and not getattr(mod, "callback_handlers", None)
+            ):
+                no_commands_ += [
+                    "\n{} <code>{}</code>".format(self.config["empty_emoji"], name)
+                ]
+                continue
+
             core = mod.__origin__.startswith("<core")
-            tmp += "{} <code>{}</code>".format(
+            tmp += "\n{} <code>{}</code>".format(
                 self.config["core_emoji"] if core else self.config["plain_emoji"], name
             )
             first = True
@@ -285,81 +294,60 @@ class Help(loader.Module):
 
             for cmd in icommands:
                 if first:
-                    tmp += (
-                        f": ( <emoji document_id=6030400221232501136>🤖</emoji> {cmd}"
-                    )
+                    tmp += f": ( 🤖 {cmd}"
                     first = False
                 else:
-                    tmp += f" | <emoji document_id=6030400221232501136>🤖</emoji> {cmd}"
+                    tmp += f" | 🤖 {cmd}"
 
             if commands or icommands:
-                tmp += " )\n"
+                tmp += " )"
                 if core:
                     core_ += [tmp]
                 else:
                     plain_ += [tmp]
+            elif not shown_warn and (mod.commands or mod.inline_handlers):
+                reply = (
+                    "<i>You have permissions to execute only these"
+                    f" commands</i>\n{reply}"
+                )
+                shown_warn = True
 
         def extract_name(line):
-            match = re.search(
-                r"[\U0001F300-\U0001FAFF\U0001F900-\U0001F9FF]*\s*(name.*)", line
-            )
+            match = re.search(r'[\U0001F300-\U0001FAFF\U0001F900-\U0001F9FF]*\s*(name.*)', line)
             return match.group(1) if match else line
-
-        hidden_mods = []
-        if only_hidden:
-            mod_names = []
-            for mod in self.allmodules.modules:
-                mod_names += [mod.__class__.__name__]
-            for mod in hidden:
-                if mod in mod_names:
-                    hidden_mods += [
-                        "{} <code>{}</code>\n".format(self.config["empty_emoji"], mod)
-                    ]
-        hidden_mods.sort(key=extract_name)
 
         plain_.sort(key=extract_name)
         core_.sort(key=extract_name)
         no_commands_.sort(key=extract_name)
 
-        reply = self.strings("all_header").format(
-            len(self.allmodules.modules),
-            (
-                0
-                if force
-                else sum(
-                    module.__class__.__name__ in hidden
-                    for module in self.allmodules.modules
-                )
-            ),
-            len(no_commands_),
-        )
-        full_list = (
-            core_ + plain_ + no_commands_
-            if force
-            else hidden_mods + no_commands_ if only_hidden else core_ + plain_
-        )
+        core_block = f"<blockquote expandable>{''.join(core_).lstrip()}</blockquote>"
+        plain_block = f"<blockquote expandable>{''.join(plain_ + (no_commands_ if force else [])).lstrip()}</blockquote>"
+
         await utils.answer(
             message,
-            (self.config["desc_icon"] + " {}\n {}{}").format(
+            (self.config["desc_icon"] + "{}{}\n\n{}{}").format(
                 reply,
-                f"<blockquote {'expandable' if self.config['expandable'] else ''}>{''.join(full_list)}</blockquote>",
+                core_block,
+                plain_block,
                 (
                     ""
                     if self.lookup("Loader").fully_loaded
-                    else f"\n\n{self.strings['partial_load']}"
+                    else f"\n\n{self.strings('partial_load')}"
                 ),
             ),
         )
 
-    @loader.command()
+    @loader.command(ru_doc="| Ссылка на чат помощи", ua_doc="| посилання для чату служби підтримки", de_doc="| Link zum Support-Chat")
     async def support(self, message):
+        """| link for support chat"""
+
         await utils.answer(
             message,
-            self.strings["support"].format(
+            self.strings("support").format(
                 (
                     utils.get_platform_emoji()
-                    if self._client.legacy_me.premium and CUSTOM_EMOJIS
-                    else "🌙"
+                    if self._client.hikka_me.premium and CUSTOM_EMOJIS
+                    else "☃️"
                 )
             ),
         )
