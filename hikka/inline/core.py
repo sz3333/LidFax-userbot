@@ -14,7 +14,8 @@ import typing
 
 from aiogram import Bot, Dispatcher
 from aiogram.enums import ParseMode
-from aiogram.exceptions import Unauthorized
+from aiogram.exceptions import TelegramAPIError
+from aiogram.exceptions import TelegramUnauthorizedError
 from lidfaxtl.errors.rpcerrorlist import InputUserDeactivatedError, YouBlockedUserError
 from lidfaxtl.tl.functions.contacts import UnblockRequest
 from lidfaxtl.tl.types import Message
