@@ -66,11 +66,7 @@ else:
         try:
             import lidfaxtl  # noqa: F811
 
-<<<<<<< Updated upstream
-            if tuple(map(int, lidfaxtl.__version__.split("."))) < (2, 0, 8):
-=======
             if tuple(map(int, lidfaxtl.__version__.split("."))) < (0, 9, 5):
->>>>>>> Stashed changes
                 raise ImportError
         except ImportError:
             print("🔄 Installing dependencies...")

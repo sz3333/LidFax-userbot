@@ -53,11 +53,7 @@ class Executor(loader.Module):
             "event": message,
             "chat": message.to_id,
             "me": me,
-<<<<<<< Updated upstream
-            "lidfaxtl": lidfaxtl,
-=======
             "hikkatl": lidfaxtl,
->>>>>>> Stashed changes
             "telethon": lidfaxtl,
             "utils": utils,
             "loader": loader,

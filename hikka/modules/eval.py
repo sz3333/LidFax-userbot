@@ -466,11 +466,7 @@ class Evaluator(loader.Module):
             **self.get_sub(lidfaxtl.tl.functions),
             "event": message,
             "chat": message.to_id,
-<<<<<<< Updated upstream
-            "lidfaxtl": lidfaxtl,
-=======
             "hikkatl": lidfaxtl,
->>>>>>> Stashed changes
             "telethon": lidfaxtl,
             "utils": utils,
             "main": main,
