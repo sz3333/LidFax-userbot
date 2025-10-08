@@ -24,7 +24,7 @@ from aiogram.types import (
     InputMediaAnimation,
     InputMediaPhoto,
 )
-from aiogram.utils.exceptions import BadRequest, RetryAfter
+from aiogram.exceptions import TelegramBadRequest, TelegramRetryAfter
 from lidfaxtl.errors.rpcerrorlist import ChatSendInlineForbiddenError
 from lidfaxtl.extensions.html import CUSTOM_EMOJIS
 from lidfaxtl.tl.types import Message
@@ -461,9 +461,10 @@ class Gallery(InlineUnit):
                 media=self._get_current_media(unit_id),
                 reply_markup=self._gallery_markup(unit_id),
             )
-        except RetryAfter as e:
+        except TelegramRetryAfter as e:
+            wait_time = getattr(e, "retry_after", getattr(e, "timeout", 1))
             await call.answer(
-                f"Got FloodWait. Wait for {e.timeout} seconds",
+                f"Got FloodWait. Wait for {wait_time} seconds",
                 show_alert=True,
             )
         except Exception:
@@ -553,14 +554,15 @@ class Gallery(InlineUnit):
                 media=self._get_current_media(unit_id),
                 reply_markup=self._gallery_markup(unit_id),
             )
-        except BadRequest:
+        except TelegramBadRequest:
             logger.debug("Error fetching photo content, attempting load next one")
             del self._units[unit_id]["photos"][self._units[unit_id]["current_index"]]
             self._units[unit_id]["current_index"] -= 1
             return await self._gallery_page(call, page, unit_id)
-        except RetryAfter as e:
+        except TelegramRetryAfter as e:
+            wait_time = getattr(e, "retry_after", getattr(e, "timeout", 1))
             await call.answer(
-                f"Got FloodWait. Wait for {e.timeout} seconds",
+                f"Got FloodWait. Wait for {wait_time} seconds",
                 show_alert=True,
             )
             return
