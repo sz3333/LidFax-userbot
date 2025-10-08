@@ -20,7 +20,18 @@ import typing
 from logging.handlers import RotatingFileHandler
 
 import lidfaxtl
+<<<<<<< Updated upstream
 from aiogram.utils.exceptions import NetworkError
+=======
+try:
+    from aiogram.exceptions import NetworkError
+except ImportError:
+    try:
+        from aiogram.utils.exceptions import NetworkError
+    except ImportError:
+        # Fallback for older versions
+        NetworkError = Exception
+>>>>>>> Stashed changes
 
 from . import utils
 from .tl_cache import CustomTelegramClient

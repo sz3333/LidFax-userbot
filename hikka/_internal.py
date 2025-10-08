@@ -34,7 +34,12 @@ def die():
     else:
         # This one is actually better, because it kills all subprocesses
         # but it can't be used inside the Docker
-        os.killpg(os.getpgid(os.getpid()), signal.SIGTERM)
+        try:
+            # Unix systems
+            os.killpg(os.getpgid(os.getpid()), signal.SIGTERM)
+        except (AttributeError, OSError):
+            # Windows or other systems that don't support killpg
+            sys.exit(0)
 
 
 def restart():
@@ -45,7 +50,7 @@ def restart():
         print(
             "Got in a loop, exiting\nYou probably need to manually remove existing"
             " packages and then restart LidFax. Run `pip uninstall -y telethon"
-            " telethon-mod hikka-tl-new`, then restart LidFax."
+            " telethon-mod lidfax-tl`, then restart LidFax."
         )
         sys.exit(0)
 
