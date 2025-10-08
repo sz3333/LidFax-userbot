@@ -27,9 +27,9 @@ from importlib.machinery import ModuleSpec
 from urllib.parse import urlparse
 
 import requests
-from hikkatl.errors.rpcerrorlist import MediaCaptionTooLongError
-from hikkatl.tl.functions.channels import JoinChannelRequest
-from hikkatl.tl.types import Channel, Message, PeerUser
+from telethon.errors.rpcerrorlist import MediaCaptionTooLongError
+from telethon.tl.functions.channels import JoinChannelRequest
+from telethon.tl.types import Channel, Message, PeerUser
 
 from .. import loader, main, utils
 from .._local_storage import RemoteStorage
@@ -620,7 +620,7 @@ class LoaderMod(loader.Module):
                         {
                             "sklearn": "scikit-learn",
                             "pil": "Pillow",
-                            "hikkatl": "Hikka-TL-New",
+                            "telethon": "Telethon",
                         }.get(e.name.lower(), e.name)
                     ]
 
@@ -850,7 +850,7 @@ class LoaderMod(loader.Module):
             developer_entity = await (
                 self._client.force_get_entity
                 if (
-                    developer in self._client.hikka_entity_cache
+                    developer in self._client.entity_cache
                     and getattr(
                         await self._client.get_entity(developer),
                         "left",

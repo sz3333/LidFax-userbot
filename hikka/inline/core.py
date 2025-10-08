@@ -15,10 +15,10 @@ import typing
 from aiogram import Bot, Dispatcher
 from aiogram.types import ParseMode
 from aiogram.utils.exceptions import TerminatedByOtherGetUpdates, Unauthorized
-from hikkatl.errors.rpcerrorlist import InputUserDeactivatedError, YouBlockedUserError
-from hikkatl.tl.functions.contacts import UnblockRequest
-from hikkatl.tl.types import Message
-from hikkatl.utils import get_display_name
+from telethon.errors.rpcerrorlist import InputUserDeactivatedError, YouBlockedUserError
+from telethon.tl.functions.contacts import UnblockRequest
+from telethon.tl.types import Message
+from telethon.utils import get_display_name
 
 from .. import utils
 from ..database import Database
@@ -111,8 +111,9 @@ class InlineManager(
         :return: None
         :rtype: None
         """
-        self._me = self._client.tg_id
-        self._name = get_display_name(self._client.hikka_me)
+        me = await self._client.get_me(True)
+        self._me = me.id
+        self._name = get_display_name(me)
 
         if not ignore_token_checks:
             is_token_asserted = await self._assert_token()

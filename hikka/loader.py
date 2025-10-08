@@ -24,7 +24,7 @@ from pathlib import Path
 from types import FunctionType
 from uuid import uuid4
 
-from hikkatl.tl.tlobject import TLObject
+from telethon.tl.tlobject import TLObject
 
 from . import security, utils, validators
 from .database import Database
@@ -133,17 +133,7 @@ VALID_PIP_PACKAGES = re.compile(
 
 USER_INSTALL = "PIP_TARGET" not in os.environ and "VIRTUAL_ENV" not in os.environ
 
-native_import = builtins.__import__
 
-
-def patched_import(name: str, *args, **kwargs):
-    if name.startswith("telethon"):
-        return native_import("hikkatl" + name[8:], *args, **kwargs)
-
-    return native_import(name, *args, **kwargs)
-
-
-builtins.__import__ = patched_import
 
 
 class InfiniteLoop:

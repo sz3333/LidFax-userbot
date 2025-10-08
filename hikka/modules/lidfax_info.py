@@ -5,8 +5,8 @@
 # 🔑 https://www.gnu.org/licenses/agpl-3.0.html
 
 import git
-from hikkatl.tl.types import Message
-from hikkatl.utils import get_display_name
+from telethon.tl.types import Message
+from telethon.utils import get_display_name
 import requests
 import os
 from .. import loader, utils, version
@@ -57,8 +57,8 @@ class LidFaxInfoMod(loader.Module):
             upd = ""
 
         me = '<b><a href="tg://user?id={}">{}</a></b>'.format(
-            self._client.hikka_me.id,
-            utils.escape_html(get_display_name(self._client.hikka_me)),
+            self._client.me.id,
+            utils.escape_html(get_display_name(self._client.me)),
         )
         build = utils.get_commit_url()
         _version = f'<i>{".".join(list(map(str, list(version.__version__))))}</i>'
@@ -125,7 +125,7 @@ class LidFaxInfoMod(loader.Module):
                     (
                         (
                             utils.get_platform_emoji()
-                            if self._client.hikka_me.premium and self.config["show_heroku"]
+                            if self._client.me.premium and self.config["show_heroku"]
                             else ""
                         ),
                         "<emoji document_id=5373141891321699086>😎</emoji>",

@@ -34,9 +34,9 @@ import traceback
 import typing
 
 import requests
-from hikkatl import events
-from hikkatl.errors import FloodWaitError, RPCError
-from hikkatl.tl.types import Message
+from telethon import events
+from telethon.errors import FloodWaitError, RPCError
+from telethon.tl.types import Message
 
 from . import main, security, utils
 from .database import Database
@@ -121,19 +121,19 @@ class CommandDispatcher:
         self.security = security.SecurityManager(client, db)
 
         self.check_security = self.security.check
-        self._me = self._client.hikka_me.id
+
+    async def init(self):
+        me = await self._client.get_me(True)
+        self._me = me.id
         self._cached_usernames = [
             (
-                self._client.hikka_me.username.lower()
-                if self._client.hikka_me.username
-                else str(self._client.hikka_me.id)
+                me.username.lower()
+                if me.username
+                else str(self._client.tg_id)
             )
         ]
 
-        self._cached_usernames.extend(
-            getattr(self._client.hikka_me, "usernames", None) or []
-        )
-
+        self._cached_usernames.extend(getattr(me, "usernames", None) or [])
         self.raw_handlers = []
         self._external_bl: typing.List[int] = []
 

@@ -8,13 +8,13 @@ import logging
 import os
 import random
 
-import hikkatl
-from hikkatl.tl.functions.messages import (
+import telethon
+from telethon.tl.functions.messages import (
     GetDialogFiltersRequest,
     UpdateDialogFilterRequest,
 )
-from hikkatl.tl.types import Message
-from hikkatl.utils import get_display_name
+from telethon.tl.types import Message
+from telethon.utils import get_display_name
 
 from .. import loader, log, main, utils
 from .._internal import fw_protect, restart
@@ -465,7 +465,7 @@ class LidFaxSettingsMod(loader.Module):
     async def inline__setting(self, call: InlineCall, key: str, state: bool = False):
         if callable(key):
             key()
-            hikkatl.extensions.html.CUSTOM_EMOJIS = not main.get_config_key(
+            telethon.extensions.html.CUSTOM_EMOJIS = not main.get_config_key(
                 "disable_custom_emojis"
             )
         else:
@@ -874,23 +874,23 @@ class LidFaxSettingsMod(loader.Module):
         if module == "core":
             if method == "flush_entity_cache":
                 result = (
-                    f"Dropped {len(self._client._hikka_entity_cache)} cache records"
+                    f"Dropped {len(self._client._telethon_entity_cache)} cache records"
                 )
-                self._client._hikka_entity_cache = {}
+                self._client._telethon_entity_cache = {}
             elif method == "flush_fulluser_cache":
                 result = (
-                    f"Dropped {len(self._client._hikka_fulluser_cache)} cache records"
+                    f"Dropped {len(self._client._telethon_fulluser_cache)} cache records"
                 )
-                self._client._hikka_fulluser_cache = {}
+                self._client._telethon_fulluser_cache = {}
             elif method == "flush_fullchannel_cache":
                 result = (
-                    f"Dropped {len(self._client._hikka_fullchannel_cache)} cache"
+                    f"Dropped {len(self._client._telethon_fullchannel_cache)} cache"
                     " records"
                 )
-                self._client._hikka_fullchannel_cache = {}
+                self._client._telethon_fullchannel_cache = {}
             elif method == "flush_perms_cache":
-                result = f"Dropped {len(self._client._hikka_perms_cache)} cache records"
-                self._client._hikka_perms_cache = {}
+                result = f"Dropped {len(self._client._telethon_perms_cache)} cache records"
+                self._client._telethon_perms_cache = {}
             elif method == "flush_loader_cache":
                 result = (
                     f"Dropped {await self.lookup('loader').flush_cache()} cache records"
@@ -898,28 +898,28 @@ class LidFaxSettingsMod(loader.Module):
             elif method == "flush_cache":
                 count = self.lookup("loader").flush_cache()
                 result = (
-                    f"Dropped {len(self._client._hikka_entity_cache)} entity cache"
+                    f"Dropped {len(self._client._telethon_entity_cache)} entity cache"
                     " records\nDropped"
-                    f" {len(self._client._hikka_fulluser_cache)} fulluser cache"
+                    f" {len(self._client._telethon_fulluser_cache)} fulluser cache"
                     " records\nDropped"
-                    f" {len(self._client._hikka_fullchannel_cache)} fullchannel cache"
+                    f" {len(self._client._telethon_fullchannel_cache)} fullchannel cache"
                     " records\nDropped"
                     f" {count} loader links cache records"
                 )
-                self._client._hikka_entity_cache = {}
-                self._client._hikka_fulluser_cache = {}
-                self._client._hikka_fullchannel_cache = {}
-                self._client.hikka_me = await self._client.get_me()
+                self._client._telethon_entity_cache = {}
+                self._client._telethon_fulluser_cache = {}
+                self._client._telethon_fullchannel_cache = {}
+                self._client.me = await self._client.get_me()
             elif method == "reload_core":
                 core_quantity = await self.lookup("loader").reload_core()
                 result = f"Reloaded {core_quantity} core modules"
             elif method == "inspect_cache":
                 result = (
                     "Entity cache:"
-                    f" {len(self._client._hikka_entity_cache)} records\nFulluser cache:"
-                    f" {len(self._client._hikka_fulluser_cache)} records\nFullchannel"
+                    f" {len(self._client._telethon_entity_cache)} records\nFulluser cache:"
+                    f" {len(self._client._telethon_fulluser_cache)} records\nFullchannel"
                     " cache:"
-                    f" {len(self._client._hikka_fullchannel_cache)} records\nLoader"
+                    f" {len(self._client._telethon_fullchannel_cache)} records\nLoader"
                     f" links cache: {self.lookup('loader').inspect_cache()} records"
                 )
             elif method == "inspect_modules":

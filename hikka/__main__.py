@@ -59,19 +59,11 @@ elif __package__ != "hikka":  # In case they did python __main__.py
     print("🚫 Error: you cannot run this as a script; you must execute as a package")
 else:
     try:
-        import hikkatl
-    except Exception:
-        pass
-    else:
-        try:
-            import hikkatl  # noqa: F811
-
-            if tuple(map(int, hikkatl.__version__.split("."))) < (2, 0, 8):
-                raise ImportError
-        except ImportError:
-            print("🔄 Installing dependencies...")
-            deps()
-            restart()
+        import telethon
+    except ImportError:
+        print("🔄 Installing dependencies...")
+        deps()
+        restart()
 
     try:
         from . import log

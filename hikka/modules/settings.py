@@ -4,9 +4,8 @@
 # You can redistribute it and/or modify it under the terms of the GNU AGPLv3
 # 🔑 https://www.gnu.org/licenses/agpl-3.0.html
 
-import hikkatl
-from hikkatl.extensions.html import CUSTOM_EMOJIS
-from hikkatl.tl.types import Message
+import telethon
+from telethon.tl.types import Message
 
 from .. import loader, main, utils, version
 from ..inline.types import InlineCall
@@ -94,12 +93,12 @@ class CoreMod(loader.Module):
             self.strings("hikka").format(
                 (
                     utils.get_platform_emoji()
-                    if self._client.hikka_me.premium and CUSTOM_EMOJIS
+                    if self._client.me.premium
                     else "☃️ <b>LidFax userbot</b>"
                 ),
                 *version.__version__,
                 utils.get_commit_url(),
-                f"{hikkatl.__version__} #{hikkatl.tl.alltlobjects.LAYER}",
+                f"{telethon.__version__} #{telethon.tl.alltlobjects.LAYER}",
             )
             + (
                 ""
