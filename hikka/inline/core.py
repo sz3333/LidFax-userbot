@@ -14,6 +14,7 @@ import typing
 
 from aiogram import Bot, Dispatcher
 from aiogram.enums import ParseMode
+from aiogram.client.default import DefaultBotProperties
 from aiogram.exceptions import (
     TelegramAPIError,
     TelegramUnauthorizedError,
@@ -133,7 +134,10 @@ class InlineManager(
 
         self.init_complete = True
 
-        self.bot = Bot(token=self._token, parse_mode=ParseMode.HTML)
+        self.bot = Bot(
+            token=self._token,
+            default=DefaultBotProperties(parse_mode=ParseMode.HTML),
+        )
         Bot.set_current(self.bot)
         self._bot = self.bot
         self._dp = Dispatcher(self.bot)
