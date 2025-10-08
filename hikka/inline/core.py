@@ -13,7 +13,7 @@ import time
 import typing
 
 from aiogram import Bot, Dispatcher
-from aiogram.types import ParseMode
+from aiogram.enums import ParseMode
 from aiogram.utils.exceptions import TerminatedByOtherGetUpdates, Unauthorized
 from lidfaxtl.errors.rpcerrorlist import InputUserDeactivatedError, YouBlockedUserError
 from lidfaxtl.tl.functions.contacts import UnblockRequest
