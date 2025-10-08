@@ -9,7 +9,7 @@ if ! command -v proot-distro &>/dev/null; then
     pkg install proot-distro -y
 fi
 
-DISTRO_NAME="ubuntu-22.04"
+DISTRO_NAME="ubuntu"
 
 # Проверяем наличие дистро
 if ! proot-distro list | grep -q "$DISTRO_NAME"; then
