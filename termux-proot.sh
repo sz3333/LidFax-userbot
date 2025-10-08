@@ -3,13 +3,16 @@
 echo -e "\033[2J\033[3;1f"
 printf "\033[1;35mLidFax auto-installer with proot-distro 🐾\033[0m\n\n"
 
-# Проверяем proot-distro
+# Отключаем seccomp для обхода багов Termux
+export PROOT_NO_SECCOMP=1
+
+# Установка proot-distro если нет
 if ! command -v proot-distro &>/dev/null; then
     echo -e "\033[0;96mInstalling proot-distro...\033[0m"
     pkg install proot-distro -y
 fi
 
-DISTRO_NAME="ubuntu"
+DISTRO_NAME="debian"  # стабильный вариант для Termux
 
 # Проверяем наличие дистро
 if ! proot-distro list | grep -q "$DISTRO_NAME"; then
@@ -17,9 +20,10 @@ if ! proot-distro list | grep -q "$DISTRO_NAME"; then
     proot-distro install $DISTRO_NAME
 fi
 
-# Создаём команду запуска внутри дистро
+# Команда внутри дистро
 RUN_CMD="bash -c '
-apt update && apt install -y python3.10 python3-pip git libjpeg-dev libssl-dev &&
+apt update && apt upgrade -y &&
+apt install -y python3.10 python3-pip git libjpeg-dev libssl-dev &&
 echo -e \"\033[0;96mInstalling Pillow...\033[0m\" &&
 pip3 install --no-cache-dir --upgrade Pillow &&
 echo -e \"\033[0;96mDownloading LidFax...\033[0m\" &&
@@ -31,6 +35,6 @@ echo -e \"\033[0;32mStarting LidFax with --root...\033[0m\" &&
 python3 -m hikka --root
 '"
 
-# Запуск в proot-дистро
+# Запуск дистро
 echo -e "\033[0;96mEntering $DISTRO_NAME...\033[0m"
 proot-distro login $DISTRO_NAME -- $RUN_CMD
