@@ -339,12 +339,24 @@ class TestMod(loader.Module):
                 caption=self.strings("logs_caption").format(named_lvl, *other),
             )
         else:
-            await self._client.send_file(
-                message.form["chat"],
-                logs,
-                caption=self.strings("logs_caption").format(named_lvl, *other),
-                reply_to=message.form["top_msg_id"],
-            )
+            # For inline messages, check if we have a valid chat
+            chat = message.form.get("chat")
+            if chat is not None:
+                await self._client.send_file(
+                    chat,
+                    logs,
+                    caption=self.strings("logs_caption").format(named_lvl, *other),
+                    reply_to=message.form["top_msg_id"],
+                )
+            else:
+                # For inline messages without chat, edit the message with logs info
+                logs_text = self.strings("logs_caption").format(named_lvl, *other)
+                await message.edit(
+                    f"📋 <b>Logs Summary</b>\n\n{logs_text}\n\n"
+                    "⚠️ <i>Full logs file cannot be sent in inline mode. "
+                    "Use the command in a chat to get the complete logs file.</i>"
+                )
+                await message.unload()
 
     @loader.command()
     async def suspend(self, message: Message):

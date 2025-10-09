@@ -149,6 +149,20 @@ class InlineCall(CallbackQuery, InlineMessage):
         )
         object.__setattr__(self, 'form', form)
 
+    async def answer(self, text: str = None, show_alert: bool = False, url: str = None, cache_time: int = 0):
+        """Override answer method to properly bind to bot instance"""
+        if hasattr(self, 'inline_manager') and self.inline_manager.bot:
+            return await self.inline_manager.bot.answer_callback_query(
+                callback_query_id=self.id,
+                text=text,
+                show_alert=show_alert,
+                url=url,
+                cache_time=cache_time
+            )
+        else:
+            # Fallback to original call's answer method
+            return await self.original_call.answer(text, show_alert=show_alert, url=url, cache_time=cache_time)
+
 
 class BotInlineCall(CallbackQuery, BotInlineMessage):
     """Modified version of classic aiogram `CallbackQuery`"""
@@ -187,6 +201,20 @@ class BotInlineCall(CallbackQuery, BotInlineMessage):
             {"id": unit_id, **inline_manager._units[unit_id]} if unit_id in inline_manager._units else {}
         )
         object.__setattr__(self, 'form', form)
+
+    async def answer(self, text: str = None, show_alert: bool = False, url: str = None, cache_time: int = 0):
+        """Override answer method to properly bind to bot instance"""
+        if hasattr(self, 'inline_manager') and self.inline_manager.bot:
+            return await self.inline_manager.bot.answer_callback_query(
+                callback_query_id=self.id,
+                text=text,
+                show_alert=show_alert,
+                url=url,
+                cache_time=cache_time
+            )
+        else:
+            # Fallback to original call's answer method
+            return await self.original_call.answer(text, show_alert=show_alert, url=url, cache_time=cache_time)
 
 
 class InlineUnit:
