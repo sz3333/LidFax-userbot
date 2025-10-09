@@ -214,7 +214,9 @@ class Utils(InlineUnit):
                     )
                     return False
 
-            markup.row(*line)
+            # Fixed: In aiogram 3.x, append directly to inline_keyboard list
+            if line:
+                markup.inline_keyboard.append(line)
 
         return markup
 
