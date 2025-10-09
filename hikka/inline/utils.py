@@ -633,7 +633,7 @@ class Utils(InlineUnit):
             return [
                 [
                     (
-                        {"text": number, "args": (number - 1,), "callback": callback}
+                        {"text": str(number), "args": (number - 1,), "callback": callback}
                         if number != current_page
                         else {
                             "text": f"· {number} ·",
@@ -670,7 +670,7 @@ class Utils(InlineUnit):
                                 }
                                 if number == 5
                                 else {
-                                    "text": number,
+                                    "text": str(number),
                                     "args": (number - 1,),
                                     "callback": callback,
                                 }
@@ -700,7 +700,7 @@ class Utils(InlineUnit):
                         }
                         if number == current_page
                         else {
-                            "text": number,
+                            "text": str(number),
                             "args": (number - 1,),
                             "callback": callback,
                         }
