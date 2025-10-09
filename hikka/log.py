@@ -9,7 +9,7 @@
 
 import asyncio
 import contextlib
-import inspect
+import inspect 
 import io
 import linecache
 import logging
@@ -17,7 +17,7 @@ import re
 import sys
 import traceback
 import typing
-import time # <--- Added for anti-spam cooldown logic
+import time 
 from logging.handlers import RotatingFileHandler
 
 import lidfaxtl
@@ -361,16 +361,12 @@ class TelegramLogsHandler(logging.Handler):
         # Clear expired errors from cache before sending
         errors_to_clear = []
         for key, (last_time_sent, count) in self._recent_errors.items():
-            if time.time() - last_time_sent >= self._error_cooldown and count > 0:
-                errors_to_clear.append(key)
-            elif count == 0 and time.time() - last_time_sent >= self._error_cooldown * 2:
+            if count == 0 and time.time() - last_time_sent >= self._error_cooldown * 2:
                 # Clear entry if it was sent successfully (count=0) and enough time passed
                 errors_to_clear.append(key)
 
         for key in errors_to_clear:
-            # We don't delete immediately, as the error might be pending in tg_buff now
-            # The logic in emit() handles re-setting time for new bursts
-            if self._recent_errors[key][1] == 0:
+            if key in self._recent_errors:
                  del self._recent_errors[key]
 
         
@@ -388,7 +384,7 @@ class TelegramLogsHandler(logging.Handler):
                     current_exc_queue_items.append((item, caller))
                     
                     # Reset the count for this error in the cache since we're sending it now
-                    error_key = (caller, type(item.sysinfo[1]), item.message)
+                    error_key = (caller, type(item.sysinfo[1]), item.message.splitlines()[0])
                     if error_key in self._recent_errors:
                          self._recent_errors[error_key] = (time.time(), 0)
                 else:
@@ -458,7 +454,8 @@ class TelegramLogsHandler(logging.Handler):
                     logfile = io.BytesIO(
                         "".join(self._queue[client_id]).encode("utf-8")
                     )
-                    logfile.name = "heroku-logs.txt"
+                    # ИСПРАВЛЕНИЕ: Имя файла изменено на lidfax-logs.txt
+                    logfile.name = "lidfax-logs.txt" 
                     logfile.seek(0)
                     await self._mods[client_id].inline.bot.send_document(
                         self._mods[client_id].logchat,
@@ -528,14 +525,31 @@ class TelegramLogsHandler(logging.Handler):
                     if current_time - last_time_sent < self._error_cooldown:
                         # Error is repeating and within cooldown period: suppress and increment count
                         self._recent_errors[error_key] = (last_time_sent, count + 1)
+                        
+                        # ЛОГИКА ДЛЯ ДИАГНОСТИКИ (вывод в консоль/файл .log):
+                        if len(self.buffer) + len(self.handledbuffer) >= self.capacity:
+                            if self.handledbuffer:
+                                del self.handledbuffer[0]
+                            else:
+                                del self.buffer[0]
+
+                        self.buffer.append(record)
+                        
+                        if record.levelno >= self.lvl >= 0:
+                            self.acquire()
+                            try:
+                                for target in self.targets:
+                                    # Обрабатываем только для тех, кто не является TelegramLogsHandler
+                                    if target != self and record.levelno >= target.level:
+                                        target.handle(record)
+
+                            finally:
+                                self.release()
+                        
                         return # Skip adding to tg_buff
                     else:
                         # Cooldown passed: set the repeat count on the exception object
-                        # This exception will be sent, and the time will be reset in sender()
                         exc.repeat_count = count
-                        # For now, mark it as a sent item by resetting the counter and updating time
-                        # The sender will use 'count' and then reset the cache entry time
-                        # self._recent_errors[error_key] = (current_time, 0) # Time reset is in sender
                 else:
                     # New error: add to cache
                     self._recent_errors[error_key] = (current_time, 0)
@@ -594,6 +608,7 @@ _tg_formatter = logging.Formatter(
 )
 
 rotating_handler = RotatingFileHandler(
+    # ИСПРАВЛЕНИЕ: Имя файла изменено на lidfax.log
     filename="lidfax.log",
     mode="a",
     maxBytes=10 * 1024 * 1024,
