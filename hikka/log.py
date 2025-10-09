@@ -9,7 +9,7 @@
 
 import asyncio
 import contextlib
-import inspect 
+import inspect
 import io
 import linecache
 import logging
@@ -17,7 +17,6 @@ import re
 import sys
 import traceback
 import typing
-import time 
 from logging.handlers import RotatingFileHandler
 
 import lidfaxtl
@@ -93,8 +92,6 @@ class HikkaException:
         self.full_stack = full_stack
         self.sysinfo = sysinfo
         self.debug_url = None
-        # Attribute to store the repeat count from anti-spam logic
-        self.repeat_count = 0 
 
     @classmethod
     def from_exc_info(
@@ -234,11 +231,6 @@ class TelegramLogsHandler(logging.Handler):
         self.capacity = capacity
         self.lvl = logging.NOTSET
         self._send_lock = asyncio.Lock()
-        
-        # --- 1️⃣ Anti-spam for repeating errors ---
-        # {(client_id, error_type, error_text_summary): (last_time_sent, count)}
-        self._recent_errors = {} 
-        self._error_cooldown = 60  # seconds until the same error can be re-sent
 
     def install_tg_log(self, mod: Module):
         if getattr(self, "_task", False):
@@ -283,14 +275,7 @@ class TelegramLogsHandler(logging.Handler):
         bot: "aiogram.Bot",  # type: ignore  # noqa: F821
         item: HikkaException,
     ):
-        # Apply repeat count text for full traceback
-        repeat_text = (
-            f"\n\n💭 <i>This same error repeated {item.repeat_count} times</i>"
-            if item.repeat_count > 0
-            else ""
-        )
-        
-        chunks = item.message + repeat_text + "\n\n<b>⛄ Full traceback:</b>\n" + item.full_stack
+        chunks = item.message + "\n\n<b>⛄ Full traceback:</b>\n" + item.full_stack
 
         chunks = list(utils.smart_split(*lidfaxtl.extensions.html.parse(chunks), 4096))
 
@@ -358,48 +343,14 @@ class TelegramLogsHandler(logging.Handler):
         return self._mods[client_id].logchat
 
     async def sender(self):
-        # Clear expired errors from cache before sending
-        errors_to_clear = []
-        for key, (last_time_sent, count) in self._recent_errors.items():
-            if count == 0 and time.time() - last_time_sent >= self._error_cooldown * 2:
-                # Clear entry if it was sent successfully (count=0) and enough time passed
-                errors_to_clear.append(key)
-
-        for key in errors_to_clear:
-            if key in self._recent_errors:
-                 del self._recent_errors[key]
-
-        
         async with self._send_lock:
-            # Separate exceptions from regular text logs
-            current_tg_buff_text = []
-            current_exc_queue_items = []
-            for item, caller in self.tg_buff:
-                if isinstance(item, HikkaException):
-                    # Add repeat count to the exception message before sending
-                    if item.repeat_count > 0:
-                        item.message += (
-                            f"\n\n💭 <i>This same error repeated {item.repeat_count} times</i>"
-                        )
-                    current_exc_queue_items.append((item, caller))
-                    
-                    # Reset the count for this error in the cache since we're sending it now
-                    error_key = (caller, type(item.sysinfo[1]), item.message.splitlines()[0])
-                    if error_key in self._recent_errors:
-                         self._recent_errors[error_key] = (time.time(), 0)
-                else:
-                    current_tg_buff_text.append((item, caller))
-
-            self.tg_buff = [] # Clear the buffer after sorting
-
-            # --- Sending Text Logs ---
             self._queue = {
                 client_id: utils.chunks(
                     utils.escape_html(
                         "".join(
                             [
                                 item[0]
-                                for item in current_tg_buff_text
+                                for item in self.tg_buff
                                 if isinstance(item[0], str)
                                 and (
                                     not item[1]
@@ -413,8 +364,7 @@ class TelegramLogsHandler(logging.Handler):
                 )
                 for client_id in self._mods
             }
-            
-            # --- Sending Exceptions (HikkaException) ---
+
             self._exc_queue = {
                 client_id: [
                     self._mods[client_id].inline.bot.send_message(
@@ -435,7 +385,7 @@ class TelegramLogsHandler(logging.Handler):
                             ],
                         ),
                     )
-                    for item in current_exc_queue_items
+                    for item in self.tg_buff
                     if isinstance(item[0], HikkaException)
                     and (not item[1] or item[1] == client_id or self.force_send_all)
                 ]
@@ -446,6 +396,8 @@ class TelegramLogsHandler(logging.Handler):
                 for exc in exceptions:
                     await exc
 
+            self.tg_buff = []
+
             for client_id in self._mods:
                 if client_id not in self._queue:
                     continue
@@ -454,8 +406,7 @@ class TelegramLogsHandler(logging.Handler):
                     logfile = io.BytesIO(
                         "".join(self._queue[client_id]).encode("utf-8")
                     )
-                    # ИСПРАВЛЕНИЕ: Имя файла изменено на lidfax-logs.txt
-                    logfile.name = "lidfax-logs.txt" 
+                    logfile.name = "heroku-logs.txt"
                     logfile.seek(0)
                     await self._mods[client_id].inline.bot.send_document(
                         self._mods[client_id].logchat,
@@ -504,56 +455,11 @@ class TelegramLogsHandler(logging.Handler):
 
         if record.levelno >= self.tg_level:
             if record.exc_info:
-                exc_type, exc_value, tb = record.exc_info
-                
                 exc = HikkaException.from_exc_info(
-                    exc_type,
-                    exc_value,
-                    tb,
+                    *record.exc_info,
                     stack=record.__dict__.get("stack", None),
                     comment=record.msg % record.args,
                 )
-                
-                # --- Anti-spam logic applied here ---
-                # Key for identifying the error: client_id, exception type, and message summary
-                error_key = (caller, type(exc_value), exc.message.splitlines()[0])
-                current_time = time.time()
-                
-                if error_key in self._recent_errors:
-                    last_time_sent, count = self._recent_errors[error_key]
-                    
-                    if current_time - last_time_sent < self._error_cooldown:
-                        # Error is repeating and within cooldown period: suppress and increment count
-                        self._recent_errors[error_key] = (last_time_sent, count + 1)
-                        
-                        # ЛОГИКА ДЛЯ ДИАГНОСТИКИ (вывод в консоль/файл .log):
-                        if len(self.buffer) + len(self.handledbuffer) >= self.capacity:
-                            if self.handledbuffer:
-                                del self.handledbuffer[0]
-                            else:
-                                del self.buffer[0]
-
-                        self.buffer.append(record)
-                        
-                        if record.levelno >= self.lvl >= 0:
-                            self.acquire()
-                            try:
-                                for target in self.targets:
-                                    # Обрабатываем только для тех, кто не является TelegramLogsHandler
-                                    if target != self and record.levelno >= target.level:
-                                        target.handle(record)
-
-                            finally:
-                                self.release()
-                        
-                        return # Skip adding to tg_buff
-                    else:
-                        # Cooldown passed: set the repeat count on the exception object
-                        exc.repeat_count = count
-                else:
-                    # New error: add to cache
-                    self._recent_errors[error_key] = (current_time, 0)
-                # --- End Anti-spam logic ---
 
                 if not self.ignore_common or all(
                     field not in exc.message
@@ -608,8 +514,7 @@ _tg_formatter = logging.Formatter(
 )
 
 rotating_handler = RotatingFileHandler(
-    # ИСПРАВЛЕНИЕ: Имя файла изменено на lidfax.log
-    filename="lidfax.log",
+    filename="heroku.log",
     mode="a",
     maxBytes=10 * 1024 * 1024,
     backupCount=1,
