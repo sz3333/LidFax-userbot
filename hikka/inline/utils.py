@@ -53,7 +53,7 @@ class Utils(InlineUnit):
         if isinstance(markup_obj, InlineKeyboardMarkup):
             return markup_obj
 
-        markup = InlineKeyboardMarkup()
+        markup = InlineKeyboardMarkup(inline_keyboard=[])
 
         map_ = (
             self._units[markup_obj]["buttons"]
