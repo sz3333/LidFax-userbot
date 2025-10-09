@@ -24,7 +24,7 @@ from aiogram.types import Message as AiogramMessage
 from aiogram.enums import ChatType
 
 from .. import utils
-from .types import BotInlineCall, InlineCall, InlineQuery, InlineUnit
+from .types import BotInlineCall, InlineCall, InlineMessage, InlineQuery, InlineUnit
 
 logger = logging.getLogger(__name__)
 
@@ -379,8 +379,11 @@ class Events(InlineUnit):
                     query = query.split(maxsplit=1)[1] if len(query.split()) > 1 else ""
 
                     try:
+                        # Create a proper InlineMessage instance for chosen inline queries
+                        # since ChosenInlineResult is not a CallbackQuery
+                        inline_message = InlineMessage(self, unit_id, chosen_inline_query.inline_message_id)
                         return await button["handler"](
-                            InlineCall(chosen_inline_query, self, unit_id),
+                            inline_message,
                             query,
                             *button.get("args", []),
                             **button.get("kwargs", {}),

@@ -133,15 +133,21 @@ class InlineCall(CallbackQuery, InlineMessage):
             game_short_name=getattr(call, 'game_short_name', None),
         )
 
-        # Use object.__setattr__ to bypass frozen model restriction
+        # Use object.__setattr__ to bypass frozen model restriction for all attributes
         object.__setattr__(self, 'original_call', call)
-
-        InlineMessage.__init__(
-            self,
-            inline_manager,
-            unit_id,
-            call.inline_message_id,
+        
+        # Set InlineMessage attributes using object.__setattr__ to bypass frozen restriction
+        inline_message_id = getattr(call, 'inline_message_id', None)
+        object.__setattr__(self, 'inline_message_id', inline_message_id)
+        object.__setattr__(self, 'unit_id', unit_id)
+        object.__setattr__(self, 'inline_manager', inline_manager)
+        object.__setattr__(self, '_units', inline_manager._units)
+        
+        # Set form attribute
+        form = (
+            {"id": unit_id, **inline_manager._units[unit_id]} if unit_id in inline_manager._units else {}
         )
+        object.__setattr__(self, 'form', form)
 
 
 class BotInlineCall(CallbackQuery, BotInlineMessage):
@@ -164,16 +170,23 @@ class BotInlineCall(CallbackQuery, BotInlineMessage):
             game_short_name=getattr(call, 'game_short_name', None),
         )
 
-        # Use object.__setattr__ to bypass frozen model restriction
+        # Use object.__setattr__ to bypass frozen model restriction for all attributes
         object.__setattr__(self, 'original_call', call)
-
-        BotInlineMessage.__init__(
-            self,
-            inline_manager,
-            unit_id,
-            call.message.chat.id,
-            call.message.message_id,
+        
+        # Set BotInlineMessage attributes using object.__setattr__ to bypass frozen restriction
+        chat_id = call.message.chat.id if call.message else None
+        message_id = call.message.message_id if call.message else None
+        object.__setattr__(self, 'chat_id', chat_id)
+        object.__setattr__(self, 'unit_id', unit_id)
+        object.__setattr__(self, 'inline_manager', inline_manager)
+        object.__setattr__(self, 'message_id', message_id)
+        object.__setattr__(self, '_units', inline_manager._units)
+        
+        # Set form attribute
+        form = (
+            {"id": unit_id, **inline_manager._units[unit_id]} if unit_id in inline_manager._units else {}
         )
+        object.__setattr__(self, 'form', form)
 
 
 class InlineUnit:
