@@ -133,7 +133,8 @@ class InlineCall(CallbackQuery, InlineMessage):
             game_short_name=getattr(call, 'game_short_name', None),
         )
 
-        self.original_call = call
+        # Use object.__setattr__ to bypass frozen model restriction
+        object.__setattr__(self, 'original_call', call)
 
         InlineMessage.__init__(
             self,
@@ -163,7 +164,8 @@ class BotInlineCall(CallbackQuery, BotInlineMessage):
             game_short_name=getattr(call, 'game_short_name', None),
         )
 
-        self.original_call = call
+        # Use object.__setattr__ to bypass frozen model restriction
+        object.__setattr__(self, 'original_call', call)
 
         BotInlineMessage.__init__(
             self,
