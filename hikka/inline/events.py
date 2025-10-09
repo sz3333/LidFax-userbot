@@ -223,13 +223,13 @@ class Events(InlineUnit):
         for func in self._allmodules.callback_handlers.values():
             if await self.check_inline_security(func=func, user=call.from_user.id):
                 try:
-                    await func(
-                        (
-                            BotInlineCall
-                            if getattr(getattr(call, "message", None), "chat", None)
-                            else InlineCall
-                        )(call, self, None)
+                    # Determine call type based on message.chat presence
+                    call_instance = (
+                        BotInlineCall(call, self, None)
+                        if getattr(getattr(call, "message", None), "chat", None)
+                        else InlineCall(call, self, None)
                     )
+                    await func(call_instance)
                 except Exception:
                     logger.exception("Error on running callback watcher!")
                     await call.answer(
@@ -278,12 +278,15 @@ class Events(InlineUnit):
                         return
 
                     try:
+                        # Create call instance with proper unit_id
+                        call_instance = (
+                            BotInlineCall(call, self, unit_id)
+                            if getattr(getattr(call, "message", None), "chat", None)
+                            else InlineCall(call, self, unit_id)
+                        )
+                        
                         result = await button["callback"](
-                            (
-                                BotInlineCall
-                                if getattr(getattr(call, "message", None), "chat", None)
-                                else InlineCall
-                            )(call, self, unit_id),
+                            call_instance,
                             *button.get("args", []),
                             **button.get("kwargs", {}),
                         )
@@ -329,12 +332,15 @@ class Events(InlineUnit):
                 await call.answer(self.translator.getkey("inline.button403"))
                 return
 
+            # Create call instance
+            call_instance = (
+                BotInlineCall(call, self, None)
+                if getattr(getattr(call, "message", None), "chat", None)
+                else InlineCall(call, self, None)
+            )
+            
             await self._custom_map[call.data]["handler"](
-                (
-                    BotInlineCall
-                    if getattr(getattr(call, "message", None), "chat", None)
-                    else InlineCall
-                )(call, self, None),
+                call_instance,
                 *self._custom_map[call.data].get("args", []),
                 **self._custom_map[call.data].get("kwargs", {}),
             )
