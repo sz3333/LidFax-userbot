@@ -122,18 +122,16 @@ class InlineCall(CallbackQuery, InlineMessage):
         inline_manager: "InlineManager",  # type: ignore  # noqa: F821
         unit_id: str,
     ):
-        CallbackQuery.__init__(self)
-
-        for attr in {
-            "id",
-            "from_user",
-            "message",
-            "inline_message_id",
-            "chat_instance",
-            "data",
-            "game_short_name",
-        }:
-            setattr(self, attr, getattr(call, attr, None))
+        # Initialize CallbackQuery with actual data from call
+        super().__init__(
+            id=call.id,
+            from_user=call.from_user,
+            chat_instance=call.chat_instance,
+            message=getattr(call, 'message', None),
+            inline_message_id=getattr(call, 'inline_message_id', None),
+            data=getattr(call, 'data', None),
+            game_short_name=getattr(call, 'game_short_name', None),
+        )
 
         self.original_call = call
 
@@ -154,18 +152,16 @@ class BotInlineCall(CallbackQuery, BotInlineMessage):
         inline_manager: "InlineManager",  # type: ignore  # noqa: F821
         unit_id: str,
     ):
-        CallbackQuery.__init__(self)
-
-        for attr in {
-            "id",
-            "from_user",
-            "message",
-            "chat",
-            "chat_instance",
-            "data",
-            "game_short_name",
-        }:
-            setattr(self, attr, getattr(call, attr, None))
+        # Initialize CallbackQuery with actual data from call
+        super().__init__(
+            id=call.id,
+            from_user=call.from_user,
+            chat_instance=call.chat_instance,
+            message=getattr(call, 'message', None),
+            inline_message_id=getattr(call, 'inline_message_id', None),
+            data=getattr(call, 'data', None),
+            game_short_name=getattr(call, 'game_short_name', None),
+        )
 
         self.original_call = call
 
@@ -196,10 +192,14 @@ class InlineQuery(AiogramInlineQuery):
     """Modified version of original Aiogram InlineQuery"""
 
     def __init__(self, inline_query: AiogramInlineQuery):
-        super().__init__(self)
-
-        for attr in {"id", "from_user", "query", "offset", "chat_type", "location"}:
-            setattr(self, attr, getattr(inline_query, attr, None))
+        super().__init__(
+            id=inline_query.id,
+            from_user=inline_query.from_user,
+            query=inline_query.query,
+            offset=inline_query.offset,
+            chat_type=getattr(inline_query, 'chat_type', None),
+            location=getattr(inline_query, 'location', None),
+        )
 
         self.inline_query = inline_query
         self.args = (
