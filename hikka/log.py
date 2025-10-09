@@ -17,7 +17,7 @@ import re
 import sys
 import traceback
 import typing
-import time  # <--- Добавлен импорт time для работы с таймаутом антиспама
+import time # <--- Added for anti-spam cooldown logic
 from logging.handlers import RotatingFileHandler
 
 import lidfaxtl
@@ -93,7 +93,7 @@ class HikkaException:
         self.full_stack = full_stack
         self.sysinfo = sysinfo
         self.debug_url = None
-        # <--- Добавлен атрибут для счетчика антиспама
+        # Attribute to store the repeat count from anti-spam logic
         self.repeat_count = 0 
 
     @classmethod
@@ -234,9 +234,11 @@ class TelegramLogsHandler(logging.Handler):
         self.capacity = capacity
         self.lvl = logging.NOTSET
         self._send_lock = asyncio.Lock()
-        # <--- Добавлены атрибуты для антиспама
-        self._recent_errors = {}  # {(client_id, error_type, error_text): (last_time_sent, count)}
-        self._error_cooldown = 60  # секунда, через которую можно повторно отправлять ту же ошибку
+        
+        # --- 1️⃣ Anti-spam for repeating errors ---
+        # {(client_id, error_type, error_text_summary): (last_time_sent, count)}
+        self._recent_errors = {} 
+        self._error_cooldown = 60  # seconds until the same error can be re-sent
 
     def install_tg_log(self, mod: Module):
         if getattr(self, "_task", False):
@@ -281,7 +283,7 @@ class TelegramLogsHandler(logging.Handler):
         bot: "aiogram.Bot",  # type: ignore  # noqa: F821
         item: HikkaException,
     ):
-        # <--- Изменена логика для добавления счетчика повторов
+        # Apply repeat count text for full traceback
         repeat_text = (
             f"\n\n💭 <i>This same error repeated {item.repeat_count} times</i>"
             if item.repeat_count > 0
@@ -356,44 +358,52 @@ class TelegramLogsHandler(logging.Handler):
         return self._mods[client_id].logchat
 
     async def sender(self):
-        # <--- Добавлена логика для отправки сообщений с накопленным счетчиком ошибок
-        # (включая текстовые логи)
-        current_tg_buff = []
-        current_exc_queue_items = []
-
-        for item, caller in self.tg_buff:
-            if isinstance(item, HikkaException):
-                # Добавление счетчика повторов к сообщению HikkaException
-                if item.repeat_count > 0:
-                    item.message += (
-                        f"\n\n💭 <i>This same error repeated {item.repeat_count} times</i>"
-                    )
-                current_exc_queue_items.append((item, caller))
-            else:
-                current_tg_buff.append((item, caller))
-
-        # Обновление _recent_errors: сбрасываем счетчики для тех ошибок, которые мы сейчас отправляем
-        errors_to_remove = []
+        # Clear expired errors from cache before sending
+        errors_to_clear = []
         for key, (last_time_sent, count) in self._recent_errors.items():
-            if time.time() - last_time_sent >= self._error_cooldown:
-                errors_to_remove.append(key)
-        
-        for key in errors_to_remove:
-            del self._recent_errors[key]
-        
-        # Очистка tg_buff и дальнейшая обработка
-        self.tg_buff = []
+            if time.time() - last_time_sent >= self._error_cooldown and count > 0:
+                errors_to_clear.append(key)
+            elif count == 0 and time.time() - last_time_sent >= self._error_cooldown * 2:
+                # Clear entry if it was sent successfully (count=0) and enough time passed
+                errors_to_clear.append(key)
 
+        for key in errors_to_clear:
+            # We don't delete immediately, as the error might be pending in tg_buff now
+            # The logic in emit() handles re-setting time for new bursts
+            if self._recent_errors[key][1] == 0:
+                 del self._recent_errors[key]
 
+        
         async with self._send_lock:
-            # Логика для обычных текстовых логов
+            # Separate exceptions from regular text logs
+            current_tg_buff_text = []
+            current_exc_queue_items = []
+            for item, caller in self.tg_buff:
+                if isinstance(item, HikkaException):
+                    # Add repeat count to the exception message before sending
+                    if item.repeat_count > 0:
+                        item.message += (
+                            f"\n\n💭 <i>This same error repeated {item.repeat_count} times</i>"
+                        )
+                    current_exc_queue_items.append((item, caller))
+                    
+                    # Reset the count for this error in the cache since we're sending it now
+                    error_key = (caller, type(item.sysinfo[1]), item.message)
+                    if error_key in self._recent_errors:
+                         self._recent_errors[error_key] = (time.time(), 0)
+                else:
+                    current_tg_buff_text.append((item, caller))
+
+            self.tg_buff = [] # Clear the buffer after sorting
+
+            # --- Sending Text Logs ---
             self._queue = {
                 client_id: utils.chunks(
                     utils.escape_html(
                         "".join(
                             [
                                 item[0]
-                                for item in current_tg_buff
+                                for item in current_tg_buff_text
                                 if isinstance(item[0], str)
                                 and (
                                     not item[1]
@@ -408,7 +418,7 @@ class TelegramLogsHandler(logging.Handler):
                 for client_id in self._mods
             }
             
-            # Логика для исключений
+            # --- Sending Exceptions (HikkaException) ---
             self._exc_queue = {
                 client_id: [
                     self._mods[client_id].inline.bot.send_message(
@@ -439,8 +449,6 @@ class TelegramLogsHandler(logging.Handler):
             for exceptions in self._exc_queue.values():
                 for exc in exceptions:
                     await exc
-
-            # self.tg_buff = []  <--- Уже очищен
 
             for client_id in self._mods:
                 if client_id not in self._queue:
@@ -509,25 +517,29 @@ class TelegramLogsHandler(logging.Handler):
                     comment=record.msg % record.args,
                 )
                 
-                # <--- Логика антиспама для повторяющихся ошибок
-                key = (caller, type(exc_value), exc.message)
+                # --- Anti-spam logic applied here ---
+                # Key for identifying the error: client_id, exception type, and message summary
+                error_key = (caller, type(exc_value), exc.message.splitlines()[0])
                 current_time = time.time()
                 
-                if key in self._recent_errors:
-                    last_time_sent, count = self._recent_errors[key]
+                if error_key in self._recent_errors:
+                    last_time_sent, count = self._recent_errors[error_key]
                     
                     if current_time - last_time_sent < self._error_cooldown:
-                        # Ошибка повторяется, но не отправляем ее сразу
-                        self._recent_errors[key] = (last_time_sent, count + 1)
-                        return # Не добавляем в tg_buff
+                        # Error is repeating and within cooldown period: suppress and increment count
+                        self._recent_errors[error_key] = (last_time_sent, count + 1)
+                        return # Skip adding to tg_buff
                     else:
-                        # Кулер прошел, отправляем, обновляем время и сбрасываем счетчик
+                        # Cooldown passed: set the repeat count on the exception object
+                        # This exception will be sent, and the time will be reset in sender()
                         exc.repeat_count = count
-                        self._recent_errors[key] = (current_time, 0)
+                        # For now, mark it as a sent item by resetting the counter and updating time
+                        # The sender will use 'count' and then reset the cache entry time
+                        # self._recent_errors[error_key] = (current_time, 0) # Time reset is in sender
                 else:
-                    # Новая ошибка, добавляем ее в recent_errors
-                    self._recent_errors[key] = (current_time, 0)
-                # <--- Конец логики антиспама
+                    # New error: add to cache
+                    self._recent_errors[error_key] = (current_time, 0)
+                # --- End Anti-spam logic ---
 
                 if not self.ignore_common or all(
                     field not in exc.message
@@ -572,4 +584,38 @@ class TelegramLogsHandler(logging.Handler):
 
 _main_formatter = logging.Formatter(
     fmt="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
-    dat
+    datefmt="%Y-%m-%d %H:%M:%S",
+    style="%",
+)
+_tg_formatter = logging.Formatter(
+    fmt="[%(levelname)s] %(name)s: %(message)s\n",
+    datefmt=None,
+    style="%",
+)
+
+rotating_handler = RotatingFileHandler(
+    filename="heroku.log",
+    mode="a",
+    maxBytes=10 * 1024 * 1024,
+    backupCount=1,
+    encoding="utf-8",
+    delay=0,
+)
+
+rotating_handler.setFormatter(_main_formatter)
+
+
+def init():
+    handler = logging.StreamHandler()
+    handler.setLevel(logging.INFO)
+    handler.setFormatter(_main_formatter)
+    logging.getLogger().handlers = []
+    logging.getLogger().addHandler(
+        TelegramLogsHandler((handler, rotating_handler), 7000)
+    )
+    logging.getLogger().setLevel(logging.NOTSET)
+    logging.getLogger("lidfaxtl").setLevel(logging.WARNING)
+    logging.getLogger("matplotlib").setLevel(logging.WARNING)
+    logging.getLogger("aiohttp").setLevel(logging.WARNING)
+    logging.getLogger("aiogram").setLevel(logging.WARNING)
+    logging.captureWarnings(True)
