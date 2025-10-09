@@ -594,7 +594,7 @@ _tg_formatter = logging.Formatter(
 )
 
 rotating_handler = RotatingFileHandler(
-    filename="heroku.log",
+    filename="lidfax.log",
     mode="a",
     maxBytes=10 * 1024 * 1024,
     backupCount=1,
