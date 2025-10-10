@@ -222,6 +222,8 @@ class TelegramLogsHandler(logging.Handler):
         self.handledbuffer = []
         self._queue = []
         self._mods = {}
+        # Buffer of items to send to Telegram: list of tuples
+        #   - (HikkaException, caller_id) or (formatted_str, caller_id)
         self.tg_buff = []
         self.force_send_all = False
         self.tg_level = 20
