@@ -32,7 +32,7 @@ class Translations(loader.Module):
             "🇺🇿": "<emoji document_id=6323430017179059570>🇺🇿</emoji>",
             "🇷🇺": "<emoji document_id=6323139226418284334>🇷🇺</emoji>",
             "🇺🇦": "<emoji document_id=5276140694891666474>🇺🇦</emoji>",
-            "🇮🇹": "<emoji document_id=6323471399188957082>🇮🇹</emoji>",
+            "🇹🇲": "<emoji document_id=6323414482282350254>🇹🇲</emoji>",
             "🇩🇪": "<emoji document_id=6320817337033295141>🇩🇪</emoji>",
             "🇪🇸": "<emoji document_id=6323315062379382237>🇪🇸</emoji>",
             "🇹🇷": "<emoji document_id=6321003171678259486>🇹🇷</emoji>",
