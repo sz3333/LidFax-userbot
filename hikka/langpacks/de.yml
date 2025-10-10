@@ -211,7 +211,7 @@ lidfax_backup:
   backup_caption: '<emoji document_id=5469718869536940860>👆</emoji> <b>Dies ist Ihre Sicherung der Datenbank. Geben Sie sie niemandem, da sie persönliche Informationen enthält. Wenn Sie sie wiederherstellen müssen, verwenden Sie</b> <pre><code class="language-lidfax">{prefix}restoredb</code></pre> <b>als Antwort auf diese Datei.</b>'
   reply_to_file: "<emoji document_id=5460967491419270149>🚫</emoji> <b>Antworten Sie auf eine .json- oder .zip-Datei</b>"
   db_restored: "<emoji document_id=5774134533590880843>🔄</emoji> <b>Datenbank aktualisiert, Neustart...</b>"
-  modules_backup: "<emoji document_id=5431736674147114227>🗂</emoji> <b>Modul-Sicherung ({})</b>\n\n<b>Sie können sie wiederherstellen mit:</b>\n<pre><code class=\"language-hikka\">{}restoremods</code></pre>"
+  modules_backup: "<emoji document_id=5431736674147114227>🗂</emoji> <b>Modul-Sicherung ({})</b>\n\n<b>Sie können sie wiederherstellen mit:</b>\n<pre><code class=\"language-lidfax\">{}restoremods</code></pre>"
   mods_restored: "<emoji document_id=5774134533590880843>🔄</emoji> <b>Module wiederhergestellt, Neustart...</b>"
   backup_sent: "<emoji document_id=5431736674147114227>🗂</emoji> <b>Sicherung in gespeicherte Nachrichten gesendet</b>"
   _cls_doc: "Verarbeitet Sicherungen der Datenbank und Module"
