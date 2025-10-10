@@ -27,6 +27,7 @@ SUPPORTED_LANGUAGES = {
     "ua": "🇺🇦 Український",
     "de": "🇩🇪 Deutsch",
     "kk": "🇰🇿 Қазақ тілі",
+    "tm": "🇹🇲 Türkmen dili"
 }
 
 
