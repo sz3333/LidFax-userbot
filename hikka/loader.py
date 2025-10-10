@@ -136,6 +136,16 @@ USER_INSTALL = "PIP_TARGET" not in os.environ and "VIRTUAL_ENV" not in os.enviro
 native_import = builtins.__import__
 
 
+def patched_import(name: str, *args, **kwargs):
+    if name.startswith("telethon"):
+        return native_import("lidfaxtl" + name[8:], *args, **kwargs)
+
+    return native_import(name, *args, **kwargs)
+
+
+builtins.__import__ = patched_import
+
+
 class InfiniteLoop:
     _task = None
     status = False
