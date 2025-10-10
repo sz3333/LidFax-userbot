@@ -328,7 +328,7 @@ inline_stuff:
   bot_username_invalid: "<emoji document_id=5460967491419270149>🚫</emoji> <b>Неправильный ник бота. Он должен заканчиваться на</b> <code>bot</code> <b>и быть не короче чем 5 символов</b>"
   bot_username_occupied: "<emoji document_id=5460967491419270149>🚫</emoji> <b>Такой ник бота уже занят</b>"
   bot_updated: "<emoji document_id=6318792204118656433>🎉</emoji> <b>Настройки сохранены. Для их применения нужно перезагрузить юзербот</b>"
-  this_is_hikka: "☃️ <b>Привет! Это LidFax — мощный модульный Telegram юзербот. Вы можете установить его на свой аккаунт!</b>\n\n<b>🌍 <a href=\"https://github.com/sz3333/Heroku\">GitHub</a></b>\n<b>👥 <a href=\"https://t.me/lidfax_talks\">Чат поддержки</a></b>"
+  this_is_hikka: "☃️ <b>Привет! Это LidFax — мощный модульный Telegram юзербот. Вы можете установить его на свой аккаунт!</b>\n\n<b>🌍 <a href=\"https://github.com/sz3333/LidFax-userbot\">GitHub</a></b>\n<b>👥 <a href=\"https://t.me/lidfax_talks\">Чат поддержки</a></b>"
   _cmd_doc_ch_hikka_bot: "<юзернейм> - Изменить юзернейм инлайн бота"
 
 test:
