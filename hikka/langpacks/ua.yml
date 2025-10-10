@@ -365,7 +365,7 @@ update_notifier:
 
 updater:
   source: "<emoji document_id=5456255401194429832>📖</emoji> <b>Вихідний код можна прочитати</b> <a href='{}'>тут</a>"
-  restarting_caption: "<emoji document_id=5328274090262275771>🕗</emoji> <b>Твоя {} перезавантажується...</b>"
+  restarting_caption: "<emoji document_id=5328274090262275771>🕗</emoji> <b>Твій {} перезавантажується...</b>"
   downloading: "<emoji document_id=5328274090262275771>🕗</emoji> <b>Завантаження оновлень...</b>"
   installing: "<emoji document_id=5328274090262275771>🕗</emoji> <b>Встановлення оновлень...</b>"
   success: "<emoji document_id=5326015457155620929>⏱</emoji> <b>Перезавантаження успішне! {}</b>\n<i>Але модулі ще завантажуються...</i>\n<i>Перезавантаження зайняло {} сек</i>"
