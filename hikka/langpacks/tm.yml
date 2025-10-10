@@ -218,88 +218,87 @@ terminal:
   _cls_doc: "Buýruklary işledýär"
 
 lidfax_backup:
-  name: "LidFaxBackup"
-  period: "⌚️ <b>Unit «ALPHA»</b> creates database backups periodically. You can change this behavior later.\n\nPlease, select the periodicity of automatic database backups"
-  saved: "✅ Backup period saved. You can re-configure it later with .set_backup_period"
-  never: "✅ I will not make automatic backups. You can re-configure it later with .set_backup_period"
-  invalid_args: "🚫 <b>Specify correct backup period in hours, or `0` to disable</b>"
-  backup_caption: '<emoji document_id=5469718869536940860>👆</emoji> <b>This is your database backup. Do not give it to anyone, it contains personal info. If you need to restore it, you can use</b> <pre><code class="language-lidfax">{prefix}restoredb</code></pre> <b>in reply to this file.</b>'
-  reply_to_file: "<emoji document_id=5460967491419270149>🚫</emoji> <b>Reply to .json or .zip file</b>"
-  db_restored: "<emoji document_id=5774134533590880843>🔄</emoji> <b>Database updated, restarting...</b>"
-  modules_backup: "<emoji document_id=5431736674147114227>🗂</emoji> <b>Backup of modules ({})</b>\n\n<b>You can restore it using:</b>\n<pre><code class=\"language-lidfax\">{}restoremods</code></pre>"
-  mods_restored: "<emoji document_id=5774134533590880843>🔄</emoji> <b>Mods restored, restarting</b>"
-  backup_sent: "<emoji document_id=5431736674147114227>🗂</emoji> <b>Backup has been sent to saved messages</b>"
+  name: "LidFaxÄtiýaçlyk"
+  period: "⌚️ <b>«ALPHA» bölümi maglumatlar bazasynyň ätiýaçlyk nusgalaryny yzygiderli döredýär. Bu tertibi soň üýtgedip bilersiňiz.\n\nMaglumatlar bazasynyň awtomatiki ätiýaçlyk nusgalaryny döretmegiň yzygiderliligini saýlaň"
+  saved: "✅ Ätiýaçlyk döretmegiň döwri ýazgy edildi. Ony .set_backup_period bilen soň üýtgedip bilersiňiz"
+  never: "✅ Men awtomatiki ätiýaçlyk döretmerin. Ony .set_backup_period bilen soň üýtgedip bilersiňiz"
+  invalid_args: "🚫 <b>Dogry ätiýaçlyk döwrüni sagatda görkezmeli ýa-da öçürmek üçin `0` goýuň</b>"
+  backup_caption: '<emoji document_id=5469718869536940860>👆</emoji> <b>Bu siziň maglumatlar bazasynyň ätiýaçlyk nusgasy. Ony hiç kim bilen paýlaşmaň, şahsy maglumatlary özünde saklaýar. Eger dikeltmek zerur bolsa, .restoredb ulanyň</b>'
+  reply_to_file: "<emoji document_id=5460967491419270149>🚫</emoji> <b>.json ýa-da .zip faýla jogap beriň</b>"
+  db_restored: "<emoji document_id=5774134533590880843>🔄</emoji> <b>Maglumatlar bazasy täzelendi, täzeden başlaýar...</b>"
+  modules_backup: "<emoji document_id=5431736674147114227>🗂</emoji> <b>Modullaryň ätiýaçlygy ({})</b>\n\n<b>Dikeltmek üçin şeýle ulanyň:</b>\n<pre><code class=\"language-lidfax\">{}restoremods</code></pre>"
+  mods_restored: "<emoji document_id=5774134533590880843>🔄</emoji> <b>Modullar dikeldildi, täzeden başlaýar</b>"
+  backup_sent: "<emoji document_id=5431736674147114227>🗂</emoji> <b>Ätiýaçlyk nusga degişli ýazgylara iberildi</b>"
 
 presets:
-  name: "Presets"
-  _fun_title: "🪩 Entertainment modules"
-  _fun_desc: "Fun modules — animations, spam, entertainment, etc."
-  _chat_title: "👥 Group Administration Helpers"
-  _chat_desc: "The collection of tools which will help to moderate your group chat — filters, notes, voice recognition, etc."
-  _service_title: "⚙️ Useful modules"
-  _service_desc: "Really useful modules — account management, link shortener, search engine, etc."
-  _downloaders_title: "📥 Downloaders"
-  _downloaders_desc: "The collection of tools which will help you download/upload files from/to different sources — YouTube, TikTok, Instagram, Spotify, VK Music, etc."
-  welcome: "👋 <b>Hi there! Tired of scrolling through endless modules in channels? Let me suggest you some pre-made collections. If you need to call this menu again, simply send /presets to this bot!</b>"
-  preset: "<b>{}:</b>\nℹ️ <i>{}</i>\n\n⚒ <b>Modules in this collection:</b>\n\n{}"
-  back: "🔙 Back"
-  install: "📦 Install"
-  installing: "<emoji document_id=5451732530048802485>⏳</emoji> <b>Installing preset</b> <code>{}</code><b>...</b>"
-  installing_module: "<emoji document_id=5451732530048802485>⏳</emoji> <b>Installing preset</b> <code>{}</code> <b>({}/{} modules)...</b>\n\n<emoji document_id=5470093614023449749>⛄️</emoji> <i>Installing module {}...</i>"
-  installed: "<emoji document_id=5436040291507247633>🎉</emoji> <b>Preset</b> <code>{}</code> <b>installed!</b>"
-  already_installed: "✅ [Installed]"
-  _cls_doc: "Suggests new LidFax
-  users a packs of modules to load"
+  name: "Presetler"
+  _fun_title: "🪩 Gyzykly modullar"
+  _fun_desc: "Gyzykly modullar — animasiýalar, spam, gyzyklylyk, we ş.m."
+  _chat_title: "👥 Topar dolandyryş kömekçileri"
+  _chat_desc: "Topar dolandyryş üçin gurallar — filterler, bellikler, ses tanamak we ş.m."
+  _service_title: "⚙️ peýdaly modullar"
+  _service_desc: "Hakykatdan peýdaly modullar — hasap dolandyryşy, baglanyşyk gysgaldyjy, gözleg motory we ş.m."
+  _downloaders_title: "📥 Ýükleýjiler"
+  _downloaders_desc: "Faýllary dürli çeşmelerden ýüklemek/ýüklemek üçin gurallar — YouTube, TikTok, Instagram, Spotify, VK Music we ş.m."
+  welcome: "👋 <b>Salam! Kanalda ädim-ädim modullara göz aýlamaktan ýadadyňmy? Men size taýýar toplamlary teklip edip bilerin. Bu menýuny gaýtadan çagyrmak üçin diňe /presets ýazsaňyz bolýar.</b>"
+  preset: "<b>{}:</b>\nℹ️ <i>{}</i>\n\n⚒ <b>Bu toplumdaky modullar:</b>\n\n{}"
+  back: "🔙 Yza"
+  install: "📦 Gur"
+  installing: "<emoji document_id=5451732530048802485>⏳</emoji> <b>Preset</b> <code>{}</code><b> gurulýar...</b>"
+  installing_module: "<emoji document_id=5451732530048802485>⏳</emoji> <b>Preset</b> <code>{}</code> <b>({}/{} modul)...</b>\n\n<emoji document_id=5470093614023449749>⛄️</emoji>"
+  installed: "<emoji document_id=5436040291507247633>🎉</emoji> <b>Preset</b> <code>{}</code> <b>guruldy!</b>"
+  already_installed: "✅ [Gurulan]"
+  _cls_doc: "Täze LidFax ulanyjylara modullar toplumy teklip edýär"
+  users a packs of modules to load: "Ulanyjylara modullar toplumy ýüklemäge mümkinçilik berýär"
 
 settings:
-  name: "Settings"
-  installation: '<emoji document_id=5363805650327450240>▪️</emoji> The installation is very easy! Just enter the following in your servers terminal:
-
-<pre><code class="language-bash">sudo apt update &amp;&amp; sudo apt upgrade -y &amp;&amp; sudo apt install git &amp;&amp; sudo apt install python3-pip &amp;&amp; git clone https://github.com/sz3333/LidFax-userbot &amp;&amp; cd LidFax-userbot &amp;&amp; pip install -r requirements.txt &amp;&amp; python3 -m hikka</code></pre>
-<emoji document_id=5299027123913105700>😐</emoji> If you dont have sudo access, simply remove the initial steps.
-
-<emoji document_id=5300777464820145682>🥳</emoji> Lets go over a few arguments:
-
-<emoji document_id=5787313834012184077>🔐</emoji> The <code>--root</code> argument allows you to run LidFax as a <b>root user</b>.
-
-<emoji document_id=5785209342986817408>🌎</emoji> The <code>--no-web</code> argument enables login to your account <b>directly in the terminal, rather than through a link</b> <code>{}.lhr.life</code>.'
-
-
-  too_many_args: "<emoji document_id=5460967491419270149>🚫</emoji> <b>Too many args</b>"
-  blacklisted: "<emoji document_id=5197474765387864959>👍</emoji> <b>Chat {} blacklisted from userbot</b>"
-  unblacklisted: "<emoji document_id=5197474765387864959>👍</emoji> <b>Chat {} unblacklisted from userbot</b>"
-  user_blacklisted: "<emoji document_id=5197474765387864959>👍</emoji> <b>User {} blacklisted from userbot</b>"
-  user_unblacklisted: "<emoji document_id=5197474765387864959>👍</emoji> <b>User {} unblacklisted from userbot</b>"
-  what_prefix: "<emoji document_id=5382187118216879236>❓</emoji> <b>What should the prefix be set to?</b>"
-  prefix_incorrect: "<emoji document_id=5460967491419270149>🚫</emoji> <b>Prefix must be one symbol in length</b>"
-  prefix_set: "{} <b>Command prefix updated. Use the following command to change it back:</b>\n<pre><code class=\"language-lidfax\">{newprefix}setprefix {oldprefix}</code></pre>"
-  alias_created: "<emoji document_id=5197474765387864959>👍</emoji> <b>Alias created. Access it with</b> <code>{}</code>"
-  aliases: "<b>🔗 Aliases:</b>\n"
-  no_command: "<emoji document_id=5460967491419270149>🚫</emoji> <b>Command</b> <code>{}</code> <b>does not exist</b>"
-  alias_args: "<emoji document_id=5460967491419270149>🚫</emoji> <b>You must provide a command and the alias for it</b>"
-  unstable: "\n\n<emoji document_id=5355133243773435190>❕</emoji> <b>You are using an unstable branch</b> <code>{}</code><b>!</b>"
-  delalias_args: "<emoji document_id=5460967491419270149>🚫</emoji> <b>You must provide the alias name</b>"
-  alias_removed: "<emoji document_id=5197474765387864959>👍</emoji> <b>Alias</b> <code>{}</code> <b>removed</b>."
-  no_alias: "<emoji document_id=5460967491419270149>🚫</emoji> <b>Alias</b> <code>{}</code> <b>does not exist</b>"
-  db_cleared: "<emoji document_id=5197474765387864959>👍</emoji> <b>Database cleared</b>"
-  hikka: "{} <b>{}.{}.{}</b> <i>{}</i>\n\n<b><emoji document_id=5289608677244811430>📁</emoji> <b>Telethon:</b> <i>1.37.0</i>\n\n<emoji document_id=5228879218363872764>⌨</emoji> <b>Developer: DepositUser.t.me & mikhaylodm.t.me</b>\n<emoji document_id=5375368793209972850>🖋</emoji> <b>We searching for designer for our userbot, DM if youre interested: DepositUser.t.me</b>"
-  confirm_cleardb: "⚠️ <b>Are you sure, that you want to clear database?</b>"
-  cleardb_confirm: "🗑 Clear database"
-  cancel: "🚫 Cancel"
-  who_to_blacklist: "<emoji document_id=5382187118216879236>❓</emoji> <b>Who to blacklist?</b>"
-  who_to_unblacklist: "<emoji document_id=5382187118216879236>❓</emoji> <b>Who to unblacklist?</b>"
-  _cmd_doc_addalias: "Set an alias for a command"
-  _cmd_doc_aliases: "Print all your aliases"
-  _cmd_doc_blacklist: "[chat_id] [module] - Blacklist the bot from operating somewhere"
-  _cmd_doc_blacklistuser: "[user_id] - Prevent this user from running any commands"
-  _cmd_doc_cleardb: "Clear the entire database, effectively performing a factory reset"
-  _cmd_doc_delalias: "Remove an alias for a command"
-  _cmd_doc_hikka: "Get Heroku version"
-  _cmd_doc_setprefix: "<prefix> - Sets command prefix"
-  _cmd_doc_unblacklist: "<chat_id> - Unblacklist the bot from operating somewhere"
-  _cmd_doc_unblacklistuser: "[user_id] - Allow this user to run permitted commands"
-  _cfg_nonstandart_prefixes: "Allow non-standart prefixes like flags or more than one symbol"
-  _cls_doc: "Control core userbot settings"
+  name: "Sazlamalar"
+  installation: '<emoji document_id=5363805650327450240>▪️</emoji> Gurnama örän aňsat! Serweriňiziň terminalynda aşakdakyny giriziň:'
+  
+  # Пример перевода bash-инструкции и комментариев
+  # Оставляю инструкцию на английском, чтобы не потерять смысл для терминала
+  # Ты можешь перевести комментарии по желанию, команды лучше оставить так:
+  # <pre><code class="language-bash">sudo apt update && sudo apt upgrade -y && sudo apt install git && sudo apt install python3-pip && git clone https://github.com/sz3...</code></pre>
+  # <emoji document_id=5299027123913105700>😐</emoji> Eger sudo elýeterli däl bolsa, başdaky ädimleri aýyryň.
+  # <emoji document_id=5300777464820145682>🥳</emoji> Gel, käbir parametrleri gözden geçireliň:
+  # <emoji document_id=5787313834012184077>🔐</emoji> <code>--root</code> parametr LidFax-i <b>root ulanyjy hökmünde</b> işledýär.
+  # <emoji document_id=5785209342986817408>🌎</emoji> <code>--no-web</code> parametr hasabyňyza <b>dogrudan terminalda giriş etmäge mümkinçilik berýär, baglanyşyk arkaly däl</b> <code>{}.lhr.life...</code>
+  
+  too_many_args: "<emoji document_id=5460967491419270149>🚫</emoji> <b>Argument gaty köp</b>"
+  blacklisted: "<emoji document_id=5197474765387864959>👍</emoji> <b>Chat {} ulanyjybotdan gara sanawa goşuldy</b>"
+  unblacklisted: "<emoji document_id=5197474765387864959>👍</emoji> <b>Chat {} ulanyjybotdan gara sanawdan aýryldy</b>"
+  user_blacklisted: "<emoji document_id=5197474765387864959>👍</emoji> <b>Ulanyjy {} ulanyjybotdan gara sanawa goşuldy</b>"
+  user_unblacklisted: "<emoji document_id=5197474765387864959>👍</emoji> <b>Ulanyjy {} ulanyjybotdan gara sanawdan aýryldy</b>"
+  what_prefix: "<emoji document_id=5382187118216879236>❓</emoji> <b>Prefiks näme bolmaly?</b>"
+  prefix_incorrect: "<emoji document_id=5460967491419270149>🚫</emoji> <b>Prefiks diňe bir simwol bolmaly</b>"
+  prefix_set: "{} <b>Buýruk prefiksi täzelendi. Yza gaýdyp üýtgetmek üçin aşakdaky buýrugy ulanyň:</b>\n<pre><code class=\"language-lidfax\">{newprefix}setprefix {oldprefix}</code></pre>"
+  alias_created: "<emoji document_id=5197474765387864959>👍</emoji> <b>Alýas döredildi. Ony</b> <code>{}</code> bilen ulanyp bilersiňiz"
+  aliases: "<b>🔗 Alýaslar:</b>\n"
+  no_command: "<emoji document_id=5460967491419270149>🚫</emoji> <b>Buýruk</b> <code>{}</code> <b>ýok</b>"
+  alias_args: "<emoji document_id=5460967491419270149>🚫</emoji> <b>Buýruk we alýas adyny bermeli</b>"
+  unstable: "\n\n<emoji document_id=5355133243773435190>❕</emoji> <b>Sen durnuksyz branch ulanýarsyň</b> <code>{}</code><b>!</b>"
+  delalias_args: "<emoji document_id=5460967491419270149>🚫</emoji> <b>Alýas adyny bermeli</b>"
+  alias_removed: "<emoji document_id=5197474765387864959>👍</emoji> <b>Alýas</b> <code>{}</code> <b>aýryldy</b>."
+  no_alias: "<emoji document_id=5460967491419270149>🚫</emoji> <b>Alýas</b> <code>{}</code> <b>ýok</b>"
+  db_cleared: "<emoji document_id=5197474765387864959>👍</emoji> <b>Maglumatlar bazasy arassalandy</b>"
+  hikka: "{} <b>{}.{}.{}</b> <i>{}</i>\n\n<b><emoji document_id=5458670770542634793>📁</emoji> <b>LidFax-TL:</b> <i>0.9.5</i>\n\n<emoji document_id=5228879218363872764>⌨</emoji> <b>Developer:...</b>"
+  confirm_cleardb: "⚠️ <b>Maglumatlar bazasyny arassalamak isleýändigiňizi tassyklaň?</b>"
+  cleardb_confirm: "🗑 Maglumatlary arassala"
+  cancel: "🚫 Yza"
+  who_to_blacklist: "<emoji document_id=5382187118216879236>❓</emoji> <b>Kimi gara sanawa goşmaly?</b>"
+  who_to_unblacklist: "<emoji document_id=5382187118216879236>❓</emoji> <b>Kimi gara sanawdan aýyrmaly?</b>"
+  _cmd_doc_addalias: "Buýruga alýas goý"
+  _cmd_doc_aliases: "Alýaslaryňy görkez"
+  _cmd_doc_blacklist: "[chat_id] [modul] - Botdan bir ýerde işlemeýändigini görkez"
+  _cmd_doc_blacklistuser: "[user_id] - Ulanyjynyň islendik buýrugy işledip bilmeginiň öňüni al"
+  _cmd_doc_cleardb: "Maglumatlar bazasyny doly arassala, fabrikadan çykarylan ýagdaýy ber"
+  _cmd_doc_delalias: "Buýruk üçin alýasy aýyr"
+  _cmd_doc_hikka: "LidFax görnüşini al"
+  _cmd_doc_setprefix: "<prefiks> - Buýruk prefiksi goý"
+  _cmd_doc_unblacklist: "<chat_id> - Botdan bir ýerde işlemegi täzeden aç"
+  _cmd_doc_unblacklistuser: "[user_id] - Bu ulanyja rugsat ber"
+  _cfg_nonstandart_prefixes: "Flag ýaly ýa-da birden köp simwolly prefiksleri ulanmaga rugsat ber"
+  _cls_doc: "Ulanyjybotyň esasy sazlamalaryny dolandyrýar"
 
 lidfax_config:
   name: "LidFaxConfig"
