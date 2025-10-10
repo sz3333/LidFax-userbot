@@ -533,8 +533,8 @@ translations:
   _cmd_doc_setlang: "[тілдер] - Стандартты тілді өзгерту"
 
 eval:
-  eval: "💻<b> Код:</b>\n<pre><code class=\"language-{}\">{}</code></pre>\n\n✅<b> Нәтиже:</b>\n<pre><code class=\"language-{}\">{}</code></pre>"
-  err: "💻<b> Код:</b>\n<pre><code class=\"language-{}\">{}</code></pre>\n\n🚫 <b>Қате:</b>\n<pre><code class=\"language-{}\">{}</code></pre>"
+  eval: "<emoji document_id={}>💻</emoji><b> Код:</b>\n<pre><code class=\"language-{}\">{}</code></pre>\n\n<emoji document_id=5197688912457245639>✅</emoji><b> Нәтиже:</b>\n<pre><code class=\"language-{}\">{}</code></pre>"
+  err: "<emoji document_id={}>💻</emoji><b> Код:</b>\n<pre><code class=\"language-{}\">{}</code></pre>\n\n<emoji document_id=5460967491419270149>🚫</emoji> <b>Қате:</b>\n<pre><code class=\"language-{}\">{}</code></pre>"
   _cls_doc: "Кодты әртүрлі бағдарламалау тілдерінде орындайды"
   compiling: "🫥 <b>Кодты компиляциялау...</b>"
   no_compiler: "💻 <b>{} компиляторы жүйеде орнатылмаған.</b>"
