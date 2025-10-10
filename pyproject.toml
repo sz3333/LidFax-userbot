@@ -25,7 +25,6 @@ emoji = "2.1.0"
 werkzeug = "2.2.2"
 psutil = "5.9.4"
 tgcrypto = "1.2.5"
-lidfax-tl = "0.9.5"
 ruamel-yaml = "0.17.21"
 rsa = "4.9"
 
