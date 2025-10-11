@@ -351,7 +351,7 @@ test:
   name: "Tester"
   set_loglevel: "<emoji document_id=5460967491419270149>🚫</emoji> <b>Verbosity-ni integer ýa-da string hökmünde görkezmeli</b>"
   no_logs: "<emoji document_id=5363948200291998612>🤷‍♀️</emoji> <b>Verbosity</b> <code>{}</code><b> üçin log ýok</b>"
-  configping: "Özleşdirilen tekst. Placeholder ulanyp bilersiňiz: {ping} - Seniň pingiň. {uptime} - Seniň iş wagtyň. {ping_hint} - Heroku modulindäki hint, random saýlanýar."
+  configping: "Özleşdirilen tekst. Placeholder ulanyp bilersiňiz: {ping} - Seniň pingiň. {uptime} - Seniň iş wagtyň. {ping_hint} - LidFax modulindäki hint, random saýlanýar."
   hint: "Hint goý"
   ping_emoji: "Ping üýtgemese çykýan emoji"
   logs_caption: "<emoji document_id=5470093614023449749>⛄️</emoji> <b>LidFax loglary verbosity</b> <code>{}</code>\n\n<emoji document_id=6318902906900711458>⚪️</emoji> <b>Wersiýa: {}.{}</b>"
