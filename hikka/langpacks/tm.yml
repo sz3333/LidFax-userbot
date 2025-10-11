@@ -401,7 +401,7 @@ updater:
   no_update: "🚸 <b>Iň täze wersiýada, täzelenmeleri çekmek isleýärsiňizmi?</b>"
   cancel: "🚫 Yza"
   lavhost_update: "<emoji document_id=5469986291380657759>✌️</emoji> <b>Seniň {} täzelenýär...</b>"
-  full_success: "<emoji document_id=5301096082674032190>👍</emoji> <b>Ulanyjybot doly ýüklenildi! {}</b>\n<i>Doly täzeden başlamak {}</i>"
+  full_success: "<emoji document_id=5301096082674032190>👍</emoji> <b>Ulanyjybot doly ýüklenildi! {}</b>\n<i>Doly täzeden başlamak şunça wagt aldy {}</i>"
   secure_boot_complete: "<emoji document_id=5472308992514464048>🔐</emoji> <b>Secure boot tamamlandy! {}</b>\n<i>Täzeden başlamak {}</i>"
   _cmd_doc_restart: "Ulanyjyboty täzeden başla"
   _cmd_doc_source: "Bu proýektiň kod baglanyşygyny görkez"
@@ -550,7 +550,7 @@ loader:
 
 translations:
   name: "Terjimeler"
-  lang_saved: "{} <b>Dil ýazgy edildi!</b>"
+  lang_saved: "{} <b>Dil saýlandy!</b>"
   pack_saved: "<emoji document_id=5197474765387864959>👍</emoji> <b>Terjime paketi ýazgy edildi!</b>"
   incorrect_language: "<emoji document_id=5460967491419270149>🚫</emoji> <b>Nädogry dil görkezildi</b>"
   lang_removed: "<emoji document_id=5197474765387864959>👍</emoji> <b>Terjimeler adaty ýagdaýyna gaýdyp geldi</b>"
