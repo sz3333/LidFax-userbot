@@ -128,12 +128,6 @@ Check out <a href="https://web.archive.org/dev.hikka.pw">dev.hikka.pw</a> for de
     <li><a href="https://gitlab.com/hackintosh5">Hackintosh5</a> for FTG, which is the base of project</li>
     <li><a href="https://t.me/GunyaKshin">Codwiz</a> for Ukrainian translation pack</li>
     <li><a href="https://t.me/thisLyomi">Lyomi</a> for German translation pack</li>
-    <li><a href="https://t.me/crow">Pavel</a> for Telethon, which is the base of lidfaxtl</li>
+    <li><a href="https://t.me/coddrago">Codrago</a> for Heroku-TL, which is the base of LidFax-TL</li>
 </ul>
-
-<hr>
-<h2>Sponsors: </h2>
-<p align="center">
-    <img src="assets/lidfax-assets.png" width="900" height="900">
-</p>
-<p align="center">Developed with support of <a href="https://google.pl/?ref=herokugh">google.pl</a></p>
+    <li><a href="https://t.me/lIulIuv">pew pew</a> for Turkmen translation pack</li>
