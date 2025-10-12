@@ -129,5 +129,5 @@ Check out <a href="https://web.archive.org/dev.hikka.pw">dev.hikka.pw</a> for de
     <li><a href="https://t.me/GunyaKshin">Codwiz</a> for Ukrainian translation pack</li>
     <li><a href="https://t.me/thisLyomi">Lyomi</a> for German translation pack</li>
     <li><a href="https://t.me/coddrago">Codrago</a> for Heroku-TL, which is the base of LidFax-TL</li>
-</ul>
     <li><a href="https://t.me/lIulIuv">pew pew</a> for Turkmen translation pack</li>
+</ul>
