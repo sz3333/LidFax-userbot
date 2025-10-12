@@ -99,7 +99,7 @@ class CoreMod(loader.Module):
                 ),
                 *version.__version__,
                 utils.get_commit_url(),
-                f"{lidfaxtl.__version__} #{lidfaxtl.tl.alltlobjects.LAYER}",
+                f"LidFax-TL 0.9.5",
             )
             + (
                 ""
