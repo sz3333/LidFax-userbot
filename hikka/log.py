@@ -74,7 +74,7 @@ linecache.getlines = getlines
 def override_text(exception: Exception) -> typing.Optional[str]:
     """Returns error-specific description if available, else `None`"""
     if isinstance(exception, NetworkError):
-        return "✈️ <b>You have problems with internet🍅connection on your server.</b>"
+        return "✈️ <b>You have problems with internet💣connection on your server.</b>"
 
     return None
 
