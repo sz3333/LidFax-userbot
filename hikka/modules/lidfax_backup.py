@@ -125,22 +125,23 @@ class LidFaxBackupMod(loader.Module):
             )
 
             backup = io.BytesIO(json.dumps(self._db).encode())
-            backup.name = (
-                f"lidf1x-db-backup-{datetime.datetime.now():%d-%m-%Y-%H-%M}.json"
-            )
+backup.name = (
+    f"lidf1x-db-backup-{datetime.datetime.now():%d-%m-%Y-%H-%M}.json"
+)
 
-                int(f"-100{self._backup_channel.id}"),
-                backup,
-                reply_markup=self.inline.generate_markup(
-                    [
-                        [
-                            {
-                                "data": "hikka/backup/restore/confirm",
-                            }
-                        ]
-                    ]
-                ),
-            )
+await self.inline.bot.send_document(
+    int(f"-100{self._backup_channel.id}"),
+    backup,
+    reply_markup=self.inline.generate_markup(
+        [
+            [
+                {
+                    "data": "hikka/backup/restore/confirm",
+                }
+            ]
+        ]
+    ),
+)
 
             self.set("last_backup", round(time.time()))
         except loader.StopLoop:
