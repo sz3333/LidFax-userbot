@@ -125,9 +125,9 @@ class LidFaxBackupMod(loader.Module):
             )
 
             backup = io.BytesIO(json.dumps(self._db).encode())
-backup.name = (
-    f"lidf1x-db-backup-{datetime.datetime.now():%d-%m-%Y-%H-%M}.json"
-)
+            backup.name = (
+                f"lidf1x-db-backup-{datetime.datetime.now():%d-%m-%Y-%H-%M}.json"
+            )
 
 await self.inline.bot.send_document(
     int(f"-100{self._backup_channel.id}"),
