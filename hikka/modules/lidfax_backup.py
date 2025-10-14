@@ -16,7 +16,6 @@ import zipfile
 from pathlib import Path
 
 from lidfaxtl.tl.types import Message
-from aiogram.types import InputFile
 
 from .. import loader, utils
 from ..inline.types import BotInlineCall
@@ -130,7 +129,7 @@ class LidFaxBackupMod(loader.Module):
             backup.seek(0)
             await self.inline.bot.send_document(
                 int(f"-100{self._backup_channel.id}"),
-                InputFile(backup, filename=backup.name),
+                backup,
                 reply_markup=self.inline.generate_markup(
                     [
                         [
