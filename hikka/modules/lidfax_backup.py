@@ -135,7 +135,6 @@ class LidFaxBackupMod(loader.Module):
                     [
                         [
                             {
-                                "text": "↪️ Restore this",
                                 "data": "hikka/backup/restore/confirm",
                             }
                         ]
