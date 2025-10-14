@@ -12,9 +12,10 @@ import json
 import logging
 import os
 import time
-import zipfile
+import zipfile #да вы заебали я ЭКСТЕРАГРАМ.
 from pathlib import Path
 
+from aiogram.types import BufferedInputFile
 from lidfaxtl.tl.types import Message
 
 from .. import loader, utils
@@ -129,7 +130,7 @@ class LidFaxBackupMod(loader.Module):
             backup.seek(0)
             await self.inline.bot.send_document(
                 int(f"-100{self._backup_channel.id}"),
-                backup,
+                BufferedInputFile(backup.getvalue(), filename=backup.name),
                 reply_markup=self.inline.generate_markup(
                     [
                         [
