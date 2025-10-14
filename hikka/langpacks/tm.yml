@@ -1021,12 +1021,11 @@ translations:
   _cls_doc: Içki terjimeleri işläp taýýarlaýar
 eval:
   name: Bahalandyrma
-  eval: "<emoji document_id={}>\U0001F4BB</emoji><b> Kod:</b>\n\n  <pre><code class=\"\
-    language-{}\">{}</code></pre>\n\n  <emoji document_id=5197688912457245639>✅</emoji><b>\
-    \ Netije:</b>\n\n  <pre><code class=\"language-{}\">{}</code></pre>"
-  err: "<emoji document_id={}>\U0001F4BB</emoji><b> Kod:</b>\n\n  <pre><code class=\"\
-    language-{}\">{}</code></pre>\n\n  <emoji document_id=5460967491419270149>\U0001F6AB\
-    </emoji> <b>Ýalňyşlyk:</b>\n\n  <pre><code class=\"language-{}\">{}</code></pre>"
+  eval: <emoji document_id={}>💻</emoji><b> Kod:</b> <pre><code class="language-{}">{}</code></pre>
+    <emoji document_id=5197688912457245639>✅</emoji><b> Netije:</b> <pre><code class="language-{}">{}</code></pre>
+  err: <emoji document_id={}>💻</emoji><b> Kod:</b> <pre><code class="language-{}">{}</code></pre>
+    <emoji document_id=5460967491419270149>🚫</emoji> <b>Ýalňyşlyk:</b> <pre><code
+    class="language-{}">{}</code></pre>
   compiling: <emoji document_id=5325787248363314644>🫥</emoji> <b>Kod kompilyasiýa
     edilýär...</b>
   no_compiler: <emoji document_id={}>💻</emoji> <b>{} kompilyator ulgama gurnalan däl.</b>
