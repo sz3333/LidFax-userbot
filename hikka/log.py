@@ -72,13 +72,10 @@ linecache.getlines = getlines
 
 
 def override_text(exception: Exception) -> typing.Optional[str]:
-    """Returns error-specific description if available, else `None`"""
+    """Returns special text only for NetworkError"""
     if isinstance(exception, NetworkError):
         return "✈️ <b>You have problems with internet💣connection on your server.</b>"
-
     return None
-
-
 class HikkaException:
     def __init__(
         self,
