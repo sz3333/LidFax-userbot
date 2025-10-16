@@ -1,8 +1,7 @@
 # ©️ Dan Gazizullin, 2021-2023
-# This file is a part of Hikka Userbot
+# Modified by LidF1x
 # 🌐 https://github.com/hikariatama/Hikka
-# You can redistribute it and/or modify it under the terms of the GNU AGPLv3
-# 🔑 https://www.gnu.org/licenses/agpl-3.0.html
+# Licensed under the AGPLv3
 
 import contextlib
 import copy
@@ -37,12 +36,12 @@ from .types import InlineMessage, InlineUnit
 
 logger = logging.getLogger(__name__)
 
+class Placeholder:
+    """Placeholder"""
+
 VERIFICATION_EMOJIES = list(
     grapheme.graphemes("🐱🐾🌸🐈🐕🦊🐇🐿🐦🐥🐉🌈⭐️✨💫🌙🌕☁️🌤☃️🔥🌊🍀🌷🌻🍓🍉🍒🍩🍪🍰🎂🧁🍫🍭🎈🎀🪩🎮🎧")
 )
-
-class Placeholder:
-    """Placeholder"""
 
 class Form(InlineUnit):
     async def form(
@@ -67,29 +66,28 @@ class Form(InlineUnit):
         silent: bool = False,
     ) -> typing.Union[InlineMessage, bool]:
         with contextlib.suppress(AttributeError):
-            _hikka_client_id_logging_tag = copy.copy(self._client.tg_id)  # noqa: F841
+            _hikka_client_id_logging_tag = copy.copy(self._client.tg_id)
 
         if reply_markup is None:
             reply_markup = []
-
         if always_allow is None:
             always_allow = []
 
         if not isinstance(text, str):
-            logger.error("Invalid type for `text`. Expected `str`, got `%s`", type(text))
+            logger.error("Invalid type for `text`")
             return False
 
         text = self.sanitise_text(text)
 
-        if photo is not None:
+        if photo:
             try:
                 path = urlparse(photo).path
                 ext = os.path.splitext(path)[1]
+                if ext in {".gif", ".mp4"}:
+                    gif = copy.copy(photo)
+                    photo = None
             except Exception:
-                ext = None
-            if ext in {".gif", ".mp4"}:
-                gif = copy.copy(photo)
-                photo = None
+                pass
 
         if isinstance(audio, str):
             audio = {"url": audio}
@@ -110,11 +108,11 @@ class Form(InlineUnit):
             **({"photo": photo} if photo else {}),
             **({"video": video} if video else {}),
             **({"gif": gif} if gif else {}),
-            **({"gif_thumb": gif} if gif else {}),  # 💥 добавлено — миниатюра гифки
-            **({"location": location} if location else {}),
-            **({"audio": audio} if audio else {}),
+            **({"gif_thumb": gif} if gif else {}),
             **({"file": file} if file else {}),
             **({"mime_type": mime_type} if mime_type else {}),
+            **({"audio": audio} if audio else {}),
+            **({"location": location} if location else {}),
             **({"perms_map": perms_map} if perms_map else {}),
             **({"message": message} if isinstance(message, Message) else {}),
             **({"force_me": force_me} if force_me else {}),
@@ -136,9 +134,9 @@ class Form(InlineUnit):
 
         self._units[unit_id]["chat"] = utils.get_chat_id(m)
         self._units[unit_id]["message_id"] = m.id
+        self._units[unit_id]["inline_message_id"] = getattr(m, "inline_message_id", None)  # 💫 фикс для кнопок
 
-        inline_message_id = self._units[unit_id]["inline_message_id"]
-        return InlineMessage(self, unit_id, inline_message_id)
+        return InlineMessage(self, unit_id, self._units[unit_id]["inline_message_id"])
 
     async def _form_inline_handler(self, inline_query: InlineQuery):
         try:
@@ -153,7 +151,6 @@ class Form(InlineUnit):
             return
 
         form = self._units[inline_query.query]
-
         try:
             if "photo" in form:
                 await inline_query.answer(
@@ -165,7 +162,9 @@ class Form(InlineUnit):
                             parse_mode="HTML",
                             photo_url=form["photo"],
                             thumbnail_url="https://img.icons8.com/cotton/452/moon-satellite.png",
-                            reply_markup=self.generate_markup(form["uid"]),
+                            reply_markup=self.generate_markup(form["uid"])
+                            if hasattr(self, "generate_markup")
+                            else None,
                         )
                     ],
                     cache_time=0,
@@ -183,7 +182,9 @@ class Form(InlineUnit):
                                 form.get("gif_thumb")
                                 or "https://img.icons8.com/cotton/452/moon-satellite.png"
                             ),
-                            reply_markup=self.generate_markup(form["uid"]),
+                            reply_markup=self.generate_markup(form["uid"])
+                            if hasattr(self, "generate_markup")
+                            else None,
                         )
                     ],
                     cache_time=0,
@@ -199,7 +200,9 @@ class Form(InlineUnit):
                             video_url=form["video"],
                             thumbnail_url="https://img.icons8.com/cotton/452/moon-satellite.png",
                             mime_type="video/mp4",
-                            reply_markup=self.generate_markup(form["uid"]),
+                            reply_markup=self.generate_markup(form["uid"])
+                            if hasattr(self, "generate_markup")
+                            else None,
                         )
                     ],
                     cache_time=0,
@@ -214,7 +217,9 @@ class Form(InlineUnit):
                             parse_mode="HTML",
                             document_url=form["file"],
                             mime_type=form.get("mime_type", "application/zip"),
-                            reply_markup=self.generate_markup(form["uid"]),
+                            reply_markup=self.generate_markup(form["uid"])
+                            if hasattr(self, "generate_markup")
+                            else None,
                         )
                     ],
                     cache_time=0,
@@ -230,7 +235,9 @@ class Form(InlineUnit):
                             title=form["audio"].get("title", "Hikka"),
                             performer=form["audio"].get("performer"),
                             audio_duration=form["audio"].get("duration"),
-                            reply_markup=self.generate_markup(form["uid"]),
+                            reply_markup=self.generate_markup(form["uid"])
+                            if hasattr(self, "generate_markup")
+                            else None,
                         )
                     ],
                     cache_time=0,
@@ -246,10 +253,12 @@ class Form(InlineUnit):
                                 parse_mode="HTML",
                                 disable_web_page_preview=True,
                             ),
-                            reply_markup=self.generate_markup(inline_query.query),
+                            reply_markup=self.generate_markup(inline_query.query)
+                            if hasattr(self, "generate_markup")
+                            else None,
                         )
                     ],
                     cache_time=0,
                 )
         except Exception as e:
-            logger.exception(f"Inline form error: {e}")
+            logger.warning(f"Inline form error: {e}")
