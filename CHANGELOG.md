@@ -1,4 +1,9 @@
 # LidFax Changelog
+
+## ☃️ LidFax 1.7.0
+- aiogram 3.0
+- better help
+
 ## ☃️ LidFax 1.6.9
 
 - Finally renamed to LidFax and new Emoji
