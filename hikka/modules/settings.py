@@ -4,9 +4,9 @@
 # You can redistribute it and/or modify it under the terms of the GNU AGPLv3
 # 🔑 https://www.gnu.org/licenses/agpl-3.0.html
 
-import hikkatl
-from hikkatl.extensions.html import CUSTOM_EMOJIS
-from hikkatl.tl.types import Message
+import lidfaxtl
+from lidfaxtl.extensions.html import CUSTOM_EMOJIS
+from lidfaxtl.tl.types import Message
 
 from .. import loader, main, utils, version
 from ..inline.types import InlineCall
@@ -99,7 +99,7 @@ class CoreMod(loader.Module):
                 ),
                 *version.__version__,
                 utils.get_commit_url(),
-                f"{hikkatl.__version__} #{hikkatl.tl.alltlobjects.LAYER}",
+                f"LidFax-TL 0.9.5",
             )
             + (
                 ""

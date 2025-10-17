@@ -7,9 +7,9 @@
 import re
 import string
 
-from hikkatl.errors.rpcerrorlist import YouBlockedUserError
-from hikkatl.tl.functions.contacts import UnblockRequest
-from hikkatl.tl.types import Message
+from lidfaxtl.errors.rpcerrorlist import YouBlockedUserError
+from lidfaxtl.tl.functions.contacts import UnblockRequest
+from lidfaxtl.tl.types import Message
 
 from .. import loader, utils
 from ..inline.types import BotInlineMessage

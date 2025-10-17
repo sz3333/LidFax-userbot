@@ -20,8 +20,8 @@ except ImportError as e:
 
 import typing
 
-from hikkatl.errors.rpcerrorlist import ChannelsTooMuchError
-from hikkatl.tl.types import Message, User
+from lidfaxtl.errors.rpcerrorlist import ChannelsTooMuchError
+from lidfaxtl.tl.types import Message, User
 
 from . import main, utils
 from .pointers import (

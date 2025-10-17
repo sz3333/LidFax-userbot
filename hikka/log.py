@@ -19,8 +19,15 @@ import traceback
 import typing
 from logging.handlers import RotatingFileHandler
 
-import hikkatl
-from aiogram.utils.exceptions import NetworkError
+import lidfaxtl
+try:
+    from aiogram.exceptions import NetworkError
+except ImportError:
+    try:
+        from aiogram.utils.exceptions import NetworkError
+    except ImportError:
+        # Fallback for older versions
+        NetworkError = Exception
 
 from . import utils
 from .tl_cache import CustomTelegramClient
@@ -65,13 +72,14 @@ linecache.getlines = getlines
 
 
 def override_text(exception: Exception) -> typing.Optional[str]:
-    """Returns error-specific description if available, else `None`"""
+    """Показывает ✈️ только при реальном обрыве соединения"""
     if isinstance(exception, NetworkError):
-        return "✈️ <b>You have problems with internet🍅connection on your server.</b>"
-
+        msg = str(exception).lower()
+        # если реально упал сокет или соединение разорвано
+        if any(word in msg for word in ["connection reset", "unreachable", "network is down", "disconnected", "no route to host"]):
+            return "✈️ <b>You have problems with internet💣connection on your server.</b>"
+        return None
     return None
-
-
 class HikkaException:
     def __init__(
         self,
@@ -109,7 +117,7 @@ class HikkaException:
                             dictionary[key] = "<Database>"
                         elif isinstance(
                             value,
-                            (hikkatl.TelegramClient, CustomTelegramClient),
+                            (lidfaxtl.TelegramClient, CustomTelegramClient),
                         ):
                             dictionary[key] = f"<{value.__class__.__name__}>"
                         elif len(str(value)) > 512:
@@ -215,6 +223,8 @@ class TelegramLogsHandler(logging.Handler):
         self.handledbuffer = []
         self._queue = []
         self._mods = {}
+        # Buffer of items to send to Telegram: list of tuples
+        #   - (HikkaException, caller_id) or (formatted_str, caller_id)
         self.tg_buff = []
         self.force_send_all = False
         self.tg_level = 20
@@ -270,7 +280,7 @@ class TelegramLogsHandler(logging.Handler):
     ):
         chunks = item.message + "\n\n<b>⛄ Full traceback:</b>\n" + item.full_stack
 
-        chunks = list(utils.smart_split(*hikkatl.extensions.html.parse(chunks), 4096))
+        chunks = list(utils.smart_split(*lidfaxtl.extensions.html.parse(chunks), 4096))
 
         await call.edit(
             chunks[0],
@@ -507,7 +517,7 @@ _tg_formatter = logging.Formatter(
 )
 
 rotating_handler = RotatingFileHandler(
-    filename="heroku.log",
+    filename="lidfax.log",
     mode="a",
     maxBytes=10 * 1024 * 1024,
     backupCount=1,
@@ -527,7 +537,7 @@ def init():
         TelegramLogsHandler((handler, rotating_handler), 7000)
     )
     logging.getLogger().setLevel(logging.NOTSET)
-    logging.getLogger("hikkatl").setLevel(logging.WARNING)
+    logging.getLogger("lidfaxtl").setLevel(logging.WARNING)
     logging.getLogger("matplotlib").setLevel(logging.WARNING)
     logging.getLogger("aiohttp").setLevel(logging.WARNING)
     logging.getLogger("aiogram").setLevel(logging.WARNING)

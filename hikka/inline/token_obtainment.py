@@ -8,8 +8,8 @@ import asyncio
 import logging
 import re
 
-from hikkatl.errors.rpcerrorlist import YouBlockedUserError
-from hikkatl.tl.functions.contacts import UnblockRequest
+from lidfaxtl.errors.rpcerrorlist import YouBlockedUserError
+from lidfaxtl.tl.functions.contacts import UnblockRequest
 
 from .. import utils
 from .._internal import fw_protect
@@ -147,7 +147,7 @@ class TokenObtainment(InlineUnit):
                         "hikka.inline",
                         "custom_bot",
                         False,
-                    ) and not re.search(r"@heroku_[0-9a-zA-Z]{6}_bot", button.text):
+                    ) and not re.search(r"@lidfax_[0-9a-zA-Z]{6}_bot", button.text):
                         continue
 
                     await fw_protect()

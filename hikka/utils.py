@@ -43,24 +43,24 @@ from urllib.parse import urlparse
 
 import git
 import grapheme
-import hikkatl
+import lidfaxtl
 import requests
 from aiogram.types import Message as AiogramMessage
-from hikkatl import hints
-from hikkatl.tl.custom.message import Message
-from hikkatl.tl.functions.account import UpdateNotifySettingsRequest
-from hikkatl.tl.functions.channels import (
+from lidfaxtl import hints
+from lidfaxtl.tl.custom.message import Message
+from lidfaxtl.tl.functions.account import UpdateNotifySettingsRequest
+from lidfaxtl.tl.functions.channels import (
     CreateChannelRequest,
     EditAdminRequest,
     EditPhotoRequest,
     InviteToChannelRequest,
 )
-from hikkatl.tl.functions.messages import (
+from lidfaxtl.tl.functions.messages import (
     GetDialogFiltersRequest,
     SetHistoryTTLRequest,
     UpdateDialogFilterRequest,
 )
-from hikkatl.tl.types import (
+from lidfaxtl.tl.types import (
     Channel,
     Chat,
     ChatAdminRights,
@@ -130,7 +130,7 @@ emoji_pattern = re.compile(
     flags=re.UNICODE,
 )
 
-parser = hikkatl.utils.sanitize_parse_mode("html")
+parser = lidfaxtl.utils.sanitize_parse_mode("html")
 logger = logging.getLogger(__name__)
 
 
@@ -242,7 +242,7 @@ def get_chat_id(message: typing.Union[Message, AiogramMessage]) -> int:
     :param message: Message to get chat ID from
     :return: Chat ID
     """
-    return hikkatl.utils.resolve_id(
+    return lidfaxtl.utils.resolve_id(
         getattr(message, "chat_id", None)
         or getattr(getattr(message, "chat", None), "id", None)
     )[0]
@@ -254,7 +254,7 @@ def get_entity_id(entity: hints.Entity) -> int:
     :param entity: Entity to get ID from
     :return: Entity ID
     """
-    return hikkatl.utils.get_peer_id(entity)
+    return lidfaxtl.utils.get_peer_id(entity)
 
 
 def escape_html(text: str, /) -> str:  # sourcery skip
@@ -515,7 +515,7 @@ async def answer(
     elif "reply_to" in kwargs:
         kwargs.pop("reply_to")
 
-    parse_mode = hikkatl.utils.sanitize_parse_mode(
+    parse_mode = lidfaxtl.utils.sanitize_parse_mode(
         kwargs.pop(
             "parse_mode",
             message.client.parse_mode,
@@ -1203,7 +1203,7 @@ def smart_split(
 
     :example:
         >>> utils.smart_split(
-            *hikkatl.extensions.html.parse(
+            *lidfaxtl.extensions.html.parse(
                 "<b>Hello, world!</b>"
             )
         )
@@ -1561,8 +1561,8 @@ def validate_html(html: str) -> str:
     :param html: HTML to validate
     :return: Valid HTML
     """
-    text, entities = hikkatl.extensions.html.parse(html)
-    return hikkatl.extensions.html.unparse(escape_html(text), entities)
+    text, entities = lidfaxtl.extensions.html.parse(html)
+    return lidfaxtl.extensions.html.unparse(escape_html(text), entities)
 
 
 def iter_attrs(obj: typing.Any, /) -> typing.List[typing.Tuple[str, typing.Any]]:

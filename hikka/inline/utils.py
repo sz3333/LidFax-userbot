@@ -28,13 +28,11 @@ from aiogram.types import (
     InputMediaPhoto,
     InputMediaVideo,
 )
-from aiogram.utils.exceptions import (
-    BadRequest,
-    MessageIdInvalid,
-    MessageNotModified,
-    RetryAfter,
+from aiogram.exceptions import (
+    TelegramBadRequest,
+    TelegramRetryAfter,
 )
-from hikkatl.utils import resolve_inline_message_id
+from lidfaxtl.utils import resolve_inline_message_id
 
 from .. import utils
 from ..types import HikkaReplyMarkup
@@ -55,7 +53,7 @@ class Utils(InlineUnit):
         if isinstance(markup_obj, InlineKeyboardMarkup):
             return markup_obj
 
-        markup = InlineKeyboardMarkup()
+        markup = InlineKeyboardMarkup(inline_keyboard=[])
 
         map_ = (
             self._units[markup_obj]["buttons"]
@@ -119,14 +117,14 @@ class Utils(InlineUnit):
 
                         line += [
                             InlineKeyboardButton(
-                                button["text"],
+                                text=button["text"],
                                 url=button["url"],
                             )
                         ]
                     elif "callback" in button:
                         line += [
                             InlineKeyboardButton(
-                                button["text"],
+                                text=button["text"],
                                 callback_data=button["_callback_data"],
                             )
                         ]
@@ -162,7 +160,7 @@ class Utils(InlineUnit):
                     elif "input" in button:
                         line += [
                             InlineKeyboardButton(
-                                button["text"],
+                                text=button["text"],
                                 switch_inline_query_current_chat=button["_switch_query"]
                                 + " ",
                             )
@@ -170,21 +168,21 @@ class Utils(InlineUnit):
                     elif "data" in button:
                         line += [
                             InlineKeyboardButton(
-                                button["text"],
+                                text=button["text"],
                                 callback_data=button["data"],
                             )
                         ]
                     elif "web_app" in button:
                         line += [
                             InlineKeyboardButton(
-                                button["text"],
-                                web_app=WebAppInfo(button["data"]),
+                                text=button["text"],
+                                web_app=WebAppInfo(url=button["data"]),
                             )
                         ]
                     elif "switch_inline_query_current_chat" in button:
                         line += [
                             InlineKeyboardButton(
-                                button["text"],
+                                text=button["text"],
                                 switch_inline_query_current_chat=button[
                                     "switch_inline_query_current_chat"
                                 ],
@@ -193,10 +191,8 @@ class Utils(InlineUnit):
                     elif "switch_inline_query" in button:
                         line += [
                             InlineKeyboardButton(
-                                button["text"],
-                                switch_inline_query_current_chat=button[
-                                    "switch_inline_query"
-                                ],
+                                text=button["text"],
+                                switch_inline_query=button["switch_inline_query"],
                             )
                         ]
                     else:
@@ -216,7 +212,9 @@ class Utils(InlineUnit):
                     )
                     return False
 
-            markup.row(*line)
+            # Fixed: In aiogram 3.x, append directly to inline_keyboard list
+            if line:
+                markup.inline_keyboard.append(line)
 
         return markup
 
@@ -487,45 +485,53 @@ class Utils(InlineUnit):
                         else unit.get("buttons", [])
                     ),
                 )
-            except MessageNotModified:
-                if query:
-                    with contextlib.suppress(Exception):
-                        await query.answer()
-
-                return False
-            except RetryAfter as e:
-                logger.info("Sleeping %ss on aiogram FloodWait...", e.timeout)
-                await asyncio.sleep(e.timeout)
+            except TelegramRetryAfter as e:
+                wait_time = getattr(e, "retry_after", getattr(e, "timeout", 1))
+                logger.info("Sleeping %ss on aiogram FloodWait...", wait_time)
+                await asyncio.sleep(wait_time)
                 return await self._edit_unit(**utils.get_kwargs())
-            except MessageIdInvalid:
-                with contextlib.suppress(Exception):
-                    await query.answer(
-                        "I should have edited some message, but it is deleted :("
-                    )
-
-                return False
-            except BadRequest as e:
-                if "There is no text in the message to edit" not in str(e):
-                    raise
-
-                try:
-                    await self.bot.edit_message_caption(
-                        caption=text,
-                        **(
-                            {"inline_message_id": inline_message_id}
-                            if inline_message_id
-                            else {"chat_id": chat_id, "message_id": message_id}
-                        ),
-                        reply_markup=self.generate_markup(
-                            reply_markup
-                            if isinstance(reply_markup, list)
-                            else unit.get("buttons", [])
-                        ),
-                    )
-                except Exception:
+            except TelegramBadRequest as e:
+                err = str(e).lower()
+                # Message not modified
+                if "message is not modified" in err:
+                    if query:
+                        with contextlib.suppress(Exception):
+                            await query.answer()
                     return False
-                else:
-                    return True
+                # Message to edit not found / id invalid
+                if (
+                    "message to edit not found" in err
+                    or "message to delete not found" in err
+                    or "message identifier is not specified" in err
+                ):
+                    with contextlib.suppress(Exception):
+                        if query:
+                            await query.answer(
+                                "I should have edited some message, but it is deleted :("
+                            )
+                    return False
+                # No text to edit -> try caption
+                if "there is no text in the message to edit" in err:
+                    try:
+                        await self.bot.edit_message_caption(
+                            caption=text,
+                            **(
+                                {"inline_message_id": inline_message_id}
+                                if inline_message_id
+                                else {"chat_id": chat_id, "message_id": message_id}
+                            ),
+                            reply_markup=self.generate_markup(
+                                reply_markup
+                                if isinstance(reply_markup, list)
+                                else unit.get("buttons", [])
+                            ),
+                        )
+                    except Exception:
+                        return False
+                    else:
+                        return True
+                # Unknown bad request
+                raise
             else:
                 return True
 
@@ -543,16 +549,11 @@ class Utils(InlineUnit):
                     else unit.get("buttons", [])
                 ),
             )
-        except RetryAfter as e:
-            logger.info("Sleeping %ss on aiogram FloodWait...", e.timeout)
-            await asyncio.sleep(e.timeout)
+        except TelegramRetryAfter as e:
+            wait_time = getattr(e, "retry_after", getattr(e, "timeout", 1))
+            logger.info("Sleeping %ss on aiogram FloodWait...", wait_time)
+            await asyncio.sleep(wait_time)
             return await self._edit_unit(**utils.get_kwargs())
-        except MessageIdInvalid:
-            with contextlib.suppress(Exception):
-                await query.answer(
-                    "I should have edited some message, but it is deleted :("
-                )
-            return False
         else:
             return True
 
@@ -630,7 +631,7 @@ class Utils(InlineUnit):
             return [
                 [
                     (
-                        {"text": number, "args": (number - 1,), "callback": callback}
+                        {"text": str(number), "args": (number - 1,), "callback": callback}
                         if number != current_page
                         else {
                             "text": f"· {number} ·",
@@ -667,7 +668,7 @@ class Utils(InlineUnit):
                                 }
                                 if number == 5
                                 else {
-                                    "text": number,
+                                    "text": str(number),
                                     "args": (number - 1,),
                                     "callback": callback,
                                 }
@@ -697,7 +698,7 @@ class Utils(InlineUnit):
                         }
                         if number == current_page
                         else {
-                            "text": number,
+                            "text": str(number),
                             "args": (number - 1,),
                             "callback": callback,
                         }

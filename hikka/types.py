@@ -23,9 +23,9 @@ from dataclasses import dataclass, field
 from importlib.abc import SourceLoader
 
 import requests
-from hikkatl.hints import EntityLike
-from hikkatl.tl.functions.account import UpdateNotifySettingsRequest
-from hikkatl.tl.types import (
+from lidfaxtl.hints import EntityLike
+from lidfaxtl.tl.functions.account import UpdateNotifySettingsRequest
+from lidfaxtl.tl.types import (
     Channel,
     ChannelFull,
     InputPeerNotifySettings,

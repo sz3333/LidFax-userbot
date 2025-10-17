@@ -34,9 +34,9 @@ import traceback
 import typing
 
 import requests
-from hikkatl import events
-from hikkatl.errors import FloodWaitError, RPCError
-from hikkatl.tl.types import Message
+from lidfaxtl import events
+from lidfaxtl.errors import FloodWaitError, RPCError
+from lidfaxtl.tl.types import Message
 
 from . import main, security, utils
 from .database import Database

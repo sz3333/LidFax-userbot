@@ -12,10 +12,11 @@ import json
 import logging
 import os
 import time
-import zipfile
+import zipfile #да вы заебали я ЭКСТЕРАГРАМ.
 from pathlib import Path
 
-from hikkatl.tl.types import Message
+from aiogram.types import BufferedInputFile
+from lidfaxtl.tl.types import Message
 
 from .. import loader, utils
 from ..inline.types import BotInlineCall
@@ -124,26 +125,23 @@ class LidFaxBackupMod(loader.Module):
             )
 
             backup = io.BytesIO(json.dumps(self._db).encode())
-            backup.name = (
-                f"lidf1x-db-backup-{datetime.datetime.now():%d-%m-%Y-%H-%M}.json"
-            )
+            backup.name = f"lidf1x-db-backup-{datetime.datetime.now():%d-%m-%Y-%H-%M}.json"
 
+            backup.seek(0)
             await self.inline.bot.send_document(
                 int(f"-100{self._backup_channel.id}"),
-                backup,
+                BufferedInputFile(backup.getvalue(), filename=backup.name),
                 reply_markup=self.inline.generate_markup(
                     [
                         [
-                            {
-                                "text": "↪️ Restore this",
-                                "data": "hikka/backup/restore/confirm",
-                            }
+                            {"text": "↪️ Restore this", "data": "hikka/backup/restore/confirm"}
                         ]
                     ]
                 ),
             )
 
             self.set("last_backup", round(time.time()))
+
         except loader.StopLoop:
             raise
         except Exception:

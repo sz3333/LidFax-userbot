@@ -10,20 +10,20 @@ import logging
 import time
 import typing
 
-from hikkatl import TelegramClient
-from hikkatl import __name__ as __base_name__
-from hikkatl import helpers
-from hikkatl._updates import ChannelState, Entity, EntityType, SessionState
-from hikkatl.errors import RPCError
-from hikkatl.errors.rpcerrorlist import TopicDeletedError
-from hikkatl.hints import EntityLike
-from hikkatl.network import MTProtoSender
-from hikkatl.tl import functions
-from hikkatl.tl.alltlobjects import LAYER
-from hikkatl.tl.functions.channels import GetFullChannelRequest
-from hikkatl.tl.functions.users import GetFullUserRequest
-from hikkatl.tl.tlobject import TLRequest
-from hikkatl.tl.types import (
+from lidfaxtl import TelegramClient
+from lidfaxtl import __name__ as __base_name__
+from lidfaxtl import helpers
+from lidfaxtl._updates import ChannelState, Entity, EntityType, SessionState
+from lidfaxtl.errors import RPCError
+from lidfaxtl.errors.rpcerrorlist import TopicDeletedError
+from lidfaxtl.hints import EntityLike
+from lidfaxtl.network import MTProtoSender
+from lidfaxtl.tl import functions
+from lidfaxtl.tl.alltlobjects import LAYER
+from lidfaxtl.tl.functions.channels import GetFullChannelRequest
+from lidfaxtl.tl.functions.users import GetFullUserRequest
+from lidfaxtl.tl.tlobject import TLRequest
+from lidfaxtl.tl.types import (
     ChannelFull,
     Message,
     Pong,
@@ -32,7 +32,7 @@ from hikkatl.tl.types import (
     UpdateShort,
     UserFull,
 )
-from hikkatl.utils import is_list_like
+from lidfaxtl.utils import is_list_like
 
 from .types import (
     CacheRecordEntity,

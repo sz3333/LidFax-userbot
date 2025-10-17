@@ -5,8 +5,8 @@
 # 🔑 https://www.gnu.org/licenses/agpl-3.0.html
 
 import logging
-from hikkatl.tl.types import Message
-from hikkatl.utils import get_display_name
+from lidfaxtl.tl.types import Message
+from lidfaxtl.utils import get_display_name
 
 from .. import loader, main, utils
 from ..inline.types import InlineCall

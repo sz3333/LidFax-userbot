@@ -20,10 +20,10 @@ from aiogram.types import (
     InlineQueryResultArticle,
     InputTextMessageContent,
 )
-from aiogram.utils.exceptions import RetryAfter
-from hikkatl.errors.rpcerrorlist import ChatSendInlineForbiddenError
-from hikkatl.extensions.html import CUSTOM_EMOJIS
-from hikkatl.tl.types import Message
+from aiogram.exceptions import TelegramRetryAfter
+from lidfaxtl.errors.rpcerrorlist import ChatSendInlineForbiddenError
+from lidfaxtl.extensions.html import CUSTOM_EMOJIS
+from lidfaxtl.tl.types import Message
 
 from .. import main, utils
 from ..types import HikkaReplyMarkup
@@ -33,6 +33,79 @@ logger = logging.getLogger(__name__)
 
 
 class List(InlineUnit):
+    def _split_text(self, text: str, max_length: int = 4096) -> typing.List[str]:
+        """
+        Splits text into multiple parts if it exceeds max_length
+        
+        :param text: text to split
+        :param max_length: maximum length per part (default 4096)
+        :return: list of text parts
+        """
+        if len(text) <= max_length:
+            return [text]
+        
+        parts = []
+        current_part = ""
+        
+        # Split by lines to avoid breaking in the middle of a line
+        lines = text.split('\n')
+        
+        for line in lines:
+            # If single line is longer than max_length, split it
+            if len(line) > max_length:
+                # If current_part has content, save it first
+                if current_part:
+                    parts.append(current_part)
+                    current_part = ""
+                
+                # Split long line into chunks
+                while len(line) > max_length:
+                    # Try to find space to break at
+                    break_point = line.rfind(' ', 0, max_length)
+                    if break_point == -1:
+                        break_point = max_length
+                    
+                    parts.append(line[:break_point])
+                    line = line[break_point:].lstrip()
+                
+                if line:
+                    current_part = line
+            else:
+                # Check if adding this line would exceed limit
+                if len(current_part) + len(line) + 1 > max_length:
+                    parts.append(current_part)
+                    current_part = line
+                else:
+                    if current_part:
+                        current_part += '\n' + line
+                    else:
+                        current_part = line
+        
+        # Don't forget the last part
+        if current_part:
+            parts.append(current_part)
+        
+        return parts
+
+    def _expand_strings(self, strings: typing.List[str]) -> typing.List[str]:
+        """
+        Expands strings list by splitting long strings into multiple parts
+        
+        :param strings: original list of strings
+        :return: expanded list with long strings split
+        """
+        expanded = []
+        for string in strings:
+            parts = self._split_text(string)
+            if len(parts) > 1:
+                # Add part indicators
+                for i, part in enumerate(parts, 1):
+                    expanded.append(f"{part}\n\n<i>📄 Part {i}/{len(parts)}</i>")
+            else:
+                expanded.append(string)
+        
+        return expanded
+
     async def list(
         self,
         message: typing.Union[Message, int],
@@ -116,9 +189,15 @@ class List(InlineUnit):
             )
             return False
 
+        # Expand strings that are too long
+        strings = self._expand_strings(strings)
+
         if len(strings) > 50:
-            logger.error("Too much pages for `strings` (%s)", len(strings))
-            return False
+            logger.warning(
+                "Too many pages for `strings` (%s), truncating to 50",
+                len(strings)
+            )
+            strings = strings[:50]
 
         if always_allow and not isinstance(always_allow, list):
             logger.error(
@@ -272,9 +351,10 @@ class List(InlineUnit):
                 reply_markup=self._list_markup(unit_id),
             )
             await call.answer()
-        except RetryAfter as e:
+        except TelegramRetryAfter as e:
+            wait_time = getattr(e, "retry_after", getattr(e, "timeout", 1))
             await call.answer(
-                f"Got FloodWait. Wait for {e.timeout} seconds",
+                f"Got FloodWait. Wait for {wait_time} seconds",
                 show_alert=True,
             )
         except Exception:
@@ -309,8 +389,8 @@ class List(InlineUnit):
                                 id=utils.rand(20),
                                 title="Hikka",
                                 input_message_content=InputTextMessageContent(
-                                    self.sanitise_text(unit["strings"][0]),
-                                    "HTML",
+                                    message_text=self.sanitise_text(unit["strings"][0]),
+                                    parse_mode="HTML",
                                     disable_web_page_preview=True,
                                 ),
                                 reply_markup=self._list_markup(inline_query.query),

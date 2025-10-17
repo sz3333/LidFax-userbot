@@ -21,9 +21,10 @@ from aiogram.types import (
     InputTextMessageContent,
 )
 from aiogram.types import Message as AiogramMessage
+from aiogram.enums import ChatType
 
 from .. import utils
-from .types import BotInlineCall, InlineCall, InlineQuery, InlineUnit
+from .types import BotInlineCall, InlineCall, InlineMessage, InlineQuery, InlineUnit
 
 logger = logging.getLogger(__name__)
 
@@ -31,7 +32,7 @@ logger = logging.getLogger(__name__)
 class Events(InlineUnit):
     async def _message_handler(self, message: AiogramMessage):
         """Processes incoming messages"""
-        if message.chat.type != "private" or message.text == "/start hikka init":
+        if message.chat.type != ChatType.PRIVATE or message.text == "/start hikka init":
             return
 
         for mod in self._allmodules.modules:
@@ -108,8 +109,8 @@ class Events(InlineUnit):
                                 title=self.sanitise_text(res["title"]),
                                 description=self.sanitise_text(res.get("description")),
                                 input_message_content=InputTextMessageContent(
-                                    self.sanitise_text(res["message"]),
-                                    "HTML",
+                                    message_text=self.sanitise_text(res["message"]),
+                                    parse_mode="HTML",
                                     disable_web_page_preview=True,
                                 ),
                                 thumb_url=res.get("thumb"),
@@ -222,13 +223,13 @@ class Events(InlineUnit):
         for func in self._allmodules.callback_handlers.values():
             if await self.check_inline_security(func=func, user=call.from_user.id):
                 try:
-                    await func(
-                        (
-                            BotInlineCall
-                            if getattr(getattr(call, "message", None), "chat", None)
-                            else InlineCall
-                        )(call, self, None)
+                    # Determine call type based on message.chat presence
+                    call_instance = (
+                        BotInlineCall(call, self, None)
+                        if getattr(getattr(call, "message", None), "chat", None)
+                        else InlineCall(call, self, None)
                     )
+                    await func(call_instance)
                 except Exception:
                     logger.exception("Error on running callback watcher!")
                     await call.answer(
@@ -277,12 +278,15 @@ class Events(InlineUnit):
                         return
 
                     try:
+                        # Create call instance with proper unit_id
+                        call_instance = (
+                            BotInlineCall(call, self, unit_id)
+                            if getattr(getattr(call, "message", None), "chat", None)
+                            else InlineCall(call, self, unit_id)
+                        )
+                        
                         result = await button["callback"](
-                            (
-                                BotInlineCall
-                                if getattr(getattr(call, "message", None), "chat", None)
-                                else InlineCall
-                            )(call, self, unit_id),
+                            call_instance,
                             *button.get("args", []),
                             **button.get("kwargs", {}),
                         )
@@ -328,12 +332,15 @@ class Events(InlineUnit):
                 await call.answer(self.translator.getkey("inline.button403"))
                 return
 
+            # Create call instance
+            call_instance = (
+                BotInlineCall(call, self, None)
+                if getattr(getattr(call, "message", None), "chat", None)
+                else InlineCall(call, self, None)
+            )
+            
             await self._custom_map[call.data]["handler"](
-                (
-                    BotInlineCall
-                    if getattr(getattr(call, "message", None), "chat", None)
-                    else InlineCall
-                )(call, self, None),
+                call_instance,
                 *self._custom_map[call.data].get("args", []),
                 **self._custom_map[call.data].get("kwargs", {}),
             )
@@ -372,8 +379,11 @@ class Events(InlineUnit):
                     query = query.split(maxsplit=1)[1] if len(query.split()) > 1 else ""
 
                     try:
+                        # Create a proper InlineMessage instance for chosen inline queries
+                        # since ChosenInlineResult is not a CallbackQuery
+                        inline_message = InlineMessage(self, unit_id, chosen_inline_query.inline_message_id)
                         return await button["handler"](
-                            InlineCall(chosen_inline_query, self, unit_id),
+                            inline_message,
                             query,
                             *button.get("args", []),
                             **button.get("kwargs", {}),
@@ -412,13 +422,13 @@ class Events(InlineUnit):
                         title=self.translator.getkey("inline.command").format(name),
                         description=doc,
                         input_message_content=InputTextMessageContent(
-                            (
+                            message_text=(
                                 self.translator.getkey("inline.command_msg").format(
                                     utils.escape_html(name),
                                     utils.escape_html(doc),
                                 )
                             ),
-                            "HTML",
+                            parse_mode="HTML",
                             disable_web_page_preview=True,
                         ),
                         thumb_url=thumb,
@@ -446,8 +456,8 @@ class Events(InlineUnit):
                         title=self.translator.getkey("inline.show_inline_cmds"),
                         description=self.translator.getkey("inline.no_inline_cmds"),
                         input_message_content=InputTextMessageContent(
-                            self.translator.getkey("inline.no_inline_cmds_msg"),
-                            "HTML",
+                            message_text=self.translator.getkey("inline.no_inline_cmds_msg"),
+                            parse_mode="HTML",
                             disable_web_page_preview=True,
                         ),
                         thumb_url=(
@@ -470,12 +480,12 @@ class Events(InlineUnit):
                         self.translator.getkey("inline.inline_cmds").format(len(_help))
                     ),
                     input_message_content=InputTextMessageContent(
-                        (
+                        message_text=(
                             self.translator.getkey("inline.inline_cmds_msg").format(
                                 "\n".join(map(lambda x: x[1], _help))
                             )
                         ),
-                        "HTML",
+                        parse_mode="HTML",
                         disable_web_page_preview=True,
                     ),
                     thumb_url=(

@@ -122,27 +122,46 @@ class InlineCall(CallbackQuery, InlineMessage):
         inline_manager: "InlineManager",  # type: ignore  # noqa: F821
         unit_id: str,
     ):
-        CallbackQuery.__init__(self)
-
-        for attr in {
-            "id",
-            "from_user",
-            "message",
-            "inline_message_id",
-            "chat_instance",
-            "data",
-            "game_short_name",
-        }:
-            setattr(self, attr, getattr(call, attr, None))
-
-        self.original_call = call
-
-        InlineMessage.__init__(
-            self,
-            inline_manager,
-            unit_id,
-            call.inline_message_id,
+        # Initialize CallbackQuery with actual data from call
+        super().__init__(
+            id=call.id,
+            from_user=call.from_user,
+            chat_instance=call.chat_instance,
+            message=getattr(call, 'message', None),
+            inline_message_id=getattr(call, 'inline_message_id', None),
+            data=getattr(call, 'data', None),
+            game_short_name=getattr(call, 'game_short_name', None),
         )
+
+        # Use object.__setattr__ to bypass frozen model restriction for all attributes
+        object.__setattr__(self, 'original_call', call)
+        
+        # Set InlineMessage attributes using object.__setattr__ to bypass frozen restriction
+        inline_message_id = getattr(call, 'inline_message_id', None)
+        object.__setattr__(self, 'inline_message_id', inline_message_id)
+        object.__setattr__(self, 'unit_id', unit_id)
+        object.__setattr__(self, 'inline_manager', inline_manager)
+        object.__setattr__(self, '_units', inline_manager._units)
+        
+        # Set form attribute
+        form = (
+            {"id": unit_id, **inline_manager._units[unit_id]} if unit_id in inline_manager._units else {}
+        )
+        object.__setattr__(self, 'form', form)
+
+    async def answer(self, text: str = None, show_alert: bool = False, url: str = None, cache_time: int = 0):
+        """Override answer method to properly bind to bot instance"""
+        if hasattr(self, 'inline_manager') and self.inline_manager.bot:
+            return await self.inline_manager.bot.answer_callback_query(
+                callback_query_id=self.id,
+                text=text,
+                show_alert=show_alert,
+                url=url,
+                cache_time=cache_time
+            )
+        else:
+            # Fallback to original call's answer method
+            return await self.original_call.answer(text, show_alert=show_alert, url=url, cache_time=cache_time)
 
 
 class BotInlineCall(CallbackQuery, BotInlineMessage):
@@ -154,28 +173,48 @@ class BotInlineCall(CallbackQuery, BotInlineMessage):
         inline_manager: "InlineManager",  # type: ignore  # noqa: F821
         unit_id: str,
     ):
-        CallbackQuery.__init__(self)
-
-        for attr in {
-            "id",
-            "from_user",
-            "message",
-            "chat",
-            "chat_instance",
-            "data",
-            "game_short_name",
-        }:
-            setattr(self, attr, getattr(call, attr, None))
-
-        self.original_call = call
-
-        BotInlineMessage.__init__(
-            self,
-            inline_manager,
-            unit_id,
-            call.message.chat.id,
-            call.message.message_id,
+        # Initialize CallbackQuery with actual data from call
+        super().__init__(
+            id=call.id,
+            from_user=call.from_user,
+            chat_instance=call.chat_instance,
+            message=getattr(call, 'message', None),
+            inline_message_id=getattr(call, 'inline_message_id', None),
+            data=getattr(call, 'data', None),
+            game_short_name=getattr(call, 'game_short_name', None),
         )
+
+        # Use object.__setattr__ to bypass frozen model restriction for all attributes
+        object.__setattr__(self, 'original_call', call)
+        
+        # Set BotInlineMessage attributes using object.__setattr__ to bypass frozen restriction
+        chat_id = call.message.chat.id if call.message else None
+        message_id = call.message.message_id if call.message else None
+        object.__setattr__(self, 'chat_id', chat_id)
+        object.__setattr__(self, 'unit_id', unit_id)
+        object.__setattr__(self, 'inline_manager', inline_manager)
+        object.__setattr__(self, 'message_id', message_id)
+        object.__setattr__(self, '_units', inline_manager._units)
+        
+        # Set form attribute
+        form = (
+            {"id": unit_id, **inline_manager._units[unit_id]} if unit_id in inline_manager._units else {}
+        )
+        object.__setattr__(self, 'form', form)
+
+    async def answer(self, text: str = None, show_alert: bool = False, url: str = None, cache_time: int = 0):
+        """Override answer method to properly bind to bot instance"""
+        if hasattr(self, 'inline_manager') and self.inline_manager.bot:
+            return await self.inline_manager.bot.answer_callback_query(
+                callback_query_id=self.id,
+                text=text,
+                show_alert=show_alert,
+                url=url,
+                cache_time=cache_time
+            )
+        else:
+            # Fallback to original call's answer method
+            return await self.original_call.answer(text, show_alert=show_alert, url=url, cache_time=cache_time)
 
 
 class InlineUnit:
@@ -196,10 +235,14 @@ class InlineQuery(AiogramInlineQuery):
     """Modified version of original Aiogram InlineQuery"""
 
     def __init__(self, inline_query: AiogramInlineQuery):
-        super().__init__(self)
-
-        for attr in {"id", "from_user", "query", "offset", "chat_type", "location"}:
-            setattr(self, attr, getattr(inline_query, attr, None))
+        super().__init__(
+            id=inline_query.id,
+            from_user=inline_query.from_user,
+            query=inline_query.query,
+            offset=inline_query.offset,
+            chat_type=getattr(inline_query, 'chat_type', None),
+            location=getattr(inline_query, 'location', None),
+        )
 
         self.inline_query = inline_query
         self.args = (
@@ -216,7 +259,7 @@ class InlineQuery(AiogramInlineQuery):
                 title=title,
                 description=description,
                 input_message_content=InputTextMessageContent(
-                    "😶‍🌫️ <i>There is nothing here...</i>",
+                    message_text="😶‍🌫️ <i>There is nothing here...</i>",
                     parse_mode="HTML",
                 ),
                 thumb_url=thumb_url,
