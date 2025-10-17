@@ -22,7 +22,7 @@ RUN apt update && \
         wget \
         tini
 
-RUN wget https://github.com/fastfetch-cli/fastfetch/releases/latest/download/fastfetch-linux-aarch64.deb -O /tmp/fastfetch.deb && \
+RUN wget https://github.com/fastfetch-cli/fastfetch/releases/latest/download/fastfetch-linux-amd64.deb -O /tmp/fastfetch.deb && \
     dpkg -i /tmp/fastfetch.deb && \
     apt-get install -f -y && \
     rm /tmp/fastfetch.deb
