@@ -274,12 +274,12 @@ class Help(loader.Module):
                 and not getattr(mod, "callback_handlers", None)
             ):
                 no_commands_ += [
-                    "\n{} <code>{}</code>".format(self.config["empty_emoji"], name)
+                    "{} <code>{}</code>".format(self.config["empty_emoji"], name)
                 ]
                 continue
 
             core = mod.__origin__.startswith("<core")
-            tmp += "\n{} <code>{}</code>".format(
+            tmp += "{} <code>{}</code>".format(
                 self.config["core_emoji"] if core else self.config["plain_emoji"], name
             )
             first = True
@@ -333,10 +333,10 @@ class Help(loader.Module):
 
         await utils.answer(
             message,
-            (self.config["desc_icon"] + " {}\n<blockquote expandable>{}</blockquote><blockquote expandable>{}</blockquote><blockquote expandable>{}</blockquote>").format(
+            (self.config["desc_icon"] + " {}\n<blockquote expandable>\n{}</blockquote><blockquote expandable>\n{}</blockquote><blockquote expandable>\n{}</blockquote>").format(
                 reply,
-                "".join(core_),
-                "".join(plain_ + (no_commands_ if force else [])),
+                "\n".join(core_),
+                "\n".join(plain_ + (no_commands_ if force else [])),
                 (
                     ""
                     if self.lookup("Loader").fully_loaded
