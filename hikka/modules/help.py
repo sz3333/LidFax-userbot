@@ -38,109 +38,107 @@ class Help(loader.Module):
             loader.ConfigValue(
                 "empty_emoji",
                 "<emoji document_id=5100652175172830068>🟠</emoji>",
- lambda: "Пустые модули",
- ),
- loader.ConfigValue(
- "desc_icon",
- "<emoji document_id=5454359873212923789>☃️</emoji>",
- lambda: "Эмодзи с описанием",
- ),
- )
+                lambda: "Empty modules",
+            ),
+            loader.ConfigValue(
+                "desc_icon",
+                "<emoji document_id=5454359873212923789>☃️</emoji>",
+                lambda: "Description emoji",
+            ),
+        )
 
- @loader.command(ru_doc="[args] | Спрячет ваши модули", ua_doc="[args] | Сховає ваші модулі", de_doc="[args] | Versteckt Ihre Module") 
- async def helphide(self, message: Message):
- """[args] | спрячет ваши модули"""
- if not (modules := utils.get_args(message)):
- await utils.answer(message, self.strings("no_mod"))
- return
+    @loader.command(ru_doc="[args] | Спрячет ваши модули", ua_doc="[args] | Сховає ваші модулі", de_doc="[args] | Versteckt Ihre Module")
+    async def helphide(self, message: Message):
+        """[args] | Hide your modules"""
+        if not (modules := utils.get_args(message)):
+            await utils.answer(message, self.strings("no_mod"))
+            return
 
- currently_hidden = self.get("hide", [])
- hidden, shown = [], []
- for module in filter(lambda module: self.lookup(module), modules):
- module = self.lookup(module)
- module = module.__class__.__name__
- если модуль входит в список currently_hidden:
- currently_hidden.remove(module)
- shown += [module]
- иначе:
- currently_hidden += [module]
- hidden += [module]
+        currently_hidden = self.get("hide", [])
+        hidden, shown = [], []
+        for module in filter(lambda module: self.lookup(module), modules):
+            module = self.lookup(module)
+            module = module.__class__.__name__
+            if module in currently_hidden:
+                currently_hidden.remove(module)
+                shown += [module]
+            else:
+                currently_hidden += [module]
+                hidden += [module]
 
- self.set("hide", currently_hidden)
+        self.set("hide", currently_hidden)
 
- await utils.answer(
- сообщение,
- self.strings("hidden_shown").format(
- len(hidden),
- len(shown),
- "\n".join([f"👁‍🗨 <i>{m}</i>" for m in hidden]),
- "\n".join([f"👁 <i>{m}</i>" for m in shown]),
- ),
- )
+        await utils.answer(
+            message,
+            self.strings("hidden_shown").format(
+                len(hidden),
+                len(shown),
+                "\n".join([f"👁‍🗨 <i>{m}</i>" for m in hidden]),
+                "\n".join([f"👁 <i>{m}</i>" for m in shown]),
+            ),
+        )
 
- def find_aliases(self, command: str) -> list:
- """Найти псевдонимы для команды"""
- aliases = []
- _command = self.allmodules.commands[command]
- if getattr(_command, "alias", None) and not (
- aliases := getattr(_command, "aliases", None)
- ):
- aliases = [_command.alias]
+    def find_aliases(self, command: str) -> list:
+        """Find aliases for command"""
+        aliases = []
+        _command = self.allmodules.commands[command]
+        if getattr(_command, "alias", None) and not (
+            aliases := getattr(_command, "aliases", None)
+        ):
+            aliases = [_command.alias]
 
- return aliases or []
+        return aliases or []
 
- async def modhelp(self, message: Message, args: str):
- exact = True
- if not (module := self.lookup(args)):
- if method := self.allmodules.dispatch(
- args.lower().strip(self.get_prefix())
- )[1]:
- module = method.__self__
- else:
- module = self.lookup(
- next(
- (
- в обратном порядке (
- отсортировано(
- [
- module.strings["name"]
- для модуля в self.allmodules.modules
- ],
- key=lambda x: difflib.SequenceMatcher(
- None,
- args.lower(),
- x,
- ).ratio(),
- )
- )
- ),
- None,
- )
- )
+    async def modhelp(self, message: Message, args: str):
+        exact = True
+        if not (module := self.lookup(args)):
+            if method := self.allmodules.dispatch(
+                args.lower().strip(self.get_prefix())
+            )[1]:
+                module = method.__self__
+            else:
+                module = self.lookup(
+                    next(
+                        (
+                            sorted(
+                                [
+                                    module.strings["name"]
+                                    for module in self.allmodules.modules
+                                ],
+                                key=lambda x: difflib.SequenceMatcher(
+                                    None,
+                                    args.lower(),
+                                    x,
+                                ).ratio(),
+                            )[-1]
+                        ),
+                        None,
+                    )
+                )
 
- exact = False
+            exact = False
 
- try:
- name = module.strings("name")
- except (KeyError, AttributeError):
- name = getattr(module, "name", "ОШИБКА")
+        try:
+            name = module.strings("name")
+        except (KeyError, AttributeError):
+            name = getattr(module, "name", "ERROR")
 
- _name = (
- "{} (v{}.{}.{})".format(
- utils.escape_html(name),
- module.__version__[0],
- module.__version__[1],
- module.__version__[2],
- )
- if hasattr(module, "__version__")
- else utils.escape_html(name)
- )
+        _name = (
+            "{} (v{}.{}.{})".format(
+                utils.escape_html(name),
+                module.__version__[0],
+                module.__version__[1],
+                module.__version__[2],
+            )
+            if hasattr(module, "__version__")
+            else utils.escape_html(name)
+        )
 
- reply = "{} <b>{}</b>:".format(
- "<emoji document_id=5454359873212923789>☃️</emoji>",
- _name,
- ""
- )
+        reply = "{} <b>{}</b>:".format(
+            "<emoji document_id=5454359873212923789>☃️</emoji>",
+            _name,
+            ""
+        )
         if module.__doc__:
             reply += (
                 "\n<i><emoji document_id=5465645994999838991>ℹ️</emoji> "
