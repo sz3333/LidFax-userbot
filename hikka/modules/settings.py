@@ -86,7 +86,7 @@ class CoreMod(loader.Module):
         module = self.allmodules.get_classname(module)
         return f"{str(chatid)}.{module}" if module else chatid
 
-    @loader.command(alias="hikka", ru_doc="Информация о Лидфакс", en_doc="Information of LidFax", ua_doc="Інформація про Лідфакс", de_doc="Informationen über LidFax")
+    @loader.command(alias="lidfazbear", ru_doc="Информация о Лидфакс", en_doc="Information of LidFax", ua_doc="Інформація про Лідфакс", de_doc="Informationen über LidFax")
     async def lidfaxcmd(self, message: Message):
         await utils.answer_file(
             message,
