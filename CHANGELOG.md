@@ -1,7 +1,7 @@
 # LidFax Changelog
 
 ## ☃️ LidFax 1.7.1
-- help customization(custom_message)
+- HysteriaHost integration
 - bugfix
 
 ## ☃️ LidFax 1.7.0
@@ -14,6 +14,7 @@
 - many changes and improvements
 - many bugs fixed, work sped up
 - replacing UpgradedEval with Executor
+- exteragram integration
 - added non-standard prefixes
 - All banners, chats and avatars have been replaced.
 - fixed bug with disabling debugger
