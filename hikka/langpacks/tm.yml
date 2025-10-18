@@ -794,6 +794,7 @@ help:
   request_join: LidFax goldaw çaty üçin baglanyşyk islediňiz
   core_notice: <emoji document_id=5355133243773435190>☝️</emoji> <b>Bu ýürek modul.
     Ony boşadybam, çalşypam bolmaz</b>
+  _cfg_cst_msg: Kömek üçin özleşdirilen habar. Boş goýuň, standart kömek habaryny ulanyň. {core_block} we {plain_block} placeholderleri ulanyp bilersiňiz
 lidfax_info:
   name: LidFaxMaglumat
   owner: Eýesi

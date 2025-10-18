@@ -419,6 +419,7 @@ help:
   not_exact: "<emoji document_id=5355133243773435190>☝️</emoji> <b>Es wurde keine exakte Übereinstimmung gefunden, daher wurde die passendste Auswahl getroffen</b>"
   request_join: "Du hast nach einem Link zum Hilfe-Chat von LidFax gefragt"
   core_notice: "<emoji document_id=5355133243773435190>☝️</emoji> <b>Dies ist ein eingebautes Modul. Du kannst es nicht entladen oder ersetzen</b>"
+  _cfg_cst_msg: "Benutzerdefinierte Nachricht für Hilfe. Leer lassen, um die Standard-Hilfe-Nachricht zu verwenden. Du kannst die Platzhalter {core_block} und {plain_block} verwenden"
   _cmd_doc_help: "[Modul] [-f] - Zeigt Hilfe an"
   _cmd_doc_helphide: "<Modul oder Module> - Versteckt das Modul(-e) aus der Hilfe\n*Trenne die Module mit Leerzeichen"
   _cmd_doc_support: "Zeigt den Link zum LidFax Hilfe-Chat"
