@@ -418,7 +418,7 @@ async def answer_file(
         )
     """
     if isinstance(message, (InlineCall, InlineMessage)):
-        message = message.form["caller"]
+        message = message.form.get("caller", message)
 
     if topic := get_topic(message):
         kwargs.setdefault("reply_to", topic)
@@ -1609,7 +1609,7 @@ def get_topic(message: Message) -> typing.Optional[int]:
             and message.reply_to.forum_topic
         )
         else (
-            message.form["top_msg_id"]
+            message.form.get("top_msg_id")
             if isinstance(message, (InlineCall, InlineMessage))
             else None
         )

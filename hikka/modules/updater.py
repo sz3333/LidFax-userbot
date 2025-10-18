@@ -134,10 +134,30 @@ class UpdaterMod(loader.Module):
         for client in self.allclients:
             # Terminate main loop of all running clients
             # Won't work if not all clients are ready
-            if client is not message.client:
-                await client.disconnect()
+            if hasattr(message, 'client'):
+                # Regular message object
+                if client is not message.client:
+                    await client.disconnect()
+            elif hasattr(message, 'inline_manager'):
+                # InlineCall object
+                if client is not message.inline_manager._client:
+                    await client.disconnect()
+            else:
+                # Fallback: disconnect all clients except the first one
+                if client is not self.allclients[0]:
+                    await client.disconnect()
 
-        await message.client.disconnect()
+        # Disconnect the current client
+        if hasattr(message, 'client'):
+            # Regular message object
+            await message.client.disconnect()
+        elif hasattr(message, 'inline_manager'):
+            # InlineCall object
+            await message.inline_manager._client.disconnect()
+        else:
+            # Fallback: disconnect the first client
+            await self.allclients[0].disconnect()
+        
         restart()
 
     async def download_common(self):
