@@ -266,7 +266,7 @@ class List(InlineUnit):
                 )(
                     (
                         utils.get_platform_emoji()
-                        if self._client.hikka_me.premium and CUSTOM_EMOJIS
+                        if utils.can_use_custom_emojis(self._client)
                         else "☃️"
                     )
                     + self.translator.getkey("inline.opening_list"),

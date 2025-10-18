@@ -4,6 +4,12 @@
 # You can redistribute it and/or modify it under the terms of the GNU AGPLv3
 # 🔑 https://www.gnu.org/licenses/agpl-3.0.html
 
+# ©️ Codrago, 2024-2025
+# This file is a part of Heroku Userbot
+# 🌐 https://github.com/coddrago/Heroku
+# You can redistribute it and/or modify it under the terms of the GNU AGPLv3
+# 🔑 https://www.gnu.org/licenses/agpl-3.0.html
+
 import re
 import difflib
 import inspect
@@ -26,10 +32,6 @@ class Help(loader.Module):
     def __init__(self):
         self.config = loader.ModuleConfig(
             loader.ConfigValue(
-                "custom_message",
-                doc=lambda: self.strings("_cfg_cst_msg"),
-            ),
-            loader.ConfigValue(
                 "core_emoji",
                 "<emoji document_id=5467413391222007923>➖</emoji>",
                 lambda: "Core module bullet",
@@ -48,6 +50,11 @@ class Help(loader.Module):
                 "desc_icon",
                 "<emoji document_id=5454359873212923789>☃️</emoji>",
                 lambda: "Desc emoji",
+            ),
+            loader.ConfigValue(
+                "command_emoji",
+                "<emoji document_id=5197195523794157505>▫️</emoji>",
+                lambda: "Emoji for command",
             ),
         )
 
@@ -92,128 +99,6 @@ class Help(loader.Module):
             aliases = [_command.alias]
 
         return aliases or []
-
-    async def _generate_blocks(self, message: Message, force: bool = False) -> tuple:
-        """Generate core_block and plain_block for custom message"""
-        hidden = self.get("hide", [])
-        
-        plain_ = []
-        core_ = []
-        no_commands_ = []
-
-        for mod in self.allmodules.modules:
-            if not hasattr(mod, "commands"):
-                continue
-
-            if mod.__class__.__name__ in self.get("hide", []) and not force:
-                continue
-
-            tmp = ""
-
-            try:
-                name = mod.strings["name"]
-            except KeyError:
-                name = getattr(mod, "name", "ERROR")
-
-            if (
-                not getattr(mod, "commands", None)
-                and not getattr(mod, "inline_handlers", None)
-                and not getattr(mod, "callback_handlers", None)
-            ):
-                no_commands_ += [
-                    "\n{} <code>{}</code>".format(self.config["empty_emoji"], name)
-                ]
-                continue
-
-            core = mod.__origin__.startswith("<core")
-            tmp += "\n{} <code>{}</code>".format(
-                self.config["core_emoji"] if core else self.config["plain_emoji"], name
-            )
-            first = True
-
-            commands = [
-                name
-                for name, func in mod.commands.items()
-                if await self.allmodules.check_security(message, func) or force
-            ]
-
-            for cmd in commands:
-                if first:
-                    tmp += f": ( {cmd}"
-                    first = False
-                else:
-                    tmp += f" | {cmd}"
-
-            icommands = [
-                name
-                for name, func in mod.inline_handlers.items()
-                if await self.inline.check_inline_security(
-                    func=func,
-                    user=message.sender_id,
-                )
-                or force
-            ]
-
-            for cmd in icommands:
-                if first:
-                    tmp += f": ( 🤖 {cmd}"
-                    first = False
-                else:
-                    tmp += f" | 🤖 {cmd}"
-
-            if commands or icommands:
-                tmp += " )"
-                if core:
-                    core_ += [tmp]
-                else:
-                    plain_ += [tmp]
-
-        def extract_name(line):
-            match = re.search(r'[\U0001F300-\U0001FAFF\U0001F900-\U0001F9FF]*\s*(name.*)', line)
-            return match.group(1) if match else line
-
-        plain_.sort(key=extract_name)
-        core_.sort(key=extract_name)
-        no_commands_.sort(key=extract_name)
-
-        core_block = f"<blockquote expandable>{''.join(core_).lstrip()}</blockquote>"
-        plain_block = f"<blockquote expandable>{''.join(plain_ + (no_commands_ if force else [])).lstrip()}</blockquote>"
-
-        return core_block, plain_block
-
-    async def _render_help(self, message: Message, args: str = "", force: bool = False) -> str:
-        """Render help message with custom formatting"""
-        if args:
-            # For specific module help, use original logic
-            return None
-        
-        hidden = self.get("hide", [])
-        
-        reply = self.strings("all_header").format(
-            len(self.allmodules.modules),
-            (
-                0
-                if force
-                else sum(
-                    module.__class__.__name__ in hidden
-                    for module in self.allmodules.modules
-                )
-            ),
-        )
-
-        # Generate blocks using the shared method
-        core_block, plain_block = await self._generate_blocks(message, force)
-
-        return (self.config["desc_icon"] + "{}{}\n\n{}{}").format(
-            reply,
-            core_block,
-            plain_block,
-            (
-                ""
-                if self.lookup("Loader").fully_loaded
-                else f"\n\n{self.strings('partial_load')}"
-            ),
-        )
 
     async def modhelp(self, message: Message, args: str):
         exact = True
@@ -263,13 +148,15 @@ class Help(loader.Module):
         )
 
         reply = "{} <b>{}</b>:".format(
-            "<emoji document_id=5454359873212923789>☃️</emoji>",
+            "<emoji document_id=5134452506935427991>🪐</emoji>",
             _name,
             ""
         )
+        inline_cmd = ""
+        cmds = ""
         if module.__doc__:
             reply += (
-                "\n<i><emoji document_id=5465645994999838991>ℹ️</emoji> "
+                "\n<i><emoji document_id=5879813604068298387>ℹ️</emoji> "
                 + utils.escape_html(inspect.getdoc(module))
                 + "\n</i>"
             )
@@ -282,7 +169,7 @@ class Help(loader.Module):
 
         if hasattr(module, "inline_handlers"):
             for name, fun in module.inline_handlers.items():
-                reply += (
+                inline_cmd += (
                     "\n<emoji document_id=5372981976804366741>🤖</emoji>"
                     " <code>{}</code> {}".format(
                         f"@{self.inline.bot_username} {name}",
@@ -294,9 +181,10 @@ class Help(loader.Module):
                     )
                 )
 
+        lines = []
         for name, fun in commands.items():
-            reply += (
-                "\n<emoji document_id=5458910485552330694>▫️</emoji>"
+            lines.append(
+                f'{self.config["command_emoji"]}'
                 " <code>{}{}</code>{} {}".format(
                     utils.escape_html(self.get_prefix()),
                     name,
@@ -320,10 +208,11 @@ class Help(loader.Module):
                     ),
                 )
             )
+        cmds = "\n".join(lines)
 
         await utils.answer(
             message,
-            reply
+            f'{reply}<blockquote expandable>{cmds}{inline_cmd}</blockquote>'
             + (f"\n\n{self.strings('not_exact')}" if not exact else "")
             + (
                 f"\n\n{self.strings('core_notice')}"
@@ -345,21 +234,117 @@ class Help(loader.Module):
             await self.modhelp(message, args)
             return
 
-        # Use custom message if configured
-        if self.config["custom_message"]:
-            # Generate core_block and plain_block for custom message
-            core_block, plain_block = await self._generate_blocks(message, force)
-            
-            custom_text = self.config["custom_message"].format(
-                core_block=core_block,
-                plain_block=plain_block,
-            )
-            await utils.answer(message, custom_text)
-            return
+        hidden = self.get("hide", [])
 
-        # Use original help rendering
-        help_text = await self._render_help(message, args, force)
-        await utils.answer(message, help_text)
+        reply = self.strings("all_header").format(
+            len(self.allmodules.modules),
+            (
+                0
+                if force
+                else sum(
+                    module.__class__.__name__ in hidden
+                    for module in self.allmodules.modules
+                )
+            ),
+        )
+        shown_warn = False
+
+        plain_ = []
+        core_ = []
+        no_commands_ = []
+
+        for mod in self.allmodules.modules:
+            if not hasattr(mod, "commands"):
+                logger.debug("Module %s is not inited yet", mod.__class__.__name__)
+                continue
+
+            if mod.__class__.__name__ in self.get("hide", []) and not force:
+                continue
+
+            tmp = ""
+
+            try:
+                name = mod.strings["name"]
+            except KeyError:
+                name = getattr(mod, "name", "ERROR")
+
+            if (
+                not getattr(mod, "commands", None)
+                and not getattr(mod, "inline_handlers", None)
+                and not getattr(mod, "callback_handlers", None)
+            ):
+                no_commands_ += [
+                    "\n{} <code>{}</code>".format(self.config["empty_emoji"], name)
+                ]
+                continue
+
+            core = mod.__origin__.startswith("<core")
+            tmp += "\n{} <code>{}</code>".format(
+                self.config["core_emoji"] if core else self.config["plain_emoji"], name
+            )
+            first = True
+
+            commands = [
+                name
+                for name, func in mod.commands.items()
+                if await self.allmodules.check_security(message, func) or force
+            ]
+
+            for cmd in commands:
+                if first:
+                    tmp += f": ( {cmd}"
+                    first = False
+                else:
+                    tmp += f" | {cmd}"
+
+            icommands = [
+                name
+                for name, func in mod.inline_handlers.items()
+                if await self.inline.check_inline_security(
+                    func=func,
+                    user=message.sender_id if not message.out else self._client.tg_id,
+                )
+                or force
+            ]
+
+            for cmd in icommands:
+                if first:
+                    tmp += f": ( 🤖 {cmd}"
+                    first = False
+                else:
+                    tmp += f" | 🤖 {cmd}"
+
+            if commands or icommands:
+                tmp += " )"
+                if core:
+                    core_ += [tmp]
+                else:
+                    plain_ += [tmp]
+            elif not shown_warn and (mod.commands or mod.inline_handlers):
+                reply = (
+                    "<i>You have permissions to execute only these"
+                    f" commands</i>\n{reply}"
+                )
+                shown_warn = True
+
+        plain_.sort(key=str.lower)
+        core_.sort(key=str.lower)
+        no_commands_.sort(key=str.lower)
+
+        await utils.answer(
+            message,
+            (self.config["desc_icon"] + " {}\n <blockquote expandable>{}</blockquote><blockquote expandable>{}</blockquote><blockquote expandable>{}</blockquote>").format(
+                reply,
+                "".join(core_),
+                "".join(plain_ + (no_commands_ if force else [])),
+                (
+                    ""
+                    if self.lookup("Loader").fully_loaded
+                    else f"\n\n{self.strings('partial_load')}"
+                ),
+            ),
+            #file = self.config["banner_url"],
+        )
 
     @loader.command(ru_doc="| Ссылка на чат помощи", ua_doc="| посилання для чату служби підтримки", de_doc="| Link zum Support-Chat")
     async def support(self, message):
@@ -367,11 +352,5 @@ class Help(loader.Module):
        
         await utils.answer(
             message,
-            self.strings("support").format(
-                (
-                    utils.get_platform_emoji()
-                    if self._client.hikka_me.premium and CUSTOM_EMOJIS
-                    else "☃️"
-                )
-            ),
+            self.strings("offchats"),
         )

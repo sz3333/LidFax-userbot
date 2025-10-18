@@ -69,6 +69,7 @@ class LidFaxInfoMod(loader.Module):
         for emoji, icon in [
             ("🍊", "<emoji document_id=5449599833973203438>🧡</emoji>"),
             ("🍇", "<emoji document_id=5449468596952507859>💜</emoji>"),
+            ("💨", "<emoji document_id=5368388371842368365>☃️</emoji>"),
             ("😶‍🌫️", "<emoji document_id=5370547013815376328>😶‍🌫️</emoji>"),
             ("❓", "<emoji document_id=5407025283456835913>📱</emoji>"),
             ("🍀", "<emoji document_id=5395325195542078574>🍀</emoji>"),
@@ -125,7 +126,7 @@ class LidFaxInfoMod(loader.Module):
                     (
                         (
                             utils.get_platform_emoji()
-                            if self._client.hikka_me.premium and self.config["show_heroku"]
+                            if utils.can_use_custom_emojis(self._client) and self.config["show_lidfax"]
                             else ""
                         ),
                         "<emoji document_id=5373141891321699086>😎</emoji>",

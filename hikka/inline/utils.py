@@ -468,6 +468,7 @@ class Utils(InlineUnit):
                         if inline_message_id
                         else {"chat_id": chat_id, "message_id": message_id}
                     ),
+                    parse_mode="HTML",
                     disable_web_page_preview=disable_web_page_preview,
                     reply_markup=self.generate_markup(
                         reply_markup
@@ -510,6 +511,7 @@ class Utils(InlineUnit):
                                 if inline_message_id
                                 else {"chat_id": chat_id, "message_id": message_id}
                             ),
+                            parse_mode="HTML",
                             reply_markup=self.generate_markup(
                                 reply_markup
                                 if isinstance(reply_markup, list)
