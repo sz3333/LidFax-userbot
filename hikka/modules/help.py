@@ -33,12 +33,12 @@ class Help(loader.Module):
         self.config = loader.ModuleConfig(
             loader.ConfigValue(
                 "core_emoji",
-                "<emoji document_id=4974681956907221809>▪️</emoji>",
+                "<emoji document_id=5467413391222007923>➖</emoji>",
                 lambda: "Core module bullet",
             ),
             loader.ConfigValue(
                 "plain_emoji",
-                "<emoji document_id=4974508259839836856>▪️</emoji>",
+                "<emoji document_id=5460759129670836513>🟠</emoji>",
                 lambda: "Plain module bullet",
             ),
             loader.ConfigValue(
@@ -48,7 +48,7 @@ class Help(loader.Module):
             ),
             loader.ConfigValue(
                 "desc_icon",
-                "<emoji document_id=5188377234380954537>🪐</emoji>",
+                "<emoji document_id=5454359873212923789>☃️</emoji>",
                 lambda: "Desc emoji",
             ),
             loader.ConfigValue(
@@ -56,12 +56,7 @@ class Help(loader.Module):
                 "<emoji document_id=5197195523794157505>▫️</emoji>",
                 lambda: "Emoji for command",
             ),
-           #loader.ConfigValue(
-           #     "banner_url",
-           #     None,
-           #     lambda: "banner for help",
-           # ),
-        )  # отложенно до фикса
+        )
 
     @loader.command(ru_doc="[args] | Спрячет ваши модули", ua_doc="[args] | Сховає ваші модулі", de_doc="[args] | Versteckt Ihre Module")
     async def helphide(self, message: Message):
