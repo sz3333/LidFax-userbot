@@ -988,47 +988,54 @@ def get_platform_emoji() -> str:
     BASE = "".join(
         (
             "<emoji document_id={}>⛄️</emoji>",
-            "<emoji document_id=5397619811884762607>⛄️</emoji>",
-            "<emoji document_id=5397678317929268607>⛄️</emoji>",
-            "<emoji document_id=5398048879117635608>⛄️</emoji>",
+            "<emoji document_id=5449841692171602800>⛄️</emoji>",
+            "<emoji document_id=5449872757670054067>⛄️</emoji>",
+            "<emoji document_id=5447608090134350438>⛄️</emoji>",
         )
     )
 
 
     if main.IS_HIKKAHOST:
-        return BASE.format(5397772811504745534)
+        return BASE.format(5449898463049318955)
 
     if main.IS_HYSTERIA:
-        return BASE.format(5397772811504745534)
+        return "".join(
+            (
+                "<emoji document_id=5368708784992581929>⛄️</emoji>",
+                "<emoji document_id=5449748366827227081>⛄️</emoji>",
+                "<emoji document_id=5449577598927537746>⛄️</emoji>",
+                "<emoji document_id=5449490342371948870>⛄️</emoji>",
+            )
+        )
 
     if main.IS_USERLAND:
-        return BASE.format(5397772811504745534)
+        return BASE.format(5449898463049318955)
 
     if main.IS_ORACLE:
-        return BASE.format(5397772811504745534)
+        return BASE.format(5449898463049318955)
 
     if main.IS_AWS:
-        return BASE.format(5397772811504745534)
+        return BASE.format(5449898463049318955)
 
     if main.IS_SERV00:
-        return BASE.format(5397772811504745534)
+        return BASE.format(5449898463049318955)
 
     if main.IS_LAVHOST:
-        return BASE.format(5397772811504745534)
+        return BASE.format(5449898463049318955)
 
     if main.IS_CODESPACES:
-        return BASE.format(5397772811504745534)
+        return BASE.format(5449898463049318955)
 
     if main.IS_TERMUX:
-        return BASE.format(5397772811504745534)
+        return BASE.format(5449898463049318955)
 
     if main.IS_RAILWAY:
-        return BASE.format(5397772811504745534)
+        return BASE.format(5449898463049318955)
 
     if main.IS_DOCKER:
-        return BASE.format(5397772811504745534)
+        return BASE.format(5449898463049318955)
 
-    return BASE.format(5397772811504745534)
+    return BASE.format(5449898463049318955)
 
 allowed_ids = [1714120111, 1655585249] 
 
