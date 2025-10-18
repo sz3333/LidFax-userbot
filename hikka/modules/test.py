@@ -347,7 +347,7 @@ class TestMod(loader.Module):
                     chat,
                     logs,
                     caption=self.strings("logs_caption").format(named_lvl, *other),
-                    reply_to=message.form["top_msg_id"],
+                    reply_to=message.form.get("top_msg_id"),
                 )
             else:
                 # For inline messages without chat, edit the message with logs info
