@@ -26,10 +26,6 @@ class Help(loader.Module):
     def __init__(self):
         self.config = loader.ModuleConfig(
             loader.ConfigValue(
-                "custom_message",
-                doc=lambda: self.strings("_cfg_cst_msg"),
-            ),
-            loader.ConfigValue(
                 "core_emoji",
                 "<emoji document_id=5467413391222007923>➖</emoji>",
                 lambda: "Core module bullet",
@@ -42,231 +38,109 @@ class Help(loader.Module):
             loader.ConfigValue(
                 "empty_emoji",
                 "<emoji document_id=5100652175172830068>🟠</emoji>",
-                lambda: "Empty modules bullet",
-            ),
-            loader.ConfigValue(
-                "desc_icon",
-                "<emoji document_id=5454359873212923789>☃️</emoji>",
-                lambda: "Desc emoji",
-            ),
-        )
+ lambda: "Пустые модули",
+ ),
+ loader.ConfigValue(
+ "desc_icon",
+ "<emoji document_id=5454359873212923789>☃️</emoji>",
+ lambda: "Эмодзи с описанием",
+ ),
+ )
 
-    @loader.command(ru_doc="[args] | Спрячет ваши модули", ua_doc="[args] | Сховає ваші модулі", de_doc="[args] | Versteckt Ihre Module")
-    async def helphide(self, message: Message):
-        """[args] | hide your modules"""
-        if not (modules := utils.get_args(message)):
-            await utils.answer(message, self.strings("no_mod"))
-            return
+ @loader.command(ru_doc="[args] | Спрячет ваши модули", ua_doc="[args] | Сховає ваші модулі", de_doc="[args] | Versteckt Ihre Module") 
+ async def helphide(self, message: Message):
+ """[args] | спрячет ваши модули"""
+ if not (modules := utils.get_args(message)):
+ await utils.answer(message, self.strings("no_mod"))
+ return
 
-        currently_hidden = self.get("hide", [])
-        hidden, shown = [], []
-        for module in filter(lambda module: self.lookup(module), modules):
-            module = self.lookup(module)
-            module = module.__class__.__name__
-            if module in currently_hidden:
-                currently_hidden.remove(module)
-                shown += [module]
-            else:
-                currently_hidden += [module]
-                hidden += [module]
+ currently_hidden = self.get("hide", [])
+ hidden, shown = [], []
+ for module in filter(lambda module: self.lookup(module), modules):
+ module = self.lookup(module)
+ module = module.__class__.__name__
+ если модуль входит в список currently_hidden:
+ currently_hidden.remove(module)
+ shown += [module]
+ иначе:
+ currently_hidden += [module]
+ hidden += [module]
 
-        self.set("hide", currently_hidden)
+ self.set("hide", currently_hidden)
 
-        await utils.answer(
-            message,
-            self.strings("hidden_shown").format(
-                len(hidden),
-                len(shown),
-                "\n".join([f"👁‍🗨 <i>{m}</i>" for m in hidden]),
-                "\n".join([f"👁 <i>{m}</i>" for m in shown]),
-            ),
-        )
+ await utils.answer(
+ сообщение,
+ self.strings("hidden_shown").format(
+ len(hidden),
+ len(shown),
+ "\n".join([f"👁‍🗨 <i>{m}</i>" for m in hidden]),
+ "\n".join([f"👁 <i>{m}</i>" for m in shown]),
+ ),
+ )
 
-    def find_aliases(self, command: str) -> list:
-        """Find aliases for command"""
-        aliases = []
-        _command = self.allmodules.commands[command]
-        if getattr(_command, "alias", None) and not (
-            aliases := getattr(_command, "aliases", None)
-        ):
-            aliases = [_command.alias]
+ def find_aliases(self, command: str) -> list:
+ """Найти псевдонимы для команды"""
+ aliases = []
+ _command = self.allmodules.commands[command]
+ if getattr(_command, "alias", None) and not (
+ aliases := getattr(_command, "aliases", None)
+ ):
+ aliases = [_command.alias]
 
-        return aliases or []
+ return aliases or []
 
-    async def _generate_blocks(self, message: Message, force: bool = False) -> tuple:
-        """Generate core_block and plain_block for custom message"""
-        hidden = self.get("hide", [])
-        
-        plain_ = []
-        core_ = []
-        no_commands_ = []
+ async def modhelp(self, message: Message, args: str):
+ exact = True
+ if not (module := self.lookup(args)):
+ if method := self.allmodules.dispatch(
+ args.lower().strip(self.get_prefix())
+ )[1]:
+ module = method.__self__
+ else:
+ module = self.lookup(
+ next(
+ (
+ в обратном порядке (
+ отсортировано(
+ [
+ module.strings["name"]
+ для модуля в self.allmodules.modules
+ ],
+ key=lambda x: difflib.SequenceMatcher(
+ None,
+ args.lower(),
+ x,
+ ).ratio(),
+ )
+ )
+ ),
+ None,
+ )
+ )
 
-        for mod in self.allmodules.modules:
-            if not hasattr(mod, "commands"):
-                continue
+ exact = False
 
-            if mod.__class__.__name__ in self.get("hide", []) and not force:
-                continue
+ try:
+ name = module.strings("name")
+ except (KeyError, AttributeError):
+ name = getattr(module, "name", "ОШИБКА")
 
-            tmp = ""
+ _name = (
+ "{} (v{}.{}.{})".format(
+ utils.escape_html(name),
+ module.__version__[0],
+ module.__version__[1],
+ module.__version__[2],
+ )
+ if hasattr(module, "__version__")
+ else utils.escape_html(name)
+ )
 
-            try:
-                name = mod.strings["name"]
-            except KeyError:
-                name = getattr(mod, "name", "ERROR")
-
-            if (
-                not getattr(mod, "commands", None)
-                and not getattr(mod, "inline_handlers", None)
-                and not getattr(mod, "callback_handlers", None)
-            ):
-                no_commands_ += [
-                    "\n{} <code>{}</code>".format(self.config["empty_emoji"], name)
-                ]
-                continue
-
-            core = mod.__origin__.startswith("<core")
-            tmp += "\n{} <code>{}</code>".format(
-                self.config["core_emoji"] if core else self.config["plain_emoji"], name
-            )
-            first = True
-
-            commands = [
-                name
-                for name, func in mod.commands.items()
-                if await self.allmodules.check_security(message, func) or force
-            ]
-
-            for cmd in commands:
-                if first:
-                    tmp += f": ( {cmd}"
-                    first = False
-                else:
-                    tmp += f" | {cmd}"
-
-            icommands = [
-                name
-                for name, func in mod.inline_handlers.items()
-                if await self.inline.check_inline_security(
-                    func=func,
-                    user=message.sender_id,
-                )
-                or force
-            ]
-
-            for cmd in icommands:
-                if first:
-                    tmp += f": ( 🤖 {cmd}"
-                    first = False
-                else:
-                    tmp += f" | 🤖 {cmd}"
-
-            if commands or icommands:
-                tmp += " )"
-                if core:
-                    core_ += [tmp]
-                else:
-                    plain_ += [tmp]
-
-        def extract_name(line):
-            match = re.search(r'[\U0001F300-\U0001FAFF\U0001F900-\U0001F9FF]*\s*(name.*)', line)
-            return match.group(1) if match else line
-
-        plain_.sort(key=extract_name)
-        core_.sort(key=extract_name)
-        no_commands_.sort(key=extract_name)
-
-        core_block = f"<blockquote expandable>{''.join(core_).lstrip()}</blockquote>"
-        plain_block = f"<blockquote expandable>{''.join(plain_ + (no_commands_ if force else [])).lstrip()}</blockquote>"
-
-        return core_block, plain_block
-
-    async def _render_help(self, message: Message, args: str = "", force: bool = False) -> str:
-        """Render help message with custom formatting"""
-        if args:
-            # For specific module help, use original logic
-            return None
-        
-        hidden = self.get("hide", [])
-        
-        reply = self.strings("all_header").format(
-            len(self.allmodules.modules),
-            (
-                0
-                if force
-                else sum(
-                    module.__class__.__name__ in hidden
-                    for module in self.allmodules.modules
-                )
-            ),
-        )
-
-        # Generate blocks using the shared method
-        core_block, plain_block = await self._generate_blocks(message, force)
-
-        return (self.config["desc_icon"] + "{}{}\n\n{}{}").format(
-            reply,
-            core_block,
-            plain_block,
-            (
-                ""
-                if self.lookup("Loader").fully_loaded
-                else f"\n\n{self.strings('partial_load')}"
-            ),
-        )
-
-    async def modhelp(self, message: Message, args: str):
-        exact = True
-        if not (module := self.lookup(args)):
-            if method := self.allmodules.dispatch(
-                args.lower().strip(self.get_prefix())
-            )[1]:
-                module = method.__self__
-            else:
-                module = self.lookup(
-                    next(
-                        (
-                            reversed(
-                                sorted(
-                                    [
-                                        module.strings["name"]
-                                        for module in self.allmodules.modules
-                                    ],
-                                    key=lambda x: difflib.SequenceMatcher(
-                                        None,
-                                        args.lower(),
-                                        x,
-                                    ).ratio(),
-                                )
-                            )
-                        ),
-                        None,
-                    )
-                )
-
-                exact = False
-
-        try:
-            name = module.strings("name")
-        except (KeyError, AttributeError):
-            name = getattr(module, "name", "ERROR")
-
-        _name = (
-            "{} (v{}.{}.{})".format(
-                utils.escape_html(name),
-                module.__version__[0],
-                module.__version__[1],
-                module.__version__[2],
-            )
-            if hasattr(module, "__version__")
-            else utils.escape_html(name)
-        )
-
-        reply = "{} <b>{}</b>:".format(
-            "<emoji document_id=5454359873212923789>☃️</emoji>",
-            _name,
-            ""
-        )
+ reply = "{} <b>{}</b>:".format(
+ "<emoji document_id=5454359873212923789>☃️</emoji>",
+ _name,
+ ""
+ )
         if module.__doc__:
             reply += (
                 "\n<i><emoji document_id=5465645994999838991>ℹ️</emoji> "
@@ -345,21 +219,123 @@ class Help(loader.Module):
             await self.modhelp(message, args)
             return
 
-        # Use custom message if configured
-        if self.config["custom_message"]:
-            # Generate core_block and plain_block for custom message
-            core_block, plain_block = await self._generate_blocks(message, force)
-            
-            custom_text = self.config["custom_message"].format(
-                core_block=core_block,
-                plain_block=plain_block,
-            )
-            await utils.answer(message, custom_text)
-            return
+        hidden = self.get("hide", [])
 
-        # Use original help rendering
-        help_text = await self._render_help(message, args, force)
-        await utils.answer(message, help_text)
+        reply = self.strings("all_header").format(
+            len(self.allmodules.modules),
+            (
+                0
+                if force
+                else sum(
+                    module.__class__.__name__ in hidden
+                    for module in self.allmodules.modules
+                )
+            ),
+        )
+        shown_warn = False
+
+        plain_ = []
+        core_ = []
+        no_commands_ = []
+
+        for mod in self.allmodules.modules:
+            if not hasattr(mod, "commands"):
+                logger.debug("Module %s is not inited yet", mod.__class__.__name__)
+                continue
+
+            if mod.__class__.__name__ in self.get("hide", []) and not force:
+                continue
+
+            tmp = ""
+
+            try:
+                name = mod.strings["name"]
+            except KeyError:
+                name = getattr(mod, "name", "ERROR")
+
+            if (
+                not getattr(mod, "commands", None)
+                and not getattr(mod, "inline_handlers", None)
+                and not getattr(mod, "callback_handlers", None)
+            ):
+                no_commands_ += [
+                    "\n{} <code>{}</code>".format(self.config["empty_emoji"], name)
+                ]
+                continue
+
+            core = mod.__origin__.startswith("<core")
+            tmp += "\n{} <code>{}</code>".format(
+                self.config["core_emoji"] if core else self.config["plain_emoji"], name
+            )
+            first = True
+
+            commands = [
+                name
+                for name, func in mod.commands.items()
+                if await self.allmodules.check_security(message, func) or force
+            ]
+
+            for cmd in commands:
+                if first:
+                    tmp += f": ( {cmd}"
+                    first = False
+                else:
+                    tmp += f" | {cmd}"
+
+            icommands = [
+                name
+                for name, func in mod.inline_handlers.items()
+                if await self.inline.check_inline_security(
+                    func=func,
+                    user=message.sender_id,
+                )
+                or force
+            ]
+
+            for cmd in icommands:
+                if first:
+                    tmp += f": ( 🤖 {cmd}"
+                    first = False
+                else:
+                    tmp += f" | 🤖 {cmd}"
+
+            if commands or icommands:
+                tmp += " )"
+                if core:
+                    core_ += [tmp]
+                else:
+                    plain_ += [tmp]
+            elif not shown_warn and (mod.commands or mod.inline_handlers):
+                reply = (
+                    "<i>You have permissions to execute only these"
+                    f" commands</i>\n{reply}"
+                )
+                shown_warn = True
+
+        def extract_name(line):
+            match = re.search(r'[\U0001F300-\U0001FAFF\U0001F900-\U0001F9FF]*\s*(name.*)', line)
+            return match.group(1) if match else line
+
+        plain_.sort(key=extract_name)
+        core_.sort(key=extract_name)
+        no_commands_.sort(key=extract_name)
+
+        core_block = f"<blockquote expandable>{''.join(core_).lstrip()}</blockquote>"
+        plain_block = f"<blockquote expandable>{''.join(plain_ + (no_commands_ if force else [])).lstrip()}</blockquote>"
+
+        await utils.answer(
+            message,
+            (self.config["desc_icon"] + "{}{}\n\n{}{}").format(
+                reply,
+                core_block,
+                plain_block,
+                (
+                    ""
+                    if self.lookup("Loader").fully_loaded
+                    else f"\n\n{self.strings('partial_load')}"
+                ),
+            ),
+        )
 
     @loader.command(ru_doc="| Ссылка на чат помощи", ua_doc="| посилання для чату служби підтримки", de_doc="| Link zum Support-Chat")
     async def support(self, message):
