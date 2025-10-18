@@ -258,7 +258,7 @@ class Gallery(InlineUnit):
                 )(
                     (
                         utils.get_platform_emoji()
-                        if utils.can_use_custom_emojis()
+                        if utils.can_use_custom_emojis(self._client)
                         else "🪐"
                     )
                     + self.translator.getkey("inline.opening_gallery"),

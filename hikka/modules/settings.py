@@ -94,7 +94,7 @@ class CoreMod(loader.Module):
             self.strings("hikka").format(
                 (
                     utils.get_platform_emoji()
-                    if utils.can_use_custom_emojis()
+                    if utils.can_use_custom_emojis(self._client)
                     else "☃️ <b>LidFax userbot</b>"
                 ),
                 *version.__version__,

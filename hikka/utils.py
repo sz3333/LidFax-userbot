@@ -1682,10 +1682,18 @@ def get_version_raw() -> str:
 get_platform_name = get_named_platform
 
 
-def can_use_custom_emojis() -> bool:
+def can_use_custom_emojis(client=None) -> bool:
     """
-    Check if custom emojis can be used (exteragram emojis enabled)
-    :return: True if custom emojis are enabled
+    Check if custom emojis can be used
+    :param client: Telegram client instance (optional)
+    :return: True if user has premium OR (exteragram emojis enabled AND custom emojis enabled)
     """
     from lidfaxtl.extensions.html import CUSTOM_EMOJIS
-    return CUSTOM_EMOJIS
+    from . import main
+    
+    # Если у пидораса есть премиум, то он может использовать custom emojis
+    if client and hasattr(client, 'hikka_me') and client.hikka_me.premium:
+        return True
+    
+    # Если он нищий то он может использовать custom emojis если exteragram emojis и custom emojis включены
+    return main.get_config_key("exteragram_emojis") and CUSTOM_EMOJIS
