@@ -1,5 +1,9 @@
 # LidFax Changelog
 
+## ☃️ LidFax 1.7.1
+- help customization(custom_message)
+- bugfix
+
 ## ☃️ LidFax 1.7.0
 - aiogram 3.0
 - better help

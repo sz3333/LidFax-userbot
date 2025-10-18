@@ -219,19 +219,9 @@ class Utils(InlineUnit):
         return markup
 
     generate_markup = _generate_markup
-
+    
     async def _close_unit_handler(self, call: InlineCall):
-        # Gracefully close: answer callback, try delete, fallback to removing markup, then unload
-        with contextlib.suppress(Exception):
-            await call.answer()
-
-        # Try deleting the message (inline or bot-sent)
-        with contextlib.suppress(Exception):
-            await call.delete()
-
-        # Finally, unload unit to free memory
-        with contextlib.suppress(Exception):
-            await call.unload()
+        return await self._client.delete_messages(call._units.get(call.unit_id).get('chat'), call._units.get(call.unit_id).get('message_id'))
 
     async def _unload_unit_handler(self, call: InlineCall):
         await call.unload()
@@ -426,9 +416,9 @@ class Utils(InlineUnit):
             media = InputFile(media)
 
         if file:
-            media = InputMediaDocument(media, caption=text, parse_mode="HTML")
+            media = InputMediaDocument(media=media, caption=text, parse_mode="HTML")
         elif photo:
-            media = InputMediaPhoto(media, caption=text, parse_mode="HTML")
+            media = InputMediaPhoto(media=media, caption=text, parse_mode="HTML")
         elif audio:
             if isinstance(audio, dict):
                 media = InputMediaAudio(
@@ -446,9 +436,9 @@ class Utils(InlineUnit):
                     parse_mode="HTML",
                 )
         elif video:
-            media = InputMediaVideo(media, caption=text, parse_mode="HTML")
+            media = InputMediaVideo(media=media, caption=text, parse_mode="HTML")
         elif gif:
-            media = InputMediaAnimation(media, caption=text, parse_mode="HTML")
+            media = InputMediaAnimation(media=media, caption=text, parse_mode="HTML")
 
         if media is None and text is None and reply_markup:
             try:
