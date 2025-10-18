@@ -108,8 +108,7 @@ class UpdaterMod(loader.Module):
             msg_obj,
             self.strings("restarting_caption").format(
                 utils.get_platform_emoji()
-                if self._client.hikka_me.premium
-                and CUSTOM_EMOJIS
+                if utils.can_use_custom_emojis()
                 and isinstance(msg_obj, Message)
                 else "LidFax"
             ),
@@ -255,8 +254,7 @@ class UpdaterMod(loader.Module):
                         " document_id=5193117564015747203>✌️</emoji><emoji"
                         " document_id=5195050806105087456>✌️</emoji><emoji"
                         " document_id=5195457642587233944>✌️</emoji><b>"
-                        if self._client.hikka_me.premium
-                        and CUSTOM_EMOJIS
+                        if utils.can_use_custom_emojis()
                         and isinstance(msg_obj, Message)
                         else "lavHost"
                     ),

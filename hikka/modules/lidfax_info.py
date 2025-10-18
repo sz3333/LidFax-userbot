@@ -126,7 +126,7 @@ class LidFaxInfoMod(loader.Module):
                     (
                         (
                             utils.get_platform_emoji()
-                            if self._client.hikka_me.premium and self.config["show_lidfax"]
+                            if utils.can_use_custom_emojis() and self.config["show_lidfax"]
                             else ""
                         ),
                         "<emoji document_id=5373141891321699086>😎</emoji>",

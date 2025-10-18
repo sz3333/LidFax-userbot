@@ -1680,3 +1680,12 @@ def get_version_raw() -> str:
 
 
 get_platform_name = get_named_platform
+
+
+def can_use_custom_emojis() -> bool:
+    """
+    Check if custom emojis can be used (exteragram emojis enabled)
+    :return: True if custom emojis are enabled
+    """
+    from lidfaxtl.extensions.html import CUSTOM_EMOJIS
+    return CUSTOM_EMOJIS
