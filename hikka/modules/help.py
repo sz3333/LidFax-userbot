@@ -4,6 +4,12 @@
 # You can redistribute it and/or modify it under the terms of the GNU AGPLv3
 # 🔑 https://www.gnu.org/licenses/agpl-3.0.html
 
+# ©️ Codrago, 2024-2025
+# This file is a part of Heroku Userbot
+# 🌐 https://github.com/coddrago/Heroku
+# You can redistribute it and/or modify it under the terms of the GNU AGPLv3
+# 🔑 https://www.gnu.org/licenses/agpl-3.0.html
+
 import re
 import difflib
 import inspect
@@ -27,29 +33,39 @@ class Help(loader.Module):
         self.config = loader.ModuleConfig(
             loader.ConfigValue(
                 "core_emoji",
-                "<emoji document_id=5467413391222007923>➖</emoji>",
+                "<emoji document_id=4974681956907221809>▪️</emoji>",
                 lambda: "Core module bullet",
             ),
             loader.ConfigValue(
                 "plain_emoji",
-                "<emoji document_id=5460759129670836513>🟠</emoji>",
+                "<emoji document_id=4974508259839836856>▪️</emoji>",
                 lambda: "Plain module bullet",
             ),
             loader.ConfigValue(
                 "empty_emoji",
                 "<emoji document_id=5100652175172830068>🟠</emoji>",
-                lambda: "Empty modules",
+                lambda: "Empty modules bullet",
             ),
             loader.ConfigValue(
                 "desc_icon",
-                "<emoji document_id=5454359873212923789>☃️</emoji>",
-                lambda: "Description emoji",
+                "<emoji document_id=5188377234380954537>🪐</emoji>",
+                lambda: "Desc emoji",
             ),
-        )
+            loader.ConfigValue(
+                "command_emoji",
+                "<emoji document_id=5197195523794157505>▫️</emoji>",
+                lambda: "Emoji for command",
+            ),
+           #loader.ConfigValue(
+           #     "banner_url",
+           #     None,
+           #     lambda: "banner for help",
+           # ),
+        )  # отложенно до фикса
 
     @loader.command(ru_doc="[args] | Спрячет ваши модули", ua_doc="[args] | Сховає ваші модулі", de_doc="[args] | Versteckt Ihre Module")
     async def helphide(self, message: Message):
-        """[args] | Hide your modules"""
+        """[args] | hide your modules"""
         if not (modules := utils.get_args(message)):
             await utils.answer(message, self.strings("no_mod"))
             return
@@ -100,23 +116,25 @@ class Help(loader.Module):
                 module = self.lookup(
                     next(
                         (
-                            sorted(
-                                [
-                                    module.strings["name"]
-                                    for module in self.allmodules.modules
-                                ],
-                                key=lambda x: difflib.SequenceMatcher(
-                                    None,
-                                    args.lower(),
-                                    x,
-                                ).ratio(),
-                            )[-1]
+                            reversed(
+                                sorted(
+                                    [
+                                        module.strings["name"]
+                                        for module in self.allmodules.modules
+                                    ],
+                                    key=lambda x: difflib.SequenceMatcher(
+                                        None,
+                                        args.lower(),
+                                        x,
+                                    ).ratio(),
+                                )
+                            )
                         ),
                         None,
                     )
                 )
 
-            exact = False
+                exact = False
 
         try:
             name = module.strings("name")
@@ -135,13 +153,15 @@ class Help(loader.Module):
         )
 
         reply = "{} <b>{}</b>:".format(
-            "<emoji document_id=5454359873212923789>☃️</emoji>",
+            "<emoji document_id=5134452506935427991>🪐</emoji>",
             _name,
             ""
         )
+        inline_cmd = ""
+        cmds = ""
         if module.__doc__:
             reply += (
-                "\n<i><emoji document_id=5465645994999838991>ℹ️</emoji> "
+                "\n<i><emoji document_id=5879813604068298387>ℹ️</emoji> "
                 + utils.escape_html(inspect.getdoc(module))
                 + "\n</i>"
             )
@@ -154,7 +174,7 @@ class Help(loader.Module):
 
         if hasattr(module, "inline_handlers"):
             for name, fun in module.inline_handlers.items():
-                reply += (
+                inline_cmd += (
                     "\n<emoji document_id=5372981976804366741>🤖</emoji>"
                     " <code>{}</code> {}".format(
                         f"@{self.inline.bot_username} {name}",
@@ -166,9 +186,10 @@ class Help(loader.Module):
                     )
                 )
 
+        lines = []
         for name, fun in commands.items():
-            reply += (
-                "\n<emoji document_id=5458910485552330694>▫️</emoji>"
+            lines.append(
+                f'{self.config["command_emoji"]}'
                 " <code>{}{}</code>{} {}".format(
                     utils.escape_html(self.get_prefix()),
                     name,
@@ -192,10 +213,11 @@ class Help(loader.Module):
                     ),
                 )
             )
+        cmds = "\n".join(lines)
 
         await utils.answer(
             message,
-            reply
+            f'{reply}<blockquote expandable>{cmds}{inline_cmd}</blockquote>'
             + (f"\n\n{self.strings('not_exact')}" if not exact else "")
             + (
                 f"\n\n{self.strings('core_notice')}"
@@ -285,7 +307,7 @@ class Help(loader.Module):
                 for name, func in mod.inline_handlers.items()
                 if await self.inline.check_inline_security(
                     func=func,
-                    user=message.sender_id,
+                    user=message.sender_id if not message.out else self._client.tg_id,
                 )
                 or force
             ]
@@ -310,29 +332,23 @@ class Help(loader.Module):
                 )
                 shown_warn = True
 
-        def extract_name(line):
-            match = re.search(r'[\U0001F300-\U0001FAFF\U0001F900-\U0001F9FF]*\s*(name.*)', line)
-            return match.group(1) if match else line
-
-        plain_.sort(key=extract_name)
-        core_.sort(key=extract_name)
-        no_commands_.sort(key=extract_name)
-
-        core_block = f"<blockquote expandable>{''.join(core_).lstrip()}</blockquote>"
-        plain_block = f"<blockquote expandable>{''.join(plain_ + (no_commands_ if force else [])).lstrip()}</blockquote>"
+        plain_.sort(key=str.lower)
+        core_.sort(key=str.lower)
+        no_commands_.sort(key=str.lower)
 
         await utils.answer(
             message,
-            (self.config["desc_icon"] + "{}{}\n\n{}{}").format(
+            (self.config["desc_icon"] + " {}\n <blockquote expandable>{}</blockquote><blockquote expandable>{}</blockquote><blockquote expandable>{}</blockquote>").format(
                 reply,
-                core_block,
-                plain_block,
+                "".join(core_),
+                "".join(plain_ + (no_commands_ if force else [])),
                 (
                     ""
                     if self.lookup("Loader").fully_loaded
                     else f"\n\n{self.strings('partial_load')}"
                 ),
             ),
+            #file = self.config["banner_url"],
         )
 
     @loader.command(ru_doc="| Ссылка на чат помощи", ua_doc="| посилання для чату служби підтримки", de_doc="| Link zum Support-Chat")
@@ -341,11 +357,5 @@ class Help(loader.Module):
        
         await utils.answer(
             message,
-            self.strings("support").format(
-                (
-                    utils.get_platform_emoji()
-                    if self._client.hikka_me.premium and CUSTOM_EMOJIS
-                    else "☃️"
-                )
-            ),
+            self.strings("offchats"),
         )
