@@ -93,27 +93,10 @@ class Help(loader.Module):
 
         return aliases or []
 
-    async def _render_help(self, message: Message, args: str = "", force: bool = False) -> str:
-        """Render help message with custom formatting"""
-        if args:
-            # For specific module help, use original logic
-            return None
-        
+    async def _generate_blocks(self, message: Message, force: bool = False) -> tuple:
+        """Generate core_block and plain_block for custom message"""
         hidden = self.get("hide", [])
         
-        reply = self.strings("all_header").format(
-            len(self.allmodules.modules),
-            (
-                0
-                if force
-                else sum(
-                    module.__class__.__name__ in hidden
-                    for module in self.allmodules.modules
-                )
-            ),
-        )
-        shown_warn = False
-
         plain_ = []
         core_ = []
         no_commands_ = []
@@ -184,12 +167,6 @@ class Help(loader.Module):
                     core_ += [tmp]
                 else:
                     plain_ += [tmp]
-            elif not shown_warn and (mod.commands or mod.inline_handlers):
-                reply = (
-                    "<i>You have permissions to execute only these"
-                    f" commands</i>\n{reply}"
-                )
-                shown_warn = True
 
         def extract_name(line):
             match = re.search(r'[\U0001F300-\U0001FAFF\U0001F900-\U0001F9FF]*\s*(name.*)', line)
@@ -201,6 +178,31 @@ class Help(loader.Module):
 
         core_block = f"<blockquote expandable>{''.join(core_).lstrip()}</blockquote>"
         plain_block = f"<blockquote expandable>{''.join(plain_ + (no_commands_ if force else [])).lstrip()}</blockquote>"
+
+        return core_block, plain_block
+
+    async def _render_help(self, message: Message, args: str = "", force: bool = False) -> str:
+        """Render help message with custom formatting"""
+        if args:
+            # For specific module help, use original logic
+            return None
+        
+        hidden = self.get("hide", [])
+        
+        reply = self.strings("all_header").format(
+            len(self.allmodules.modules),
+            (
+                0
+                if force
+                else sum(
+                    module.__class__.__name__ in hidden
+                    for module in self.allmodules.modules
+                )
+            ),
+        )
+
+        # Generate blocks using the shared method
+        core_block, plain_block = await self._generate_blocks(message, force)
 
         return (self.config["desc_icon"] + "{}{}\n\n{}{}").format(
             reply,
@@ -345,7 +347,14 @@ class Help(loader.Module):
 
         # Use custom message if configured
         if self.config["custom_message"]:
-            await utils.answer(message, self.config["custom_message"])
+            # Generate core_block and plain_block for custom message
+            core_block, plain_block = await self._generate_blocks(message, force)
+            
+            custom_text = self.config["custom_message"].format(
+                core_block=core_block,
+                plain_block=plain_block,
+            )
+            await utils.answer(message, custom_text)
             return
 
         # Use original help rendering
