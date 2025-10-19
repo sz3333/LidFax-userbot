@@ -148,7 +148,7 @@ class Help(loader.Module):
         )
 
         reply = "{} <b>{}</b>:".format(
-            "<emoji document_id=5134452506935427991>🪐</emoji>",
+            "<emoji document_id=5222375937798061829>☃️</emoji>",
             _name,
             ""
         )
