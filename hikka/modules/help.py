@@ -148,7 +148,7 @@ class Help(loader.Module):
         )
 
         reply = "{} <b>{}</b>:".format(
-            "<emoji document_id=5134452506935427991>🪐</emoji>",
+            "<emoji document_id=5222375937798061829>☃️</emoji>",
             _name,
             ""
         )
@@ -156,7 +156,7 @@ class Help(loader.Module):
         cmds = ""
         if module.__doc__:
             reply += (
-                "\n<i><emoji document_id=5879813604068298387>ℹ️</emoji> "
+                "\n<i><emoji document_id=5465645994999838991>ℹ️</emoji> "
                 + utils.escape_html(inspect.getdoc(module))
                 + "\n</i>"
             )
@@ -274,12 +274,12 @@ class Help(loader.Module):
                 and not getattr(mod, "callback_handlers", None)
             ):
                 no_commands_ += [
-                    "\n{} <code>{}</code>".format(self.config["empty_emoji"], name)
+                    "{} <code>{}</code>".format(self.config["empty_emoji"], name)
                 ]
                 continue
 
             core = mod.__origin__.startswith("<core")
-            tmp += "\n{} <code>{}</code>".format(
+            tmp += "{} <code>{}</code>".format(
                 self.config["core_emoji"] if core else self.config["plain_emoji"], name
             )
             first = True
@@ -333,10 +333,10 @@ class Help(loader.Module):
 
         await utils.answer(
             message,
-            (self.config["desc_icon"] + " {}\n<blockquote expandable>{}</blockquote><blockquote expandable>{}</blockquote><blockquote expandable>{}</blockquote>").format(
+            (self.config["desc_icon"] + " {}\n<blockquote expandable>\n{}</blockquote><blockquote expandable>\n{}</blockquote><blockquote expandable>\n{}</blockquote>").format(
                 reply,
-                "".join(core_),
-                "".join(plain_ + (no_commands_ if force else [])),
+                "\n".join(core_),
+                "\n".join(plain_ + (no_commands_ if force else [])),
                 (
                     ""
                     if self.lookup("Loader").fully_loaded
