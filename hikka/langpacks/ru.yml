@@ -121,7 +121,7 @@ lidfax_settings:
   no_cmd: "<emoji document_id=5469791106591890404>🪄</emoji> <b>Укажи команду, для которой надо включить\\выключить NoNick</b>"
   cmd_nn: "<emoji document_id=5469791106591890404>🪄</emoji> <b>Состояние NoNick для</b> <code>{}</code><b>: {}</b>"
   cmd404: "<emoji document_id=5469791106591890404>🪄</emoji> <b>Команда не найдена</b>"
-  inline_settings: "⚙️ <b>Здесь можно управлять настройками Heroku</b>"
+  inline_settings: "⚙️ <b>Здесь можно управлять настройками LidFax</b>"
   confirm_update: "🧭 <b>Подтвердите обновление. Юзербот будет перезагружен</b>"
   confirm_restart: "🔄 <b>Подтвердите перезагрузку</b>"
   suggest_fs: "✅ Предлагать сохранение модулей"
