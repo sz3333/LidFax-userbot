@@ -99,7 +99,7 @@ IS_SERV00 = "serv00" in socket.gethostname()
 IS_AEZA = "aeza" in socket.gethostname()
 IS_HYSTERIA = "HYSTERIA" in os.environ
 IS_REWHOST = "RewHost" in socket.gethostname()
-IS_USERLAND = "userland" in os.environ
+IS_PROOTDISTRO = "PRoot-Distro" in os.popen("uname -a").read() or "PROOTDISTRO_NAME" in os.environ
 IS_WSL = False
 with contextlib.suppress(Exception):
     from platform import uname
@@ -109,33 +109,30 @@ with contextlib.suppress(Exception):
 
 # fmt: off
 LATIN_MOCK = [
-    "Amor", "Arbor", "Astra", "Aurum", "Bellum", "Caelum",
-    "Calor", "Candor", "Carpe", "Celer", "Certo", "Cibus",
-    "Civis", "Clemens", "Coetus", "Cogito", "Conexus",
-    "Consilium", "Cresco", "Cura", "Cursus", "Florus",
-    "Deus", "Dies", "Digitus", "Discipulus", "Dominus",
-    "Donum", "Dulcis", "Artem", "Elementum", "Emendo",
-    "Ensis", "Equus", "Espero", "Fidelis", "Fides",
-    "Finis", "Flamma", "Flos", "Fortis", "Frater", "Fuga",
-    "Fulgeo", "Genius", "Artur", "Gratia", "Gravis",
-    "Femboy", "Honor", "xenside", "Iris", "Imago",
-    "Furry", "Inceptum", "Infinitus", "Ingenium",
-    "Initium", "Intra", "Iunctus", "Iustitia", "Labor",
-    "Laurus", "Lectus", "Legio", "Liberi", "Libertas",
-    "Lumen", "Lux", "Magister", "Magnus", "Manus",
-    "Memoria", "Mens", "Mors", "Mundo", "Natura",
-    "Nexus", "Nobilis", "Nomen", "Novus", "Nox",
-    "Oculus", "Omnis", "Opus", "Orbis", "Ordo", "Os",
-    "Pax", "Perpetuus", "Persona", "Petra", "Pietas",
-    "Pons", "Populus", "Potentia", "Primus", "Proelium",
-    "Pulcher", "Purus", "Quaero", "Quies", "Ratio",
+    "Amor", "Astra", "Aurum", "Caelum", "Spiritus", "Lux",
+    "Femboy", "Furry", "Softpaw", "Catboy", "Tailwave",
+    "Mochi", "Fluff", "Nyapi", "PinkTail", "Purrfect",
+    "Snuggle", "Cuddle", "Glowfur", "Sweetpaw", "Meowster",
+    "Starling", "Dreamer", "Nya", "Softcore", "Hugloop",
+    "Foxie", "Lynxie", "Snowtail", "Nimbly", "Cutiecore",
+    "Heartbeam", "Owopup", "MewDrop", "Chroma", "Velvix",
+    "Sparkpaw", "Floof", "Meowmix", "Pawprint", "Lunaris",
+    "Whisk", "Pufftail", "Kitsu", "Cloverpaw", "Bunbun",
+    "Vita", "Veritas", "Zephyrus", "Arbor", "Celer",
+    "Civis", "Consilium", "Cura", "Dominus", "Donum",
+    "Dulcis", "Elementum", "Ensis", "Equus", "Fortis",
+    "Frater", "Genius", "Gratia", "Honor", "Iris",
+    "Ingenium", "Initium", "Iustitia", "Labor", "Lectus",
+    "Legio", "Lumen", "Magister", "Magnus", "Manus",
+    "Memoria", "Mens", "Natura", "Nexus", "Nomen",
+    "Novus", "Nox", "Oculus", "Opus", "Orbis",
+    "Ordo", "Pax", "Persona", "Pietas", "Potentia",
+    "Primus", "Pulcher", "Purus", "Quaero", "Ratio",
     "Regnum", "Sanguis", "Sapientia", "Sensus", "Serenus",
-    "Sermo", "Signum", "Sol", "Solus", "Sors", "Spes",
-    "Spiritus", "Stella", "Summus", "Teneo", "Terra",
-    "Tigris", "Trans", "Tribuo", "Tristis", "Ultimus",
-    "Unitas", "Universus", "Uterque", "Valde", "Vates",
-    "Veritas", "Verus", "Vester", "Via", "Victor",
-    "Vita", "Fox", "Vultus", "Zephyrus"
+    "Signum", "Sol", "Spes", "Spiritus", "Stella",
+    "Summus", "Teneo", "Terra", "Tristis", "Ultimus",
+    "Unitas", "Universus", "Vates", "Victor", "Vita",
+    "Fox", "Vultus"
 ]
 # fmt: on
 
@@ -175,17 +172,26 @@ def generate_random_system_version():
     :example: "Windows 10.0.19042.1234" or "Ubuntu 20.04.19042.1234"
     """
     os_choices = [
-        ("Windows Longhorn", "Longhorn"),
-        ("Windows XP", "XP"),
-        ("Windows 8", "8.1"),
-        ("Windows 10", "10"),
-        ("Windows 11", "11"),
-        ("Ubuntu", "20.04"),
-        ("Debian", "10"),
-        ("Fedora", "33"),
-        ("Arch Linux", "2021.05"),
-        ("CentOS", "8"),
-    ]
+    ("Windows 11 Pro 25H2", "11.0.26100"),
+    ("Ubuntu 24.04 LTS", "24.04"),
+    ("Debian 13 Trixie", "13"),
+    ("Fedora 41 Workstation", "41"),
+    ("Arch Linux", "2025.02"),
+    ("Manjaro 24.1 Ruah", "24.1"),
+    ("Linux Mint 22 Wilma", "22"),
+    ("Pop!_OS 24.04", "24.04"),
+    ("ZorinOS 17 Core", "17"),
+    ("Kali Linux 2025.1", "2025.1"),
+    ("Garuda Linux", "2025.02"),
+    ("RedOS 8.1", "8.1"),
+    ("UwUntu 22.04", "22.04"),
+    ("Windows Lite 11", "11 Lite"),
+    ("Android 14 (Termux)", "14"),
+    ("BlissOS 15", "15"),
+    ("Tails 6.8", "6.8"),
+    ("RewHost Cloud", "3.4"),
+    ("PRoot-Distro Arch", "6.2.1"),
+]
     os_name, os_version = random.choice(os_choices)
 
     version = f"{os_name} {os_version}"
