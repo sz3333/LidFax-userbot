@@ -212,6 +212,7 @@ terminal:
   auth_locked: "<emoji document_id=5460967491419270149>🚫</emoji> <b>Authentication failed, please try again later</b>"
   auth_ongoing: "<emoji document_id=5213452215527677338>⏳</emoji> <b>Authenticating...</b>"
   done: "<emoji document_id=5314250708508220914>✅</emoji> <b>Done</b>"
+  dangerous_command: "🚫 <b>Dangerous command blocked!</b>\n\n<code>{}</code>\n\nThis command could cause serious harm to the system and has been blocked for your safety."
   _cmd_doc_apt: "Shorthand for '.terminal apt'"
   _cmd_doc_terminal: "<command> - Execute bash command"
   _cmd_doc_terminate: "[-f to force kill] - Use in reply to send SIGTERM to a process"
