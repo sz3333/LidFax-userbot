@@ -1015,7 +1015,7 @@ def get_platform_emoji() -> str:
         )
 
     if main.IS_PROOTDISTRO:
-        return BASE.format(5217444336089714383)
+        return BASE.format(5462965600399691584)
 
     if main.IS_ORACLE:
         return BASE.format(5449898463049318955)
