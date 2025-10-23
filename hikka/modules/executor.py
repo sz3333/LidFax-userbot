@@ -19,11 +19,7 @@ class Executor(loader.Module):
     """Выполнение python кода"""
 
     strings = {
-        "name": "Executor",
-
-        "no_code": "<emoji document_id=5854929766146118183>❌</emoji> <b>Должно быть </b><code>{}exec [python код]</code>",
-
-        "executing": "<b><emoji document_id=5332600281970517875>🔄</emoji> Выполняю код...</b>"
+        "name": "Executor"
     }
 
     def __init__(self):
@@ -31,7 +27,7 @@ class Executor(loader.Module):
             loader.ConfigValue(
                 "hide_phone",
                 True,
-                lambda: "Скрывает твой номер телефона при выводе",
+                lambda: self.strings["no_phone"],
                 validator=loader.validators.Boolean()
             ),
         )
@@ -75,7 +71,7 @@ class Executor(loader.Module):
             "event": message,
             "chat": message.to_id,
             "me": me,
-            "hikkatl": lidfaxtl,
+            "lidfaxtl": lidfaxtl,
             "telethon": lidfaxtl,
             "utils": utils,
             "loader": loader,
@@ -128,16 +124,12 @@ class Executor(loader.Module):
                 res = res.replace("+"+me.phone, t_h).replace(me.phone, t_h)
 
         if result:
-            result = f"""{'<emoji document_id=6334758581832779720>✅</emoji> Результат' if not cerr else '<emoji document_id=5440381017384822513>🚫</emoji> Ошибка'}:
-<pre><code class="language-python">{result}</code></pre>
-"""
-        if res or res == 0 or res == False and res is not None:
-            result += f"""<emoji document_id=6334778871258286021>💾</emoji> Код вернул:
-<pre><code class="language-python">{res}</code></pre>
-"""
+            if not cerr:
+                result = self.strings["result_no_error"].format(result=result)
+            else:
+                result = self.strings["result_error"].format(result=result)
 
-        return await utils.answer(message, f"""<b>
-<emoji document_id=5431376038628171216>💻</emoji> Код:
-<pre><code class="language-python">{code}</code></pre>
-{result}
-<emoji document_id=5451732530048802485>⏳</emoji> Выполнен за {round(stop_time - start_time, 5)} секунд</b>""")
+        if res or res == 0 or res == False and res is not None:
+            result += self.strings["res_return"].format(res=res)
+
+        return await utils.answer(message, self.strings["result"].format(code=code, result=result, time=round(stop_time - start_time, 5)))

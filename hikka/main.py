@@ -86,7 +86,6 @@ BASE_DIR = (
 BASE_PATH = Path(BASE_DIR)
 CONFIG_PATH = BASE_PATH / "config.json"
 
-IS_DEV = "DEV" in os.environ
 IS_TERMUX = "com.termux" in os.environ.get("PREFIX", "")
 IS_CODESPACES = "CODESPACES" in os.environ
 IS_DOCKER = "DOCKER" in os.environ
@@ -95,6 +94,7 @@ IS_GOORM = "GOORM" in os.environ
 IS_LAVHOST = "LAVHOST" in os.environ
 IS_HIKKAHOST = "HIKKAHOST" in os.environ
 IS_MIDGA = "MIDGA" in os.environ
+IS_DEV = "IS_DEV" in os.environ
 IS_ORACLE = "ORACLE_OS" in os.environ
 IS_AWS = "AWS_OS" in os.environ
 IS_SERV00 = "serv00" in socket.gethostname()

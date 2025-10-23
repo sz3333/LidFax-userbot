@@ -548,6 +548,19 @@ eval:
   _cmd_doc_ephp: "Выполняет PHP код"
   _cmd_doc_eruby: "Выполняет Ruby код"
 
+executor:
+  no_code: "<emoji document_id=5854929766146118183>❌</emoji> <b>Должно быть </b><code>{}exec [python код]</code>"
+  executing: "<b><emoji document_id=5332600281970517875>🔄</emoji> Выполняю код...</b>"
+  no_phone: "Скрывает твой номер телефона при выводе"
+  result_no_error: '✅ <b>Результат:</b>\n<pre><code class="language-python">{result}</code></pre>\n'
+  result_error: '🚫 <b>Ошибка:</b>\n<pre><code class="language-python">{result}</code></pre>\n'
+  res_return: '💾 <b>Код вернул:</b>\n<pre><code class="language-python">{res}</code></pre>\n'
+  result: '<b>💻 <b>Код:</b>\n<pre><code class="language-python">{code}</code></pre>\n{result}⏳ <b>Выполнен за {time} сек</b></b>'
+  input_prompt: "<b>📥 Input:</b> {prompt}"
+  input_waiting: "<b>📥 Ожидаю ввода...</b>"
+  _cmd_doc_exec: "Выполнить python код"
+  _cls_doc: "Выполнение python кода"
+
 translate:
   no_args: "<emoji document_id=5460967491419270149>❌</emoji> <b>Не указаны аргументы</b>"
   error: "<emoji document_id=5460967491419270149>❌</emoji> <b>Не удалось перевести текст</b>"
