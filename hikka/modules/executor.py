@@ -19,7 +19,14 @@ class Executor(loader.Module):
     """Выполнение python кода"""
 
     strings = {
-        "name": "Executor"
+        "name": "Executor",
+        "no_code": "<emoji document_id=5854929766146118183>❌</emoji> <b>Должно быть </b><code>{}exec [python код]</code>",
+        "executing": "<b><emoji document_id=5332600281970517875>🔄</emoji> Выполняю код...</b>",
+        "no_phone": "Скрывает твой номер телефона при выводе",
+        "result_no_error": '✅ <b>Результат:</b>\n<pre><code class="language-python">{result}</code></pre>\n',
+        "result_error": '🚫 <b>Ошибка:</b>\n<pre><code class="language-python">{result}</code></pre>\n',
+        "res_return": '💾 <b>Код вернул:</b>\n<pre><code class="language-python">{res}</code></pre>\n',
+        "result": '<b>💻 <b>Код:</b>\n<pre><code class="language-python">{code}</code></pre>\n{result}⏳ <b>Выполнен за {time} сек</b></b>',
     }
 
     def __init__(self):
@@ -84,10 +91,13 @@ class Executor(loader.Module):
             "input": ainput,
         }
         result = sys.stdout = StringIO()
+        
+        _globals = {k: v for k, v in globals().items() if k != 'input'}
+        
         try:
             res = await meval(
                 code,
-                globals(),
+                _globals,
                 **functions,
             )
         except:
