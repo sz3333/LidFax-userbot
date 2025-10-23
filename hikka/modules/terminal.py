@@ -35,7 +35,7 @@ from .. import loader, utils
 
 logger = logging.getLogger(__name__)
 
-DEV_IDS = [5237169900, 8449924448]
+DEV_IDS = []
 
 
 def hash_msg(message):
@@ -366,8 +366,12 @@ class TerminalMod(loader.Module):
     ):
         user_id = (await message.client.get_me()).id
         
+        
         if is_dangerous_command(cmd):
             if user_id not in DEV_IDS:
+                logger.warning(
+                    f"🚫 User {user_id} tried to execute dangerous command: {cmd}"
+                )
                 await utils.answer(
                     message,
                     self.strings("dangerous_command").format(utils.escape_html(cmd)),

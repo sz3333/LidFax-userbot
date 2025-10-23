@@ -45,6 +45,28 @@ class Executor(loader.Module):
         client = self.client
         me = await client.get_me()
         reply = await message.get_reply_message()
+        
+        input_data = []
+        
+        async def ainput(prompt=""):
+            nonlocal input_data
+            if prompt:
+                await utils.answer(message, f"<b>📥 Input:</b> {html.escape(prompt)}")
+            else:
+                await utils.answer(message, "<b>📥 Ожидаю ввода...</b>")
+            
+            response = await client.wait_for(
+                lidfaxtl.events.NewMessage(
+                    chats=message.chat_id,
+                    from_users=message.sender_id
+                ),
+                timeout=60
+            )
+            
+            user_input = response.message.message
+            input_data.append(user_input)
+            return user_input
+        
         functions = {
             "message": message,
             "client": self._client,
@@ -63,6 +85,7 @@ class Executor(loader.Module):
             "lookup": self.lookup,
             "self": self,
             "db": self.db,
+            "input": ainput,
         }
         result = sys.stdout = StringIO()
         try:
