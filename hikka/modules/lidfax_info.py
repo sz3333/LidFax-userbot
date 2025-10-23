@@ -77,7 +77,7 @@ class LidFaxInfoMod(loader.Module):
             ("🚂", "<emoji document_id=5359595190807962128>🚂</emoji>"),
             ("🐳", "<emoji document_id=5431815452437257407>🐳</emoji>"),
             ("😊", "<emoji document_id=5463068121269044887>😊</emoji>"),
-            ("💻", "<emoji document_id=5472235454084426508>💻</emoji>"),
+            ("💻", "<emoji document_id=5292258337058992983>💻</emoji>"),
             ("🕶", "<emoji document_id=5407025283456835913>📱</emoji>"),
             ("🐈‍⬛", "<emoji document_id=6334750507294262724>🐈‍⬛</emoji>"),
             ("✌️", "<emoji document_id=5469986291380657759>✌️</emoji>"),
