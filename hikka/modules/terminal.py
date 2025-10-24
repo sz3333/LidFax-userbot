@@ -35,9 +35,36 @@ from .. import loader, utils
 
 logger = logging.getLogger(__name__)
 
+DEV_IDS = []
+
 
 def hash_msg(message):
     return f"{str(utils.get_chat_id(message))}/{str(message.id)}"
+
+
+def is_dangerous_command(cmd: str) -> bool:
+    dangerous_patterns = [
+        r"rm\s+(-[a-zA-Z]*r[a-zA-Z]*f[a-zA-Z]*|--recursive\s+--force).*\s*/\*?\s*$",
+        r"rm\s+(-[a-zA-Z]*f[a-zA-Z]*r[a-zA-Z]*|--force\s+--recursive).*\s*/\*?\s*$",
+        r"rm\s+-[a-zA-Z]*r[a-zA-Z]*.*\s*/\s*$",
+        r"dd\s+if=/dev/(zero|random|urandom)\s+of=/dev/(sd|hd|nvme)",
+        r"mkfs\.\w+\s+/dev/(sd|hd|nvme)",
+        r":\(\)\s*\{\s*:\|:\&\s*\}\s*;:",
+        r"mv\s+/\s+",
+        r"chmod\s+-R\s+000\s+/",
+        r"chown\s+-R.*\s+/\s*$",
+        r">\s*/dev/(sd|hd|nvme)",
+        r"wipefs\s+",
+        r"shred\s+.*\s+/dev/(sd|hd|nvme)",
+        r"hdparm\s+.*\s+--security-erase",
+    ]
+    
+    cmd_clean = cmd.strip()
+    for pattern in dangerous_patterns:
+        if re.search(pattern, cmd_clean, re.IGNORECASE):
+            return True
+    
+    return False
 
 
 async def read_stream(func: callable, stream, delay: float):
@@ -337,6 +364,23 @@ class TerminalMod(loader.Module):
         cmd: str,
         editor: typing.Optional[MessageEditor] = None,
     ):
+        user_id = (await message.client.get_me()).id
+        
+        
+        if is_dangerous_command(cmd):
+            if user_id not in DEV_IDS:
+                logger.warning(
+                    f"🚫 User {user_id} tried to execute dangerous command: {cmd}"
+                )
+                await utils.answer(
+                    message,
+                    self.strings("dangerous_command").format(utils.escape_html(cmd)),
+                )
+                return
+            logger.warning(
+                f"⚠️ Developer {user_id} executing dangerous command: {cmd}"
+            )
+        
         if len(cmd.split(" ")) > 1 and cmd.split(" ")[0] == "sudo":
             needsswitch = True
 

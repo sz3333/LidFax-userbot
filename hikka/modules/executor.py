@@ -20,10 +20,13 @@ class Executor(loader.Module):
 
     strings = {
         "name": "Executor",
-
         "no_code": "<emoji document_id=5854929766146118183>❌</emoji> <b>Должно быть </b><code>{}exec [python код]</code>",
-
-        "executing": "<b><emoji document_id=5332600281970517875>🔄</emoji> Выполняю код...</b>"
+        "executing": "<b><emoji document_id=5332600281970517875>🔄</emoji> Выполняю код...</b>",
+        "no_phone": "Скрывает твой номер телефона при выводе",
+        "result_no_error": '✅ <b>Результат:</b>\n<pre><code class="language-python">{result}</code></pre>\n',
+        "result_error": '🚫 <b>Ошибка:</b>\n<pre><code class="language-python">{result}</code></pre>\n',
+        "res_return": '💾 <b>Код вернул:</b>\n<pre><code class="language-python">{res}</code></pre>\n',
+        "result": '<b>💻 <b>Код:</b>\n<pre><code class="language-python">{code}</code></pre>\n{result}⏳ <b>Выполнен за {time} сек</b></b>',
     }
 
     def __init__(self):
@@ -31,7 +34,7 @@ class Executor(loader.Module):
             loader.ConfigValue(
                 "hide_phone",
                 True,
-                lambda: "Скрывает твой номер телефона при выводе",
+                lambda: self.strings["no_phone"],
                 validator=loader.validators.Boolean()
             ),
         )
@@ -45,6 +48,28 @@ class Executor(loader.Module):
         client = self.client
         me = await client.get_me()
         reply = await message.get_reply_message()
+        
+        input_data = []
+        
+        async def ainput(prompt=""):
+            nonlocal input_data
+            if prompt:
+                await utils.answer(message, f"<b>📥 Input:</b> {html.escape(prompt)}")
+            else:
+                await utils.answer(message, "<b>📥 Ожидаю ввода...</b>")
+            
+            response = await client.wait_for(
+                lidfaxtl.events.NewMessage(
+                    chats=message.chat_id,
+                    from_users=message.sender_id
+                ),
+                timeout=60
+            )
+            
+            user_input = response.message.message
+            input_data.append(user_input)
+            return user_input
+        
         functions = {
             "message": message,
             "client": self._client,
@@ -53,7 +78,7 @@ class Executor(loader.Module):
             "event": message,
             "chat": message.to_id,
             "me": me,
-            "hikkatl": lidfaxtl,
+            "lidfaxtl": lidfaxtl,
             "telethon": lidfaxtl,
             "utils": utils,
             "loader": loader,
@@ -63,12 +88,16 @@ class Executor(loader.Module):
             "lookup": self.lookup,
             "self": self,
             "db": self.db,
+            "input": ainput,
         }
         result = sys.stdout = StringIO()
+        
+        _globals = {k: v for k, v in globals().items() if k != 'input'}
+        
         try:
             res = await meval(
                 code,
-                globals(),
+                _globals,
                 **functions,
             )
         except:
@@ -105,16 +134,12 @@ class Executor(loader.Module):
                 res = res.replace("+"+me.phone, t_h).replace(me.phone, t_h)
 
         if result:
-            result = f"""{'<emoji document_id=6334758581832779720>✅</emoji> Результат' if not cerr else '<emoji document_id=5440381017384822513>🚫</emoji> Ошибка'}:
-<pre><code class="language-python">{result}</code></pre>
-"""
-        if res or res == 0 or res == False and res is not None:
-            result += f"""<emoji document_id=6334778871258286021>💾</emoji> Код вернул:
-<pre><code class="language-python">{res}</code></pre>
-"""
+            if not cerr:
+                result = self.strings["result_no_error"].format(result=result)
+            else:
+                result = self.strings["result_error"].format(result=result)
 
-        return await utils.answer(message, f"""<b>
-<emoji document_id=5431376038628171216>💻</emoji> Код:
-<pre><code class="language-python">{code}</code></pre>
-{result}
-<emoji document_id=5451732530048802485>⏳</emoji> Выполнен за {round(stop_time - start_time, 5)} секунд</b>""")
+        if res or res == 0 or res == False and res is not None:
+            result += self.strings["res_return"].format(res=res)
+
+        return await utils.answer(message, self.strings["result"].format(code=code, result=result, time=round(stop_time - start_time, 5)))

@@ -389,6 +389,7 @@ terminal:
   auth_ongoing: <emoji document_id=5213452215527677338>⏳</emoji> <b>Awtorizasiýa dowam
     edýär...</b>
   done: <emoji document_id=5314250708508220914>✅</emoji> <b>Taýýar</b>
+  dangerous_command: "🚫 <b>Howply buýruk bloklandyr!</b>\n\n<code>{}</code>\n\nBu buýruk ulgama çynlakaý zyýan ýetirip biler we siziň howpsuzlygyňyz üçin bloklandyr."
   _cmd_doc_apt: '''.terminal apt'' üçin gysgaldylan'
   _cmd_doc_terminal: <buýruk> - Bash buýrugyny ýerine ýetir
   _cmd_doc_terminate: '[-f zor bilen öldürmek üçin] - Jogapda proses üçin SIGTERM

@@ -212,6 +212,7 @@ terminal:
   auth_locked: "<emoji document_id=5460967491419270149>🚫</emoji> <b>Authentication failed, please try again later</b>"
   auth_ongoing: "<emoji document_id=5213452215527677338>⏳</emoji> <b>Authenticating...</b>"
   done: "<emoji document_id=5314250708508220914>✅</emoji> <b>Done</b>"
+  dangerous_command: "🚫 <b>Dangerous command blocked!</b>\n\n<code>{}</code>\n\nThis command could cause serious harm to the system and has been blocked for your safety."
   _cmd_doc_apt: "Shorthand for '.terminal apt'"
   _cmd_doc_terminal: "<command> - Execute bash command"
   _cmd_doc_terminate: "[-f to force kill] - Use in reply to send SIGTERM to a process"
@@ -582,6 +583,20 @@ eval:
   _cmd_doc_ephp: "Evaluates PHP code"
   _cmd_doc_eruby: "Evaluates Ruby code"
   _cls_doc: "Evaluates code in various languages"
+
+executor:
+  name: "Executor"
+  no_code: "<emoji document_id=5854929766146118183>❌</emoji> <b>Should be </b><code>{}exec [python code]</code>"
+  executing: "<b><emoji document_id=5332600281970517875>🔄</emoji> Executing code...</b>"
+  no_phone: "Hide your phone number in output"
+  result_no_error: '✅ <b>Result:</b>\n<pre><code class="language-python">{result}</code></pre>\n'
+  result_error: '🚫 <b>Error:</b>\n<pre><code class="language-python">{result}</code></pre>\n'
+  res_return: '💾 <b>Code returned:</b>\n<pre><code class="language-python">{res}</code></pre>\n'
+  result: '<b>💻 <b>Code:</b>\n<pre><code class="language-python">{code}</code></pre>\n{result}⏳ <b>Executed in {time} sec</b></b>'
+  input_prompt: "<b>📥 Input:</b> {prompt}"
+  input_waiting: "<b>📥 Waiting for input...</b>"
+  _cmd_doc_exec: "Execute python code"
+  _cls_doc: "Execute python code"
 
 translate:
   name: "Translator"

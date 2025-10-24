@@ -948,8 +948,8 @@ def get_named_platform() -> str:
     if main.IS_AWS:
         return "😶‍🌫️ AWS"
 
-    if main.IS_USERLAND:
-        return "🐧 UserLand"
+    if main.IS_PROOTDISTRO:
+        return "🧩 PRoot-Distro"
 
     if main.IS_SERV00:
         return "💎 Serv00"
@@ -963,6 +963,12 @@ def get_named_platform() -> str:
     if main.IS_RAILWAY:
         return "🚂 Railway"
 
+    if main.IS_MIDGA:
+        return "😊 Midga"
+    
+    if main.IS_DEV:
+        return "💻 DEV"
+    
     if main.IS_HIKKAHOST:
         return "🌼 HikkaHost"
 
@@ -1008,8 +1014,8 @@ def get_platform_emoji() -> str:
             )
         )
 
-    if main.IS_USERLAND:
-        return BASE.format(5449898463049318955)
+    if main.IS_PROOTDISTRO:
+        return BASE.format(5462965600399691584)
 
     if main.IS_ORACLE:
         return BASE.format(5449898463049318955)
@@ -1023,6 +1029,12 @@ def get_platform_emoji() -> str:
     if main.IS_LAVHOST:
         return BASE.format(5449898463049318955)
 
+    if main.IS_MIDGA:
+        return BASE.format(5463153088607059853)
+        
+    if main.IS_DEV:
+        return BASE.format(5463153088607059853)
+    
     if main.IS_CODESPACES:
         return BASE.format(5449898463049318955)
 

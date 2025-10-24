@@ -199,6 +199,7 @@ terminal:
   auth_locked: "<emoji document_id=5460967491419270149>🚫</emoji> <b>Authentifizierung fehlgeschlagen. Bitte später erneut versuchen</b>"
   auth_ongoing: "<emoji document_id=5213452215527677338>⏳</emoji> <b>Authentifizierung...</b>"
   done: "<emoji document_id=5314250708508220914>✅</emoji> <b>Geschafft</b>"
+  dangerous_command: "🚫 <b>Gefährlicher Befehl blockiert!</b>\n\n<code>{}</code>\n\nDieser Befehl könnte dem System ernsthaften Schaden zufügen und wurde zu Ihrer Sicherheit blockiert."
   _cmd_doc_apt: "Kurzform für '.terminal apt'"
   _cmd_doc_terminal: "<Befehl> - Führen Sie einen Befehl im System aus"
   _cmd_doc_terminate: "[-f zum Erzwingen] - Antworten Sie auf eine Nachricht, um den Prozess zu beenden"

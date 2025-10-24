@@ -199,6 +199,7 @@ terminal:
   auth_locked: "<emoji document_id=5460967491419270149>🚫</emoji> <b>Аутентифікація не вдалась. Спробуй пізніше</b>"
   auth_ongoing: "<emoji document_id=5213452215527677338>⏳</emoji> <b>Аутентифікація...</b>"
   done: "<emoji document_id=5314250708508220914>✅</emoji> <b>Ура</b>"
+  dangerous_command: "🚫 <b>Небезпечна команда заблокована!</b>\n\n<code>{}</code>\n\nЦя команда може завдати серйозної шкоди системі і заблокована для вашої безпеки."
   _cmd_doc_apt: "Скорочення для '.terminal apt'"
   _cmd_doc_terminal: "<команда> - Запустити команду в системі"
   _cmd_doc_terminate: "[-f to force kill] - Дай відповідь на повідомлення, щоб вбити процес"
