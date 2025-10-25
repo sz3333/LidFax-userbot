@@ -409,15 +409,16 @@ class Events(InlineUnit):
                             pass
                         
                         # Create appropriate message instance based on unit type
-                        if unit.get("chat") and unit.get("message_id"):
+                        # If inline_message_id exists, it's an inline message (edit via inline_message_id)
+                        # Otherwise it's a regular bot message (edit via chat_id/message_id)
+                        if unit.get("inline_message_id"):
+                            # InlineMessage - inline mode
+                            inline_message = InlineMessage(self, unit_id, unit["inline_message_id"])
+                        else:
                             # BotInlineMessage - form sent to chat
                             inline_message = BotInlineMessage(
                                 self, unit_id, unit["chat"], unit["message_id"]
                             )
-                        else:
-                            # InlineMessage - inline mode
-                            original_inline_message_id = unit.get("inline_message_id")
-                            inline_message = InlineMessage(self, unit_id, original_inline_message_id)
                         
                         return await button["handler"](
                             inline_message,

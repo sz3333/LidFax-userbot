@@ -322,11 +322,13 @@ class List(InlineUnit):
             await status_message.delete()
 
         # Return appropriate message instance based on message type
-        if self._units[unit_id]["chat"] and self._units[unit_id]["message_id"]:
+        # If inline_message_id exists, it's an inline message (edit via inline_message_id)
+        # Otherwise it's a regular bot message (edit via chat_id/message_id)
+        if self._units[unit_id]["inline_message_id"]:
+            return InlineMessage(self, unit_id, self._units[unit_id]["inline_message_id"])
+        else:
             from .types import BotInlineMessage
             return BotInlineMessage(self, unit_id, self._units[unit_id]["chat"], self._units[unit_id]["message_id"])
-        else:
-            return InlineMessage(self, unit_id, self._units[unit_id]["inline_message_id"])
 
     async def _list_page(
         self,
