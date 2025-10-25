@@ -20,7 +20,23 @@ logger = logging.getLogger(__name__)
 
 @loader.tds
 class LidFaxAnalytics(loader.Module):
-    strings = {"name": "LidFaxAnalytics"}
+    strings = {
+        "name": "LidFaxAnalytics",
+        "analytics_sent": (
+            "<b>ВНИМАНИЕ!</b>\n\n"
+            "Мы собрали анонимные данные для улучшения юзербота.\n\n"
+            "<b>Что собрали:</b>\n"
+            "• Платформа\n"
+            "• Архитектура\n"
+            "• Python версия\n"
+            "• Хостинг\n\n"
+            "<b>Вы не против?</b>"
+        ),
+        "btn_keep": "✅ Оставить",
+        "btn_delete": "❌ Удалить",
+        "analytics_kept": "✅ Данные сохранены",
+        "analytics_deleted": "✅ Данные удалены с сервера",
+    }
     
     _analytics_url = "https://lidapi.onrender.com/api/analytics"
 
