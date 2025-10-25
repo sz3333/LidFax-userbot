@@ -24,7 +24,7 @@ from aiogram.types import Message as AiogramMessage
 from aiogram.enums import ChatType
 
 from .. import utils
-from .types import BotInlineCall, InlineCall, InlineMessage, InlineQuery, InlineUnit
+from .types import BotInlineCall, BotInlineMessage, InlineCall, InlineMessage, InlineQuery, InlineUnit
 
 logger = logging.getLogger(__name__)
 
@@ -408,9 +408,16 @@ class Events(InlineUnit):
                         except Exception:
                             pass
                         
-                        # Use the original unit's inline_message_id, not the temporary one
-                        original_inline_message_id = unit.get("inline_message_id")
-                        inline_message = InlineMessage(self, unit_id, original_inline_message_id)
+                        # Create appropriate message instance based on unit type
+                        if unit.get("chat") and unit.get("message_id"):
+                            # BotInlineMessage - form sent to chat
+                            inline_message = BotInlineMessage(
+                                self, unit_id, unit["chat"], unit["message_id"]
+                            )
+                        else:
+                            # InlineMessage - inline mode
+                            original_inline_message_id = unit.get("inline_message_id")
+                            inline_message = InlineMessage(self, unit_id, original_inline_message_id)
                         
                         return await button["handler"](
                             inline_message,

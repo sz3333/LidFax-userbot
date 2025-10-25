@@ -317,6 +317,7 @@ class Gallery(InlineUnit):
 
         self._units[unit_id]["chat"] = utils.get_chat_id(m)
         self._units[unit_id]["message_id"] = m.id
+        self._units[unit_id]["inline_message_id"] = getattr(m, "inline_message_id", None)
 
         if isinstance(message, Message) and message.out:
             await message.delete()
@@ -327,7 +328,12 @@ class Gallery(InlineUnit):
         if not isinstance(next_handler, ListGalleryHelper):
             asyncio.ensure_future(self._load_gallery_photos(unit_id))
 
-        return InlineMessage(self, unit_id, self._units[unit_id]["inline_message_id"])
+        # Return appropriate message instance based on message type
+        if self._units[unit_id]["chat"] and self._units[unit_id]["message_id"]:
+            from .types import BotInlineMessage
+            return BotInlineMessage(self, unit_id, self._units[unit_id]["chat"], self._units[unit_id]["message_id"])
+        else:
+            return InlineMessage(self, unit_id, self._units[unit_id]["inline_message_id"])
 
     async def _call_photo(
         self,

@@ -139,7 +139,12 @@ class Form(InlineUnit):
         self._units[unit_id]["message_id"] = m.id
         self._units[unit_id]["inline_message_id"] = getattr(m, "inline_message_id", None)  # 💫 фикс для кнопок
 
-        return InlineMessage(self, unit_id, self._units[unit_id]["inline_message_id"])
+        # Return appropriate message instance based on message type
+        if self._units[unit_id]["chat"] and self._units[unit_id]["message_id"]:
+            from .types import BotInlineMessage
+            return BotInlineMessage(self, unit_id, self._units[unit_id]["chat"], self._units[unit_id]["message_id"])
+        else:
+            return InlineMessage(self, unit_id, self._units[unit_id]["inline_message_id"])
 
     async def _form_inline_handler(self, inline_query: InlineQuery):
         try:
