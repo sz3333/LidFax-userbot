@@ -70,7 +70,7 @@ class LidFaxConfigMod(loader.Module):
         query: str,
         mod: str,
         option: str,
-        inline_message_id: str,
+        inline_message_id: str = None,
         obj_type: typing.Union[bool, str] = False,
     ):
         try:
@@ -106,7 +106,6 @@ class LidFaxConfigMod(loader.Module):
                     {"text": self.strings("close_btn"), "action": "close"},
                 ]
             ],
-            inline_message_id=inline_message_id,
         )
 
     async def inline__reset_default(
@@ -265,7 +264,7 @@ class LidFaxConfigMod(loader.Module):
         query: str,
         mod: str,
         option: str,
-        inline_message_id: str,
+        inline_message_id: str = None,
         obj_type: typing.Union[bool, str] = False,
     ):
         try:
@@ -310,7 +309,6 @@ class LidFaxConfigMod(loader.Module):
                     {"text": self.strings("close_btn"), "action": "close"},
                 ]
             ],
-            inline_message_id=inline_message_id,
         )
 
     async def inline__remove_item(
@@ -319,7 +317,7 @@ class LidFaxConfigMod(loader.Module):
         query: str,
         mod: str,
         option: str,
-        inline_message_id: str,
+        inline_message_id: str = None,
         obj_type: typing.Union[bool, str] = False,
     ):
         try:
@@ -376,7 +374,6 @@ class LidFaxConfigMod(loader.Module):
                     {"text": self.strings("close_btn"), "action": "close"},
                 ]
             ],
-            inline_message_id=inline_message_id,
         )
 
     def _generate_series_markup(
@@ -392,7 +389,7 @@ class LidFaxConfigMod(loader.Module):
                     "text": self.strings("enter_value_btn"),
                     "input": self.strings("enter_value_desc"),
                     "handler": self.inline__set_config,
-                    "args": (mod, option, call.inline_message_id),
+                    "args": (mod, option),
                     "kwargs": {"obj_type": obj_type},
                 }
             ],
@@ -403,14 +400,14 @@ class LidFaxConfigMod(loader.Module):
                             "text": self.strings("remove_item_btn"),
                             "input": self.strings("remove_item_desc"),
                             "handler": self.inline__remove_item,
-                            "args": (mod, option, call.inline_message_id),
+                            "args": (mod, option),
                             "kwargs": {"obj_type": obj_type},
                         },
                         {
                             "text": self.strings("add_item_btn"),
                             "input": self.strings("add_item_desc"),
                             "handler": self.inline__add_item,
-                            "args": (mod, option, call.inline_message_id),
+                            "args": (mod, option),
                             "kwargs": {"obj_type": obj_type},
                         },
                     ]
@@ -537,7 +534,7 @@ class LidFaxConfigMod(loader.Module):
                     "text": self.strings("enter_value_btn"),
                     "input": self.strings("enter_value_desc"),
                     "handler": self.inline__set_config,
-                    "args": (mod, option, call.inline_message_id),
+                    "args": (mod, option),
                     "kwargs": {"obj_type": obj_type},
                 }
             ],
@@ -606,7 +603,7 @@ class LidFaxConfigMod(loader.Module):
                     "text": self.strings("enter_value_btn"),
                     "input": self.strings("enter_value_desc"),
                     "handler": self.inline__set_config,
-                    "args": (mod, option, call.inline_message_id),
+                    "args": (mod, option),
                     "kwargs": {"obj_type": obj_type},
                 }
             ],
@@ -798,7 +795,7 @@ class LidFaxConfigMod(loader.Module):
                         "text": self.strings("enter_value_btn"),
                         "input": self.strings("enter_value_desc"),
                         "handler": self.inline__set_config,
-                        "args": (mod, config_opt, call.inline_message_id),
+                        "args": (mod, config_opt),
                         "kwargs": {"obj_type": obj_type},
                     }
                 ],

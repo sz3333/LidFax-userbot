@@ -400,9 +400,18 @@ class Events(InlineUnit):
                     query = query.split(maxsplit=1)[1] if len(query.split()) > 1 else ""
 
                     try:
-                        # Create a proper InlineMessage instance for chosen inline queries
-                        # since ChosenInlineResult is not a CallbackQuery
-                        inline_message = InlineMessage(self, unit_id, chosen_inline_query.inline_message_id)
+                        # Delete the temporary "Inline input processing..." message
+                        try:
+                            await self.bot.delete_message(
+                                inline_message_id=chosen_inline_query.inline_message_id
+                            )
+                        except Exception:
+                            pass
+                        
+                        # Use the original unit's inline_message_id, not the temporary one
+                        original_inline_message_id = unit.get("inline_message_id")
+                        inline_message = InlineMessage(self, unit_id, original_inline_message_id)
+                        
                         return await button["handler"](
                             inline_message,
                             query,
