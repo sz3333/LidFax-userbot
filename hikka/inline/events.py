@@ -239,7 +239,16 @@ class Events(InlineUnit):
                     continue
 
         for unit_id, unit in self._units.copy().items():
-            for button in utils.array_sum(unit.get("buttons", [])):
+            buttons = unit.get("buttons", [])
+            if not isinstance(buttons, list):
+                logger.warning(
+                    "Unit %s has invalid buttons type: %s (expected list)",
+                    unit_id,
+                    type(buttons).__name__,
+                )
+                continue
+            
+            for button in utils.array_sum(buttons):
                 if not isinstance(button, dict):
                     logger.warning(
                         "Can't process update, because of corrupted button: %s",
@@ -366,7 +375,19 @@ class Events(InlineUnit):
                 return
 
         for unit_id, unit in self._units.copy().items():
-            for button in utils.array_sum(unit.get("buttons", [])):
+            buttons = unit.get("buttons", [])
+            if not isinstance(buttons, list):
+                logger.debug(
+                    "Unit %s has invalid buttons type: %s (expected list)",
+                    unit_id,
+                    type(buttons).__name__,
+                )
+                continue
+            
+            for button in utils.array_sum(buttons):
+                if not isinstance(button, dict):
+                    continue
+                
                 if (
                     "_switch_query" in button
                     and "input" in button

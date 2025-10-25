@@ -92,6 +92,9 @@ class Form(InlineUnit):
         if isinstance(audio, str):
             audio = {"url": audio}
 
+        # Validate and normalize markup
+        reply_markup = self._validate_markup(reply_markup) or []
+
         unit_id = utils.rand(16)
         perms_map = None if manual_security else self._find_caller_sec_map()
 
