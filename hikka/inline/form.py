@@ -147,6 +147,45 @@ class Form(InlineUnit):
         except IndexError:
             return
 
+        # Check if query is a switch_query for input buttons
+        for unit_id, unit in self._units.copy().items():
+            if unit.get("type") != "form":
+                continue
+            
+            buttons = unit.get("buttons", [])
+            if not isinstance(buttons, list):
+                continue
+                
+            for button in utils.array_sum(buttons):
+                if not isinstance(button, dict):
+                    continue
+                    
+                if (
+                    button.get("_switch_query") == query
+                    and "input" in button
+                    and inline_query.from_user.id
+                    in [self._me]
+                    + self._client.dispatcher.security._owner
+                    + unit.get("always_allow", [])
+                ):
+                    await inline_query.answer(
+                        [
+                            InlineQueryResultArticle(
+                                id=utils.rand(20),
+                                title=button.get("input", "Enter value"),
+                                description=inline_query.query.split(maxsplit=1)[1]
+                                if len(inline_query.query.split()) > 1
+                                else "Click to submit",
+                                input_message_content=InputTextMessageContent(
+                                    message_text="🌘 <i>Inline input processing...</i>",
+                                    parse_mode="HTML",
+                                ),
+                            )
+                        ],
+                        cache_time=0,
+                    )
+                    return
+
         if (
             inline_query.query not in self._units
             or self._units[inline_query.query]["type"] != "form"

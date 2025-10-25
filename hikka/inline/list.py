@@ -376,6 +376,50 @@ class List(InlineUnit):
         )
 
     async def _list_inline_handler(self, inline_query: InlineQuery):
+        try:
+            query = inline_query.query.split()[0]
+        except IndexError:
+            query = inline_query.query
+        
+        # Check if query is a switch_query for input buttons
+        for unit_id, unit in self._units.copy().items():
+            if unit.get("type") != "list":
+                continue
+            
+            custom_buttons = unit.get("custom_buttons", [])
+            if not isinstance(custom_buttons, list):
+                continue
+                
+            for button in utils.array_sum(custom_buttons):
+                if not isinstance(button, dict):
+                    continue
+                    
+                if (
+                    button.get("_switch_query") == query
+                    and "input" in button
+                    and inline_query.from_user.id
+                    in [self._me]
+                    + self._client.dispatcher.security._owner
+                    + unit.get("always_allow", [])
+                ):
+                    await inline_query.answer(
+                        [
+                            InlineQueryResultArticle(
+                                id=utils.rand(20),
+                                title=button.get("input", "Enter value"),
+                                description=inline_query.query.split(maxsplit=1)[1]
+                                if len(inline_query.query.split()) > 1
+                                else "Click to submit",
+                                input_message_content=InputTextMessageContent(
+                                    message_text="🌘 <i>Inline input processing...</i>",
+                                    parse_mode="HTML",
+                                ),
+                            )
+                        ],
+                        cache_time=0,
+                    )
+                    return
+        
         for unit in self._units.copy().values():
             if (
                 inline_query.from_user.id == self._me
