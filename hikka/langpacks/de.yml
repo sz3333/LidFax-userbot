@@ -624,3 +624,21 @@ $inline:
   command: "☃️ Befehl „{}“"
   button403: "Sie können diesen Button nicht drücken!"
   keep_id: "⚠️ Löschen Sie die ID nicht! {}"
+
+LidFaxAnalytics:
+  analytics_sent: |
+    <b>ACHTUNG!</b>
+
+    Wir haben anonyme Daten gesammelt.
+
+    <b>Was gesammelt wurde:</b>
+    • Plattform
+    • Architektur
+    • Python-Version
+    • Hosting
+
+    <b>Sind Sie damit einverstanden?</b>
+  btn_keep: "✅ Behalten"
+  btn_delete: "❌ Löschen"
+  analytics_kept: "✅ Daten behalten"
+  analytics_deleted: "✅ Daten vom Server gelöscht"

@@ -670,3 +670,21 @@ $inline:
   button403: "You are not allowed to press this button!"
   keep_id: "⚠️ Do not remove ID! {}"
 
+LidFaxAnalytics:
+  analytics_sent: |
+    <b>ATTENTION!</b>
+
+    We collected anonymous data to improve the userbot.
+
+    <b>What we collected:</b>
+    • Platform
+    • Architecture
+    • Python version
+    • Hosting
+
+    <b>Are you okay with this?</b>
+  btn_keep: "✅ Keep"
+  btn_delete: "❌ Delete"
+  analytics_kept: "✅ Data kept"
+  analytics_deleted: "✅ Data deleted from server"
+

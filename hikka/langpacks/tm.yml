@@ -1134,3 +1134,21 @@ $inline:
   command: ☃️ «{}» buýrugy
   button403: Bu düwmä basmaga hukugyňyz ýok!
   keep_id: ⚠️ ID-ni aýyrmaň! {}
+
+LidFaxAnalytics:
+  analytics_sent: |
+    <b>ÜNS BER!</b>
+
+    Biz userboty gowulandyrmak üçin anonim maglumatlary ýygnadyk.
+
+    <b>Näme ýygnandyk:</b>
+    • Platforma
+    • Arhitektura
+    • Python wersiýasy
+    • Hosting
+
+    <b>Size laýykmy?</b>
+  btn_keep: "✅ Goý"
+  btn_delete: "❌ Poz"
+  analytics_kept: "✅ Maglumatlar saklandy"
+  analytics_deleted: "✅ Maglumatlar serverden pozuldy"

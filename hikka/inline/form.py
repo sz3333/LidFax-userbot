@@ -92,6 +92,9 @@ class Form(InlineUnit):
         if isinstance(audio, str):
             audio = {"url": audio}
 
+        # Validate and normalize markup
+        reply_markup = self._validate_markup(reply_markup) or []
+
         unit_id = utils.rand(16)
         perms_map = None if manual_security else self._find_caller_sec_map()
 
@@ -136,13 +139,59 @@ class Form(InlineUnit):
         self._units[unit_id]["message_id"] = m.id
         self._units[unit_id]["inline_message_id"] = getattr(m, "inline_message_id", None)  # 💫 фикс для кнопок
 
-        return InlineMessage(self, unit_id, self._units[unit_id]["inline_message_id"])
+        # Return appropriate message instance based on message type
+        # If inline_message_id exists, it's an inline message (edit via inline_message_id)
+        # Otherwise it's a regular bot message (edit via chat_id/message_id)
+        if self._units[unit_id]["inline_message_id"]:
+            return InlineMessage(self, unit_id, self._units[unit_id]["inline_message_id"])
+        else:
+            from .types import BotInlineMessage
+            return BotInlineMessage(self, unit_id, self._units[unit_id]["chat"], self._units[unit_id]["message_id"])
 
     async def _form_inline_handler(self, inline_query: InlineQuery):
         try:
             query = inline_query.query.split()[0]
         except IndexError:
             return
+
+        # Check if query is a switch_query for input buttons
+        for unit_id, unit in self._units.copy().items():
+            if unit.get("type") != "form":
+                continue
+            
+            buttons = unit.get("buttons", [])
+            if not isinstance(buttons, list):
+                continue
+                
+            for button in utils.array_sum(buttons):
+                if not isinstance(button, dict):
+                    continue
+                    
+                if (
+                    button.get("_switch_query") == query
+                    and "input" in button
+                    and inline_query.from_user.id
+                    in [self._me]
+                    + self._client.dispatcher.security._owner
+                    + unit.get("always_allow", [])
+                ):
+                    await inline_query.answer(
+                        [
+                            InlineQueryResultArticle(
+                                id=utils.rand(20),
+                                title=button.get("input", "Enter value"),
+                                description=inline_query.query.split(maxsplit=1)[1]
+                                if len(inline_query.query.split()) > 1
+                                else "Click to submit",
+                                input_message_content=InputTextMessageContent(
+                                    message_text="🌘 <i>Inline input processing...</i>",
+                                    parse_mode="HTML",
+                                ),
+                            )
+                        ],
+                        cache_time=0,
+                    )
+                    return
 
         if (
             inline_query.query not in self._units

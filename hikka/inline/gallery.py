@@ -19,10 +19,12 @@ from aiogram.types import (
     CallbackQuery,
     InlineKeyboardMarkup,
     InlineQuery,
+    InlineQueryResultArticle,
     InlineQueryResultGif,
     InlineQueryResultPhoto,
     InputMediaAnimation,
     InputMediaPhoto,
+    InputTextMessageContent,
 )
 from aiogram.exceptions import TelegramBadRequest, TelegramRetryAfter
 from lidfaxtl.errors.rpcerrorlist import ChatSendInlineForbiddenError
@@ -315,6 +317,7 @@ class Gallery(InlineUnit):
 
         self._units[unit_id]["chat"] = utils.get_chat_id(m)
         self._units[unit_id]["message_id"] = m.id
+        self._units[unit_id]["inline_message_id"] = getattr(m, "inline_message_id", None)
 
         if isinstance(message, Message) and message.out:
             await message.delete()
@@ -325,7 +328,14 @@ class Gallery(InlineUnit):
         if not isinstance(next_handler, ListGalleryHelper):
             asyncio.ensure_future(self._load_gallery_photos(unit_id))
 
-        return InlineMessage(self, unit_id, self._units[unit_id]["inline_message_id"])
+        # Return appropriate message instance based on message type
+        # If inline_message_id exists, it's an inline message (edit via inline_message_id)
+        # Otherwise it's a regular bot message (edit via chat_id/message_id)
+        if self._units[unit_id]["inline_message_id"]:
+            return InlineMessage(self, unit_id, self._units[unit_id]["inline_message_id"])
+        else:
+            from .types import BotInlineMessage
+            return BotInlineMessage(self, unit_id, self._units[unit_id]["chat"], self._units[unit_id]["message_id"])
 
     async def _call_photo(
         self,
@@ -663,6 +673,50 @@ class Gallery(InlineUnit):
         )
 
     async def _gallery_inline_handler(self, inline_query: InlineQuery):
+        try:
+            query = inline_query.query.split()[0]
+        except IndexError:
+            query = inline_query.query
+        
+        # Check if query is a switch_query for input buttons
+        for unit_id, unit in self._units.copy().items():
+            if unit.get("type") != "gallery":
+                continue
+            
+            custom_buttons = unit.get("custom_buttons", [])
+            if not isinstance(custom_buttons, list):
+                continue
+                
+            for button in utils.array_sum(custom_buttons):
+                if not isinstance(button, dict):
+                    continue
+                    
+                if (
+                    button.get("_switch_query") == query
+                    and "input" in button
+                    and inline_query.from_user.id
+                    in [self._me]
+                    + self._client.dispatcher.security._owner
+                    + unit.get("always_allow", [])
+                ):
+                    await inline_query.answer(
+                        [
+                            InlineQueryResultArticle(
+                                id=utils.rand(20),
+                                title=button.get("input", "Enter value"),
+                                description=inline_query.query.split(maxsplit=1)[1]
+                                if len(inline_query.query.split()) > 1
+                                else "Click to submit",
+                                input_message_content=InputTextMessageContent(
+                                    message_text="🌘 <i>Inline input processing...</i>",
+                                    parse_mode="HTML",
+                                ),
+                            )
+                        ],
+                        cache_time=0,
+                    )
+                    return
+        
         for unit in self._units.copy().values():
             if (
                 inline_query.from_user.id == self._me

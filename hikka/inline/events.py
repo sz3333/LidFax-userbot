@@ -24,7 +24,7 @@ from aiogram.types import Message as AiogramMessage
 from aiogram.enums import ChatType
 
 from .. import utils
-from .types import BotInlineCall, InlineCall, InlineMessage, InlineQuery, InlineUnit
+from .types import BotInlineCall, BotInlineMessage, InlineCall, InlineMessage, InlineQuery, InlineUnit
 
 logger = logging.getLogger(__name__)
 
@@ -239,7 +239,16 @@ class Events(InlineUnit):
                     continue
 
         for unit_id, unit in self._units.copy().items():
-            for button in utils.array_sum(unit.get("buttons", [])):
+            buttons = unit.get("buttons", [])
+            if not isinstance(buttons, list):
+                logger.warning(
+                    "Unit %s has invalid buttons type: %s (expected list)",
+                    unit_id,
+                    type(buttons).__name__,
+                )
+                continue
+            
+            for button in utils.array_sum(buttons):
                 if not isinstance(button, dict):
                     logger.warning(
                         "Can't process update, because of corrupted button: %s",
@@ -366,7 +375,19 @@ class Events(InlineUnit):
                 return
 
         for unit_id, unit in self._units.copy().items():
-            for button in utils.array_sum(unit.get("buttons", [])):
+            buttons = unit.get("buttons", [])
+            if not isinstance(buttons, list):
+                logger.debug(
+                    "Unit %s has invalid buttons type: %s (expected list)",
+                    unit_id,
+                    type(buttons).__name__,
+                )
+                continue
+            
+            for button in utils.array_sum(buttons):
+                if not isinstance(button, dict):
+                    continue
+                
                 if (
                     "_switch_query" in button
                     and "input" in button
@@ -379,9 +400,26 @@ class Events(InlineUnit):
                     query = query.split(maxsplit=1)[1] if len(query.split()) > 1 else ""
 
                     try:
-                        # Create a proper InlineMessage instance for chosen inline queries
-                        # since ChosenInlineResult is not a CallbackQuery
-                        inline_message = InlineMessage(self, unit_id, chosen_inline_query.inline_message_id)
+                        # Delete the temporary "Inline input processing..." message
+                        try:
+                            await self.bot.delete_message(
+                                inline_message_id=chosen_inline_query.inline_message_id
+                            )
+                        except Exception:
+                            pass
+                        
+                        # Create appropriate message instance based on unit type
+                        # If inline_message_id exists, it's an inline message (edit via inline_message_id)
+                        # Otherwise it's a regular bot message (edit via chat_id/message_id)
+                        if unit.get("inline_message_id"):
+                            # InlineMessage - inline mode
+                            inline_message = InlineMessage(self, unit_id, unit["inline_message_id"])
+                        else:
+                            # BotInlineMessage - form sent to chat
+                            inline_message = BotInlineMessage(
+                                self, unit_id, unit["chat"], unit["message_id"]
+                            )
+                        
                         return await button["handler"](
                             inline_message,
                             query,
