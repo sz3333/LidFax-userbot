@@ -808,7 +808,8 @@ lidfax_info:
   ram_usage: RAM ulanylyşy
   send_info: Ulanyjybot maglumatyny iber
   description: ℹ Bu hiç hili şahsy maglumatlary paş etmeýär
-  up-to-date: <emoji document_id=5370699111492229743>😌</emoji> <b>Täze</b>
+  up-to-date: <emoji document_id=5458485283790004353>👍</emoji>
+ <b>Täze</b>
   update_required: <emoji document_id=5424728541650494040>😕</emoji> <b>Täzelenme zerur</b>
     <code>.update</code>
   setinfo_no_args: <emoji document_id=5370881342659631698>😢</emoji> <b>Maglumat üýtgetmek

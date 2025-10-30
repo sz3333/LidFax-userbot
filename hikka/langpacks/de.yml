@@ -437,7 +437,8 @@ lidfax_info:
   send_info: "Sende Informationen zum Userbot"
   description: "ℹ Dies wird keine persönlichen Informationen preisgeben"
   _ihandle_doc_info: "Sende Informationen zum Userbot"
-  up-to-date: "<emoji document_id=5370699111492229743>😌</emoji> <b>Aktuelle Version</b>"
+  up-to-date: "<emoji document_id=5458485283790004353>👍</emoji>
+ <b>Aktuelle Version</b>"
   update_required: "<emoji document_id=5424728541650494040>😕</emoji> <b>Update erforderlich</b> <code>.update</code>"
   _cfg_cst_msg: "Benutzerdefinierter Nachrichtentext in info. Kann Schlüsselwörter {me}, {version}, {build}, {prefix}, {platform}, {upd}, {uptime}, {cpu_usage}, {ram_usage}, {branch} enthalten"
   _cfg_cst_btn: "Benutzerdefinierte Schaltfläche in der Nachricht in info. Lasse es leer, um die Schaltfläche zu entfernen"
