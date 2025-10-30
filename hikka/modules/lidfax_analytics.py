@@ -122,7 +122,8 @@ class LidFaxAnalytics(loader.Module):
                     raise Exception(f"Server returned {response.status}")
 
     async def _remove_analytics(self, analytics_id: int):
-        url = self._analytics_url.rstrip("/analytics") + f"/analytics/{analytics_id}"
+        base_url = self._analytics_url.rsplit("/analytics", 1)[0]
+        url = f"{base_url}/analytics/{analytics_id}"
         
         async with aiohttp.ClientSession() as session:
             async with session.delete(
