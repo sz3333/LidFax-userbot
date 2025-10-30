@@ -436,8 +436,7 @@ lidfax_info:
   send_info: "Надіслати інформацію про юзербота"
   description: "ℹ Це не розкриє жодної особистої інформації"
   _ihandle_doc_info: "Надіслати інформацію про юзербота"
-  up-to-date: "<emoji document_id=5458485283790004353>👍</emoji>
- <b>Актуальна версія</b>"
+  up-to-date: "<emoji document_id=5458485283790004353>👍</emoji><b>Актуальна версія</b>"
   update_required: "<emoji document_id=5424728541650494040>😕</emoji> <b>Потрібне оновлення</b> <code>.update</code>"
   _cfg_cst_msg: "Кастомний текст повідомлення в info. Може містити ключові слова {me}, {version}, {build}, {prefix}, {platform}, {upd}, {uptime}, {cpu_usage}, {ram_usage}, {branch}"
   _cfg_cst_btn: "Кастомна кнопка в повідомленні в info. Залиш порожнім, щоб прибрати кнопку"

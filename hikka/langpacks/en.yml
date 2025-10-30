@@ -459,8 +459,7 @@ lidfax_info:
   ram_usage: "RAM usage"
   send_info: "Send userbot info"
   description: "ℹ This will not compromise any sensitive info"
-  up-to-date: "<emoji document_id=5458485283790004353>👍</emoji>
- <b>Up-to-date</b>"
+  up-to-date: "<emoji document_id=5458485283790004353>👍</emoji><b>Up-to-date</b>"
   update_required: "<emoji document_id=5424728541650494040>😕</emoji> <b>Update required</b> <code>.update</code>"
   setinfo_no_args: "<emoji document_id=5370881342659631698>😢</emoji> <b>You need to specify text to change info to</b>"
   setinfo_success: "<emoji document_id=5436040291507247633>🎉</emoji> <b>Info changed successfully</b>"
@@ -688,4 +687,5 @@ LidFaxAnalytics:
   btn_delete: "❌ Delete"
   analytics_kept: "✅ Data kept"
   analytics_deleted: "✅ Data deleted from server"
+
 
