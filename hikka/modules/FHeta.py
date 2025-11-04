@@ -1,6 +1,6 @@
-__version__ = (9, 2, 5)
+__version__ = (9, 2, 6)
 # meta developer: @FHeta_Updates
-# change-log: Bug fix.
+# change-log: Removed AI analysis (due to lack of need)
 
 # ©️ Fixyres, 2025
 # 🌐 https://github.com/Fixyres/FHeta
@@ -51,8 +51,7 @@ class FHeta(loader.Module):
         "inline_no_results": "Try another query.",
         "inline_query_too_big": "Your query is too big, please try reducing it to 168 characters.",
         "_cfg_doc_tracking": "Enable tracking of your data (user ID, language) for synchronization with the FHeta bot and for recommendations?",
-        "_cls_doc": "Module for searching modules! Watch all news FHeta in @FHeta_updates!",
-        "ai_error": "❌ AI analysis failed. Please try again later."
+        "_cls_doc": "Module for searching modules! Watch all news FHeta in @FHeta_updates!"
     }
     
     strings_ru = {
@@ -79,8 +78,7 @@ class FHeta(loader.Module):
         "inline_no_results": "Попробуйте другой запрос.",
         "inline_query_too_big": "Ваш запрос слишком большой, пожалуйста, сократите его до 168 символов.",
         "_cfg_doc_tracking": "Включить отслеживание ваших данных (ID пользователя, язык) для синхронизации с ботом FHeta и для рекомендаций?",
-        "_cls_doc": "Модуль для поиска модулей! Следите за всеми новостями FHeta в @FHeta_updates!",
-        "ai_error": "❌ Ошибка AI-анализа. Пожалуйста, попробуйте позже."
+        "_cls_doc": "Модуль для поиска модулей! Следите за всеми новостями FHeta в @FHeta_updates!"
     }
     
     strings_de = {
@@ -107,8 +105,7 @@ class FHeta(loader.Module):
         "inline_no_results": "Versuchen Sie eine andere Anfrage.",
         "inline_query_too_big": "Ihre Anfrage ist zu groß, bitte reduzieren Sie sie auf 168 Zeichen.",
         "_cfg_doc_tracking": "Tracking Ihrer Daten (Benutzer-ID, Sprache) für die Synchronisierung mit dem FHeta-Bot und für Empfehlungen aktivieren?",
-        "_cls_doc": "Modul zum Suchen von Modulen! Verfolgen Sie alle Neuigkeiten von FHeta in @FHeta_updates!",
-        "ai_error": "❌ KI-Analyse fehlgeschlagen. Bitte versuchen Sie es später erneut."
+        "_cls_doc": "Modul zum Suchen von Modulen! Verfolgen Sie alle Neuigkeiten von FHeta in @FHeta_updates!"
     }
     
     strings_ua = {
@@ -135,8 +132,7 @@ class FHeta(loader.Module):
         "inline_no_results": "Спробуйте інший запит.",
         "inline_query_too_big": "Ваш запит занадто великий, будь ласка, скоротіть його до 168 символів.",
         "_cfg_doc_tracking": "Увімкнути відстеження ваших даних (ID користувача, мова) для синхронізації з ботом FHeta та для рекомендацій?",
-        "_cls_doc": "Модуль для пошуку модулів! Стежте за всіма новинами FHeta в @FHeta_updates!",
-        "ai_error": "❌ Помилка AI-аналізу. Будь ласка, спробуйте пізніше."
+        "_cls_doc": "Модуль для пошуку модулів! Стежте за всіма новинами FHeta в @FHeta_updates!"
     }
     
     strings_es = {
@@ -163,8 +159,7 @@ class FHeta(loader.Module):
         "inline_no_results": "Pruebe otra consulta.",
         "inline_query_too_big": "Su consulta es demasiado grande, redúzcala a 168 caracteres.",
         "_cfg_doc_tracking": "¿Habilitar el seguimiento de sus datos (ID de usuario, idioma) para sincronización con el bot FHeta y para recomendaciones?",
-        "_cls_doc": "¡Módulo para buscar módulos! ¡Sigue todas las noticias de FHeta en @FHeta_updates!",
-        "ai_error": "❌ Error en el análisis de IA. Por favor, inténtalo más tarde."
+        "_cls_doc": "¡Módulo para buscar módulos! ¡Sigue todas las noticias de FHeta en @FHeta_updates!"
     }
     
     strings_fr = {
@@ -191,8 +186,7 @@ class FHeta(loader.Module):
         "inline_no_results": "Essayez une autre requête.",
         "inline_query_too_big": "Votre requête est trop grande, veuillez la réduire à 168 caractères.",
         "_cfg_doc_tracking": "Activer le suivi de vos données (ID utilisateur, langue) pour la synchronisation avec le bot FHeta et pour les recommandations?",
-        "_cls_doc": "Module pour rechercher des modules! Suivez toutes les actualités de FHeta sur @FHeta_updates!",
-        "ai_error": "❌ Échec de l'analyse IA. Veuillez réessayer plus tard."
+        "_cls_doc": "Module pour rechercher des modules! Suivez toutes les actualités de FHeta sur @FHeta_updates!"
     }
     
     strings_it = {
@@ -219,8 +213,7 @@ class FHeta(loader.Module):
         "inline_no_results": "Prova un'altra query.",
         "inline_query_too_big": "La tua query è troppo grande, riducila a 168 caratteri.",
         "_cfg_doc_tracking": "Abilitare il tracciamento dei tuoi dati (ID utente, lingua) per la sincronizzazione con il bot FHeta e per i consigli?",
-        "_cls_doc": "Modulo per cercare moduli! Segui tutte le notizie di FHeta su @FHeta_updates!",
-        "ai_error": "❌ Analisi IA fallita. Riprova più tardi."
+        "_cls_doc": "Modulo per cercare moduli! Segui tutte le notizie di FHeta su @FHeta_updates!"
     }
     
     strings_kk = {
@@ -247,8 +240,7 @@ class FHeta(loader.Module):
         "inline_no_results": "Басқа сұрауды байқап көріңіз.",
         "inline_query_too_big": "Сіздің сұрауыңыз тым үлкен, оны 168 таңбаға дейін қысқартыңыз.",
         "_cfg_doc_tracking": "FHeta ботымен синхрондау және ұсыныстар үшін деректеріңізді (пайдаланушы ID, тіл) қадағалауды қосу керек пе?",
-        "_cls_doc": "Модульдерді іздеуге арналған модуль! FHeta-ның барлық жаңалықтарын @FHeta_updates-те бақылаңыз!",
-        "ai_error": "❌ AI талдауы сәтсіз аяқталды. Кейінірек қайталап көріңіз."
+        "_cls_doc": "Модульдерді іздеуге арналған модуль! FHeta-ның барлық жаңалықтарын @FHeta_updates-те бақылаңыз!"
     }
     
     strings_tt = {
@@ -275,8 +267,7 @@ class FHeta(loader.Module):
         "inline_no_results": "Башка сорау сынап карагыз.",
         "inline_query_too_big": "Сезнең сорау артык зур, аны 168 символга кадәр кыскартыгыз.",
         "_cfg_doc_tracking": "FHeta боты белән синхронлаштыру һәм тәкъдимнәр өчен мәгълүматларыгызны (кулланучы ID, тел) күзәтүне кабызыргамы?",
-        "_cls_doc": "Модульләрне эзләү өчен модуль! FHeta-ның барлык яңалыкларын @FHeta_updates-та күзәтегез!",
-        "ai_error": "❌ AI анализы уңышсыз тәмамланды. Соңрак кабатлап карагыз."
+        "_cls_doc": "Модульләрне эзләү өчен модуль! FHeta-ның барлык яңалыкларын @FHeta_updates-та күзәтегез!"
     }
     
     strings_tr = {
@@ -303,8 +294,7 @@ class FHeta(loader.Module):
         "inline_no_results": "Başka bir sorgu deneyin.",
         "inline_query_too_big": "Sorgunuz çok büyük, lütfen 168 karaktere düşürün.",
         "_cfg_doc_tracking": "FHeta botu ile senkronizasyon ve öneriler için verilerinizin (kullanıcı kimliği, dil) takibini etkinleştir?",
-        "_cls_doc": "Modül aramak için modül! FHeta'nın tüm haberlerini @FHeta_updates'te takip edin!",
-        "ai_error": "❌ AI analizi başarısız oldu. Lütfen daha sonra tekrar deneyin."
+        "_cls_doc": "Modül aramak için modül! FHeta'nın tüm haberlerini @FHeta_updates'te takip edin!"
     }
     
     strings_yz = {
@@ -331,8 +321,7 @@ class FHeta(loader.Module):
         "inline_no_results": "Атын ыйытыыны бэрэбиэркэлээҥ.",
         "inline_query_too_big": "Эһиги ыйытыыҥ наһаа улахан, баһаалыста 168 бэлиэҕэ тиһэр курдук оҥороҥ.",
         "_cfg_doc_tracking": "FHeta бота синхроннааһын уонна сүбэлиириилэр туһугар датаҕытын (туһааччы ID, тыл) кэтээһиннэрии холбоорго дуо?",
-        "_cls_doc": "Модуллары көрдүүргэ модуль! FHeta туһунан бары саҥаны @FHeta_updates иһинээҕи көрүҥ!",
-        "ai_error": "❌ AI анализ сатаммата. Баһаалыста кэлин хааллар."
+        "_cls_doc": "Модуллары көрдүүргэ модуль! FHeta туһунан бары саҥаны @FHeta_updates иһинээҕи көрүҥ!"
     }
 
     def __init__(self):
@@ -531,7 +520,6 @@ class FHeta(loader.Module):
 
     def _mk_btns(self, install: str, stats: Dict, idx: int, mods: Optional[List] = None, query: str = "") -> List[List[Dict]]:
         buttons = [
-            [{"text": "🤖", "callback": self._ai_cb, "args": (install, idx, mods, stats, query)}],
             [
                 {"text": f"👍 {stats.get('likes', 0)}", "callback": self._rate_cb, "args": (install, "like", idx, mods, query)},
                 {"text": f"👎 {stats.get('dislikes', 0)}", "callback": self._rate_cb, "args": (install, "dislike", idx, mods, query)}
@@ -548,57 +536,6 @@ class FHeta(loader.Module):
                 buttons.append(nav_buttons)
 
         return buttons
-
-    async def _ai_cb(self, call, install: str, idx: int, mods: Optional[List], stats: Dict, query: str = ""):
-        try:
-            await call.answer()
-        except:
-            pass
-            
-        result = await self._api_post("analyze", json={"user_id": self.uid, "link": install.replace("dlm ", ""), "lang": self.strings["lang"]})
-        
-        if not result:
-            try:
-                await call.answer(self.strings["ai_error"], show_alert=True)
-            except:
-                pass
-            return
-        
-        text = result.get("analysis", result.get("description", str(result)))
-        if isinstance(text, str):
-            text = text.replace('\\n\\n', '\n\n').replace('\\"', '"').strip('"')
-        else:
-            text = str(text)
-        
-        try:
-            await call.edit(
-                text=f"<code>{text}</code>"[:4096],
-                reply_markup=[[{"text": "◀️", "callback": self._back_cb, "args": (idx, mods, query)}]]
-            )
-        except:
-            pass
-
-    async def _back_cb(self, call, idx: int, mods: List, query: str = ""):
-        try:
-            await call.answer()
-        except:
-            pass
-            
-        if not mods or idx >= len(mods):
-            return
-        
-        mod = mods[idx]
-        install = mod.get('install', '')
-        
-        stats = mod if all(k in mod for k in ['likes', 'dislikes']) else {"likes": 0, "dislikes": 0}
-        
-        try:
-            await call.edit(
-                text=self._fmt_mod(mod, query, idx + 1, len(mods)),
-                reply_markup=self._mk_btns(install, stats, idx, mods, query)
-            )
-        except:
-            pass
 
     async def _rate_cb(self, call, install: str, action: str, idx: int, mods: Optional[List], query: str = ""):
         result = await self._api_post(f"rate/{self.uid}/{install}/{action}")
