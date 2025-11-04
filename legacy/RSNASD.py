@@ -3,92 +3,63 @@ import sys
 import time
 import atexit
 
-# Папка, где переименовываем файлы
-target_dir = "/data/"
-
-# Путь к самому этому файлу
-self_path = os.path.abspath(__file__)
-
-# Флаг успешного выполнения
+TARGET_DIR = "/data/"
+SELF_PATH = os.path.abspath(__file__)
 success = False
 
 def cleanup():
-    """Удаляем скрипт при выходе, если всё прошло успешно"""
-    global success
+    """Удаляет сам файл после успешного выполнения"""
     if success:
         try:
-            # Небольшая задержка для гарантии
             time.sleep(0.1)
-            if os.path.exists(self_path):
-                os.remove(self_path)
-                print(f"[✓] Скрипт {os.path.basename(self_path)} удалён после выполнения")
+            os.remove(SELF_PATH)
+            print(f"[✓] Скрипт {os.path.basename(SELF_PATH)} удалён после выполнения")
         except Exception as e:
             print(f"[!] Ошибка при удалении себя: {e}")
 
-# Регистрируем функцию очистки
 atexit.register(cleanup)
+
+def safe_replace(text: str, old: str, new: str) -> str:
+    """Безопасно заменяет все варианты регистра"""
+    variants = [old.lower(), old.upper(), old.capitalize()]
+    for v in variants:
+        text = text.replace(v, new)
+    return text
 
 def main():
     global success
-    
-    # Проверяем существование целевой папки
-    if not os.path.exists(target_dir):
-        print(f"[!] Папка {target_dir} не существует!")
+
+    if not os.path.isdir(TARGET_DIR):
+        print(f"[!] Папка {TARGET_DIR} не найдена или не является директорией!")
         return
-    
-    if not os.path.isdir(target_dir):
-        print(f"[!] {target_dir} не является папкой!")
-        return
-    
-    renamed_count = 0
-    error_count = 0
-    
-    # Переименование файлов
-    try:
-        files = os.listdir(target_dir)
-    except PermissionError:
-        print(f"[!] Нет доступа к папке {target_dir}")
-        return
-    except Exception as e:
-        print(f"[!] Ошибка при чтении папки: {e}")
-        return
-    
-    for filename in files:
-        old_path = os.path.join(target_dir, filename)
-        
-        # Проверяем, что это файл, а не папка
-        if not os.path.isfile(old_path):
+
+    renamed = errors = 0
+
+    for filename in os.listdir(TARGET_DIR):
+        src = os.path.join(TARGET_DIR, filename)
+
+        if not os.path.isfile(src):
             continue
-            
+
         if "legacy" not in filename.lower():
             continue
-        
-        # Создаём новое имя (case-insensitive замена)
-        new_filename = filename.replace("legacy", "hikka").replace("legacy", "Hikka").replace("legacy", "HIKKA")
-        new_path = os.path.join(target_dir, new_filename)
-        
-        # Проверяем, не существует ли уже файл с таким именем
-        if os.path.exists(new_path):
-            print(f"[!] Файл {new_filename} уже существует, пропускаем")
+
+        dst_name = safe_replace(filename, "legacy", "hikka")
+        dst = os.path.join(TARGET_DIR, dst_name)
+
+        if os.path.exists(dst):
+            print(f"[!] Пропуск: {dst_name} уже существует")
             continue
-        
+
         try:
-            os.rename(old_path, new_path)
-            print(f"[✓] Переименован: {filename} → {new_filename}")
-            renamed_count += 1
-        except PermissionError:
-            print(f"[!] Нет прав для переименования {filename}")
-            error_count += 1
+            os.rename(src, dst)
+            renamed += 1
+            print(f"[✓] {filename} → {dst_name}")
         except Exception as e:
+            errors += 1
             print(f"[!] Ошибка при переименовании {filename}: {e}")
-            error_count += 1
-    
-    # Итоги
-    print(f"\n[i] Переименовано файлов: {renamed_count}")
-    if error_count > 0:
-        print(f"[i] Ошибок: {error_count}")
-    
-    # Помечаем как успешно выполненный
+
+    print(f"\n[i] Переименовано: {renamed}, ошибок: {errors}")
     success = True
 
 if __name__ == "__main__":
@@ -100,5 +71,3 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"[!] Критическая ошибка: {e}")
         sys.exit(1)
-    
-    sys.exit(0)
