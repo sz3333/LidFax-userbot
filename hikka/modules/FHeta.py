@@ -1,6 +1,6 @@
-__version__ = (9, 2, 6)
+__version__ = (9, 2, 7)
 # meta developer: @FHeta_Updates
-# change-log: Removed AI analysis (due to lack of need)
+# change-log: The search has been improved, but unfortunately only for searching through .fheta. In @your_heroku_bot fheta, now uses more primitive search due to strict Telegram limitations on inline query response time of 15 seconds...
 
 # ©️ Fixyres, 2025
 # 🌐 https://github.com/Fixyres/FHeta
@@ -25,7 +25,7 @@ from telethon.tl.functions.contacts import UnblockRequest
 @loader.tds
 class FHeta(loader.Module):
     '''Module for searching modules! Watch all news FHeta in @FHeta_updates!'''
-   
+
     strings = {
         "name": "FHeta",
         "searching": "🔎 <b>Searching...</b>",
@@ -53,7 +53,7 @@ class FHeta(loader.Module):
         "_cfg_doc_tracking": "Enable tracking of your data (user ID, language) for synchronization with the FHeta bot and for recommendations?",
         "_cls_doc": "Module for searching modules! Watch all news FHeta in @FHeta_updates!"
     }
-    
+
     strings_ru = {
         "searching": "🔎 <b>Поиск...</b>",
         "no_query": "❌ <b>Введите запрос для поиска.</b>",
@@ -80,7 +80,7 @@ class FHeta(loader.Module):
         "_cfg_doc_tracking": "Включить отслеживание ваших данных (ID пользователя, язык) для синхронизации с ботом FHeta и для рекомендаций?",
         "_cls_doc": "Модуль для поиска модулей! Следите за всеми новостями FHeta в @FHeta_updates!"
     }
-    
+
     strings_de = {
         "searching": "🔎 <b>Suche...</b>",
         "no_query": "❌ <b>Geben Sie eine Suchanfrage ein.</b>",
@@ -107,7 +107,7 @@ class FHeta(loader.Module):
         "_cfg_doc_tracking": "Tracking Ihrer Daten (Benutzer-ID, Sprache) für die Synchronisierung mit dem FHeta-Bot und für Empfehlungen aktivieren?",
         "_cls_doc": "Modul zum Suchen von Modulen! Verfolgen Sie alle Neuigkeiten von FHeta in @FHeta_updates!"
     }
-    
+
     strings_ua = {
         "searching": "🔎 <b>Пошук...</b>",
         "no_query": "❌ <b>Введіть запит для пошуку.</b>",
@@ -134,7 +134,7 @@ class FHeta(loader.Module):
         "_cfg_doc_tracking": "Увімкнути відстеження ваших даних (ID користувача, мова) для синхронізації з ботом FHeta та для рекомендацій?",
         "_cls_doc": "Модуль для пошуку модулів! Стежте за всіма новинами FHeta в @FHeta_updates!"
     }
-    
+
     strings_es = {
         "searching": "🔎 <b>Buscando...</b>",
         "no_query": "❌ <b>Ingrese una consulta para buscar.</b>",
@@ -161,7 +161,7 @@ class FHeta(loader.Module):
         "_cfg_doc_tracking": "¿Habilitar el seguimiento de sus datos (ID de usuario, idioma) para sincronización con el bot FHeta y para recomendaciones?",
         "_cls_doc": "¡Módulo para buscar módulos! ¡Sigue todas las noticias de FHeta en @FHeta_updates!"
     }
-    
+
     strings_fr = {
         "searching": "🔎 <b>Recherche...</b>",
         "no_query": "❌ <b>Entrez une requête pour rechercher.</b>",
@@ -188,7 +188,7 @@ class FHeta(loader.Module):
         "_cfg_doc_tracking": "Activer le suivi de vos données (ID utilisateur, langue) pour la synchronisation avec le bot FHeta et pour les recommandations?",
         "_cls_doc": "Module pour rechercher des modules! Suivez toutes les actualités de FHeta sur @FHeta_updates!"
     }
-    
+
     strings_it = {
         "searching": "🔎 <b>Ricerca in corso...</b>",
         "no_query": "❌ <b>Inserisci una query per cercare.</b>",
@@ -215,7 +215,7 @@ class FHeta(loader.Module):
         "_cfg_doc_tracking": "Abilitare il tracciamento dei tuoi dati (ID utente, lingua) per la sincronizzazione con il bot FHeta e per i consigli?",
         "_cls_doc": "Modulo per cercare moduli! Segui tutte le notizie di FHeta su @FHeta_updates!"
     }
-    
+
     strings_kk = {
         "searching": "🔎 <b>Іздеу...</b>",
         "no_query": "❌ <b>Іздеу үшін сұрауды енгізіңіз.</b>",
@@ -242,7 +242,7 @@ class FHeta(loader.Module):
         "_cfg_doc_tracking": "FHeta ботымен синхрондау және ұсыныстар үшін деректеріңізді (пайдаланушы ID, тіл) қадағалауды қосу керек пе?",
         "_cls_doc": "Модульдерді іздеуге арналған модуль! FHeta-ның барлық жаңалықтарын @FHeta_updates-те бақылаңыз!"
     }
-    
+
     strings_tt = {
         "searching": "🔎 <b>Эзләү...</b>",
         "no_query": "❌ <b>Эзләү өчен сорау кертегез.</b>",
@@ -269,7 +269,7 @@ class FHeta(loader.Module):
         "_cfg_doc_tracking": "FHeta боты белән синхронлаштыру һәм тәкъдимнәр өчен мәгълүматларыгызны (кулланучы ID, тел) күзәтүне кабызыргамы?",
         "_cls_doc": "Модульләрне эзләү өчен модуль! FHeta-ның барлык яңалыкларын @FHeta_updates-та күзәтегез!"
     }
-    
+
     strings_tr = {
         "searching": "🔎 <b>Aranıyor...</b>",
         "no_query": "❌ <b>Arama yapmak için bir sorgu girin.</b>",
@@ -296,7 +296,7 @@ class FHeta(loader.Module):
         "_cfg_doc_tracking": "FHeta botu ile senkronizasyon ve öneriler için verilerinizin (kullanıcı kimliği, dil) takibini etkinleştir?",
         "_cls_doc": "Modül aramak için modül! FHeta'nın tüm haberlerini @FHeta_updates'te takip edin!"
     }
-    
+
     strings_yz = {
         "searching": "🔎 <b>Көрдөөбүт...</b>",
         "no_query": "❌ <b>Көрдүүргэ ыйытыыны киллэриҥ.</b>",
@@ -339,7 +339,7 @@ class FHeta(loader.Module):
             await client(UnblockRequest("@FHeta_robot"))
         except:
             pass
-            
+
         await self.request_join(
             "FHeta_Updates",
             "🔥 This is the channel with all updates in FHeta!"
@@ -375,11 +375,11 @@ class FHeta(loader.Module):
                     [sys.executable, "-m", "pip", "install", "certifi==2024.8.30"]
                 )
             await asyncio.sleep(60)
-            
+
     async def _sync_loop(self):
         tracked = True
         timeout = aiohttp.ClientTimeout(total=5)
-        
+
         async with aiohttp.ClientSession(timeout=timeout) as session:
             while True:
                 try:
@@ -406,9 +406,9 @@ class FHeta(loader.Module):
                             await response.release()
                 except:
                     pass
-                    
+
                 await asyncio.sleep(10)
-            
+
     async def on_dlmod(self, client, db):
         try:
             await client(UnblockRequest("@FHeta_robot"))
@@ -424,7 +424,7 @@ class FHeta(loader.Module):
                     params=params,
                     headers={"Authorization": self.token},
                     ssl=self.ssl,
-                    timeout=aiohttp.ClientTimeout(total=10)
+                    timeout=aiohttp.ClientTimeout(total=180)
                 ) as response:
                     if response.status == 200:
                         return await response.json()
@@ -441,7 +441,7 @@ class FHeta(loader.Module):
                     params=params,
                     headers={"Authorization": self.token},
                     ssl=self.ssl,
-                    timeout=aiohttp.ClientTimeout(total=30)
+                    timeout=aiohttp.ClientTimeout(total=180)
                 ) as response:
                     if response.status == 200:
                         return await response.json()
@@ -451,10 +451,10 @@ class FHeta(loader.Module):
 
     async def _fetch_thumb(self, url: Optional[str]) -> str:
         default_thumb = "https://raw.githubusercontent.com/Fixyres/FHeta/refs/heads/main/imgonline-com-ua-Resize-SOMllzo0cPFUCor.png"
-        
+
         if not url:
             return default_thumb
-        
+
         try:
             async with aiohttp.ClientSession() as session:
                 async with session.get(url, timeout=aiohttp.ClientTimeout(total=1)) as response:
@@ -462,7 +462,7 @@ class FHeta(loader.Module):
                         return str(response.url)
         except:
             pass
-        
+
         return default_thumb
 
     def _fmt_mod(self, mod: Dict, query: str = "", idx: int = 1, total: int = 1, inline: bool = False) -> str:
@@ -498,10 +498,10 @@ class FHeta(loader.Module):
         for cmd in cmds:
             desc_dict = cmd.get("description", {})
             desc_text = desc_dict.get(lang) or desc_dict.get("doc") or ""
-            
+
             if isinstance(desc_text, dict):
                 desc_text = desc_text.get("doc", "")
-            
+
             cmd_name = utils.escape_html(cmd.get("name", ""))
             cmd_desc = utils.escape_html(desc_text) if desc_text else ""
 
@@ -515,7 +515,7 @@ class FHeta(loader.Module):
             result += self.strings["cmds"].format(cmds="\n".join(regular_cmds))
         if inline_cmds:
             result += self.strings["inline_cmds"].format(cmds="\n".join(inline_cmds))
-            
+
         return result
 
     def _mk_btns(self, install: str, stats: Dict, idx: int, mods: Optional[List] = None, query: str = "") -> List[List[Dict]]:
@@ -539,18 +539,18 @@ class FHeta(loader.Module):
 
     async def _rate_cb(self, call, install: str, action: str, idx: int, mods: Optional[List], query: str = ""):
         result = await self._api_post(f"rate/{self.uid}/{install}/{action}")
-        
+
         if mods and idx < len(mods):
             mod = mods[idx]
             stats_response = await self._api_post("get", json=[install])
             stats = stats_response.get(install, {"likes": 0, "dislikes": 0})
-            
+
             mod["likes"] = stats.get("likes", 0)
             mod["dislikes"] = stats.get("dislikes", 0)
         else:
             stats_response = await self._api_post("get", json=[install])
             stats = stats_response.get(install, {"likes": 0, "dislikes": 0})
-        
+
         try:
             await call.edit(reply_markup=self._mk_btns(install, stats, idx, mods, query))
         except:
@@ -573,15 +573,15 @@ class FHeta(loader.Module):
             await call.answer()
         except:
             pass
-            
+
         if not (0 <= idx < len(mods)):
             return
-        
+
         mod = mods[idx]
         install = mod.get('install', '')
-        
+
         stats = mod if all(k in mod for k in ['likes', 'dislikes']) else {"likes": 0, "dislikes": 0}
-        
+
         try:
             await call.edit(
                 text=self._fmt_mod(mod, query, idx + 1, len(mods)),
@@ -621,7 +621,7 @@ class FHeta(loader.Module):
             }
 
         mods = await self._api_get("search", query=query.args, inline="true", token=self.token, user_id=self.uid)
-        
+
         if not mods or not isinstance(mods, list):
             return {
                 "title": self.strings["inline_no_results"],
@@ -633,16 +633,16 @@ class FHeta(loader.Module):
         seen_keys = set()
         results = []
         installs_to_fetch = []
-        
+
         for mod in mods[:50]:
             key = f"{mod.get('name', '')}_{mod.get('author', '')}_{mod.get('version', '')}"
             if key in seen_keys:
                 continue
             seen_keys.add(key)
-            
+
             if 'likes' not in mod or 'dislikes' not in mod:
                 installs_to_fetch.append(mod.get('install', ''))
-        
+
         if installs_to_fetch:
             stats_response = await self._api_post("get", json=installs_to_fetch)
             for mod in mods[:50]:
@@ -650,23 +650,23 @@ class FHeta(loader.Module):
                 if install in stats_response:
                     mod['likes'] = stats_response[install].get('likes', 0)
                     mod['dislikes'] = stats_response[install].get('dislikes', 0)
-        
+
         seen_keys = set()
         for mod in mods[:50]:
             key = f"{mod.get('name', '')}_{mod.get('author', '')}_{mod.get('version', '')}"
             if key in seen_keys:
                 continue
             seen_keys.add(key)
-            
+
             stats = {
                 "likes": mod.get('likes', 0),
                 "dislikes": mod.get('dislikes', 0)
             }
-            
+
             desc = mod.get("description", "")
             if isinstance(desc, dict):
                 desc = desc.get(self.strings["lang"]) or desc.get("doc") or next(iter(desc.values()), "")
-            
+
             results.append({
                 "title": utils.escape_html(mod.get("name", "")),
                 "description": utils.escape_html(str(desc)),
@@ -692,7 +692,7 @@ class FHeta(loader.Module):
     async def fhetacmd(self, message):
         '''(query) - search modules.'''        
         query = utils.get_args_raw(message)
-        
+
         if not query:
             await utils.answer(message, self.strings["no_query"])
             return
@@ -710,7 +710,7 @@ class FHeta(loader.Module):
 
         seen_keys = set()
         unique_mods = []
-        
+
         for mod in mods:
             key = f"{mod.get('name', '')}_{mod.get('author', '')}_{mod.get('version', '')}"
             if key not in seen_keys:
@@ -723,22 +723,22 @@ class FHeta(loader.Module):
             return
 
         first_mod = unique_mods[0]
-        
+
         if 'likes' not in first_mod or 'dislikes' not in first_mod:
             installs = [m.get('install', '') for m in unique_mods]
             stats_response = await self._api_post("get", json=installs)
-            
+
             for mod in unique_mods:
                 install = mod.get('install', '')
                 if install in stats_response:
                     mod['likes'] = stats_response[install].get('likes', 0)
                     mod['dislikes'] = stats_response[install].get('dislikes', 0)
-        
+
         stats = {
             "likes": first_mod.get('likes', 0),
             "dislikes": first_mod.get('dislikes', 0)
         }
-        
+
         photo = None
         if len(unique_mods) == 1:
             photo = await self._fetch_thumb(first_mod.get("banner"))
@@ -751,7 +751,7 @@ class FHeta(loader.Module):
             photo=photo,
             reply_markup=self._mk_btns(first_mod.get("install", ""), stats, 0, unique_mods if len(unique_mods) > 1 else None, query)
         )
-        
+
         await status_msg.delete()
 
     @loader.command(
@@ -773,7 +773,7 @@ class FHeta(loader.Module):
         local_file.name = f"FHeta.py"
         local_file.seek(0)
         local_first_line = local_file.readline().strip().decode("utf-8")
-        
+
         correct_version = sys_module.__version__
         correct_version_str = ".".join(map(str, correct_version))
 
@@ -799,21 +799,21 @@ class FHeta(loader.Module):
     @loader.watcher(chat_id=7575472403)
     async def _install_via_fheta(self, message):
         link = message.raw_text.strip()
-        
+
         if not link.startswith("https://"):
             return
 
         loader_module = self.lookup("loader")
-        
+
         try:
             for _ in range(5):
                 await loader_module.download_and_install(link, None)
-                
+
                 if getattr(loader_module, "fully_loaded", False):
                     loader_module.update_modules_in_db()
-                
+
                 is_loaded = any(mod.__origin__ == link for mod in self.allmodules.modules)
-                
+
                 if is_loaded:
                     rose_msg = await message.respond("🌹")
                     await asyncio.sleep(1)
