@@ -1,74 +1,210 @@
-# ©️ Dan Gazizullin, 2021-2023
-# This file is a part of Hikka Userbot
-# 🌐 https://github.com/hikariatama/Hikka
-# You can redistribute it and/or modify it under the terms of the GNU AGPLv3
-# 🔑 https://www.gnu.org/licenses/agpl-3.0.html
+#   █▀▀ ▄▀█   █▀▄▀█ █▀█ █▀▄ █▀
+#   █▀░ █▀█   █░▀░█ █▄█ █▄▀ ▄█
 
-import contextlib
-import difflib
-import json
+#   https://t.me/famods
+
+# 🔒    Licensed under the GNU AGPLv3
+# 🌐 https://www.gnu.org/licenses/agpl-3.0.html
+
+# ---------------------------------------------------------------------------------
+# Name: Hetsu
+# Description: Search and install modules easily.
+# meta developer: @FAmods
+# meta banner: https://github.com/FajoX1/FAmods/blob/main/assets/banners/hetsu.png?raw=true
+# requires: aiohttp
+# ---------------------------------------------------------------------------------
+
+import re
+import asyncio
+import aiohttp
+
 import logging
-from typing import Dict, Literal, Optional, TypeVar, List, Tuple, Union
-from dataclasses import dataclass
 
-import requests
-from hikkatl.tl.types import Message
-from hikkatl.utils import resolve_inline_message_id
-
+from telethon import types, functions
 from .. import loader, utils
-from ..types import InlineCall, InlineQuery
 
 logger = logging.getLogger(__name__)
 
-T = TypeVar("T")
-
-
-def array_sum(array: List[List[T]]) -> List[T]:
-    """Performs basic sum operation on array"""
-    result: List[T] = []
-    for item in array:
-        result += item
-
-    return result
-
-
-@dataclass
-class HetaModule:
-    name: str
-    repo: str
-    link: str
-    libs: List[str]
-    hash: str
-    commands: Dict[str, str]
-    pic: Optional[str]
-    banner: Optional[str]
-    cls_doc: str
-
-
 @loader.tds
-class NewUnitHeta(loader.Module):
-    """Manages stuff with heta.dan.tatar"""
+class Hetsu(loader.Module):
+    """Search and install modules easily."""
 
     strings = {
-        "name": "NewUnitHeta",
-        "no_query": "<emoji document_id=5210952531676504517>❌</emoji> <b>You must specify query</b>",
-        "no_results": "<emoji document_id=5210952531676504517>❌</emoji> <b>No results</b>",
-        "api_error": "<emoji document_id=5210952531676504517>❌</emoji> <b>API is having issues</b>",
-        "result": "🥰 <b>Results for</b> <code>{query}</code><b>:</b>\n\n🧳 <code>{name}</code> <b>by</b> <code>{dev}</code>\n👨‍🏫 <i>{cls_doc}</i>\n\n📚 <b>Commands:</b>\n{commands}\n\n🔗 <b>Install:</b> <code>{prefix}ndlh {mhash}</code>",
-        "install": "🪄 Install",
-        "loaded": "✅ Sucessfully installed",
-        "not_loaded": "❌ Installation failed",
-        "language": "en",
-        "404": "<emoji document_id=5210952531676504517>❌</emoji> <b>Module not found</b>",
-        "not_exact": "<emoji document_id=5312383351217201533>⚠️</emoji> <b>No exact match has been found, so the closest result is shown instead</b>",
-        "link": '<emoji document_id=5280658777148760247>🌐</emoji> <b><a href="{url}">Link</a> of</b> <code>{class_name}</code>\n\n<emoji document_id=5188377234380954537>🌘</emoji> <code>{prefix}dlm {url}</code>\n\n{not_exact}',
-        "file": "<emoji document_id=5433653135799228968>📁</emoji> <b>File of</b> <code>{class_name}</code>\n\n<emoji document_id=5188377234380954537>🌘</emoji> <code>{prefix}lm</code> <b>in reply to this message to install</b>\n\n{not_exact}",
-        "args": "<emoji document_id=5210952531676504517>❌</emoji> <b>You must specify arguments</b>",
-        "_cmd_doc_heta": "<query> - Searches Heta repository for modules",
-        "_cmd_doc_ml": "<module name> - Send link to module",
-        "_cls_doc": "Manages stuff with @hikkamods_bot",
-        "enter_search_query": "🔎 Enter search query",
-        "search_query_desc": "Command, module name, description, etc.",
+        "name": "Hetsu",
+
+        "no_q": "<emoji document_id=5854929766146118183>❌</emoji> <b>You need to write <code>{}hetsu [query]</code></b>",
+        "inline_no_q": "<emoji document_id=5854929766146118183>❌</emoji> <b>Enter query.</b>",
+
+        "no_modules": "<b>❌ No modules founded.</b>",
+
+        "searching": """<emoji document_id=5404630946563515782>🔍</emoji> <b>Hetsu searching...</b>
+        
+<i><emoji document_id=6028117381690167734>🛡</emoji> Searching above 900+ modules. All modules are safety and clearly moderated.</i>""",
+
+        "module": """<b><emoji document_id=5843843420468024653>⭐️</emoji> Module <code>{module_name}</code></b> {developer}
+
+<emoji document_id=5843862283964390528>🔖</emoji> <b>Ratio:</b> <code>{ratio}</code>
+<emoji document_id=5874960879434338403>🔎</emoji> <b>Query:</b> {query}
+
+<emoji document_id=5879785854284599288>ℹ️</emoji> <b>Description:</b> <i>{description}</i>
+
+<emoji document_id=5967816500415827773>💻</emoji> <b>Source code:</b> <a href="{link}">click</a>
+
+<emoji document_id=5899757765743615694>⬇️</emoji> <code>{prefix}dlm {link}</code>""",
+    }
+
+    def __init__(self):
+        self.config = loader.ModuleConfig(
+            loader.ConfigValue(
+                "limit",
+                5,
+                lambda: "Max results of modules.",
+            ),
+        )
+
+
+    async def client_ready(self, client, db):
+        self.db = db
+        self._client = client
+
+    @loader.command()
+    async def hetsucmd(self, message):
+        """Search module"""
+
+        q = utils.get_args_raw(message)
+        if not q:
+            return await utils.answer(message, self.strings["no_q"].format(self.get_prefix()))
+        
+        await utils.answer(message, self.strings['searching'])
+
+        q_default = q
+
+        if not bool(re.fullmatch(r"[A-Za-z\s\d\W]+", q)):
+            q = await self._client(
+                functions.messages.TranslateTextRequest(
+                    peer=False,
+                    id=False,
+                    text=[
+                        types.TextWithEntities(
+                            q_default,
+                            [],
+                        )
+                    ],
+                    to_lang="en",
+                )
+            )
+
+            q = q.result[0].text        
+
+        logger.info(q)
+
+        async with aiohttp.ClientSession() as session:
+            async with session.get(
+                "https://hetsu.fajox.one/api/search",
+                params={
+                    "q": q,
+                    "limit": 1,
+                }
+            ) as response:
+                modules = (await response.json())['results']
+
+        if not modules:
+            return await utils.answer(message, self.strings['no_modules'])
+        
+        module = modules[0]
+
+        module_text = self.strings['module'].format(
+            module_name=module['name'],
+            developer=f"<b>by <code>{module['developer']}</code></b>" if module['developer'] else "",
+            ratio=module['ratio'],
+            query=q_default,
+            description=module['description'] if module['description'] else "No description.",
+            link=module['link'],
+            prefix=self.get_prefix()
+        )
+
+        if module['banner']:
+            return await utils.answer_file(
+                message,
+                module['banner'],
+                caption=module_text,
+            )
+        else:
+            return await utils.answer(
+                message,
+                module_text
+            )
+
+    @loader.inline_handler()
+    async def hetsu(self, query):
+        """Search module"""
+
+        q = query.args
+
+        if not q:
+            return {
+                "title": "No query",
+                "description": "Enter query for search module",
+                "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Flat_cross_icon.svg/1024px-Flat_cross_icon.svg.png",
+                "message": self.strings['inline_no_q'],
+            }
+
+        q_default = q
+
+        if not bool(re.fullmatch(r"[A-Za-z\s\d\W]+", q)):
+            q = await self._client(
+                functions.messages.TranslateTextRequest(
+                    peer=False,
+                    id=False,
+                    text=[
+                        types.TextWithEntities(
+                            q,
+                            [],
+                        )
+                    ],
+                    to_lang="en",
+                )
+            )
+
+        q = str(q)
+
+        async with aiohttp.ClientSession() as session:
+            async with session.get(
+                "https://hetsu.fajox.one/api/search",
+                params={
+                    "q": q,
+                    "limit": self.config['limit'],
+                }
+            ) as response:
+                modules = (await response.json())['results']
+
+        if not modules:
+            return {
+                "title": "No modules",
+                "description": "No modules founded with this query.",
+                "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Flat_cross_icon.svg/1024px-Flat_cross_icon.svg.png",
+                "message": self.strings['no_modules'],
+            }
+
+        answer = []
+
+        for module in modules:
+            answer.append({
+                "title": module['name'],
+                "description": module['description'] if module['description'] else "No description.",
+                "thumb": "https://img.icons8.com/m_outlined/512/FFFFFF/info.png",
+                "message": self.strings['module'].format(
+                    module_name=module['name'],
+                    developer=f"<b>by <code>{module['developer']}</code></b>" if module['developer'] else "",
+                    ratio=module['ratio'],
+                    query=q_default,
+                    description=module['description'] if module['description'] else "No description.",
+                    link=module['link'],
+                    prefix=self.get_prefix()
+                ),
+            })
+
+        return answer        "search_query_desc": "Command, module name, description, etc.",
         "_ihandle_doc_heta": "Searches Heta repository for modules",
         "enter_hash": "<emoji document_id=5210952531676504517>❌</emoji> <b>You must specify hash</b>",
         "resolving_hash": "<emoji document_id=5325731315004218660>⏳</emoji> <b>Resolving hash...</b>",
