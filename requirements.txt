@@ -16,5 +16,5 @@ tgcrypto==1.2.5
 rsa==4.9
 ruamel.yaml==0.17.21
 penis==420420.6969
-
+pornhubapi
 # Python 3.8+
