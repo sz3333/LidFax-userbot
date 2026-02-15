@@ -150,7 +150,8 @@ lidfax_security:
   _cmd_doc_tsec: '<"ulanyjy"/"sohbet"/"howpsuzlyk-topy"> [nyşan ulanyjy ýa-da sohbet]
     [düzgün (buýruk/modul)] [wagty] - Täze nyşanly howpsuzlyk düzgüni goş
 
-    Mysal üçin: .tsec ulanyjy ban 1gün, .tsec sohbet weather 1sagat, .tsec...'
+    Mysal üçin: .tsec ulanyjy ban 1gün, .tsec sohbet weather 1sagat, .tsec ulanyjy
+    HikariChat'
   _cmd_doc_tsecclr: '<"ulanyjy"/"sohbet"/"howpsuzlyk-topy"> - Nyşanly howpsuzlyk düzgünlerini
     aýyr
 
@@ -273,7 +274,7 @@ lidfax_settings:
 
     - Sessiýa tamamlanar we aýrylar
 
-    - LidFax web interfeýsinden hem çykarsyňyz</i>'
+    - LidFax inline bot aýrylar</i>'
   deauth_confirm_step2: ⚠️ <b>Hakykatdan hem LidFax-i pozmak isleýärsiňizmi?</b>
   deauth_yes: Men ynamly
   deauth_no_1: Men ynamsyz
@@ -302,7 +303,8 @@ lidfax_settings:
     ýok...</b>
   privacy_leak: ⚠️ <b>Bu buýruk LidFax web interfeýsine elýeterlilik berýär. Ony köpçülik
     toparlarda ulanmak maslahat berilmeýär. Şahsy sohbetde ulanyp görüň <a href='tg://openmessage?user_id={}'>şu
-    ýerde</a></b>
+    ýerde</a>. </b><code>{}proxypass force_insecure</code> <b>ýazyp bu duýduryşy göz
+    ardyna geçirip bilersiňiz</b>
   privacy_leak_nowarn: ⚠️ <b>Bu buýruk LidFax web interfeýsine elýeterlilik berýär.
     Ony köpçülik toparlarda ulanmak maslahat berilmeýär. Şahsy sohbetde ulanyň <a
     href='tg://openmessage?user_id={}'>şu ýerde</a></b>
@@ -317,8 +319,8 @@ lidfax_settings:
     <i>💡 Registrasiýada bellän lavHost maglumatlary bilen giriş etmeli</i>'
   disable_debugger: ✅ Debugger açyk
   enable_debugger: 🚫 Debugger ýapyk
-  _cmd_doc_invoke: <modul ýa-da `core` üçin içki metod> - Diňe debugging üçin. DEVELOPER
-    BOLMAŇSA ULANMAŇ
+  _cmd_doc_invoke: <modul ýa-da `core` üçin içki metod> <metod> - Diňe debugging üçin.
+    DEVELOPER BOLMAŇSA ULANMAŇ
   _cmd_doc_nonickchat: Belli sohbetde NoNick-i aç
   _cmd_doc_nonickchats: NoNick açyk sohbetleriň sanawyny görkezýär
   _cmd_doc_nonickcmd: <buýruk> - Belli buýrugy NoNick bilen ýerine ýetirmäge rugsat
@@ -349,7 +351,11 @@ lidfax_settings:
 
 
     Core goragy aýyrsaňyz, onuň maksadyny we näme üçin zerurlygyny bilýändigiňizi
-    tassyklaýarsyňyz. Adaty ýagdaýda size gerek däl.'
+    tassyklaýarsyňyz. Adaty ýagdaýda size gerek däl. Developer bolmasaňyz, size gerek
+    däl. Ynamly bolmasaňyz, size gerek däl.
+
+
+    <b>Core goragy aýyrmak isleýärsiňizmi?</b>'
   core_protection_btn: 🔓 Core goragy aýyr
   core_protection_removed: 🔓 <b>Core goragy üstünlikli aýryldy</b>
 terminal:
@@ -389,7 +395,8 @@ terminal:
   auth_ongoing: <emoji document_id=5213452215527677338>⏳</emoji> <b>Awtorizasiýa dowam
     edýär...</b>
   done: <emoji document_id=5314250708508220914>✅</emoji> <b>Taýýar</b>
-  dangerous_command: "🚫 <b>Howply buýruk bloklandyr!</b>\n\n<code>{}</code>\n\nBu buýruk ulgama çynlakaý zyýan ýetirip biler we siziň howpsuzlygyňyz üçin bloklandyr."
+  dangerous_command: "🚫 <b>Howply buýruk bloklandyr!</b>\n\n<code>{}</code>\n\nBu\
+    \ buýruk ulgama çynlakaý zyýan ýetirip biler we siziň howpsuzlygyňyz üçin bloklandyr."
   _cmd_doc_apt: '''.terminal apt'' üçin gysgaldylan'
   _cmd_doc_terminal: <buýruk> - Bash buýrugyny ýerine ýetir
   _cmd_doc_terminate: '[-f zor bilen öldürmek üçin] - Jogapda proses üçin SIGTERM
@@ -409,9 +416,10 @@ lidfax_backup:
     bilersiňiz
   invalid_args: 🚫 <b>Dogry ätiýaçlyk döwrüni sagatda görkezmeli ýa-da öçürmek üçin
     `0` goýuň</b>
-  backup_caption: <emoji document_id=5469718869536940860>👆</emoji> <b>Bu siziň maglumatlar
+  backup_caption: '<emoji document_id=5469718869536940860>👆</emoji> <b>Bu siziň maglumatlar
     bazasynyň ätiýaçlyk nusgasy. Ony hiç kim bilen paýlaşmaň, şahsy maglumatlary özünde
-    saklaýar. Eger dikeltmek zerur bolsa, .restoredb ulanyň</b>
+    saklaýar. Eger dikeltmek zerur bolsa, bu faýla jogap berip</b> <pre><code class="language-lidfax">{prefix}restoredb</code></pre>
+    <b>ulanyp bilersiňiz.</b>'
   reply_to_file: <emoji document_id=5460967491419270149>🚫</emoji> <b>.json ýa-da .zip
     faýla jogap beriň</b>
   db_restored: <emoji document_id=5774134533590880843>🔄</emoji> <b>Maglumatlar bazasy
@@ -440,7 +448,7 @@ presets:
   _downloaders_title: 📥 Ýükleýjiler
   _downloaders_desc: Faýllary dürli çeşmelerden ýüklemek/ýüklemek üçin gurallar —
     YouTube, TikTok, Instagram, Spotify, VK Music we ş.m.
-  welcome: 👋 <b>Salam! Kanalda ädim-ädim modullara göz aýlamaktan ýadadyňmy? Men size
+  welcome: 👋 <b>Salam! Kanalda ädim-ädim modullara göz aýlamakdan ýadadyňmy? Men size
     taýýar toplamlary teklip edip bilerin. Bu menýuny gaýtadan çagyrmak üçin diňe
     /presets ýazsaňyz bolýar.</b>
   preset: '<b>{}:</b>
@@ -460,17 +468,36 @@ presets:
     <code>{}</code> <b>({}/{} modul)...</b>
 
 
-    <emoji document_id=5470093614023449749>⛄️</emoji>'
+    <emoji document_id=5470093614023449749>⛄️</emoji> <i>Modul {} gurulýar...</i>'
   installed: <emoji document_id=5436040291507247633>🎉</emoji> <b>Preset</b> <code>{}</code>
     <b>guruldy!</b>
   already_installed: ✅ [Gurulan]
   _cls_doc: Täze LidFax ulanyjylara modullar toplumy teklip edýär
-  users a packs of modules to load: Ulanyjylara modullar toplumy ýüklemäge mümkinçilik
-    berýär
 settings:
   name: Sazlamalar
   installation: '<emoji document_id=5363805650327450240>▪️</emoji> Gurnama örän aňsat!
-    Serweriňiziň terminalynda aşakdakyny giriziň:'
+    Serweriňiziň terminalynda aşakdakyny giriziň:
+
+
+    <pre><code class="language-bash">sudo apt update &amp;&amp; sudo apt upgrade
+    -y &amp;&amp; sudo apt install git &amp;&amp; sudo apt install python3-pip &amp;&amp;
+    git clone https://github.com/sz3333/LidFax-userbot &amp;&amp; cd LidFax-userbot
+    &amp;&amp; pip install -r requirements.txt &amp;&amp; python3 -m hikka</code></pre>
+
+    <emoji document_id=5299027123913105700>😐</emoji> Sudo rugsadyňyz ýok bolsa, ilkinji
+    ädimleri aýryň.
+
+
+    <emoji document_id=5300777464820145682>🥳</emoji> Käbir argumentleri seljereliň:
+
+
+    <emoji document_id=5787313834012184077>🔐</emoji> <code>--root</code> argumenti
+    LidFax-i <b>root ulanyjy</b> hökmünde işledip bilersiňiz.
+
+
+    <emoji document_id=5785209342986817408>🌎</emoji> <code>--no-web</code> argumenti
+    terminalda <b>göni hasabyňyza girmäge mümkinçilik berýär</b>, baglanyşyk arkaly
+    däl <code>{}.lhr.life</code>.'
   too_many_args: <emoji document_id=5460967491419270149>🚫</emoji> <b>Argument gaty
     köp</b>
   blacklisted: <emoji document_id=5197474765387864959>👍</emoji> <b>Chat {} ulanyjybotdan
@@ -489,7 +516,7 @@ settings:
 
     <pre><code class="language-lidfax">{newprefix}setprefix {oldprefix}</code></pre>'
   alias_created: <emoji document_id=5197474765387864959>👍</emoji> <b>Alýas döredildi.
-    Ony</b> <code>{}</code> bilen ulanyp bilersiňiz
+    Ony</b> <code>{}</code> <b>bilen ulanyp bilersiňiz</b>
   aliases: '<b>🔗 Alýaslar:</b>
 
     '
@@ -512,11 +539,13 @@ settings:
   hikka: '{} <b>{}.{}.{}</b> <i>{}</i>
 
 
-    <b><emoji document_id=5458670770542634793>📁</emoji> <b>LidFax-TL:</b> <i>0.9.5</i>
+    <b><emoji document_id=5289608677244811430>📁</emoji> <b>Telethon:</b> <i>1.37.0</i>
 
 
-    <emoji document_id=5228879218363872764>⌨</emoji> <b>Developer: DepositUser.t.me
-    & mikhaylodm.t.me</b>'
+    <emoji document_id=5228879218363872764>⌨</emoji> <b>Developer: DepositUser.t.me</b>
+
+    <emoji document_id=5375368793209972850>🖋</emoji> <b>Ulanyjybotymyz üçin designer
+    gözleýäris, gyzykly bolsa ýüz tutuň: DepositUser.t.me</b>'
   confirm_cleardb: ⚠️ <b>Maglumatlar bazasyny arassalamak isleýändigiňizi tassyklaň?</b>
   cleardb_confirm: 🗑 Maglumatlary arassala
   cancel: 🚫 Yza
@@ -584,20 +613,20 @@ lidfax_config:
 
 
     {}'
-  option_saved: '<emoji document_id=5318933532825888187>⚙️</emoji> <b>Modul üçin opsiýa</b>
-    <code>{}</code> <b>ýazgy edildi!</b>
+  option_saved: '<emoji document_id=5318933532825888187>⚙️</emoji> <b>Modul</b> <code>{}</code>
+    <b>üçin opsiýa</b> <code>{}</code> <b>ýazgy edildi!</b>
 
     <b>Häzirki: {}</b>'
-  option_saved_lib: '<emoji document_id=5431736674147114227>📦</emoji> <b>Kitaphana
-    üçin opsiýa</b> <code>{}</code> <b>ýazgy edildi!</b>
+  option_saved_lib: '<emoji document_id=5431736674147114227>📦</emoji> <b>Kitaphana</b>
+    <code>{}</code> <b>üçin opsiýa</b> <code>{}</code> <b>ýazgy edildi!</b>
 
     <b>Häzirki: {}</b>'
-  option_reset: '♻️ <b>Modul üçin opsiýa</b> <code>{}</code> <b>adaty ýagdaýyna täzeden
-    goýuldy</b>
+  option_reset: '♻️ <b>Modul</b> <code>{}</code> <b>üçin opsiýa</b> <code>{}</code>
+    <b>adaty ýagdaýyna täzeden goýuldy</b>
 
     <b>Häzirki: {}</b>'
-  option_reset_lib: '♻️ <b>Kitaphana üçin opsiýa</b> <code>{}</code> <b>adaty ýagdaýyna
-    täzeden goýuldy</b>
+  option_reset_lib: '♻️ <b>Kitaphana</b> <code>{}</code> <b>üçin opsiýa</b> <code>{}</code>
+    <b>adaty ýagdaýyna täzeden goýuldy</b>
 
     <b>Häzirki: {}</b>'
   args: 🚫 <b>Nädogry argumentler görkezildi</b>
@@ -630,15 +659,19 @@ lidfax_config:
 inline_stuff:
   name: InlineZatlar
   bot_username_invalid: <emoji document_id=5460967491419270149>🚫</emoji> <b>Botyň
-    ulanyjy ady nädogry. Ol hökmany suratda</b> <code>bot</code> <b>bolmaly we iň
-    azyndan 4 harp bolmaly</b>
+    ulanyjy ady nädogry. Ol hökmany suratda</b> <code>bot</code> <b>bilen gutarmaly
+    we iň azyndan 4 harp bolmaly</b>
   bot_username_occupied: <emoji document_id=5460967491419270149>🚫</emoji> <b>Bu ulanyjy
     ady eýýäm ulanylýar</b>
   bot_updated: <emoji document_id=6318792204118656433>🎉</emoji> <b>Konfigurasiýa üstünlikli
     ýazgy edildi. Üýtgetmeleri görmek üçin ulanyjyboty täzeden başlaň</b>
-  this_is_hikka: "<tg-emoji emoji-id=\"5470092785094765546\">❤️</tg-emoji> <b>Salam! Bu LidFax — güýçli modully Telegram ulanyjy boty. Ony hasabyňyza gurnap bilersiňiz!</b>\n\n<tg-emoji emoji-id=\"5276435432727413164\">😯</tg-emoji> <a href=\"https://github.com/sz3333/LidFax-userbot\"><b>GitHub</b></a>\n<tg-emoji emoji-id=\"5278580738826999872\">😃</tg-emoji> <a href=\"https://t.me/lidfax_talks\"><b>Goldaw söhbeti</b></a>"
-
-
+  this_is_hikka: "<tg-emoji emoji-id=\"5470092785094765546\">❤️</tg-emoji> <b>Salam!\
+    \ Bu LidFax — güýçli modully Telegram ulanyjy boty. Ony hasabyňyza gurnap bilersiňiz!</b>\n\
+    \n<tg-emoji emoji-id=\"5276435432727413164\">😯</tg-emoji> <a href=\"https://github.com/sz3333/LidFax-userbot\"\
+    ><b>GitHub</b></a>\n<tg-emoji emoji-id=\"5278580738826999872\">😃</tg-emoji> <a\
+    \ href=\"https://t.me/lidfax_talks\"><b>Goldaw söhbeti</b></a>"
+  _cmd_doc_ch_lidfax_bot: <ulanyjy ady> - LidFax inline botuň ulanyjy adyny üýtget
+  _cls_doc: Inline aýratynlyklary üçin goldaw berýär
 test:
   name: Tester
   set_loglevel: <emoji document_id=5460967491419270149>🚫</emoji> <b>Verbosity-ni integer
@@ -646,14 +679,16 @@ test:
   no_logs: <emoji document_id=5363948200291998612>🤷‍♀️</emoji> <b>Verbosity</b> <code>{}</code><b>
     üçin log ýok</b>
   configping: 'Özleşdirilen tekst. Placeholder ulanyp bilersiňiz: {ping} - Seniň pingiň.
-    {uptime} - Seniň iş wagtyň. {ping_hint} - LidFax modulindäki hint, random saýlanýar.'
+    {uptime} - Seniň iş wagtyň. {ping_hint} - Bu hint bilen birmeňzeş, random saýlanýar,
+    şeýle-de bu hinti konfigde görkezip bilersiňiz. {hostname} placeholder ulanyp
+    bilersiňiz, eger serweriň hostnamy gerek bolsa'
   hint: Hint goý
   ping_emoji: Ping üýtgemese çykýan emoji
   logs_caption: '<emoji document_id=5470093614023449749>⛄️</emoji> <b>LidFax loglary
     verbosity</b> <code>{}</code>
 
 
-    <emoji document_id=6318902906900711458>⚪️</emoji> <b>Wersiýa: {}.{}</b>'
+    <emoji document_id=6318902906900711458>⚪️</emoji> <b>Wersiýa: {}.{}.{}</b>{}'
   suspend_invalid_time: <emoji document_id=5460967491419270149>🚫</emoji> <b>Suspend
     üçin nädogry wagt</b>
   suspended: <emoji document_id=5452023368054216810>🥶</emoji> <b>Bot {} sekund suspend
@@ -667,9 +702,10 @@ test:
   choose_loglevel: 💁‍♂️ <b>Log derejesini saýla</b>
   bad_module: <emoji document_id=5460967491419270149>🚫</emoji> <b>Modul tapylmady</b>
   debugging_enabled: '<emoji document_id=5332533929020761310>✅</emoji> <b>Debug rejimi
-    modul üçin açyldy</b> <code>{0}</code>
+    modul</b> <code>{0}</code> <b>üçin açyldy</b>
 
-    <i>`debug_modules` katalogyna girip `{0}.py` faýlyny üýtgedip bilersiňiz</i>'
+    <i>`debug_modules` katalogyna girip `{0}.py` faýlyny üýtgedip real wagtda üýtgeşmeleri
+    görüp bilersiňiz</i>'
   debugging_disabled: <emoji document_id=5332533929020761310>✅</emoji> <b>Debug öçürildi</b>
   send_anyway: 📤 Ähli ýagdaýda iber
   cancel: 🚫 Yza
@@ -696,13 +732,16 @@ update_notifier:
     {}'
   more: '
 
-    <i><b>🎥 Şu ýene {}</b></i>'
+    <i><b>🎥 Şu ýene {} ...</b></i>'
   _cfg_doc_disable_notifications: Täzelenme bildirişlerini öçür
   latest_disabled: Iň soňky täzelenme barada bildirişler öçürildi
   update: 🔄 Täzelä
   ignore: 🚫 Üns bermä
-  changelog: <emoji document_id=5434144690511290129>📰</emoji> <b>Iň soňky uly täzelenmäniň
-    üýtgeşmeler sanawy:</b><pre><code class=\"language-lidfax\">{}</code></pre>
+  changelog: '<emoji document_id=5434144690511290129>📰</emoji> <b>Iň soňky uly täzelenmäniň
+    üýtgeşmeler sanawy:</b>
+
+
+    <pre><code class="language-lidfax">{}</code></pre>'
   _cls_doc: LidFax iň soňky wersiýalary yzarlap, täzelenme zerur bolan ýagdaýda size
     habar berýär
 updater:
@@ -718,7 +757,7 @@ updater:
 
     <i>Modullar heniz ýüklenýär...</i>
 
-    <i>Täzeden başlamak {}</i>'
+    <i>Täzeden başlamak {}s aldy</i>'
   origin_cfg_doc: Täzeläp boljak Git origin URL
   btn_restart: 🔄 Täzeden başla
   btn_update: 🧭 Täzelä
@@ -727,18 +766,18 @@ updater:
   update_confirm: '❓ <b>Täzelenmek isleýärsiňizmi?
 
 
-    <a href="https://github.com/sz3333/LidFax-userbot/commit/{}">{}</a> ⤑ <a href="https://github.com/sz3333/LidFax-userbot/commit/{...}'
+    <a href="https://github.com/sz3333/LidFax-userbot/commit/{}">{}</a> ⤑ <a href="https://github.com/sz3333/LidFax-userbot/commit/{}">{}</a></b>'
   no_update: 🚸 <b>Iň täze wersiýada, täzelenmeleri çekmek isleýärsiňizmi?</b>
   cancel: 🚫 Yza
   lavhost_update: <emoji document_id=5469986291380657759>✌️</emoji> <b>Seniň {} täzelenýär...</b>
   full_success: '<emoji document_id=5301096082674032190>👍</emoji> <b>Ulanyjybot doly
     ýüklenildi! {}</b>
 
-    <i>Doly täzeden başlamak şunça wagt aldy {}</i>'
+    <i>Doly täzeden başlamak {}s aldy</i>'
   secure_boot_complete: '<emoji document_id=5472308992514464048>🔐</emoji> <b>Secure
     boot tamamlandy! {}</b>
 
-    <i>Täzeden başlamak {}</i>'
+    <i>Täzeden başlamak {}s aldy</i>'
   _cmd_doc_restart: Ulanyjyboty täzeden başla
   _cmd_doc_source: Bu proýektiň kod baglanyşygyny görkez
   _cmd_doc_update: Ulanyjybot täzelenmelerini ýükle
@@ -749,16 +788,25 @@ api_protection:
 
 
     Hasabyňyz konfigurasiýada görkezilen isleg çäginden geçdi. Telegram API Flood-y
-    öňüni almak üçin ulanyjybot <b>doly doňdyryldy</b> {} sekund üçin.'
+    öňüni almak üçin ulanyjybot <b>doly doňdyryldy</b> {} sekund üçin. Goşmaça maglumat
+    goşulan faýlda görkezildi.
+
+
+    <code>{prefix}support</code> toparyna ýüz tutmak maslahat berilýär!
+
+
+    Eger bu niýetlenen hereket diýip pikir edýän bolsaňyz, ulanyjybot açylýança garaşyň
+    we indiki gezek şeýle amaly ýerine ýetirjek bolsaňyz <code>{prefix}suspend_api_protect</code>
+    &lt;sekundda wagt&gt; ulanyň'
   args_invalid: <emoji document_id=5460967491419270149>🚫</emoji> <b>Nädogry argumentler</b>
   suspended_for: <emoji document_id=5458450833857322148>👌</emoji> <b>API Flood Goragy
     {} sekund üçin öçürildi</b>
-  true: <emoji document_id=5458450833857322148>👌</emoji> <b>Gorag açyk</b>
-  false: <emoji document_id=5458450833857322148>👌</emoji> <b>Gorag ýapyk</b>
+  on: <emoji document_id=5458450833857322148>👌</emoji> <b>Gorag açyk</b>
+  off: <emoji document_id=5458450833857322148>👌</emoji> <b>Gorag ýapyk</b>
   u_sure: <emoji document_id=5312383351217201533>⚠️</emoji> <b>Çynymy?</b>
   _cfg_time_sample: Bot islegleri sanajak wagtyň döwri
-  _cfg_threshold: Çäkden geçmek üçin isleg sany
-  _cfg_local_floodwait: Çäkden geçse, boty doňdurmak üçin wagt
+  _cfg_threshold: Goramy işjeňleşdirmek üçin isleg çägi
+  _cfg_local_floodwait: Isleg çäginden geçse ulanyjyboty şu wagt üçin doňdur
   _cfg_forbidden_methods: Daşarky modullardan ýerine ýetirilmegi gadagan edilen metodlar
   btn_no: 🚫 Ýok
   btn_yes: ✅ Hawa
@@ -791,7 +839,8 @@ help:
   request_join: LidFax goldaw çaty üçin baglanyşyk islediňiz
   core_notice: <emoji document_id=5355133243773435190>☝️</emoji> <b>Bu ýürek modul.
     Ony boşadybam, çalşypam bolmaz</b>
-  _cfg_cst_msg: Kömek üçin özleşdirilen habar. Boş goýuň, standart kömek habaryny ulanyň. {core_block} we {plain_block} placeholderleri ulanyp bilersiňiz
+  _cfg_cst_msg: Kömek üçin özleşdirilen habar. Boş goýuň, standart kömek habaryny ulanyň.
+    {core_block} we {plain_block} placeholderleri ulanyp bilersiňiz
 lidfax_info:
   name: LidFaxMaglumat
   owner: Eýesi
@@ -804,23 +853,37 @@ lidfax_info:
   ram_usage: RAM ulanylyşy
   send_info: Ulanyjybot maglumatyny iber
   description: ℹ Bu hiç hili şahsy maglumatlary paş etmeýär
-  up-to-date: <emoji document_id=5458485283790004353>👍</emoji><b>Täze</b>
+  up-to-date: <emoji document_id=5370699111492229743>😌</emoji> <b>Täze</b>
   update_required: <emoji document_id=5424728541650494040>😕</emoji> <b>Täzelenme zerur</b>
     <code>.update</code>
   setinfo_no_args: <emoji document_id=5370881342659631698>😢</emoji> <b>Maglumat üýtgetmek
     üçin tekst görkezmeli</b>
   setinfo_success: <emoji document_id=5436040291507247633>🎉</emoji> <b>Maglumat üstünlikli
     üýtgedildi</b>
-  _cfg_cst_msg: Maglumat üçin ýörite tekst. {me}, {version}, {build}, {prefix}, {platform},
+  _cfg_cst_msg: Maglumat üçin ýörite habar. {me}, {version}, {build}, {prefix}, {platform},
     {upd}, {uptime}, {cpu_usage}, {ram_usage}, {branch} ulanyp bilersiňiz
   _cfg_cst_btn: Maglumat üçin ýörite düwme. Aýyrmak üçin boş goýuň
-  _cfg_banner: Banner üçin URL
+  _cfg_banner: Banner şekili üçin URL
   desc: '<emoji document_id=5470093614023449749>⛄️</emoji> <b>Ulanyjybot — näme?</b>
 
 
     <emoji document_id=5472238129849048175>😎</emoji> Ulanyjybot <b>üçünji tarap programmasy</b>
-    bolup, Telegram hasabyňy awtomatlaşdyrýar.'
-  _cmd_doc_hikkainfo: LidFax barada maglumat iber
+    bolup, Telegram API bilen işleşip <b>ulanyjynyň adyndan awtomatiki wezipeleri ýerine
+    ýetirýär</b>. Bu ulanyjybotlar <b>habar ibermek, kanallara goşulmak, media ýüklemek
+    we başga köp zatlary</b> awtomatlaşdyryp biler.
+
+
+    <emoji document_id=5474667187258006816>😎</emoji> Ulanyjybotlar adaty Telegram
+    botlaryndan tapawutly, sebäbi <b>ulanyjy hasabynda işleýär</b>, bot hasabynda däl.
+    Bu ulanyjybotlaryň has köp funksiýalara girmegine we has giň mümkinçiliklere eýe
+    bolmagyna mümkinçilik berýär.
+
+
+    <emoji document_id=5472267631979405211>🚫</emoji> Şeýle-de bellemeli, <b>ulanyjybotlar
+    Telegram tarapyndan resmi taýdan goldanmaýar</b> we olaryň ulanylmagy platformanyň
+    hyzmat şertlerini bozup biler. Şonuň üçin <b>ulanyjybotlary ulananyňyzda seresap
+    boluň</b> we olaryň zyýanly maksat üçin ulanylmaýandygyna göz ýetiriň.'
+  _cmd_doc_hikkainfo: Maglumat iber aka 'LidFax näme?'
   _cmd_doc_info: Ulanyjybot barada maglumat iber
   _cmd_doc_setinfo: <tekst> - .info-da tekst üýtgedýär
   _ihandle_doc_info: Ulanyjybot barada maglumat iber
@@ -829,30 +892,43 @@ loader:
   name: Ýükleýji
   loadmod_pm_timeout: Bu hereketi tassyklamak üçin 10 sekunt garaşyň
   loadmod_not_allowed_fresh_pm: '<emoji document_id=5449570787109401454>⚠️</emoji>
-    <b><uÜns bilen oka!</u></b> <emoji document_id=5449570787109401454>⚠️</emoji>
+    <b><u>Üns bilen oka!</u></b> <emoji document_id=5449570787109401454>⚠️</emoji>
 
 
-    Täze PM-da modullary ýüklemek howply!'
+    <b>Tanyş bolmadyk ulanyjy bilen PM-da modul ýüklemek synanyşýarsyňyz.</b> Developer
+    tarapyndan tassyklanmadyk modullar köp meselelere sebäp bolup biler, <b>hasabyňyz
+    bilen meselelerden başlap, hasabyň pozulmagyna ýa-da sessiýanyň kompromitasiýasyna
+    çenli</b>. Eger bu ulanyjyny tanasaňyz we <b><u>100%</u></b> ynamsaňyz, birnäçe
+    gün garaşyp täzeden synanyşyň.'
   loadmod_confirm_pm_message: <emoji document_id=5451732530048802485>⏳</emoji> <i>Tassyklaýşyňy
     garaşýar...</i>
   link: '<emoji document_id=5256113064821926998>📁</emoji> <b>{class_name} üçin faýl</b>
 
 
     <emoji document_id=5470093614023449749>⛄️</emoji> <b>Bu habara jogapda {prefix}lm
-    ýazyp moduly guraň</b>'
+    ýazyp moduly guraň</b>
+
+
+    <emoji document_id=5449385734148487483>⛄️</emoji> <code>{prefix}dlm {url}</code>
+
+
+    {not_exact}'
   file: '<emoji document_id=5256113064821926998>📁</emoji> <b>{class_name} üçin faýl</b>
 
 
     <emoji document_id=5470093614023449749>⛄️</emoji> <b>Bu habara jogapda {prefix}lm
-    ýazyp moduly guraň</b>'
+    ýazyp moduly guraň</b>
+
+
+    {not_exact}'
   finding_module_in_repos: <emoji document_id=5873204392429096339>🔄</emoji> Modullary
     repolarda gözleýär.
   loading_module_via_file: <emoji document_id=5873204392429096339>🔄</emoji> Modul
     faýl boýunça ýüklenýär.
   ml_load_module: <emoji document_id=5873204392429096339>🔄</emoji> Modul faýl hökmünde
     ýüklenýär.
-  not_exact: <emoji document_id=5355133243773435190>⚠️</emoji> Takyk gabat gelme ýok,
-    iň ýakyn netijeler görkezilýär
+  not_exact: <emoji document_id=5355133243773435190>⚠️</emoji> <i>Takyk gabat gelme
+    ýok, iň ýakyn netijeler görkezilýär</i>
   args: <emoji document_id=5460967491419270149>❌</emoji> <b>Argumentler görkezilmeli</b>
   loadmod_cancelled: <emoji document_id=5460967491419270149>🚫</emoji> <b>Modul ýüklemesi
     ýatyryldy</b>
@@ -860,8 +936,11 @@ loader:
 
 
     Nämälim çeşmeden modul ýüklemek <b><u>örän howply</u></b> we hasabyň pozulmagyna
-    ýa-da sessiýanyň kompromitasiýasyna sebäp bolup biler. Ynamly çeşmeden ýükleýändigiňize
-    göz ýetiriň.'
+    ýa-da sessiýanyň kompromitasiýasyna sebäp bolup biler. Bu ulanyjyny tanýandygyňyza
+    we <b><u>100%</u></b> ynamsaňyza göz ýetiriň.
+
+
+    <b>Modul ýüklemegi dowam etdirmek isleýärsiňizmi?</b>'
   loadmod_confirm_pm_yes: ✅ Hawa, dowam et
   loadmod_confirm_pm_no: 🚫 Ýok, ýatyry
   repo_config_doc: Modul repo üçin URL
@@ -869,7 +948,8 @@ loader:
   no_module: <emoji document_id=5460967491419270149>🚫</emoji> <b>Modul repo-da elýeterli
     däl.</b>
   no_file: <emoji document_id=5460967491419270149>🚫</emoji> <b>Faýl tapylmady</b>
-  provide_module: <emoji document_id=5312383351217201533>⚠️</emoji> <b>Moduly görkezmeli</b>
+  provide_module: <emoji document_id=5312383351217201533>⚠️</emoji> <b>Ýüklemek üçin
+    moduly görkezmeli</b>
   bad_unicode: <emoji document_id=5460967491419270149>🚫</emoji> <b>Modulda nädogry
     Unicode formaty</b>
   load_failed: <emoji document_id=5460967491419270149>🚫</emoji> <b>Ýükleme başartmady.
@@ -885,7 +965,8 @@ loader:
   requirements_failed_termux: '<emoji document_id=5407025283456835913>🕶</emoji> <b>Talaplar
     gurulyp bilinmedi</b>
 
-    <b>Iň köp sebäbi Termux köp kitaphanalary goldamaýar</b>'
+    <b>Iň köp sebäbi Termux köp kitaphanalary goldamaýar. Bu bagy hökmünde habar bermeň,
+    bu çözülip bilinmez.</b>'
   requirements_installing: '<emoji document_id=5328311576736833844>🚀</emoji> <b>Talaplar
     gurulýar:
 
@@ -902,7 +983,8 @@ loader:
   inline_init_failed: '<emoji document_id=5454225457916420314>😖</emoji> <b>Bu modul
     LidFax inline funksiýasyny talap edýär we InlineManager-in başlatmasy başartmady</b>
 
-    <i>Bir moduldan biri aýryň</i>'
+    <i>@BotFather-dan köne botlaryňyzyň birini aýyryň we bu moduly ýüklemek üçin ulanyjyboty
+    täzeden başladyň</i>'
   version_incompatible: '<emoji document_id=5454225457916420314>😖</emoji> <b>Bu modul
     LidFax {}+ talap edýär
 
@@ -913,17 +995,21 @@ loader:
 
 
     <emoji document_id=5287454910059654880>🫶</emoji> <b>Developer:</b> {}'
-  depends_from: "\n\n<emoji document_id=5431736674147114227>\U0001F4E6</emoji> <b>Baglanyşyklar:</b>\
-    \ \n{}"
+  depends_from: '
+
+
+    <emoji document_id=5431736674147114227>📦</emoji> <b>Baglanyşyklar:</b>
+
+    {}'
   by: tarapyndan
   module_fs: 💿 <b>Bu moduly faýl ulgamynda saklamak isleýärsiňizmi, täzeden başlanda
     pozulmasyn?</b>
   save: 💿 Sakla
   no_save: 🚫 Saklama
-  save_for_all: 💽 Hemmesi üçin sakla
+  save_for_all: 💽 Hemişe faýl ulgamynda sakla
   never_save: 🚫 Hiç haçan saklama
   will_save_fs: 💽 Indi .loadmod bilen ýüklenen ähli modullar faýl ulgamynda saklanar
-  add_repo_config_doc: Goşmaça repo-lar
+  add_repo_config_doc: Ýüklemek üçin goşmaça repo-lar
   share_link_doc: .dlmod netijesinde modul baglanyşygyny paýlaş
   modlink: '
 
@@ -950,26 +1036,33 @@ loader:
     esasy modulyň üstünden ýazmaga synanýar (</b><code>{}</code><b>)</b>
 
 
-    <emoji document_id=5472146462362048818>💡</emoji><i> Repo-ni üýtgediň</i>'
+    <emoji document_id=5472146462362048818>💡</emoji><i> Bagt hökmünde habar bermeň.
+    Bu core modullary zibillik bilen çalyşmagyň öňüni almak üçin howpsuzlyk çäresidir</i>'
   overwrite_command: '<emoji document_id=5454225457916420314>😖</emoji> <b>Bu modul
-    esasy buýruğun üstünden ýazmaga synanýar (</b><code>{}{}</code><b>)</b>
+    esasy buýrugyň üstünden ýazmaga synanýar (</b><code>{}{}</code><b>)</b>
 
 
-    <emoji document_id=5472146462362048818>💡</emoji><i> Repo-ni üýtgediň</i>'
+    <emoji document_id=5472146462362048818>💡</emoji><i> Bagt hökmünde habar bermeň.
+    Bu core modullaryň buýruklaryny zibillik bilen çalyşmagyň öňüni almak üçin howpsuzlyk
+    çäresidir</i>'
   unload_core: '<emoji document_id=5454225457916420314>😖</emoji> <b>Esasy moduly boşadyp
     bilmersiňiz</b> <code>{}</code><b></b>
 
 
-    <emoji document_id=5472146462362048818>💡</emoji><i> Repo-ni üýtgediň</i>'
+    <emoji document_id=5472146462362048818>💡</emoji><i> Bagt hökmünde habar bermeň.
+    Bu core modullary zibillik bilen çalyşmagyň öňüni almak üçin howpsuzlyk çäresidir</i>'
   cannot_unload_lib: <emoji document_id=5454225457916420314>😖</emoji> <b>Kitaphanany
     boşadyp bilmersiňiz</b>
   wait_channel_approve: '<emoji document_id=5469741319330996757>💫</emoji> <b>Modul</b>
     <code>{}</code> <b>kanala goşulmaga rugsat soraýar <a href="https://t.me/{}">{}</a>.
 
 
-    <b><emoji document_id=5470093614023449749>⛄️</emoji> Sebäbi:</b> <i>{}</i>'
-  installing: <emoji document_id=5325792861885570739>🕔</emoji> <b>Modul gurulýar</b>
-    <code>{}</code><b>...</b>
+    <b><emoji document_id="5467666648263564704">❓</emoji> Sebäbi: {}</b>
+
+
+    <i><a href="https://t.me/{}">Tasdyklanmasyny</a> garaşýar...</i>'
+  installing: <emoji document_id=5325792861885570739>🕔</emoji> <b>Modul</b> <code>{}</code>
+    <b>gurulýar...</b>
   repo_exists: <emoji document_id=5460967491419270149>🚫</emoji> <b>Repo</b> <code>{}</code>
     <b> eýýäm goşuldy</b>
   repo_added: <emoji document_id=5458538099002863737>✅</emoji> <b>Repo</b> <code>{}</code>
@@ -1010,7 +1103,7 @@ translations:
 
     <b>❓ Sebäbi:</b> <i>{}</i>'
   fw_error: <emoji document_id=5877458226823302157>🕒</emoji> <b>Çagyryş</b> <code>{}</code>
-    <b>FloodWait sebäpli {}</b> <code>{}</code> metodda
+    <b>FloodWait sebäpli {} metodda</b> <code>{}</code>
   rpc_error: <emoji document_id=5877477244938489129>🚫</emoji> <b>Çagyryş</b> <code>{}</code>
     <b>RPC ýalňyşlygy sebäpli başartmady:</b> <code>{}</code>
   _cmd_doc_dllangpack: '[terjime paketi baglanyşygy | boş bolsa aýyr] - LidFax terjime
@@ -1019,11 +1112,22 @@ translations:
   _cls_doc: Içki terjimeleri işläp taýýarlaýar
 eval:
   name: Bahalandyrma
-  eval: <emoji document_id={}>💻</emoji><b> Kod:</b> <pre><code class="language-{}">{}</code></pre>
-    <emoji document_id=5197688912457245639>✅</emoji><b> Netije:</b> <pre><code class="language-{}">{}</code></pre>
-  err: <emoji document_id={}>💻</emoji><b> Kod:</b> <pre><code class="language-{}">{}</code></pre>
-    <emoji document_id=5460967491419270149>🚫</emoji> <b>Ýalňyşlyk:</b> <pre><code
-    class="language-{}">{}</code></pre>
+  eval: '<emoji document_id={}>💻</emoji><b> Kod:</b>
+
+    <pre><code class="language-{}">{}</code></pre>
+
+
+    <emoji document_id=5197688912457245639>✅</emoji><b> Netije:</b>
+
+    <pre><code class="language-{}">{}</code></pre>'
+  err: '<emoji document_id={}>💻</emoji><b> Kod:</b>
+
+    <pre><code class="language-{}">{}</code></pre>
+
+
+    <emoji document_id=5460967491419270149>🚫</emoji> <b>Ýalňyşlyk:</b>
+
+    <pre><code class="language-{}">{}</code></pre>'
   compiling: <emoji document_id=5325787248363314644>🫥</emoji> <b>Kod kompilyasiýa
     edilýär...</b>
   no_compiler: <emoji document_id={}>💻</emoji> <b>{} kompilyator ulgama gurnalan däl.</b>
@@ -1035,6 +1139,36 @@ eval:
   _cmd_doc_ephp: PHP koduny bahalandyrýar
   _cmd_doc_eruby: Ruby koduny bahalandyrýar
   _cls_doc: Kody dürli dillerde bahalandyrýar
+executor:
+  name: Ýerine ýetiriji
+  no_code: <emoji document_id=5854929766146118183>❌</emoji> <b>Bolmaly</b> <code>{}exec
+    [python kody]</code>
+  executing: <b><emoji document_id=5332600281970517875>🔄</emoji> Kod ýerine ýetirilýär...</b>
+  no_phone: Netijede telefon belgini gizle
+  result_no_error: '✅ <b>Netije:</b>
+
+    <pre><code class="language-python">{result}</code></pre>
+
+    '
+  result_error: '🚫 <b>Ýalňyşlyk:</b>
+
+    <pre><code class="language-python">{result}</code></pre>
+
+    '
+  res_return: '💾 <b>Kod gaýdanly netije:</b>
+
+    <pre><code class="language-python">{res}</code></pre>
+
+    '
+  result: '<b>💻 <b>Kod:</b>
+
+    <pre><code class="language-python">{code}</code></pre>
+
+    {result}⏳ <b>{time} sekuntda ýerine ýetirildi</b></b>'
+  input_prompt: '<b>📥 Giriş:</b> {prompt}'
+  input_waiting: <b>📥 Girişi garaşýar...</b>
+  _cmd_doc_exec: Python kody ýerine ýetir
+  _cls_doc: Python kody ýerine ýetirýär
 translate:
   name: Terjimeçi
   no_args: <emoji document_id=5460967491419270149>❌</emoji> <b>Argument ýok</b>
@@ -1050,12 +1184,37 @@ quickstart:
     ❓ <b>Kömek gerekmi?</b> Goldaw çatyňa goşulyp bilersiňiz. Hemmämize kömek edýäris.
 
 
-    📼 <b>Modul barada maglumatlary tapyp bilersiňiz</b>'
+    📼 <b>Modullary tapyp we gurup bilersiňiz</b> <code>.heta</code> <b>ulanyp. Gözleg
+    sorawyňyzy giriziň we zerur modul üçin ⛩ Gur basyň</b>
+
+
+    📣 <b>Jemgyýet tarapyndan döredilen modullary kanallarda tapmak üçin: <a href="https://t.me/lidfax_ub/2">görkez</a></b>
+
+
+    💁‍♀️ <b>Çalt başlamak:</b>
+
+
+    1️⃣ <b>Modul sanawyny görmek üçin</b> <code>.help</code> <b>ýazyň</b>
+
+    2️⃣ <b>ModulAdy/buýrugy barada kömek görmek üçin</b> <code>.help &lt;ModulAdy/buýrugy&gt;</code>
+    <b>ýazyň</b>
+
+    3️⃣ <b>Baglanyşykdan modul ýüklemek üçin</b> <code>.dlmod &lt;baglanyşyk&gt;</code>
+    <b>ýazyň</b>
+
+    4️⃣ <b>Faýldan modul gurmak üçin</b> <code>.loadmod</code> <b>faýla jogap berip
+    ýazyň</b>
+
+    5️⃣ <b>ModulAdy modulyny boşatmak üçin</b> <code>.unloadmod &lt;ModulAdy&gt;</code>
+    <b>ýazyň</b>
+
+
+    💡 <b>LidFax Friendly-Telegram we GeekTG modullary, şeýle-de öz modullary goldaýar.</b>'
   railway: 🚂 <b>Ulanyjybotyň Railway-da gurnalan</b>. Bu platforma diňe <b>ayda 500
     mugt sagat</b> berýär. Bu çägiňize ýetseňiz, <b>LidFax doňdyrylar</b>. Indiki
-    aýda dowam eder.
+    aýda <b>https://railway.app saýtyna girip täzeden başlamaly</b>.
   lavhost: ✌️ <b>Ulanyjybotyň lavHost-da gurnalan</b>. Täzelikler we bildirişler üçin
-    @lavhost kanalyna goşulyň. Platforma bilen baglanyşykly soraglar üçin @lavhost-da
+    @lavhost kanalyna goşulyň. Platforma bilen baglanyşykly soraglar üçin @lavhostchat-da
     ýüz tutuň.
   language_saved: 🇹🇲 Dil ýazgy edildi!
   language: 🇹🇲 Türkmen
@@ -1065,10 +1224,10 @@ $validators:
   boolean: boolen
   positive: 'pozitiw '
   digits: ' takyk {digits} san bilen'
-  integer_min: '{sign}{minimum}{digits} sanly integer'
-  integer_range: '{sign}{minimum} bilen {maximum}{digits} aralygynda integer'
+  integer_min: '{sign}{minimum}-den uly integer{digits}'
+  integer_range: '{sign}{minimum} bilen {maximum} aralygynda integer{digits}'
   integer: '{sign}integer{digits}'
-  integer_max: '{sign}{maximum}{digits} çenli integer'
+  integer_max: '{sign}{maximum}-den kiçi integer{digits}'
   choice: 'aşakdakylardan biri: {possible}'
   multichoice: 'gymmatlaryň sanawy, hersi aşakdakylardan biri bolmaly: {possible}'
   each: ' (her biri {each} bolmaly)'
@@ -1113,7 +1272,7 @@ $inline:
     <emoji document_id=5226512880362332956>📖</emoji> <b>Loglar:</b>
 
 
-    <pre><code class="language-log">{}</code></pre>'
+    <pre><code class="language-logs">{}</code></pre>'
   show_inline_cmds: 📄 Elýeterli inline buýruklary görkez
   no_inline_cmds: Elýeterli buýruk ýok
   no_inline_cmds_msg: <b>😔 Elýeterli inline buýruk ýok ýa-da girmek hukugyňyz ýok</b>
@@ -1130,7 +1289,6 @@ $inline:
   command: ☃️ «{}» buýrugy
   button403: Bu düwmä basmaga hukugyňyz ýok!
   keep_id: ⚠️ ID-ni aýyrmaň! {}
-
 LidFaxAnalytics:
   analytics_sent: |
     <b>ÜNS BER!</b>
@@ -1144,7 +1302,7 @@ LidFaxAnalytics:
     • Hosting
 
     <b>Size laýykmy?</b>
-  btn_keep: "✅ Goý"
-  btn_delete: "❌ Poz"
-  analytics_kept: "✅ Maglumatlar saklandy"
-  analytics_deleted: "✅ Maglumatlar serverden pozuldy"
+  btn_keep: ✅ Goý
+  btn_delete: ❌ Poz
+  analytics_kept: ✅ Maglumatlar saklandy
+  analytics_deleted: ✅ Maglumatlar serverden pozuldy
