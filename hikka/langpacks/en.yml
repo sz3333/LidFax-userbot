@@ -38,7 +38,7 @@ lidfax_security:
   group_admin: "🧑‍⚖️ Admin (any)"
   group_member: "👥 In group"
   pm: "🤙 In PM"
-  everyone: "<tg-emoji emoji-id=\"5449559998151552901\">🟣</tg-emoji> Everyone (Inline)"
+  everyone: "🟣 Everyone (Inline)"
   owner_list: "<emoji document_id=5386399931378440814>😎</emoji> <b>Users in group</b> <code>owner</code><b>:</b>\n\n{}"
   no_owner: "<emoji document_id=5386399931378440814>😎</emoji> <b>There is no users in group</b> <code>owner</code>"
   owner_added: '<emoji document_id="5386399931378440814">😎</emoji> <b><a href="tg://user?id={}">{}</a> added to group</b> <code>owner</code>'
@@ -46,7 +46,7 @@ lidfax_security:
   no_user: "<emoji document_id=5460967491419270149>🚫</emoji> <b>Specify user to permit</b>"
   not_a_user: "<emoji document_id=5449570787109401454>⚠️</emoji> <b>Specified entity is not a user</b>"
   li: '<emoji document_id=4974307891025543730>▫️</emoji> <b><a href="tg://user?id={}">{}</a></b>'
-  warning: "⚠️ <b>Please, confirm, that you want to add <a href=\"tg://user?id={}\">{}</a> to group</b> <code>{}</code><b>!\nThis action may reveal personal info and grant full or partial access to userbot to this user</b>"
+  warning: "<tg-emoji emoji-id=\"5449570787109401454\">🟣</tg-emoji> <b>Please, confirm, that you want to add <a href=\"tg://user?id={}\">{}</a> to group</b> <code>{}</code><b>!\nThis action may reveal personal info and grant full or partial access to userbot to this user</b>"
   cancel: "🚫 Cancel"
   confirm: "👑 Confirm"
   enable_nonick_btn: "🔰 Enable"
