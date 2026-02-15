@@ -38,7 +38,7 @@ lidfax_security:
   group_admin: "🧑‍⚖️ Admin (any)"
   group_member: "👥 In group"
   pm: "🤙 In PM"
-  everyone: "🌍 Everyone (Inline)"
+  everyone: "<tg-emoji emoji-id="5449559998151552901">🟣</tg-emoji> Everyone (Inline)"
   owner_list: "<emoji document_id=5386399931378440814>😎</emoji> <b>Users in group</b> <code>owner</code><b>:</b>\n\n{}"
   no_owner: "<emoji document_id=5386399931378440814>😎</emoji> <b>There is no users in group</b> <code>owner</code>"
   owner_added: '<emoji document_id="5386399931378440814">😎</emoji> <b><a href="tg://user?id={}">{}</a> added to group</b> <code>owner</code>'
