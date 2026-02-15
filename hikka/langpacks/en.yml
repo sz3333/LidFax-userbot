@@ -345,7 +345,7 @@ inline_stuff:
   bot_username_invalid: "<emoji document_id=5460967491419270149>🚫</emoji> <b>Specified bot username is invalid. It must end with</b> <code>bot</code> <b>and contain at least 4 symbols</b>"
   bot_username_occupied: "<emoji document_id=5460967491419270149>🚫</emoji> <b>This username is already occupied</b>"
   bot_updated: "<emoji document_id=6318792204118656433>🎉</emoji> <b>Config successfully saved. Restart userbot to apply changes</b>"
-  this_is_hikka: "☃️ <b>Hi! This is LidFax — powerful modular Telegram userbot. You can install it to your account!</b>\n\n<b>🌍 <a href=\"https://github.com/sz3333/LidFax-userbot\">GitHub</a></b>\n<b>👥 <a href=\"https://t.me/lidfax_talks\">Support chat</a></b>"
+  this_is_hikka: "<tg-emoji emoji-id="5470092785094765546">❤️</tg-emoji> <b>Hi! This is LidFax — powerful modular Telegram userbot. You can install it to your account!</b>\n\n<b><tg-emoji emoji-id="5276435432727413164">😯</tg-emoji><b> <a href=\"https://github.com/sz3333/LidFax-userbot\">GitHub</a></b>\n<b><tg-emoji emoji-id="5278580738826999872">😃</tg-emoji><b> <a href=\"https://t.me/lidfax_talks\">Support chat</a></b>"
   _cmd_doc_ch_lidfax_bot: "<username> - Change your LidFax inline bot username"
   _cls_doc: "Provides support for inline stuff"
 
